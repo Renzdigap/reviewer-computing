@@ -23,6 +23,14 @@
   - **PCIe Expansion**: **8 × PCIe 4.0** slots
   - **Chassis Compatibility**: Compatible with **2U or 4U rack servers** (e.g., TaiShan 2280 2U and TaiShan 5280 4U share this motherboard!).
 - **Rack Heights (p. 150)**: **1U = 1.75 in (4.45 cm)**, **2U = 3.5 in (8.9 cm)**, **4U = 7 in (17.8 cm)**.
+<!-- PDF_FIGS_START -->
+![Server Mainboard Physical Hardware Layout (Official Reference: p. 149)](../assets/images/p1_h3s3_mainboard_hardware.png)
+*Figure: Server Mainboard Physical Hardware Layout (Official Reference: p. 149)*
+
+![Server Rack Unit (U) Chassis Dimensions (Official Reference: p. 150)](../assets/images/p1_h3s3_server_chassis_u.png)
+*Figure: Server Rack Unit (U) Chassis Dimensions (Official Reference: p. 150)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -34,6 +42,14 @@
   - **PSU 1 & PSU 2** (with PSU sockets)
   - **FlexIO card 1 (connected to CPU 1)** and **FlexIO card 2 (connected to CPU 2)**
   - **USB 3.0 port**, **VGA port**, **Debugging serial port**, and **Management network port (iBMC)**.
+<!-- PDF_FIGS_START -->
+![TaiShan 200 (2280) Front Panel Components and Indicators (1-9) (Official Reference: p. 151)](../assets/images/p1_h3s3_front_panel_2280.png)
+*Figure: TaiShan 200 (2280) Front Panel Components and Indicators (1-9) (Official Reference: p. 151)*
+
+![TaiShan 200 (2280) Rear Panel Ports and I/O Modules (1-12) (Official Reference: p. 152)](../assets/images/p1_h3s3_rear_panel_2280.png)
+*Figure: TaiShan 200 (2280) Rear Panel Ports and I/O Modules (1-12) (Official Reference: p. 152)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

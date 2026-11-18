@@ -39,6 +39,11 @@ Enterprise data centers are transforming in 5 ways: from **resource silos to res
 | **Cloud 1.0 (Efficiency)** | **Virtualization-centric** — abstracts hardware into VMs for higher resource utilization | VMware ESXi, KVM, Xen, Microsoft Hyper-V |
 | **Cloud 2.0 (Cloud Pilot)** | **Resource-centric (Software Defined / Cloud Resource)** — infrastructure migration to cloud, standardized & automated resource services | OpenStack, VMware |
 | **Cloud 3.0 (Cloud Native)** | **Application-centric (Container / Cloud Native)** — agile application development, microservices, and lifecycle management | Docker, Cloud Foundry, Kubernetes |
+<!-- PDF_FIGS_START -->
+![Enterprise Migration from Traditional IT to Cloud Architecture (Official Reference: p. 35)](../assets/images/p1_h1s2_cloud_migration.png)
+*Figure: Enterprise Migration from Traditional IT to Cloud Architecture (Official Reference: p. 35)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -53,6 +58,14 @@ Enterprise data centers are transforming in 5 ways: from **resource silos to res
 - **Private Cloud**: Exclusively owned and operated by a single organization behind the enterprise ingress firewall for maximum data protection.
 - **Public Cloud**: Owned and operated by a third-party cloud service provider and shared across organizations over the Internet (like water/electricity utilities).
 - **Hybrid Cloud**: Combines public and private clouds (or on-premises resources) as distinct entities bound together, viewed externally as a single cloud with workload portability.
+<!-- PDF_FIGS_START -->
+![Cloud Service Models Responsibility Boundaries (IaaS, PaaS, SaaS) (Official Reference: p. 36)](../assets/images/p1_h1s2_cloud_service_models.png)
+*Figure: Cloud Service Models Responsibility Boundaries (IaaS, PaaS, SaaS) (Official Reference: p. 36)*
+
+![Cloud Deployment Models (Public, Private, Hybrid Cloud) (Official Reference: p. 37)](../assets/images/p1_h1s2_cloud_deployment.png)
+*Figure: Cloud Deployment Models (Public, Private, Hybrid Cloud) (Official Reference: p. 37)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

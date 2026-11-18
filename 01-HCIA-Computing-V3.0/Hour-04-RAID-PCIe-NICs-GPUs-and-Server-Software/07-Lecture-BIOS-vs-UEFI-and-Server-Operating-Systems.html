@@ -398,6 +398,129 @@ p { margin-bottom: 10px; }
       #code-editor { min-height: 240px; }
       .console-body { height: 220px; }
     }
+
+/* PDF_FIGURES_CSS */
+.pdf-figures-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 14px;
+  margin: 16px 0 20px 0;
+}
+.pdf-figures-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 12px 0 16px 0;
+}
+.pdf-figure {
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  transition: border-color 0.2s ease;
+}
+.pdf-figure:hover {
+  border-color: #38bdf8;
+}
+.pdf-figure-frame {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.pdf-figure-frame img {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: zoom-in;
+  display: block;
+}
+.pdf-figures-compact .pdf-figure-frame img {
+  max-height: 210px;
+}
+.pdf-figure figcaption {
+  margin-top: 9px;
+  font-size: 12.5px;
+  color: #d1d5db;
+  text-align: center;
+  line-height: 1.4;
+}
+.pdf-figure figcaption strong {
+  color: #f9fafb;
+  display: block;
+  margin-bottom: 2px;
+}
+.pdf-ref-tag {
+  color: #9ca3af;
+  font-size: 11px;
+}
+.img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 15, 0.92);
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox.open {
+  display: flex;
+}
+.img-lightbox-box {
+  max-width: 94vw;
+  max-height: 84vh;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox-box img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+}
+.img-lightbox-bar {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #f3f4f6;
+  font-size: 13.5px;
+  max-width: 90vw;
+  text-align: center;
+}
+.img-lightbox-close {
+  background: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.img-lightbox-close:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+}
+
   </style>
   <script src="../../sync_engine.js"></script>
 </head>
@@ -441,6 +564,8 @@ p { margin-bottom: 10px; }
 <li><strong>Conventional BIOS Process (6 steps)</strong>: Power on &amp; start device \rightarrow CPU loads BIOS \rightarrow Initialize hardware \rightarrow Perform <strong>POST</strong> (Power-On Self-Test) &amp; hardware self-check \rightarrow Load boot options \rightarrow Process system instructions.</li>
 <li><strong>UEFI Process (4 steps)</strong>: Power on &amp; start device \rightarrow Initialize UEFI \rightarrow Boot the OS \rightarrow Enter the OS.</li>
 </ul>
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s4_bios_stack.png" alt="Position of BIOS Between Hardware and Operating System" data-caption="Position of BIOS Between Hardware and Operating System (Official Reference: p. 204)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Position of BIOS Between Hardware and Operating System</strong><span class="pdf-ref-tag">Official Reference: p. 204 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s4_bios_vs_uefi.png" alt="Conventional BIOS vs UEFI Running Process Flowchart" data-caption="Conventional BIOS vs UEFI Running Process Flowchart (Official Reference: p. 206)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Conventional BIOS vs UEFI Running Process Flowchart</strong><span class="pdf-ref-tag">Official Reference: p. 206 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+
 <p>---</p>
 <h3>2. OS Architecture &amp; Unix/Linux Evolution Timeline (pp. 208–218)</h3>
 <ul class="md-list">
@@ -451,6 +576,8 @@ p { margin-bottom: 10px; }
 <li><strong>1964</strong>: Multics released \rightarrow <strong>1969</strong>: First Unix \rightarrow <strong>1973</strong>: C-based Unix v3 \rightarrow <strong>1977</strong>: BSD \rightarrow <strong>1979</strong>: Unix System V7 \rightarrow <strong>Sept 27, 1983 / 1984</strong>: <strong>Richard Stallman</strong> announced <strong>GNU Project</strong> (<em>"GNU's Not Unix"</em>) \rightarrow <strong>1987</strong>: <strong>MINIX</strong> (educational Unix-like OS) \rightarrow <strong>Sept/Oct 5, 1991</strong>: <strong>Linus Torvalds</strong> (Univ. of Helsinki) released the first <strong>Linux kernel</strong> (10,000 lines of code) \rightarrow <strong>1993</strong>: Slackware/Debian \rightarrow <strong>1994</strong>: Red Hat/SUSE 1.0 \rightarrow <strong>2004</strong>: Ubuntu \rightarrow <strong>2019</strong>: <strong>EulerOS open-sourced as openEuler</strong>.</li>
 <li><strong>Linux Core Features (p. 218)</strong>: Multi-platform, Multi-user &amp; multitasking, Free/open-source (<strong>GPL</strong>), <strong>Fully compatible with POSIX.1</strong> (<strong>IEEE 1003 / ISO/IEC 9945</strong>), and <strong>"Everything is a file"</strong> (files, directories, character/block devices, sockets, printers, processes, pipes accessed via <code class="inline-code">fopen()</code>, <code class="inline-code">fclose()</code>, <code class="inline-code">fwrite()</code>, <code class="inline-code">fread()</code>).</li>
 </ul>
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s4_os_architecture.png" alt="OS Kernel Subsystems, System Calls and User Space" data-caption="OS Kernel Subsystems, System Calls and User Space (Official Reference: p. 208)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>OS Kernel Subsystems, System Calls and User Space</strong><span class="pdf-ref-tag">Official Reference: p. 208 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+
 <p>---</p>
 <h3>3. Linux File Directory Structure (<code class="inline-code">/</code>, p. 219)</h3>
 <div class="table-wrap"><table class="md-table">
@@ -464,7 +591,9 @@ p { margin-bottom: 10px; }
 <tr><td><strong><code class="inline-code">/mnt</code></strong></td><td><strong>Temporary mount point</strong> for manual mounting of other file systems (e.g., mounting CD-ROM to <code class="inline-code">/mnt</code>).</td></tr>
 <tr><td><strong><code class="inline-code">/opt</code></strong></td><td>Stores <strong>additional third-party application software</strong> installed on the host (e.g., Oracle installation packages); empty by default.</td></tr>
 </tbody></table></div>
-          </div>
+          
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s4_linux_dir_tree.png" alt="Linux Root File Directory Structure Tree" data-caption="Linux Root File Directory Structure Tree (Official Reference: p. 219)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Linux Root File Directory Structure Tree</strong><span class="pdf-ref-tag">Official Reference: p. 219 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+</div>
 
           <div class="takeaways-card">
             <h3>High-Yield Summary & Takeaways</h3>
@@ -674,5 +803,31 @@ p { margin-bottom: 10px; }
       if (correctCount === qs.length) markUnitCompleted();
     }
   </script>
+
+  <div id="img-lightbox" class="img-lightbox" onclick="if(event.target===this) closeImgZoom()">
+    <div class="img-lightbox-box">
+      <img id="img-lightbox-target" src="" alt="Zoomed Diagram" />
+    </div>
+    <div class="img-lightbox-bar">
+      <span id="img-lightbox-caption"></span>
+      <button type="button" class="img-lightbox-close" onclick="closeImgZoom()">Close</button>
+    </div>
+  </div>
+  <script>
+    function openImgZoom(imgEl) {
+      if (!imgEl) return;
+      document.getElementById('img-lightbox-target').src = imgEl.src;
+      document.getElementById('img-lightbox-caption').textContent = imgEl.getAttribute('data-caption') || imgEl.alt || '';
+      document.getElementById('img-lightbox').classList.add('open');
+    }
+    function closeImgZoom() {
+      document.getElementById('img-lightbox').classList.remove('open');
+      document.getElementById('img-lightbox-target').src = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImgZoom();
+    });
+  </script>
+
 </body>
 </html>

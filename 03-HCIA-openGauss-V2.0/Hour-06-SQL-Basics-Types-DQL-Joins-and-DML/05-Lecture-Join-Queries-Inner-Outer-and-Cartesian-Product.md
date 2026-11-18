@@ -42,6 +42,17 @@
   - **`e LEFT JOIN t`**: Returns `11` (`92`), `12` (`95`), and `13` (`score = NULL`) (3 rows).
   - **`e RIGHT JOIN t`**: Returns `NULL` (`staff_id` from `e` is `NULL`, `score = 90`), `11` (`92`), and `12` (`95`) (3 rows).
   - **`e FULL JOIN t`**: Returns `11`, `12`, `13` (`score = NULL`), and `NULL` (`score = 90`) (4 rows).
+<!-- PDF_FIGS_START -->
+![Left Outer Join Row Matching Visual Example (Official Reference: p. 387)](../assets/images/p3_h6s3_left_outer_join.png)
+*Figure: Left Outer Join Row Matching Visual Example (Official Reference: p. 387)*
+
+![Right Outer Join Row Matching Visual Example (Official Reference: p. 388)](../assets/images/p3_h6s3_right_outer_join.png)
+*Figure: Right Outer Join Row Matching Visual Example (Official Reference: p. 388)*
+
+![Full Outer Join Row Matching Visual Example (Official Reference: p. 389)](../assets/images/p3_h6s3_full_outer_join.png)
+*Figure: Full Outer Join Row Matching Visual Example (Official Reference: p. 389)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

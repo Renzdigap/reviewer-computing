@@ -31,6 +31,11 @@ Mainstream server drives use **SATA**, **SAS**, and **PCIe (NVMe)** interfaces:
   - **Two Key Advantages**:
     1. **High performance**: Directly connects to CPUs through the **PCIe bus**, bypassing SAS/SATA controllers to deliver ultra-high IOPS, high bandwidth, and low latency.
     2. **Standardization**: Mature OS driver ecosystem.
+<!-- PDF_FIGS_START -->
+![Physical Drive Interfaces: SATA (Notched Gap) vs SAS vs PCIe (Official Reference: p. 155)](../assets/images/p1_h3s4_drive_interfaces.png)
+*Figure: Physical Drive Interfaces: SATA (Notched Gap) vs SAS vs PCIe (Official Reference: p. 155)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

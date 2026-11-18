@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 A query `SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10` is running a slow `Seq Scan`. Use `gs_index_advise` to get an index recommendation, create a virtual index using `hypopg_create_index`, enable `enable_hypo_index`, and verify the optimizer switches to an `Index Scan`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![X-Tuner Deep Reinforcement Learning Parameter Optimization Loop (Official Reference: p. 246)](../assets/images/p3_h4s4_xtuner_drl.png)
+*Figure: X-Tuner Deep Reinforcement Learning Parameter Optimization Loop (Official Reference: p. 246)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Call `SELECT * FROM gs_index_advise('SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10');`.
 2. Step 2: Create a virtual index using `SELECT * FROM hypopg_create_index('CREATE INDEX ON bmsql_customer(c_w_id)');`.

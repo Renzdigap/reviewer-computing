@@ -24,6 +24,14 @@
   3. **Computing power**
   4. **Scenarios**
   *(Note: On p. 56, the three conditions for explosive AI growth are **algorithm, computing power, and data**. **Talent** is NOT a basic element of AI applications!)*
+<!-- PDF_FIGS_START -->
+![Relationship Between AI, Machine Learning, KDD, and Deep Learning (Official Reference: p. 47)](../assets/images/p1_h1s4_ai_ml_dl_venn.png)
+*Figure: Relationship Between AI, Machine Learning, KDD, and Deep Learning (Official Reference: p. 47)*
+
+![AI Industry Ecosystem Stack (Official Reference: p. 51)](../assets/images/p1_h1s4_ai_ecosystem.png)
+*Figure: AI Industry Ecosystem Stack (Official Reference: p. 51)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

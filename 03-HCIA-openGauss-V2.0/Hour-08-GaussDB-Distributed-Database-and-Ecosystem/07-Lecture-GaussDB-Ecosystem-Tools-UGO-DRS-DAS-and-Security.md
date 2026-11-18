@@ -37,6 +37,14 @@ Professional tool focused on **heterogeneous database object/schema migration an
   4. **Migration workload evaluation**
   5. **Database structure migration**
   6. **Application SQL migration**
+<!-- PDF_FIGS_START -->
+![DRS Service Module: Backup Migration Workflow via OBS (Official Reference: p. 508)](../assets/images/p3_h8s4_drs_backup_migration.png)
+*Figure: DRS Service Module: Backup Migration Workflow via OBS (Official Reference: p. 508)*
+
+![UGO Heterogeneous Database Schema and Application Migration Workflow (Official Reference: p. 510)](../assets/images/p3_h8s4_ugo_migration.png)
+*Figure: UGO Heterogeneous Database Schema and Application Migration Workflow (Official Reference: p. 510)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -47,6 +55,11 @@ Professional tool focused on **heterogeneous database object/schema migration an
 | **`CTS`** | **Cloud Trace Service** | Log audit service recording console/API operations on cloud resources. **Console queries cover the last 7 days**; dumps compressed trace files to **OBS** for long-term storage encrypted via **KMS**. |
 | **`CES`** | **Cloud Eye Service** | Resource & database monitoring platform (automatic/server monitoring, real-time alarm notifications, OBS dumping, resource grouping, error/slow log & trace monitoring). |
 | **`DBSS`** | **Database Security Service** | Includes **Database Protection (DB firewall, data breach prevention)** and **Database Security Audit**. Deployed in **bypass mode**; provides user behavior detection (associating app & DB layers), multi-dimensional lead analysis (Risk, Session, Statement leads), real-time SQL injection/blacklist/whitelist alarms, and **Sarbanes-Oxley (SOX)** compliance reports. |
+<!-- PDF_FIGS_START -->
+![CTS (Cloud Trace Service) Audit Log Flow (Official Reference: p. 513)](../assets/images/p3_h8s4_cts_flow.png)
+*Figure: CTS (Cloud Trace Service) Audit Log Flow (Official Reference: p. 513)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

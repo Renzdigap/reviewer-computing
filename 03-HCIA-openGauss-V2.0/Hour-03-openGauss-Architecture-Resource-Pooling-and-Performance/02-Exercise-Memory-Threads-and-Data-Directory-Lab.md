@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 You are auditing an openGauss instance's memory settings (`shared_buffers`, `cstore_buffers`, `work_mem`, `maintenance_work_mem`) and checking the database OID mapping inside the `base/` directory.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss Instance Architecture (GaussMaster, Background Threads, Memory Pools, Storage) (Official Reference: p. 135)](../assets/images/p3_h3s1_instance_architecture.png)
+*Figure: openGauss Instance Architecture (GaussMaster, Background Threads, Memory Pools, Storage) (Official Reference: p. 135)*
+
+![Database Logical Objects to Physical Datafile Segments and 8KB Blocks (Official Reference: p. 141)](../assets/images/p3_h3s1_db_physical_mapping.png)
+*Figure: Database Logical Objects to Physical Datafile Segments and 8KB Blocks (Official Reference: p. 141)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Query `SHOW shared_buffers;`, `SHOW cstore_buffers;`, and `SHOW work_mem;`.
 2. Step 2: Query `SELECT oid, datname FROM pg_database WHERE datname = 'postgres';` to find the subdirectory OID under `base/`.

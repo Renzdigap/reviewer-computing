@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are designing a Huawei Cloud MRS big data architecture blueprint. Map the official Hadoop components to their exact roles and assign the graph/query frameworks.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Hadoop Big Data Ecosystem Component Stack (Official Reference: p. 44)](../assets/images/p1_h1s3_hadoop_ecosystem.png)
+*Figure: Hadoop Big Data Ecosystem Component Stack (Official Reference: p. 44)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `deployment_tool` to `'Ambari'`, `workflow_scheduler` to `'Oozie'`, `coordination_service` to `'ZooKeeper'`, and `etl_tool` to `'Sqoop'`.
 2. Set `spark_graph_library` to `'GraphX'` and `flink_graph_library` to `'Gelly'`.

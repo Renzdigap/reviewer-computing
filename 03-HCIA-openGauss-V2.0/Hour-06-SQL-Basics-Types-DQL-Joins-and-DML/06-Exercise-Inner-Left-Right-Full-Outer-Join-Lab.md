@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Using the official `education e` (`staff_id` 11, 12, 13) and `training t` (`staff_id` 10, 11, 12) tables from Chapter 05 (pp. 387–389), write `LEFT JOIN`, `RIGHT JOIN`, and `FULL JOIN` queries to compare how unmatched rows are padded with `NULL`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Left Outer Join Row Matching Visual Example (Official Reference: p. 387)](../assets/images/p3_h6s3_left_outer_join.png)
+*Figure: Left Outer Join Row Matching Visual Example (Official Reference: p. 387)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Write a `LEFT JOIN` query between `education e` and `training t` on `e.staff_id = t.staff_id`.
 2. Step 2: Write a `RIGHT JOIN` query between `education e` and `training t` on `e.staff_id = t.staff_id`.

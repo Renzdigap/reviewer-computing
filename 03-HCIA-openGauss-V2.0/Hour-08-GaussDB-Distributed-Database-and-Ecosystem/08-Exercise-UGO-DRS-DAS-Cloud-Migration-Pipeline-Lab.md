@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are planning an Oracle-to-GaussDB migration on Huawei Cloud. Complete the SQL verification query listing the 6 official core functions of UGO (Ch.06 Quiz Q2) and matching `DAS`, `DRS`, `CTS`, `CES`, and `DBSS` to their roles.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![UGO Heterogeneous Database Schema and Application Migration Workflow (Official Reference: p. 510)](../assets/images/p3_h8s4_ugo_migration.png)
+*Figure: UGO Heterogeneous Database Schema and Application Migration Workflow (Official Reference: p. 510)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Fill in the missing keywords in the 6 official UGO core functions (`profiling`, `recommendation`, `compatibility`, `workload`, `structure`, `Application SQL`).
 2. Step 2: Match `'DRS'` (real-time data migration/sync), `'DAS'` (web console management), and `'DBSS'` (bypass-mode database security audit).

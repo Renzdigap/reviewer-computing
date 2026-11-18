@@ -42,6 +42,11 @@ When booting from the openEuler 24.03/20.03 LTS ISO:
 | **`/boot`** | Stores kernel and boot loader files required for system booting. |
 | **`/boot/efi`** | Boot device and application program started by the **Extensible Firmware Interface (EFI/UEFI)**. |
 | **`swap`** | Virtual memory swap partition used to swap dirty data from RAM when memory is insufficient. **Sizing rule:** If physical memory is small, set `swap` to **twice (2×) the memory size**; if memory is large, reduce the swap ratio accordingly. |
+<!-- PDF_FIGS_START -->
+![openEuler Installation Summary Spokes (Localization, Software, System) (Official Reference: p. 42)](../assets/images/p2_h1s3_anaconda_summary.png)
+*Figure: openEuler Installation Summary Spokes (Localization, Software, System) (Official Reference: p. 42)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

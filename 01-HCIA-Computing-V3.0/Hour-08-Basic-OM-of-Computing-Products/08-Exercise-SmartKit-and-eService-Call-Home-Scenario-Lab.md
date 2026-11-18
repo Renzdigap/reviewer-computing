@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are delivering a batch of bare-metal TaiShan 200 (2280) servers on site using SmartKit and configuring eService Call Home for post-delivery maintenance.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![eService Automatic Fault Reporting (Call Home) Flow (Official Reference: p. 437)](../assets/images/p1_h8s4_eservice_callhome.png)
+*Figure: eService Automatic Fault Reporting (Call Home) Flow (Official Reference: p. 437)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `raid_capable_tools` to `['Smart Provisioning', 'SmartKit', 'iBMC']` and `excluded_remote_om_tool` to `'eService'`.
 2. Set `smartkit_max_parallel_tasks` to `50` and `ts200_burn_in_engine` to `'Smart Provisioning'` (while V3 uses `'FTK.iso'`).

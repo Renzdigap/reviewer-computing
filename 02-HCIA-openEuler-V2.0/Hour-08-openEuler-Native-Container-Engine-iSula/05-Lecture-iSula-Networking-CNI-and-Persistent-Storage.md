@@ -22,6 +22,11 @@
   * **`"network-plugin": "cni"`** (can be set to `cni` or left empty by default).
   * **`"cni-bin-dir": "/opt/cni/bin"`** (default directory storing compiled CNI plugin binaries).
   * **`"cni-conf-dir": "/etc/cni/net.d"`** (default directory storing CNI network configuration files).
+<!-- PDF_FIGS_START -->
+![How isulad Runs a Container Execution Chain (Official Reference: p. 419)](../assets/images/p2_h8s3_isulad_run_chain.png)
+*Figure: How isulad Runs a Container Execution Chain (Official Reference: p. 419)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -37,6 +42,11 @@ When you create a bridge network in iSula, three CNI plugins work together (Ch.0
   isula network inspect cni0
   isula run --net cni0 -d -it isulad/busybox sleep 99d
   ```
+<!-- PDF_FIGS_START -->
+![CNI and iSula Bridge Network Topology (Official Reference: p. 420)](../assets/images/p2_h8s3_cni_bridge_network.png)
+*Figure: CNI and iSula Bridge Network Topology (Official Reference: p. 420)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure FusionDirector batch management limits, Server Profile lifecycle constraints, and OS deployment parameters for a Kunpeng data center.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![FusionDirector Five Intelligent Management Features (Official Reference: p. 382)](../assets/images/p1_h8s2_five_intelligent.png)
+*Figure: FusionDirector Five Intelligent Management Features (Official Reference: p. 382)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `max_log_export_servers` to `100` and `max_concurrent_os_deployments` to `30` (with `os_deploy_timeout_hours: 2`).
 2. Set `ssdp_discovery_network_requirement` to `'L2'`.

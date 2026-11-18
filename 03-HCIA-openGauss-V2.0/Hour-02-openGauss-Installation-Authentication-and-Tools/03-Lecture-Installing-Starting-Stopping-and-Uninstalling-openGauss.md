@@ -44,6 +44,11 @@ sh install.sh -w Huawei@123 -p 5432
    - **Start cluster**: `gs_om -t start` (default timeout is **300s**; customize via `gs_om -t start --time-out=300`).
    - **Stop cluster**: `gs_om -t stop`
    - *Note*: An HA cluster must be started in HA mode. If started in standalone mode, restore the HA relationship using `gs_ctl build`.
+<!-- PDF_FIGS_START -->
+![openGauss End-to-End Installation Pipeline (Official Reference: p. 82)](../assets/images/p3_h2s1_install_flowchart.png)
+*Figure: openGauss End-to-End Installation Pipeline (Official Reference: p. 82)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

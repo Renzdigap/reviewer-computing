@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure a RAID 5 logical volume named 'Data' across four 8 TB SATA HDDs on a TaiShan 200 (2280) server via iBMC WebUI and verify JBOD and BIOS RAID settings.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Avago MegaRAID BIOS VNC Create Virtual Drive Interface (Official Reference: p. 322)](../assets/images/p1_h6s4_raid_vnc_create.png)
+*Figure: Avago MegaRAID BIOS VNC Create Virtual Drive Interface (Official Reference: p. 322)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `ibmc_raid_query_path` to `'System > System Info > Others'` and `ibmc_raid_config_path` to `'System > Storage Management'`.
 2. Set `passthrough_mode_name` to `'JBOD'` and `unsupported_raid_level` to `'RAID 00'`.

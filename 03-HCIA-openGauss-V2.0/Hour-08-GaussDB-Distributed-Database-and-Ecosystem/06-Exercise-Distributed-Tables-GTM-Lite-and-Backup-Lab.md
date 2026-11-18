@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 In a GaussDB distributed cluster, create a large fact table `orders_fact` distributed across shards by `HASH(order_id)` and a small lookup table `currency_dim` replicated on every shard using `DISTRIBUTE BY REPLICATION` so joins do not require network redistribution.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![GTM-Lite Lockless Transaction Timestamp Coordination (Official Reference: p. 500)](../assets/images/p3_h8s3_gtm_lite.png)
+*Figure: GTM-Lite Lockless Transaction Timestamp Coordination (Official Reference: p. 500)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Create `orders_fact(order_id INT, cust_id INT, amount NUMERIC(10,2))` distributed by hash on `order_id` (`DISTRIBUTE BY HASH(order_id)`).
 2. Step 2: Create `currency_dim(curr_code CHAR(3), curr_name VARCHAR(20))` replicated across all shards (`DISTRIBUTE BY REPLICATION`).

@@ -31,6 +31,11 @@ On the iBMC WebUI **Home** page, clicking **Virtual Console \rightarrow Start** 
   5. **Self-check of drives and other devices** (checks HDDs/SSDs, optical drive, USB peripherals)
   6. **Result presentation** (presents self-check result via **beep codes** or **on-screen messages**)
   7. **OS startup** (loads OS from bootable device and hands over control to the OS)
+<!-- PDF_FIGS_START -->
+![Server Power-On Self-Test (POST) Execution Sequence (Official Reference: p. 312)](../assets/images/p1_h6s3_post_flow.png)
+*Figure: Server Power-On Self-Test (POST) Execution Sequence (Official Reference: p. 312)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

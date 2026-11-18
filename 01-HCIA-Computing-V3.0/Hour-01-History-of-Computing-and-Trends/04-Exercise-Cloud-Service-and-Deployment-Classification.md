@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 An enterprise is migrating from Traditional IT to Huawei Cloud. Complete the architecture mapping configuration defining Cloud 1.0/2.0/3.0 focus areas and IaaS/PaaS/SaaS management boundaries.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Cloud Service Models Responsibility Boundaries (IaaS, PaaS, SaaS) (Official Reference: p. 36)](../assets/images/p1_h1s2_cloud_service_models.png)
+*Figure: Cloud Service Models Responsibility Boundaries (IaaS, PaaS, SaaS) (Official Reference: p. 36)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `cloud_1_focus` to `'virtualization-centric'`, `cloud_2_focus` to `'resource-centric'`, and `cloud_3_focus` to `'application-centric'`.
 2. Set `iaas_user_manages_os` to `True` and `paas_user_manages_os` to `False`.

@@ -22,6 +22,11 @@
   * **Check File System Type:** **`lsblk -f`**, **`blkid`**, or **`df -T`**.
   * **Check Disk & Mount Space:** **`fdisk -l`** (lists all mounted and unmounted disks/partitions) and **`df -h`** (checks mounted disk space and usage).
 * **Disk Interfaces:** **IDE (PATA / parallel port)**, **SATA (serial port)**, **SCSI / SAS** (server-grade, hot-swappable, high stability), and **Fibre Channel (FC)**.
+<!-- PDF_FIGS_START -->
+![Linux File System Architecture Stack and VFS Layer (Official Reference: p. 258)](../assets/images/p2_h6s1_vfs_file_system.png)
+*Figure: Linux File System Architecture Stack and VFS Layer (Official Reference: p. 258)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -32,6 +37,14 @@ In `/dev/xxyN`:
 * **`N` (Partition Number):**
   * **`1 to 4`:** Reserved for **Primary partitions** or the **Extended partition** (at most **1 extended partition** per disk, which cannot be used directly until divided into logical partitions).
   * **`5 and above`:** **Logical partitions ALWAYS start from 5!** Example: **`/dev/sdb6` is the second logical partition on the second SCSI disk**!
+<!-- PDF_FIGS_START -->
+![Linux Disk Partition Device Naming (/dev/xx[a-z][1-N]) (Official Reference: p. 268)](../assets/images/p2_h6s1_device_naming.png)
+*Figure: Linux Disk Partition Device Naming (/dev/xx[a-z][1-N]) (Official Reference: p. 268)*
+
+![MBR Disk Partition Types (Primary, Extended, Logical Partition Relationship) (Official Reference: p. 267)](../assets/images/p2_h6s1_mbr_partitions.png)
+*Figure: MBR Disk Partition Types (Primary, Extended, Logical Partition Relationship) (Official Reference: p. 267)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -42,6 +55,14 @@ In `/dev/xxyN`:
 | **Max Disk/Partition Size** | **2 TB** maximum (`fdisk` does not support >2 TB). | **18 EB** maximum (supports >2 TB). |
 | **Max Partitions** | **4 primary** (or 3 primary + 1 extended). Total usable: **SCSI max 15** (4 primary or 12 logical); **IDE max 63** (4 primary or 60 logical). | **128 partitions** per disk (no primary/extended/logical distinction). |
 | **Interactive Commands** | `fdisk /dev/sdb`: **`n`** (new: `p` primary, `e` extended, `l` logical), **`d`** (delete), **`p`** (print table), **`l`** (list IDs: `82` swap, `83` Linux, **`8e` Linux LVM**), **`t`** (change ID), **`w`** (save & exit), **`q`** (quit without saving). | `parted /dev/sdb`: **`mklabel gpt`** (set GPT table), **`mkpart`** (create partition), **`print`**, **`resizepart`**, **`rm`**, **`quit`**. Non-interactive: `parted /dev/sdb mklabel gpt` -> `parted /dev/sdb mkpart primary 0 1000`. |
+<!-- PDF_FIGS_START -->
+![fdisk Interactive Primary Partitioning Flowchart (Official Reference: p. 271)](../assets/images/p2_h6s1_fdisk_flow.png)
+*Figure: fdisk Interactive Primary Partitioning Flowchart (Official Reference: p. 271)*
+
+![parted Interactive GPT Partitioning Workflow (Official Reference: p. 275)](../assets/images/p2_h6s1_parted_flow.png)
+*Figure: parted Interactive GPT Partitioning Workflow (Official Reference: p. 275)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

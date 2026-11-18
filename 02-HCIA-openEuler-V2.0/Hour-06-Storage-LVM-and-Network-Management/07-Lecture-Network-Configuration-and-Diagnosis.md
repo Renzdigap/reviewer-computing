@@ -37,6 +37,11 @@ openEuler uses `systemd/udev` **Predictable Network Interface Names** (e.g., **`
   * **`x<MAC>`**: MAC address-based (`x78e7d1`).
   * **`u<port>`**: USB device port (`u2`).
 * **Config Files (`/etc/sysconfig/network-scripts/ifcfg-*`):** Key parameters: `TYPE`, `BOOTPROTO` (`dhcp`/`static`/`none`), `ONBOOT` (`yes`/`no`), `IPADDR`, `NETMASK`, `GATEWAY`, `BROADCAST`, `HWADDR`/`MACADDR`, `PEERDNS`, `DNS1`/`DNS2`, `USERCTL`, `NAME`, `DEVICE`. *(Note: In kernel 3.x+, Huawei recommends **`nmcli`** or **`nmtui`** over manual `ifcfg-*` editing).*
+<!-- PDF_FIGS_START -->
+![Predictable NIC Naming Rules Breakdown (enp0s3) (Official Reference: p. 306)](../assets/images/p2_h6s4_nic_naming_rules.png)
+*Figure: Predictable NIC Naming Rules Breakdown (enp0s3) (Official Reference: p. 306)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -54,6 +59,11 @@ openEuler uses `systemd/udev` **Predictable Network Interface Names** (e.g., **`
   * **`ping`**: Sends **ICMP echo request** packets and waits for echo replies to test connectivity.
   * **`tracepath`**: Traces packet path from source to destination: (1) hop count/routing nodes, (2) RTT of each hop, (3) **detects Path MTU (`pmtu`) changes**.
   * **`ss` (Socket Statistics, e.g., `ss -talnp`)**: Displays network sockets/listening ports; **works faster than `netstat` by accessing data directly from the kernel!**
+<!-- PDF_FIGS_START -->
+![Creating Network Connections in nmtui Text UI (Official Reference: p. 315)](../assets/images/p2_h6s4_nmtui_gui.png)
+*Figure: Creating Network Connections in nmtui Text UI (Official Reference: p. 315)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

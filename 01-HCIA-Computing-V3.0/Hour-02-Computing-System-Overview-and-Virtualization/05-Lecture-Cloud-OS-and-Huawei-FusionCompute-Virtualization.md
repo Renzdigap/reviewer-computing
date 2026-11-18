@@ -28,6 +28,17 @@ Virtualization creates an abstraction layer over physical hardware to decouple O
 - **FusionStorage Block**: Scale-out distributed block storage software deployed on general-purpose servers to consolidate local drives into a virtual storage pool.
 - **eBackup**: Virtualization backup software that works with **FusionCompute snapshots** and **Changed Block Tracking (CBT)** to back up VM data.
 - **UltraVR**: Disaster Recovery (DR) management software providing VM data protection via **asynchronous remote replication** of underlying SAN storage.
+<!-- PDF_FIGS_START -->
+![Before Virtualization vs After Virtualization Architecture (Official Reference: p. 104)](../assets/images/p1_h2s3_virtualization_compare.png)
+*Figure: Before Virtualization vs After Virtualization Architecture (Official Reference: p. 104)*
+
+![Hypervisor (VMM), Host OS, and Guest OS Stack (Official Reference: p. 105)](../assets/images/p1_h2s3_hypervisor_concepts.png)
+*Figure: Hypervisor (VMM), Host OS, and Guest OS Stack (Official Reference: p. 105)*
+
+![Position of FusionCompute in Huawei Virtualization Suite (Official Reference: p. 107)](../assets/images/p1_h2s3_fusioncompute_suite.png)
+*Figure: Position of FusionCompute in Huawei Virtualization Suite (Official Reference: p. 107)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -37,6 +48,20 @@ Virtualization creates an abstraction layer over physical hardware to decouple O
 - **FusionCompute Benefits (pp. 113–114)**:
   - **Resource & Time-based Sharing**: Increases physical server utilization from **5%–10% (before virtualization)** to **60%+ (after virtualization)** with a **1:5 to 1:10 consolidation ratio** (e.g., balancing daytime MMS server peaks `08:00–20:00` with nighttime WAP gateway peaks `22:00–04:00`).
   - **High Availability (HA) vs. Live Migration**: If a node **fails**, **HA** detects the fault and **restarts** VMs on another healthy host. During **planned maintenance**, VMs are **migrated online (live migration)** without interrupting services.
+<!-- PDF_FIGS_START -->
+![FusionCompute Virtual Computing Resource Pooling (Official Reference: p. 109)](../assets/images/p1_h2s3_virtual_computing.png)
+*Figure: FusionCompute Virtual Computing Resource Pooling (Official Reference: p. 109)*
+
+![FusionCompute Virtual Storage Architecture (Official Reference: p. 110)](../assets/images/p1_h2s3_virtual_storage.png)
+*Figure: FusionCompute Virtual Storage Architecture (Official Reference: p. 110)*
+
+![FusionCompute Virtual Network (DVS and VLAN Port Groups) (Official Reference: p. 112)](../assets/images/p1_h2s3_virtual_network.png)
+*Figure: FusionCompute Virtual Network (DVS and VLAN Port Groups) (Official Reference: p. 112)*
+
+![FusionCompute Fault Recovery (HA) and Live Migration (Official Reference: p. 114)](../assets/images/p1_h2s3_ha_maintenance.png)
+*Figure: FusionCompute Fault Recovery (HA) and Live Migration (Official Reference: p. 114)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

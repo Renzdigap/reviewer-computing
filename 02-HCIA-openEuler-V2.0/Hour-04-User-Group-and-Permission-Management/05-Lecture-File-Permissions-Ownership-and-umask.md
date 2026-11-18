@@ -34,6 +34,14 @@ In `drwxr-xr-x. 2 root root 4096 Jun 1 14:00 shili`, the 10-character mode strin
 | **`r` (Read)** | **4** | Read the actual content of the file. | Read the directory structure list (`ls`). |
 | **`w` (Write)** | **2** | Edit, add, or modify file content (does **not** allow deleting the file itself!). | **Create, delete, rename, or move files** inside the directory! |
 | **`x` (Execute)** | **1** | Execute the file as a program/script. | **Access/enter the directory (`cd`)**. |
+<!-- PDF_FIGS_START -->
+![Detailed Output Fields of 'ls -l' Command (Official Reference: p. 171)](../assets/images/p2_h4s3_ls_l_callouts.png)
+*Figure: Detailed Output Fields of 'ls -l' Command (Official Reference: p. 171)*
+
+![9-Bit File Permission Structure (File Type, Owner, Group, Other) (Official Reference: p. 173)](../assets/images/p2_h4s3_permission_bits.png)
+*Figure: 9-Bit File Permission Structure (File Type, Owner, Group, Other) (Official Reference: p. 173)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

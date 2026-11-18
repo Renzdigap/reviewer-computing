@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Write a Python script to validate the SPD EEPROM specs, compute the theoretical peak memory bandwidth of a dual-socket Kunpeng 920 server with DDR4-2933 across 16 total channels (2 × 8 channels), and check DIMM population rules.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Basic Physical Structure and Markings of a Server Memory Module (Official Reference: p. 143)](../assets/images/p1_h3s2_dimm_structure.png)
+*Figure: Basic Physical Structure and Markings of a Server Memory Module (Official Reference: p. 143)*
+
+![TaiShan 200 (2280) 32 Color-Coded DIMM Slots across 8 Memory Channels (Official Reference: p. 147)](../assets/images/p1_h3s2_dimm_slots_2280.png)
+*Figure: TaiShan 200 (2280) 32 Color-Coded DIMM Slots across 8 Memory Channels (Official Reference: p. 147)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `spd_pins` to `8`, `spd_capacity_bytes` to `256`, and `dimm_data_width_bits` to `64`.
 2. Set `channels_per_cpu` to `8` and `total_dimm_slots_2p` to `32`.

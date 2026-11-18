@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are designing an openGauss Resource Pooling deployment on Huawei OceanStor Dorado storage. Record the exact component names (`DMS`, `DSS`), required SCSI3 protocols (`PR`, `CAW`), and maximum standby node count (`7`) into an architecture verification query.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss Resource Pooling Architecture (DMS, DSS and Shared Storage) (Official Reference: p. 146)](../assets/images/p3_h3s2_resource_pooling.png)
+*Figure: openGauss Resource Pooling Architecture (DMS, DSS and Shared Storage) (Official Reference: p. 146)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Complete the `SELECT` verification query specifying `'DSS'` as the storage service component and `'DMS'` as the memory service component.
 2. Step 2: Specify `'RDMA'` as the low-latency page exchange protocol (reducing latency by >= 20% over TCP) and `7` as the maximum number of standby nodes supported.

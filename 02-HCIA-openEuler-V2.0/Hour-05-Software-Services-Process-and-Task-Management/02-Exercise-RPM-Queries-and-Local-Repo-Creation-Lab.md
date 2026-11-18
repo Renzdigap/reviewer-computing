@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You need to audit which RPM package owns `/etc/passwd`, list all configuration files belonging to the `bash` RPM package, and initialize a local software repository in `/mnt/local_repo` using `createrepo`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![RPM Package Naming Convention Anatomy (name-version-release.arch.rpm) (Official Reference: p. 195)](../assets/images/p2_h5s1_rpm_naming.png)
+*Figure: RPM Package Naming Convention Anatomy (name-version-release.arch.rpm) (Official Reference: p. 195)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Query which RPM package owns `/etc/passwd` using `rpm -qf /etc/passwd`.
 2. Step 2: Query all configuration files installed by the `bash` package using `rpm -qc bash`.

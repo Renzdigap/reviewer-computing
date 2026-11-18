@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure the eSight integration architecture mapping (`IF1`–`IF5`) and batch operation capacity limits for a large carrier data center.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![External Interfaces of eSight (IF1 through IF5) (Official Reference: p. 404)](../assets/images/p1_h8s3_esight_interfaces.png)
+*Figure: External Interfaces of eSight (IF1 through IF5) (Official Reference: p. 404)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Map `southbound_interface` to `'IF1'`, `northbound_oss_interface` to `'IF2'`, and `auth_ldap_radius_sso_interface` to `'IF3'`.
 2. Set `excel_batch_import_max` to `500`, `os_deploy_task_max` to `200`, and `os_deploy_concurrent_max` to `40`.

@@ -28,6 +28,17 @@
 | **`IF3`** | **External Authentication Server Interface** | **LDAP, RADIUS, and SSO** |
 | **`IF4`** | **Notification Interface** (sends alarms, events, reports) | Connects to enterprise **Mail servers (Email)** and **SMS gateways (SMS)** |
 | **`IF5`** | **User Interface (UI)** | Invoked by system administrators and operators via Web browser |
+<!-- PDF_FIGS_START -->
+![eSight Unified Enterprise ICT O&M Topology (Official Reference: p. 402)](../assets/images/p1_h8s3_esight_overview.png)
+*Figure: eSight Unified Enterprise ICT O&M Topology (Official Reference: p. 402)*
+
+![eSight Modular Software Architecture (Official Reference: p. 403)](../assets/images/p1_h8s3_esight_arch.png)
+*Figure: eSight Modular Software Architecture (Official Reference: p. 403)*
+
+![External Interfaces of eSight (IF1 through IF5) (Official Reference: p. 404)](../assets/images/p1_h8s3_esight_interfaces.png)
+*Figure: External Interfaces of eSight (IF1 through IF5) (Official Reference: p. 404)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

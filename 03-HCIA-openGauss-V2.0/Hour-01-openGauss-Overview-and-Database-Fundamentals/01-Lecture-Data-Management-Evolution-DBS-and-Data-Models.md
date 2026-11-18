@@ -27,6 +27,11 @@
   1. **Database (DB)** — stores data.
   2. **DBMS** — manages the database.
   3. **Database Applications** — supplement the DBMS to provide intuitive user-facing data processing (along with DBAs and users).
+<!-- PDF_FIGS_START -->
+![Database System (DBS) Component Stack Diagram (Official Reference: p. 9)](../assets/images/p3_h1s1_dbs_components.png)
+*Figure: Database System (DBS) Component Stack Diagram (Official Reference: p. 9)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -40,6 +45,11 @@
 | **Data Sharing** | No sharing; high redundancy | Poor sharing; high redundancy | **Good sharing; low redundancy** |
 | **Data Independence** | Poor (program-bound) | Good physical independence; poor logical independence | **High physical & good logical independence** |
 | **Data Structuring** | Unstructured | Structured inside a record; unstructured as a whole | **Unified data model & overall structuring** |
+<!-- PDF_FIGS_START -->
+![Three Stages of Data Management Development (Official Reference: p. 10)](../assets/images/p3_h1s1_data_mgmt_stages.png)
+*Figure: Three Stages of Data Management Development (Official Reference: p. 10)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -53,6 +63,11 @@
   - **SQL-92 / SQL2 (1992)**: Introduced standard classification concepts.
   - **SQL:1999 / SQL3 (1999)**: Major revision adding object-oriented features, regular expressions, triggers, and recursive queries.
   - **SQL:2003**: XML & Window functions; **SQL:2008**: `TRUNCATE`; **SQL:2011**: Temporal/time-series; **SQL:2016**: JSON.
+<!-- PDF_FIGS_START -->
+![Hierarchical (Tree), Network (Graph), and Relational Models (Official Reference: p. 18)](../assets/images/p3_h1s1_database_models.png)
+*Figure: Hierarchical (Tree), Network (Graph), and Relational Models (Official Reference: p. 18)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

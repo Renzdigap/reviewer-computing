@@ -28,6 +28,11 @@
 | **`GDS Loader` & `WLM`** | **Gauss Data Service / Workload Manager** | High-speed parallel data loading direct to DNs (`GDS`) and workload resource management (`WLM`). |
 
 > **Roles Perceived by the Management Plane (p. 495)**: **`DN`**, **`CN`**, **`GTM`**, **`ETCD`**, and **`CMS`**.
+<!-- PDF_FIGS_START -->
+![GaussDB Distributed Components Architecture and Control/Data Planes (CM, GTM, CN, DN, ETCD, CMS) (Official Reference: p. 495)](../assets/images/p3_h8s2_distributed_components.png)
+*Figure: GaussDB Distributed Components Architecture and Control/Data Planes (CM, GTM, CN, DN, ETCD, CMS) (Official Reference: p. 495)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -40,6 +45,11 @@
    - **`Gather` Stream**: Collects results from DNs back to the CN.
 4. **Step 4 (Result Return to CN)**: Each **DN** executes its fragment in multi-threaded parallel mode and returns its partial result set to the **CN**.
 5. **Step 5 (Final Aggregation)**: The **CN** summarizes/merges the results and sends the final response to the service application.
+<!-- PDF_FIGS_START -->
+![GaussDB Distributed SQL Execution 5-Step Flow Across CN and DNs (Official Reference: p. 487)](../assets/images/p3_h8s2_distributed_exec_flow.png)
+*Figure: GaussDB Distributed SQL Execution 5-Step Flow Across CN and DNs (Official Reference: p. 487)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

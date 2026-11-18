@@ -44,6 +44,20 @@ openGauss horizontally splits a table into non-overlapping physical partitions t
 - **SMP (Symmetric Multi-Processing, pp. 187–188)**:
   - Intra-query operator-level multi-threaded parallel execution within a single process (exchanging data in memory via the **`Stream`** operator without network overhead).
   - Controlled by GUC **`query_dop`**: `1` (disabled, default); `0` (adaptive selection between `[1, 8]` when system load < 50%). *Note*: Data skew or high concurrent OLTP load degrades SMP efficiency.
+<!-- PDF_FIGS_START -->
+![Kunpeng NUMA CPU Die Structure and Node Distance Matrix (Official Reference: p. 183)](../assets/images/p3_h3s4_kunpeng_numa_matrix.png)
+*Figure: Kunpeng NUMA CPU Die Structure and Node Distance Matrix (Official Reference: p. 183)*
+
+![NUMA-Aware Kernel Data Partitioning Structure (Official Reference: p. 185)](../assets/images/p3_h3s4_numa_kernel_struct.png)
+*Figure: NUMA-Aware Kernel Data Partitioning Structure (Official Reference: p. 185)*
+
+![Unscheduled Thread Migration vs NUMA-Pinned Core Binding (Official Reference: p. 186)](../assets/images/p3_h3s4_numa_thread_binding.png)
+*Figure: Unscheduled Thread Migration vs NUMA-Pinned Core Binding (Official Reference: p. 186)*
+
+![SMP Multi-Thread Parallel Execution Flow (Official Reference: p. 187)](../assets/images/p3_h3s4_smp_parallel.png)
+*Figure: SMP Multi-Thread Parallel Execution Flow (Official Reference: p. 187)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -66,6 +80,11 @@ openGauss horizontally splits a table into non-overlapping physical partitions t
   - **RTO (Recovery Time Objective)**: Application-oriented — maximum tolerable **service downtime** (measures recovery timeliness).
   - **Ultimate RTO (Parallel Redo + Incremental Checkpoint)**: Uses multi-level pipelines to replay Xlogs in parallel on the standby node. Enabled only when **both `recovery_parse_workers > 1` AND `recovery_parallelism > 1`**. *(Constraint: Cascaded standby nodes are NOT supported when Ultimate RTO is enabled!)*
 - **Logical Replication (p. 198)**: DNs reversely parse physical WAL logs into logical logs (**logical decoding**, supported on standby nodes since v1.1.0); tools like **DRS** convert them into SQL for heterogeneous bidirectional sync with **MySQL** or **Oracle**. *(Constraint: Column-store replication is NOT supported!)*
+<!-- PDF_FIGS_START -->
+![RPO vs RTO Disaster Recovery Metrics on Time Axis (Official Reference: p. 196)](../assets/images/p3_h3s4_rpo_vs_rto_timeline.png)
+*Figure: RPO vs RTO Disaster Recovery Metrics on Time Axis (Official Reference: p. 196)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

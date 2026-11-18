@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Complete the hardware verification file for PCIe 4.0/5.0 bandwidths, Huawei server NIC form factors, CPU/GPU ALU ratios, and TaiShan PSU dimensions.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![TaiShan 200 Riser Cards and PCIe I/O Module Slot Mapping (Official Reference: p. 172)](../assets/images/p1_h4s2_riser_pcie_slots.png)
+*Figure: TaiShan 200 Riser Cards and PCIe I/O Module Slot Mapping (Official Reference: p. 172)*
+
+![Huawei IN Series Intelligent NIC (Hi1822) Hardware Callouts (Official Reference: p. 180)](../assets/images/p1_h4s2_inic_hi1822.png)
+*Figure: Huawei IN Series Intelligent NIC (Hi1822) Hardware Callouts (Official Reference: p. 180)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `pcie4_gt_s` to `16.0`, `pcie4_x16_gbs` to `31.5`, and `pcie5_x16_gbs` to `63.0`.
 2. Set `non_replaceable_pch_nic` to `'LOM'` and `blade_only_nic` to `'Mezzanine'`.

@@ -37,6 +37,11 @@ Connect a PC to the iBMC management port via crossover or twisted-pair cable, br
 | **Configure Time Zone & NTP** | **`iBMC Settings > Time Zone & NTP`** (synchronizes host clocks with **UTC** within **1 ms on LAN** and **tens of ms on WAN**) |
 | **Enable VNC** | **`Services > VNC`** (provides remote video display and keyboard/mouse control) |
 | **Enable SNMP** | **`Services > SNMP`** |
+<!-- PDF_FIGS_START -->
+![Direct Crossover Cable Connection to iBMC Port and WebUI Login (Official Reference: p. 300)](../assets/images/p1_h6s2_ibmc_webui_connect.png)
+*Figure: Direct Crossover Cable Connection to iBMC Port and WebUI Login (Official Reference: p. 300)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -22,6 +22,11 @@ Resource pooling innovates HA deployment by allowing **1 Read/Write Primary node
 2. **DMS (Distributed Memory Service)**:
    - A dynamic library integrated into the database that pools memory and exchanges hot data pages in real time between primary and standby shared buffer pools over **TCP** (default) or **OCK RDMA** (with **CX5 NIC**, reducing standby consistent-read latency by **>= 20%**).
    - Log replication is **not** required between primary and standby nodes during normal operation because pages are exchanged directly via DMS!
+<!-- PDF_FIGS_START -->
+![openGauss Resource Pooling Architecture (DMS, DSS and Shared Storage) (Official Reference: p. 146)](../assets/images/p3_h3s2_resource_pooling.png)
+*Figure: openGauss Resource Pooling Architecture (DMS, DSS and Shared Storage) (Official Reference: p. 146)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

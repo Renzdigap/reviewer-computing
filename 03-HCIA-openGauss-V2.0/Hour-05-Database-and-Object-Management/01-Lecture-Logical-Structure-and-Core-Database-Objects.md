@@ -28,6 +28,11 @@
   - `\d tablename`: Describe columns, types, and indexes of `tablename` (or system catalog).
   - `\db`: List all tablespaces.
   - `\q`: Quit `gsql`.
+<!-- PDF_FIGS_START -->
+![openGauss Tablespace, Database, Table, and Data Block Hierarchy (Official Reference: p. 277)](../assets/images/p3_h5s1_logical_arch.png)
+*Figure: openGauss Tablespace, Database, Table, and Data Block Hierarchy (Official Reference: p. 277)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

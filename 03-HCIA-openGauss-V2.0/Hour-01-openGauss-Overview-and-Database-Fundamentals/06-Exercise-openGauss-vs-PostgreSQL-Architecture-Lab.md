@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Verify that openGauss runs as a single `gaussdb` process with multiple worker and background threads (unlike PostgreSQL's multi-process model) and check the openGauss version and incremental checkpoint setting.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss Thread Pool Architecture vs PostgreSQL Multi-Process Architecture (Official Reference: p. 48)](../assets/images/p3_h1s3_opengauss_vs_pg.png)
+*Figure: openGauss Thread Pool Architecture vs PostgreSQL Multi-Process Architecture (Official Reference: p. 48)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Use `ps ux | grep gaussdb` to view the running `gaussdb` master process.
 2. Step 2: Use `ps -T -p 24209` to list the threads (`SPID`) inside the `gaussdb` process.

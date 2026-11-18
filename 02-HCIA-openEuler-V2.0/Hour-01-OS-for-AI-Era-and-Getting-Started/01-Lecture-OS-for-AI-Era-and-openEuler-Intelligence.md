@@ -33,6 +33,14 @@ The term **Artificial Intelligence (AI)** was coined by **John McCarthy in 1956*
   1. **Web Entry:** Easy-to-use browser portal providing openEuler knowledge, community announcements, and O&M solutions via intelligent agents.
   2. **Intelligent Shell Entry:** Allows O&M engineers and developers to interact with openEuler in the terminal using **natural human language** for heuristic tuning and fault diagnosis.
 * **Core Backend Components:** Orchestration Engine, Historical Context Management, Agent Framework (Intelligent O&M, Intelligent Optimization, CVE Hotfix services), Document Parsing Engine, and **Retrieval-Augmented Generation (RAG)** Knowledge Base.
+<!-- PDF_FIGS_START -->
+![openEuler OS for AI and AI for OS Architecture (Official Reference: p. 7)](../assets/images/p2_h1s1_openeuler_ai_platform.png)
+*Figure: openEuler OS for AI and AI for OS Architecture (Official Reference: p. 7)*
+
+![AI for OS Agent Framework and Knowledge Base Stack (Official Reference: p. 8)](../assets/images/p2_h1s1_ai_for_os_agent.png)
+*Figure: AI for OS Agent Framework and Knowledge Base Stack (Official Reference: p. 8)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -398,6 +398,129 @@ p { margin-bottom: 10px; }
       #code-editor { min-height: 240px; }
       .console-body { height: 220px; }
     }
+
+/* PDF_FIGURES_CSS */
+.pdf-figures-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 14px;
+  margin: 16px 0 20px 0;
+}
+.pdf-figures-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 12px 0 16px 0;
+}
+.pdf-figure {
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  transition: border-color 0.2s ease;
+}
+.pdf-figure:hover {
+  border-color: #38bdf8;
+}
+.pdf-figure-frame {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.pdf-figure-frame img {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: zoom-in;
+  display: block;
+}
+.pdf-figures-compact .pdf-figure-frame img {
+  max-height: 210px;
+}
+.pdf-figure figcaption {
+  margin-top: 9px;
+  font-size: 12.5px;
+  color: #d1d5db;
+  text-align: center;
+  line-height: 1.4;
+}
+.pdf-figure figcaption strong {
+  color: #f9fafb;
+  display: block;
+  margin-bottom: 2px;
+}
+.pdf-ref-tag {
+  color: #9ca3af;
+  font-size: 11px;
+}
+.img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 15, 0.92);
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox.open {
+  display: flex;
+}
+.img-lightbox-box {
+  max-width: 94vw;
+  max-height: 84vh;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox-box img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+}
+.img-lightbox-bar {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #f3f4f6;
+  font-size: 13.5px;
+  max-width: 90vw;
+  text-align: center;
+}
+.img-lightbox-close {
+  background: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.img-lightbox-close:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+}
+
   </style>
   <script src="../../sync_engine.js"></script>
 </head>
@@ -445,6 +568,8 @@ p { margin-bottom: 10px; }
 <tr><td><strong>RAID 50</strong></td><td>≥ 6</td><td><strong>$(N - M)/N</strong></td><td><strong>RAID 5 first, then RAID 0</strong> across M spans (≥ 2 spans × 3 disks = 6$ disks min). Tolerates 1 disk failure per RAID 5 span.</td></tr>
 <tr><td><strong>RAID 60</strong></td><td>≥ 8 (theory)</td><td><strong>$(N - 2M)/N</strong></td><td><strong>RAID 6 first, then RAID 0</strong> across M spans (≥ 2 spans × 4 disks = 8$ disks min on p.161–162). Tolerates 2 disk failures per RAID 6 span.</td></tr>
 </tbody></table></div>
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s1_raid_definition.png" alt="RAID Virtualization: Combining Physical Disks into Logical Disks" data-caption="RAID Virtualization: Combining Physical Disks into Logical Disks (Official Reference: p. 159)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>RAID Virtualization: Combining Physical Disks into Logical Disks</strong><span class="pdf-ref-tag">Official Reference: p. 159 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s1_raid_levels_1.png" alt="RAID 0, RAID 1, RAID 5, RAID 10 Block Striping, Mirroring and Parity" data-caption="RAID 0, RAID 1, RAID 5, RAID 10 Block Striping, Mirroring and Parity (Official Reference: p. 160)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>RAID 0, RAID 1, RAID 5, RAID 10 Block Striping, Mirroring and Parity</strong><span class="pdf-ref-tag">Official Reference: p. 160 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s1_raid_levels_2.png" alt="RAID 6 (Dual Parity P+Q), RAID 1E, RAID 50, RAID 60 Block Layouts" data-caption="RAID 6 (Dual Parity P+Q), RAID 1E, RAID 50, RAID 60 Block Layouts (Official Reference: p. 161)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>RAID 6 (Dual Parity P+Q), RAID 1E, RAID 50, RAID 60 Block Layouts</strong><span class="pdf-ref-tag">Official Reference: p. 161 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+
 <p>---</p>
 <h3>2. Hot Spare, Reconstruction &amp; Why RAID != Backup (pp. 164–165)</h3>
 <ul class="md-list">
@@ -453,6 +578,8 @@ p { margin-bottom: 10px; }
 <li><strong>Dedicated Hot Spare</strong>: Dedicated to <strong>one specific</strong> redundant RAID group.</li>
 <li><strong>RAID Cannot Replace Data Backup (p. 165)</strong>: RAID only protects against physical disk failures; it <strong>cannot</strong> prevent data loss from <strong>viruses, human error, accidental deletion, or OS/file system corruption</strong>.</li>
 </ul>
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s1_raid_luns.png" alt="RAID Logical Volumes and LUN Slicing" data-caption="RAID Logical Volumes and LUN Slicing (Official Reference: p. 164)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>RAID Logical Volumes and LUN Slicing</strong><span class="pdf-ref-tag">Official Reference: p. 164 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s1_raid_hot_spare.png" alt="RAID Hot Spare and XOR Data Reconstruction Workflow" data-caption="RAID Hot Spare and XOR Data Reconstruction Workflow (Official Reference: p. 165)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>RAID Hot Spare and XOR Data Reconstruction Workflow</strong><span class="pdf-ref-tag">Official Reference: p. 165 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+
 <p>---</p>
 <h3>3. Software RAID vs. Hardware RAID (Built-in &amp; External) (pp. 166–169)</h3>
 <ul class="md-list">
@@ -470,7 +597,9 @@ p { margin-bottom: 10px; }
 <li><strong>Built-in Hardware RAID</strong>: Uses a PCIe RAID controller card (e.g., <strong>Avago MegaRAID SAS 9440-8i</strong> with Mini-SAS <strong>SFF-8643</strong> ports, heat sink, heartbeat LED, and chip overtemperature LED) with its own independent processor and cache memory; supports bootable arrays.</li>
 <li><strong>External Hardware RAID</strong>: Independent external disk array subsystem connected via standard controller; supports dual controllers, hot swap, and ultra-large capacity.</li>
 </ul>
-          </div>
+          
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s1_raid_hardware.png" alt="Hardware RAID Mode 1 (Built-in Controller) vs Mode 2 (External Array)" data-caption="Hardware RAID Mode 1 (Built-in Controller) vs Mode 2 (External Array) (Official Reference: p. 166)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Hardware RAID Mode 1 (Built-in Controller) vs Mode 2 (External Array)</strong><span class="pdf-ref-tag">Official Reference: p. 166 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h4s1_megaraid_9440.png" alt="Avago MegaRAID SAS 9440-8i Card Physical Callouts (1-5)" data-caption="Avago MegaRAID SAS 9440-8i Card Physical Callouts (1-5) (Official Reference: p. 169)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Avago MegaRAID SAS 9440-8i Card Physical Callouts (1-5)</strong><span class="pdf-ref-tag">Official Reference: p. 169 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+</div>
 
           <div class="takeaways-card">
             <h3>High-Yield Summary & Takeaways</h3>
@@ -680,5 +809,31 @@ p { margin-bottom: 10px; }
       if (correctCount === qs.length) markUnitCompleted();
     }
   </script>
+
+  <div id="img-lightbox" class="img-lightbox" onclick="if(event.target===this) closeImgZoom()">
+    <div class="img-lightbox-box">
+      <img id="img-lightbox-target" src="" alt="Zoomed Diagram" />
+    </div>
+    <div class="img-lightbox-bar">
+      <span id="img-lightbox-caption"></span>
+      <button type="button" class="img-lightbox-close" onclick="closeImgZoom()">Close</button>
+    </div>
+  </div>
+  <script>
+    function openImgZoom(imgEl) {
+      if (!imgEl) return;
+      document.getElementById('img-lightbox-target').src = imgEl.src;
+      document.getElementById('img-lightbox-caption').textContent = imgEl.getAttribute('data-caption') || imgEl.alt || '';
+      document.getElementById('img-lightbox').classList.add('open');
+    }
+    function closeImgZoom() {
+      document.getElementById('img-lightbox').classList.remove('open');
+      document.getElementById('img-lightbox-target').src = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImgZoom();
+    });
+  </script>
+
 </body>
 </html>

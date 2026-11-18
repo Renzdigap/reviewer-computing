@@ -34,6 +34,11 @@ Traditional distributed databases maintain a global active transaction list on t
 | :--- | :--- | :--- |
 | **`GTM-Lite` Mode** | **Strong Global Consistency** | Connects to lightweight GTM for lock-free CSN snapshots; ideal for general enterprise OLTP requiring real-time cross-shard read consistency. |
 | **`GTM-Free` Mode** | **Eventual Consistency** (does not provide real-time cross-node read consistency) | **Does NOT connect to GTM** (zero central node involvement); achieves maximum throughput in **perfectly sharded OLTP scenarios**. |
+<!-- PDF_FIGS_START -->
+![GTM-Lite Lockless Transaction Timestamp Coordination (Official Reference: p. 500)](../assets/images/p3_h8s3_gtm_lite.png)
+*Figure: GTM-Lite Lockless Transaction Timestamp Coordination (Official Reference: p. 500)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

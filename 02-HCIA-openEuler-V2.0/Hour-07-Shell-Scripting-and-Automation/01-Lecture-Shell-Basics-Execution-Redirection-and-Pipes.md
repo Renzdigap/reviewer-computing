@@ -26,6 +26,11 @@ The **Shell** is the command interpreter in user space that parses user commands
   * View all installed shells in the system: **`cat /etc/shells`**
   * View default shell of the current login user: **`echo $SHELL`**
   * View the currently running shell: **`echo $0`**
+<!-- PDF_FIGS_START -->
+![Shell Command Parsing, Expansion and Kernel Execution Diagram (Official Reference: p. 326)](../assets/images/p2_h7s1_shell_overview.png)
+*Figure: Shell Command Parsing, Expansion and Kernel Execution Diagram (Official Reference: p. 326)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

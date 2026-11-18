@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Write a Python script that models the internal die, cluster, core, and memory controller topology of a Kunpeng 920 processor and verifies HCCS 4-socket scaling.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Kunpeng 920 Multi-Die Physical Chip Internal Architecture (Official Reference: p. 234)](../assets/images/p1_h5s1_kunpeng920_chip.png)
+*Figure: Kunpeng 920 Multi-Die Physical Chip Internal Architecture (Official Reference: p. 234)*
+
+![Kunpeng 920 Dual CPU Dies, 8-Channel DDR4 and HCCS Interconnect (Official Reference: p. 237)](../assets/images/p1_h5s1_kunpeng_die_features.png)
+*Figure: Kunpeng 920 Dual CPU Dies, 8-Channel DDR4 and HCCS Interconnect (Official Reference: p. 237)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `process_nm` to `7`, `cpu_dies` to `2`, and `io_dies` to `1` (total 3 dies).
 2. Set `clusters_per_cpu_die` to `8`, `cores_per_cluster` to `4`, and `ddr4_controllers_per_cpu_die` to `4`.

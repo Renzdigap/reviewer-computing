@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You have created logical partition `/dev/hdb6` on an openEuler server. Format `/dev/hdb6` with the `ext4` file system using `mkfs -t ext4`, mount it temporarily to `/test`, and append a persistent mount entry to `/etc/fstab`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Temporary Mounting (mount) vs Permanent Mounting (/etc/fstab) (Official Reference: p. 280)](../assets/images/p2_h6s2_drive_mounting.png)
+*Figure: Temporary Mounting (mount) vs Permanent Mounting (/etc/fstab) (Official Reference: p. 280)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Format `/dev/hdb6` as `ext4` using `mkfs -t ext4 /dev/hdb6` (exact Ch.05 Quiz Q2 syntax).
 2. Step 2: Create mount point `/test` and mount `/dev/hdb6` to `/test` using `mount /dev/hdb6 /test`.

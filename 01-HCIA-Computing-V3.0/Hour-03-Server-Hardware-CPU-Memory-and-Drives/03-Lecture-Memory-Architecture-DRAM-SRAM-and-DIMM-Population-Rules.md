@@ -20,6 +20,11 @@ Memory (internal/main memory) acts as the communication bridge between external 
 - **Serial Presence Detect (SPD, pp. 143, 224)**:
   - An **8-pin SOIC-encapsulated (3 mm × 4 mm) electrically erasable programmable read-only memory (EEPROM)** with a capacity of **256 bytes** (main model: **24LC01B**, located on the right side of the front of a DIMM).
   - Stores memory capacity, chip/module manufacturer, operating speed, voltage, and row/column address bandwidth. During boot, the mainboard automatically reads the SPD to configure memory working parameters.
+<!-- PDF_FIGS_START -->
+![Basic Physical Structure and Markings of a Server Memory Module (Official Reference: p. 143)](../assets/images/p1_h3s2_dimm_structure.png)
+*Figure: Basic Physical Structure and Markings of a Server Memory Module (Official Reference: p. 143)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -44,6 +49,11 @@ Memory (internal/main memory) acts as the communication bridge between external 
   1. **At least one DIMM must be configured in slots supported by CPU 1**.
   2. **All DIMMs on a server must have the exact same specifications** (capacity, bit width, rank, height) — i.e., **the same part number (P/N code)**.
   3. **Balanced Configuration Principle**: Optimal performance requires both CPUs to have the **same number of DIMMs** (processor balance) and DIMMs to be **evenly distributed across the 8 memory channels** (channel balance: **1, 2, 4, 6, 8, or 16 DIMMs per CPU**, though 6 is partially populated, **3, 5, 7, 9, 10, 11, 12, 13, 14, or 15 DIMMs on a single CPU** are explicitly listed on p. 148 as **unbalanced channel configurations**!).
+<!-- PDF_FIGS_START -->
+![TaiShan 200 (2280) 32 Color-Coded DIMM Slots across 8 Memory Channels (Official Reference: p. 147)](../assets/images/p1_h3s2_dimm_slots_2280.png)
+*Figure: TaiShan 200 (2280) 32 Color-Coded DIMM Slots across 8 Memory Channels (Official Reference: p. 147)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

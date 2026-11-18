@@ -43,6 +43,11 @@
 | **Kunpeng NUMA Scaling** | NUMA data structure reconstruction, cache-line padding, ARMv8.1 native `casal` spin-lock (**1.5M tpmC** on 2-socket Kunpeng) | Weak NUMA multi-core capability (**< 600,000 tpmC** on dual-socket server) |
 | **Storage Engines** | **Multi-engine**: Row-store (Astore/Ustore in-place update), Column-store, and **MOT (Memory-Optimized Table)** | **Row-store only** (append-only MVCC) |
 | **Optimizer & SQL** | CBO + **ABO (AI-Based Optimizer)**; SQL92/99/2003/2011 + enterprise extensions | Standard CBO; average performance in complex enterprise queries |
+<!-- PDF_FIGS_START -->
+![openGauss Thread Pool Architecture vs PostgreSQL Multi-Process Architecture (Official Reference: p. 48)](../assets/images/p3_h1s3_opengauss_vs_pg.png)
+*Figure: openGauss Thread Pool Architecture vs PostgreSQL Multi-Process Architecture (Official Reference: p. 48)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

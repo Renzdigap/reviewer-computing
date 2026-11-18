@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are preparing a Kunpeng 920 (ARM64) server running openEuler 20.03 LTS for openGauss installation. Disable firewalld, disable `RemoveIPC`, set the ARM64 recommended MTU (8192) on `eth0`, and create the `dbgrp` group and `omm` user.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss One Primary and Multiple Standbys Topology (Official Reference: p. 80)](../assets/images/p3_h2s1_one_primary_multi_standby.png)
+*Figure: openGauss One Primary and Multiple Standbys Topology (Official Reference: p. 80)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Disable and stop `firewalld.service` using `systemctl`.
 2. Step 2: Configure `RemoveIPC=no` in `/etc/systemd/logind.conf` and restart `systemd-logind`.

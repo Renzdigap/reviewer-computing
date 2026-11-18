@@ -26,6 +26,11 @@
     2. **Reading a file:** Searched from top layer (`upperdir`/container layer) down to lower image layers (`lowerdir`).
     3. **Modifying a file:** Looked up from top to bottom; when modified for the first time, the file is **copied from the read-only image layer up to the container layer (`copy_up`)** and modified there (**Copy-on-Write**).
     4. **Deleting a file/directory:** Because image layers are read-only, UnionFS creates a **whiteout file** (or **opaque directory** in OverlayFS) in the R/W container layer to hide the underlying file/directory!
+<!-- PDF_FIGS_START -->
+![Layered Structure of Container Images (Read-Write Container Layer + R/O Image Layers) (Official Reference: p. 429)](../assets/images/p2_h8s4_image_layers.png)
+*Figure: Layered Structure of Container Images (Read-Write Container Layer + R/O Image Layers) (Official Reference: p. 429)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -39,6 +44,14 @@
     2. **`upperdir`:** Read-write container layer (stores new, `copy_up`-modified, and whiteout/opaque files).
     3. **`merged`:** Unified view presented to the user/container.
     4. **`workdir`:** Internal working directory (**invisible to users**).
+<!-- PDF_FIGS_START -->
+![AUFS Multi-Layered Directory Union Mount Structure (Official Reference: p. 432)](../assets/images/p2_h8s4_aufs_layers.png)
+*Figure: AUFS Multi-Layered Directory Union Mount Structure (Official Reference: p. 432)*
+
+![OverlayFS Structure (lowerdir, upperdir, merged File Overlay) (Official Reference: p. 433)](../assets/images/p2_h8s4_overlayfs_layers.png)
+*Figure: OverlayFS Structure (lowerdir, upperdir, merged File Overlay) (Official Reference: p. 433)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

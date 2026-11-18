@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Write a Python hardware inspection script that maps CPU Control Unit registers (PC, IR, ID, OC) and calculates clock cycle period and total physical cores on a 2-socket TaiShan 200 (2280) server.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![TaiShan 200 (Model 2280) Front Exploded View (Components 1-8) (Official Reference: p. 134)](../assets/images/p1_h3s1_taishan2280_front_exploded.png)
+*Figure: TaiShan 200 (Model 2280) Front Exploded View (Components 1-8) (Official Reference: p. 134)*
+
+![TaiShan 200 (Model 2280) Rear Exploded View (Components 1-5) (Official Reference: p. 135)](../assets/images/p1_h3s1_taishan2280_rear_exploded.png)
+*Figure: TaiShan 200 (Model 2280) Rear Exploded View (Components 1-5) (Official Reference: p. 135)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `next_instruction_address_register` to `'PC'` and `current_instruction_register` to `'IR'`.
 2. Calculate `clock_period_ns_at_100mhz` as `10` (since 1 / 100 MHz = 10 ns).

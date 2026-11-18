@@ -49,6 +49,14 @@ Middleware connects system software (OS) and application software across differe
 | **Key Bottleneck / Metric** | **Memory efficiency**, TPS, SQL rate, concurrency | **Drive I/O bandwidth**, SQL duration, partitioning |
 
 - **Server Requirements for Databases (p. 101)**: Peak CPU load must **not exceed 85%**. Reference 4-socket Kunpeng openGauss 5.0.0+ configuration on **openEuler 20.03 LTS**: **TaiShan 200 (model 2480)**, **4 × Kunpeng 920 64-core CPUs**, **1 TB RAM**, **Hi1822 NIC (4 × 25GE, latency < 0.1 ms)**, **4 × NVMe SSDs** (V5 sequential write ≥ 2600 MB/s).
+<!-- PDF_FIGS_START -->
+![Database System (DBS) Component Relationships (Official Reference: p. 97)](../assets/images/p1_h2s2_dbs_components.png)
+*Figure: Database System (DBS) Component Relationships (Official Reference: p. 97)*
+
+![Database Models: Hierarchical (Tree), Network (Graph), Relational (Official Reference: p. 98)](../assets/images/p1_h2s2_database_models.png)
+*Figure: Database Models: Hierarchical (Tree), Network (Graph), Relational (Official Reference: p. 98)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

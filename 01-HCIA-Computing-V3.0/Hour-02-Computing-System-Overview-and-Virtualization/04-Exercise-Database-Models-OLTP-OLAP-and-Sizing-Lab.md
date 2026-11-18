@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure the hardware and software specification sheet for deploying openGauss 5.0.0 on a 4-socket Kunpeng server and validate middleware/OS rules.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Database Models: Hierarchical (Tree), Network (Graph), Relational (Official Reference: p. 98)](../assets/images/p1_h2s2_database_models.png)
+*Figure: Database Models: Hierarchical (Tree), Network (Graph), Relational (Official Reference: p. 98)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `server_model` to `'TaiShan 200 2480'`, `max_cpu_peak_load_percent` to `85`, and `nic_chip` to `'Hi1822'`.
 2. Set `open_source_ejb_middleware` to `'JBoss'` and `lightweight_no_ejb_middleware` to `'Tomcat'`.

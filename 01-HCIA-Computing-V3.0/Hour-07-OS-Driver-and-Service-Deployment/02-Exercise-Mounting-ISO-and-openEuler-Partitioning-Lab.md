@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure the Kickstart/Anaconda installation parameters for deploying `openEuler-22.03-LTS-aarch64-dvd.iso` on a TaiShan 200 (2280) server via the iBMC Remote Virtual Console.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openEuler Drive Partitioning Scheme on TaiShan 2280 (Official Reference: p. 332)](../assets/images/p1_h7s1_partition_scheme.png)
+*Figure: openEuler Drive Partitioning Scheme on TaiShan 2280 (Official Reference: p. 332)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `iso_boot_option` to `'DVD-ROM drive'` and `iso_filename` to `'openEuler-22.03-LTS-aarch64-dvd.iso'`.
 2. Set `manual_partition_mode` to `'Custom'`.

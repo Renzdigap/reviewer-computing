@@ -26,6 +26,11 @@ Huawei's Kunpeng open hardware platform spans **Processor \rightarrow Single Nod
 | **2014** | **Kunpeng 912 (Hi1612)** | Huawei's **first Arm-based 64-bit (AArch64) processor** |
 | **2016** | **Kunpeng 916** | **Industry's first Arm processor that supports multiple sockets** (data center predecessor) |
 | **Jan 2019** | **Kunpeng 920** | **Industry's first 7 nm data center–level Arm processor** |
+<!-- PDF_FIGS_START -->
+![Kunpeng Processor SoC and Full Computing Platform (Official Reference: p. 231)](../assets/images/p1_h5s1_kunpeng_soc.png)
+*Figure: Kunpeng Processor SoC and Full Computing Platform (Official Reference: p. 231)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -39,6 +44,11 @@ Huawei's Kunpeng open hardware platform spans **Processor \rightarrow Single Nod
      - **1 I/O die**: Provides **PCIe 4.0/CCIX** interfaces, **100GE RoCE** Ethernet ports, SAS/SATA storage controllers, inter-chip cache coherence interface, and hardware acceleration engines.
   4. **Cluster**: Set of cores; **1 Cluster = 4 Cores**, and **1 CPU Die = 8 Clusters** (8 × 4 = 32 cores/die, 64 cores/processor).
   5. **Core**: Computing unit of the CPU.
+<!-- PDF_FIGS_START -->
+![Kunpeng 920 Multi-Die Physical Chip Internal Architecture (Official Reference: p. 234)](../assets/images/p1_h5s1_kunpeng920_chip.png)
+*Figure: Kunpeng 920 Multi-Die Physical Chip Internal Architecture (Official Reference: p. 234)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -50,6 +60,11 @@ Huawei's Kunpeng open hardware platform spans **Processor \rightarrow Single Nod
   - **PCIe 4.0 (compatible with PCIe 3.0/2.0/1.0) & CCIX**: Increases total I/O bandwidth by **66%**.
   - **100GE RoCE Ethernet**: Increases network bandwidth by **4x**.
   - **Reliability**: Supports **RAS-45** features.
+<!-- PDF_FIGS_START -->
+![Kunpeng 920 Dual CPU Dies, 8-Channel DDR4 and HCCS Interconnect (Official Reference: p. 237)](../assets/images/p1_h5s1_kunpeng_die_features.png)
+*Figure: Kunpeng 920 Dual CPU Dies, 8-Channel DDR4 and HCCS Interconnect (Official Reference: p. 237)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

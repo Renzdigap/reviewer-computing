@@ -22,6 +22,11 @@
   3. **DHCP automatic IP address allocation**: Used when devices are in DHCP mode and **accounts, SNs, and MAC addresses** are known (*Restriction*: requires a **DHCP relay server** on the network).
   4. **SSDP automatic discovery**: Uses **IP-SN mapping mode** (known SNs/accounts) or **IP resource pool allocation mode** (allocates random IPs when device info is unknown). (*Restriction*: **FusionDirector and the devices MUST be on the same Layer 2 (L2) network**!).
 - **One-Click Log Collection (p. 380)**: Exports logs of **a maximum of 100 servers at a time** in one-click mode.
+<!-- PDF_FIGS_START -->
+![FusionDirector Centralized Management Overview Topology (Official Reference: p. 378)](../assets/images/p1_h8s2_fusiondirector_arch.png)
+*Figure: FusionDirector Centralized Management Overview Topology (Official Reference: p. 378)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -38,6 +43,17 @@
 3. **Intelligent Version Management (pp. 390–394)**: Connects to **HOUP** (*Huawei Online Update Platform*) via out-of-band channels (consumes zero service bandwidth) for **OTA** baseline push, common/OTA/periodic update schedules, firmware/driver update, and software installation/update/rollback/uninstallation.
 4. **Intelligent Fault Management (pp. 395–396)**: AI-based **Disk Fault Prediction** (risk charts) and **Memory Fault Prediction** (DIMM health & historical self-healing records).
 5. **Intelligent Energy Efficiency Management (pp. 397–400)**: Solves data center pain points (rack space utilization only 40%–50%, rack power usage 50%, electricity ≥ 78% of op costs). Provides AI rack power prediction, **cabinet-level power capping**, PSU hibernation, and 4 optimization analyses: **Power distribution** (batch power capping), **Temperature risk** (power off overheated air-intake servers), **Load optimization** (batch operations on low-load servers), and **Space optimization**.
+<!-- PDF_FIGS_START -->
+![FusionDirector Five Intelligent Management Features (Official Reference: p. 382)](../assets/images/p1_h8s2_five_intelligent.png)
+*Figure: FusionDirector Five Intelligent Management Features (Official Reference: p. 382)*
+
+![FusionDirector 1-to-N Server Profile Binding Architecture (Official Reference: p. 383)](../assets/images/p1_h8s2_server_profile.png)
+*Figure: FusionDirector 1-to-N Server Profile Binding Architecture (Official Reference: p. 383)*
+
+![FusionDirector Intelligent Version Upgrade (HOUP/OTA Flow) (Official Reference: p. 390)](../assets/images/p1_h8s2_version_ota.png)
+*Figure: FusionDirector Intelligent Version Upgrade (HOUP/OTA Flow) (Official Reference: p. 390)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure a high-throughput Memory-Optimized Table (MOT) `trade_mot` for user `jack`: grant `USAGE` on `FOREIGN SERVER mot_server` to `jack`, create the MOT `trade_mot(trade_id INT, price NUMERIC(10,2))`, create an index `idx_trade_id` on it, and write the statement to drop the MOT.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss Dual Storage Architecture: Disk Engine vs Memory-Optimized Table (MOT) (Official Reference: p. 303)](../assets/images/p3_h5s2_dual_storage_mot.png)
+*Figure: openGauss Dual Storage Architecture: Disk Engine vs Memory-Optimized Table (MOT) (Official Reference: p. 303)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Grant MOT usage permission using `GRANT USAGE ON FOREIGN SERVER mot_server TO jack;`.
 2. Step 2: Create the MOT using `CREATE FOREIGN TABLE trade_mot(trade_id INT, price NUMERIC(10,2)) SERVER mot_server;`.

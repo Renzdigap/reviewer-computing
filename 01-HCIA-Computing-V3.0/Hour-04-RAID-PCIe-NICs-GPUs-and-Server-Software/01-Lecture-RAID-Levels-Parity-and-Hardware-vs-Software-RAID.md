@@ -27,6 +27,17 @@ Proposed by **Prof. D.A. Patterson** at UC Berkeley in **1988**, **RAID (Redunda
 | **RAID 10 vs. 01** | ≥ 4 (even) | **50%** | **RAID 10** mirrors first (RAID 1) then stripes (RAID 0); tolerates 1 failed disk per RAID 1 span. **RAID 01** stripes first (RAID 0) then mirrors (RAID 1) — losing 1 disk loses an entire stripe and degrades the array into a non-redundant RAID 0! |
 | **RAID 50** | ≥ 6 | **$(N - M)/N** | **RAID 5 first, then RAID 0** across M spans (≥ 2 spans × 3 disks = 6$ disks min). Tolerates 1 disk failure per RAID 5 span. |
 | **RAID 60** | ≥ 8 (theory) | **$(N - 2M)/N** | **RAID 6 first, then RAID 0** across M spans (≥ 2 spans × 4 disks = 8$ disks min on p.161–162). Tolerates 2 disk failures per RAID 6 span. |
+<!-- PDF_FIGS_START -->
+![RAID Virtualization: Combining Physical Disks into Logical Disks (Official Reference: p. 159)](../assets/images/p1_h4s1_raid_definition.png)
+*Figure: RAID Virtualization: Combining Physical Disks into Logical Disks (Official Reference: p. 159)*
+
+![RAID 0, RAID 1, RAID 5, RAID 10 Block Striping, Mirroring and Parity (Official Reference: p. 160)](../assets/images/p1_h4s1_raid_levels_1.png)
+*Figure: RAID 0, RAID 1, RAID 5, RAID 10 Block Striping, Mirroring and Parity (Official Reference: p. 160)*
+
+![RAID 6 (Dual Parity P+Q), RAID 1E, RAID 50, RAID 60 Block Layouts (Official Reference: p. 161)](../assets/images/p1_h4s1_raid_levels_2.png)
+*Figure: RAID 6 (Dual Parity P+Q), RAID 1E, RAID 50, RAID 60 Block Layouts (Official Reference: p. 161)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -35,6 +46,14 @@ Proposed by **Prof. D.A. Patterson** at UC Berkeley in **1988**, **RAID (Redunda
   - **Global Hot Spare**: Shared by **all** redundant RAID groups in the system.
   - **Dedicated Hot Spare**: Dedicated to **one specific** redundant RAID group.
 - **RAID Cannot Replace Data Backup (p. 165)**: RAID only protects against physical disk failures; it **cannot** prevent data loss from **viruses, human error, accidental deletion, or OS/file system corruption**.
+<!-- PDF_FIGS_START -->
+![RAID Logical Volumes and LUN Slicing (Official Reference: p. 164)](../assets/images/p1_h4s1_raid_luns.png)
+*Figure: RAID Logical Volumes and LUN Slicing (Official Reference: p. 164)*
+
+![RAID Hot Spare and XOR Data Reconstruction Workflow (Official Reference: p. 165)](../assets/images/p1_h4s1_raid_hot_spare.png)
+*Figure: RAID Hot Spare and XOR Data Reconstruction Workflow (Official Reference: p. 165)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -48,6 +67,14 @@ Proposed by **Prof. D.A. Patterson** at UC Berkeley in **1988**, **RAID (Redunda
   6. S.M.A.R.T. for disks
 - **Built-in Hardware RAID**: Uses a PCIe RAID controller card (e.g., **Avago MegaRAID SAS 9440-8i** with Mini-SAS **SFF-8643** ports, heat sink, heartbeat LED, and chip overtemperature LED) with its own independent processor and cache memory; supports bootable arrays.
 - **External Hardware RAID**: Independent external disk array subsystem connected via standard controller; supports dual controllers, hot swap, and ultra-large capacity.
+<!-- PDF_FIGS_START -->
+![Hardware RAID Mode 1 (Built-in Controller) vs Mode 2 (External Array) (Official Reference: p. 166)](../assets/images/p1_h4s1_raid_hardware.png)
+*Figure: Hardware RAID Mode 1 (Built-in Controller) vs Mode 2 (External Array) (Official Reference: p. 166)*
+
+![Avago MegaRAID SAS 9440-8i Card Physical Callouts (1-5) (Official Reference: p. 169)](../assets/images/p1_h4s1_megaraid_9440.png)
+*Figure: Avago MegaRAID SAS 9440-8i Card Physical Callouts (1-5) (Official Reference: p. 169)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

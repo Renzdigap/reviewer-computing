@@ -27,6 +27,14 @@ A **transaction** is an indivisible logical unit of work used for database recov
   - **Consistency (C)**: A transaction transitions the database from one valid/consistent state to another (e.g., total money across accounts before and after transfer remains invariant).
   - **Isolation (I)**: Concurrent transactions execute independently without interfering with each other or exposing uncommitted intermediate states.
   - **Durability (D)**: Once committed, changes are permanent and survive power loss or system crashes (implemented via **WAL — Write-Ahead Logging**).
+<!-- PDF_FIGS_START -->
+![Database Transaction Execution State Machine (Active, Committed, Failed, End) (Official Reference: p. 20)](../assets/images/p3_h1s2_tx_states.png)
+*Figure: Database Transaction Execution State Machine (Active, Committed, Failed, End) (Official Reference: p. 20)*
+
+![ACID Isolation Concurrent Transactions (T1 and T2) (Official Reference: p. 22)](../assets/images/p3_h1s2_acid_isolation.png)
+*Figure: ACID Isolation Concurrent Transactions (T1 and T2) (Official Reference: p. 22)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -55,6 +63,35 @@ A **transaction** is an indivisible logical unit of work used for database recov
 - **OLTP (Online Transaction Processing)** vs. **OLAP (Online Analytical Processing)**:
   - **OLTP**: Routine short transactions (insert/update/delete), read/write, dozens of rows via index/hash, 100 MB–GB scale, measured by **transaction throughput (tpmC)** and memory efficiency.
   - **OLAP**: Decision support & data warehousing, complex multi-dimensional aggregation queries, mostly reads, millions of rows via full/partition scans, 100 GB–TB+ scale, measured by **disk I/O bandwidth and query response time**.
+<!-- PDF_FIGS_START -->
+![Relational Database Deployment Architecture Taxonomy (Official Reference: p. 31)](../assets/images/p3_h1s2_arch_evolution.png)
+*Figure: Relational Database Deployment Architecture Taxonomy (Official Reference: p. 31)*
+
+![Single Node vs Standalone Database Deployment (Official Reference: p. 32)](../assets/images/p3_h1s2_single_node.png)
+*Figure: Single Node vs Standalone Database Deployment (Official Reference: p. 32)*
+
+![Grouping Deployment: Master/Backup Topology (Official Reference: p. 33)](../assets/images/p3_h1s2_master_backup.png)
+*Figure: Grouping Deployment: Master/Backup Topology (Official Reference: p. 33)*
+
+![Grouping Deployment: Master/Slave (Read/Write Split) Topology (Official Reference: p. 34)](../assets/images/p3_h1s2_master_slave.png)
+*Figure: Grouping Deployment: Master/Slave (Read/Write Split) Topology (Official Reference: p. 34)*
+
+![Grouping Deployment: Multi-Master Topology (Official Reference: p. 35)](../assets/images/p3_h1s2_multi_master.png)
+*Figure: Grouping Deployment: Multi-Master Topology (Official Reference: p. 35)*
+
+![Shared Disk Multi-Master Cluster Topology (Official Reference: p. 36)](../assets/images/p3_h1s2_shared_disk.png)
+*Figure: Shared Disk Multi-Master Cluster Topology (Official Reference: p. 36)*
+
+![Horizontal vs Vertical Database Sharding Diagram (Official Reference: p. 37)](../assets/images/p3_h1s2_sharding_split.png)
+*Figure: Horizontal vs Vertical Database Sharding Diagram (Official Reference: p. 37)*
+
+![Shared-Nothing Distributed Architecture (Official Reference: p. 38)](../assets/images/p3_h1s2_shared_nothing.png)
+*Figure: Shared-Nothing Distributed Architecture (Official Reference: p. 38)*
+
+![Massively Parallel Processing (MPP) Execution Topology (Official Reference: p. 39)](../assets/images/p3_h1s2_mpp_architecture.png)
+*Figure: Massively Parallel Processing (MPP) Execution Topology (Official Reference: p. 39)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -23,6 +23,11 @@
   - **September 2019**: EulerOS was officially open-sourced as **openEuler** (hosted on **Gitee**, docs at `https://www.openeuler.org/en/`).
   - **September 25, 2021**: Released as an open-source digital infrastructure OS covering **IT, CT, and OT** (server, cloud, edge, embedded).
   - **November 9, 2021**: Donated to the **OpenAtom Foundation**.
+<!-- PDF_FIGS_START -->
+![Kunpeng Open Hardware and Open Source Software Strategy (Official Reference: p. 258)](../assets/images/p1_h5s3_kunpeng_ecosystem.png)
+*Figure: Kunpeng Open Hardware and Open Source Software Strategy (Official Reference: p. 258)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -33,6 +38,11 @@
   2. **Secure containers**: Essentially VMs encapsulated with container interfaces; integrates **Kata Containers 1.7** with heterogeneous compute and DPDK/SPDK support.
   3. **System containers**: Lightweight VM alternative isolating user namespaces with dynamic resource adjustment.
 - **openEuler 22.03 LTS Features (p. 264)**: Built on **Linux kernel 5.10 LTS** (23M lines of new code); uses **systemd** (compatible with SysV init); supports **Kickstart** automated installation, **BiSheng Compiler** (C, C++, Fortran), and MySQL/Spark/Hive/HBase tuning.
+<!-- PDF_FIGS_START -->
+![openEuler A-Tune Sensing-Decision-Execution Closed Loop (Official Reference: p. 261)](../assets/images/p1_h5s3_atune_loop.png)
+*Figure: openEuler A-Tune Sensing-Decision-Execution Closed Loop (Official Reference: p. 261)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

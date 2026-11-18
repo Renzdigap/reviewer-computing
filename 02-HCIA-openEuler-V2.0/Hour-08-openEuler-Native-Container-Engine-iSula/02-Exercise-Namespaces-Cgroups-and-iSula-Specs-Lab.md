@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are preparing an engineering specification for migrating edge and cloud workloads from Docker to openEuler iSula. Complete the specification mapping kernel primitives, `iSulad` implementation language, default runtime, and toolkit components.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![iSula Container Engine Architecture Stack (isulad, CRI, sysCall) (Official Reference: p. 394)](../assets/images/p2_h8s1_isula_architecture.png)
+*Figure: iSula Container Engine Architecture Stack (isulad, CRI, sysCall) (Official Reference: p. 394)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Specify the kernel feature for resource isolation (`Namespaces`) and the `/sys/fs/cgroup` feature for resource limitation (`cgroups`), plus the namespace that isolates hostnames (`UTS`).
 2. Step 2: Specify the programming language of `iSulad` (`C/C++`) and its default OCI runtime (`LCR`).

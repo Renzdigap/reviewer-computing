@@ -44,6 +44,11 @@ Look carefully at the official flowchart on **Ch.05 Page 335**:
 3. **Branch B — Overwrite Installation (upgrading a device that already has a driver and firmware installed)**:
    - **Step 1**: **Install the firmware** first! (Using the existing working driver.)
    - **Step 2**: **Install the driver** second!
+<!-- PDF_FIGS_START -->
+![Driver and Firmware Initial vs Overwrite Installation Decision Flow (Official Reference: p. 335)](../assets/images/p1_h7s2_driver_firmware_flow.png)
+*Figure: Driver and Firmware Initial vs Overwrite Installation Decision Flow (Official Reference: p. 335)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

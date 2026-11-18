@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are deploying openEuler Intelligence for an enterprise O&M team. Complete the architecture verification manifest below to specify the two interaction entries, the three Intelligent Diagnosis agents, and the three Intelligent Container Image tiers.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![AI for OS Agent Framework and Knowledge Base Stack (Official Reference: p. 8)](../assets/images/p2_h1s1_ai_for_os_agent.png)
+*Figure: AI for OS Agent Framework and Knowledge Base Stack (Official Reference: p. 8)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Set `INTERACTION_ENTRIES` to the two official access entries supported by the openEuler intelligent platform (`web` and `intelligent shell`).
 2. Step 2: Set `DIAGNOSIS_AGENTS` to the three diagnostic agents in execution order (`Inspection`, `Demarcation`, `Detection`) and specify `TOP_ROOT_CAUSE_METRICS=3`.

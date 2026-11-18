@@ -24,6 +24,11 @@ Huawei's Kunpeng HPC solution delivers **20% higher computing power**, **80%+ HP
   - **DonauKit**: Cluster management (**Donau Portal**) + Job scheduling (**Donau Scheduler**).
   - **HPCKit**: Communication library (**Hyper MPI**), Math library & solver (**KML** — Kunpeng Math Library), and Compilers (**BiSheng Compiler / GCC**).
   - **DevKit**: Performance profiling, code porting, Kunpeng affinity code optimization, I/O optimization.
+<!-- PDF_FIGS_START -->
+![Kunpeng High-Performance Computing (HPC) Full Stack (Official Reference: p. 118)](../assets/images/p1_h2s4_kunpeng_hpc_arch.png)
+*Figure: Kunpeng High-Performance Computing (HPC) Full Stack (Official Reference: p. 118)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -44,6 +49,11 @@ Most software in the HPC ecosystem is **open source**, while **commercial closed
   - **MRS (MapReduce Service)**: One-stop big data platform running **HBase, CarbonData, Hive, Spark, SparkSQL, Presto, Flink, Storm, Kafka, Flume, Loader, MapReduce, Tez, MLlib**.
   - **DWS**: Data Warehouse Service; **DLI**: Data Lake Insight; **CSS**: Cloud Search Service; **GES**: Graph Engine Service; **DataArts Studio**: Unified data integration, governance, and development; **DLV**: Data Visualization; **ROMA**: IoT access.
 - **ModelArts (p. 125 Quiz Q3)**: Huawei Cloud's one-stop AI development platform enabling developers to quickly create, train, and deploy models.
+<!-- PDF_FIGS_START -->
+![Huawei Cloud Big Data Solution (MRS and DataArts Studio) (Official Reference: p. 123)](../assets/images/p1_h2s4_cloud_bigdata_mrs.png)
+*Figure: Huawei Cloud Big Data Solution (MRS and DataArts Studio) (Official Reference: p. 123)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

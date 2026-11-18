@@ -26,6 +26,14 @@
   2. **Accelerator driver subsystem**: Core unified driver interface wrap in kernel space.
   3. **Application library subsystem**: Standard **OpenSSL** accelerator engine and **zlib** alternate library (hides hardware details so existing SSL/TLS/compression apps migrate seamlessly).
   4. **Application system**: Upper-layer user applications (Big data stream data, Block data encryption, Smart security video streams, Web service HTTPS handshakes).
+<!-- PDF_FIGS_START -->
+![Traditional PCIe Crypto Card vs Kunpeng On-Chip KAE Engine (Official Reference: p. 240)](../assets/images/p1_h5s2_kae_onchip.png)
+*Figure: Traditional PCIe Crypto Card vs Kunpeng On-Chip KAE Engine (Official Reference: p. 240)*
+
+![Logical Architecture of Kunpeng Accelerator Engine (KAE) (Official Reference: p. 242)](../assets/images/p1_h5s2_kae_logical.png)
+*Figure: Logical Architecture of Kunpeng Accelerator Engine (KAE) (Official Reference: p. 242)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -54,6 +62,20 @@
 - **Rear I/O Module Rule (p. 249)**: On the rear panel of TaiShan 2280, **I/O modules 1 and 2** can be configured with the same drive module or riser module, while **I/O module 3 cannot** (supports 4× 2.5'' rear drives or 2×PCIe 4.0 x8 FHHL slots).
 - **TaiShan 2280 vs. 5280 Internal Structure (pp. 252–254)**: Both share the **same motherboard**, but differ in **drive backplanes**: 5280 holds **24 × 3.5" front drives** + **12 × 3.5" rear lower drives** + **4 × 3.5" rear upper drives** (up to 40 × 3.5" drives) + **4 × 2.5" rear drives**.
 - **Kunpeng Application Benchmarks (p. 256)**: Big Data (**+30% performance**), SDS (**+20% IOPS**, compression time **reduced by 66%**).
+<!-- PDF_FIGS_START -->
+![TaiShan 2280 Balanced Server Complete Front and Rear Panel Key (Official Reference: p. 249)](../assets/images/p1_h5s2_ts2280_panels_full.png)
+*Figure: TaiShan 2280 Balanced Server Complete Front and Rear Panel Key (Official Reference: p. 249)*
+
+![Internal Component Layout of TaiShan 2280 Balanced Server (Official Reference: p. 250)](../assets/images/p1_h5s2_ts2280_internal.png)
+*Figure: Internal Component Layout of TaiShan 2280 Balanced Server (Official Reference: p. 250)*
+
+![TaiShan 5280 Storage Server Complete Front and Rear Panel Key (Official Reference: p. 253)](../assets/images/p1_h5s2_ts5280_panels_full.png)
+*Figure: TaiShan 5280 Storage Server Complete Front and Rear Panel Key (Official Reference: p. 253)*
+
+![Internal Component Layout of TaiShan 5280 Storage Server (Official Reference: p. 254)](../assets/images/p1_h5s2_ts5280_internal.png)
+*Figure: Internal Component Layout of TaiShan 5280 Storage Server (Official Reference: p. 254)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

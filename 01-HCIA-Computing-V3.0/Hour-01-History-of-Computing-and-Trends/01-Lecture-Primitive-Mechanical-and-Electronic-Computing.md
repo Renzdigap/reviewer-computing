@@ -24,12 +24,28 @@ Computing is the process of symbol transformation based on mathematical rules. A
 | **Abacus** | Pre-Arabic numerals to modern era | Fast arithmetic (addition, subtraction, multiplication, division, exponentiation, root extraction) using bead manipulation rules. |
 | **Napier's Bones (1617)** | John Napier (*Rabdologiae*) | A board (left border marked 1–9) and **10 rods** (top marked 0–9, nine front squares split by a diagonal line separating tens and ones places). Replaces multi-digit multiplication with addition and single-digit multiplication (and division with subtraction). |
 | **Logarithms & Slide Rule** | John Napier & Henry Briggs | Napier invented logarithms (*Mirifici Logarithmorum Canonis Descriptio*); **Henry Briggs** compiled the first base-10 logarithm table (lg(X)). Combining two logarithmic scales created linear and circular **slide rules**. |
+<!-- PDF_FIGS_START -->
+![Inca Quipu Knotted Strings Place-Value Diagram (Official Reference: p. 10)](../assets/images/p1_h1s1_quipu_knots.png)
+*Figure: Inca Quipu Knotted Strings Place-Value Diagram (Official Reference: p. 10)*
+
+![Chinese Counting Rods Horizontal and Vertical Notation (Official Reference: p. 11)](../assets/images/p1_h1s1_counting_rods.png)
+*Figure: Chinese Counting Rods Horizontal and Vertical Notation (Official Reference: p. 11)*
+
+![Napier's Bones Multiplication Rods and Lattice Example (Official Reference: p. 13)](../assets/images/p1_h1s1_napiers_bones.png)
+*Figure: Napier's Bones Multiplication Rods and Lattice Example (Official Reference: p. 13)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
 ### 2. Mechanical Computing Era (pp. 16–18)
 - **Pascal's Adder (Pascaline)**: Invented by French mathematician **Blaise Pascal**. Uses rotary dials for input and small windows above dials for output. Its centerpiece carry mechanism is the **sautoir**, which carries `1` to the next dial when a dial transitions from `9` to `0`. Early models only performed addition; later editions performed subtraction by reversing dial rotation. Marks the transition from **manual to automatic** computing tools.
 - **Key-Driven Calculator (Comptometer, 1886)**: Invented by American engineer **Dorr Eugene Felt**. Resembles a typewriter in a square box with a clearing handle on the right. Each key displays two numbers whose **sum is 9**: the **larger number** is used for addition/multiplication, and the **smaller number** (9's complement) transforms subtraction into addition while blocking carry (e.g., 500 - 427 is computed by pressing `500` and `426` on smaller numbers = 500 + 573 = 73 with carry blocked).
+<!-- PDF_FIGS_START -->
+![Comptometer Key-Driven Mechanical Calculator Keyboard (Official Reference: p. 18)](../assets/images/p1_h1s1_comptometer.png)
+*Figure: Comptometer Key-Driven Mechanical Calculator Keyboard (Official Reference: p. 18)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

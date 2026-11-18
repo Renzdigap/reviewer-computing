@@ -25,6 +25,17 @@
      - **Operation Controller (OC)**: Generates micro-operation control signals according to strict timing pulses.
   2. **Arithmetic Logic Unit (ALU)**: Execution core performing arithmetic (`+`, `-`, `*`, `/`), logical (`AND`, `OR`, `NOT`, `XOR`), shift, comparison, and transfer operations upon receiving commands from the control unit.
   3. **Storage Unit**: Includes **on-chip cache (L1/L2/L3)** and the **register group**, which temporarily hold data/results to reduce slow main memory accesses.
+<!-- PDF_FIGS_START -->
+![TaiShan 200 (Model 2280) Front Exploded View (Components 1-8) (Official Reference: p. 134)](../assets/images/p1_h3s1_taishan2280_front_exploded.png)
+*Figure: TaiShan 200 (Model 2280) Front Exploded View (Components 1-8) (Official Reference: p. 134)*
+
+![TaiShan 200 (Model 2280) Rear Exploded View (Components 1-5) (Official Reference: p. 135)](../assets/images/p1_h3s1_taishan2280_rear_exploded.png)
+*Figure: TaiShan 200 (Model 2280) Rear Exploded View (Components 1-5) (Official Reference: p. 135)*
+
+![CPU Architecture: Control Unit, ALU, and Storage Unit Data/Control Flow (Official Reference: p. 138)](../assets/images/p1_h3s1_von_neumann_cpu.png)
+*Figure: CPU Architecture: Control Unit, ALU, and Storage Unit Data/Control Flow (Official Reference: p. 138)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -39,6 +50,11 @@
   - **Cache (L1/L2/L3)**: Bridges the speed gap between fast CPU cores and slower main memory; operates near processor frequency.
   - **Number of cores & threads**: Normally a **1:1** correspondence (16 cores = 16 threads); with hyper-threading (SMT), it becomes **1:2** (16 cores = 32 threads).
 - **Arm RISC Characteristics (p. 137)**: Small size, low power, supports **Thumb (16-bit) / Arm (32-bit)** dual instruction sets (plus 64-bit AArch64), uses a large number of registers, performs most data operations in registers, and uses **fixed instruction length**.
+<!-- PDF_FIGS_START -->
+![Four Basic CPU Functions Flow (Official Reference: p. 139)](../assets/images/p1_h3s1_cpu_functions.png)
+*Figure: Four Basic CPU Functions Flow (Official Reference: p. 139)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

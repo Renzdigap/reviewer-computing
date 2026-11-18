@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are tuning process priorities and configuring scheduled maintenance on openEuler. Adjust the `nice` value of PID `9700` to `12` using `renice`, send the `HUP` signal to PID `3389` using `kill`, schedule `example.sh` to run once at `15:00` using `at`, and write a crontab entry that runs `/usr/local/bin/backup.sh` every Monday at `08:00` AM.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Process State Transition State Machine (R, S, D, T, Z) (Official Reference: p. 227)](../assets/images/p2_h5s4_process_states.png)
+*Figure: Process State Transition State Machine (R, S, D, T, Z) (Official Reference: p. 227)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Change the nice value of running process PID `9700` to `12` using `renice -n 12 -p 9700` and send the `HUP` signal to PID `3389` using `kill -s HUP 3389`.
 2. Step 2: Schedule the script `example.sh` to run once at `15:00` using `at -f example.sh 15:00` and list the queue with `atq`.

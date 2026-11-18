@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are auditing `/var/run` (which is a symbolic link to `/run`) and `/usr/local`. Navigate into `/var/run`, print both its logical and physical paths, list all files (including hidden files, human-readable sizes, sorted by time) in `/usr/local`, and inspect the `/etc` directory entry itself without listing its contents.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Linux Root File Directory Structure Tree (FHS) (Official Reference: p. 79)](../assets/images/p2_h2s2_linux_fhs_tree.png)
+*Figure: Linux Root File Directory Structure Tree (FHS) (Official Reference: p. 79)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Change directory to `/var/run` using `cd /var/run` and display the physical path (resolving symlinks) using `pwd -P`.
 2. Step 2: List all files (including hidden files) in `/usr/local` in human-readable long format sorted by time using `ls -ahlt /usr/local`.

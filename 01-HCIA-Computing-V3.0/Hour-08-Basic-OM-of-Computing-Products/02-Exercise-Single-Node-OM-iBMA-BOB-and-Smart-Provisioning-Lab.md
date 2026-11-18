@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure the single-node O&M mapping for iBMA, BOB, iBMC Advanced Edition, and Smart Provisioning toolbox operations.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![iBMA and BOB In-Band vs Out-of-Band Communication Paths (Official Reference: p. 360)](../assets/images/p1_h8s1_ibma_bob_paths.png)
+*Figure: iBMA and BOB In-Band vs Out-of-Band Communication Paths (Official Reference: p. 360)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `bob_cli_command` to `'bobCmd'` and `redfish_os_deploy_license` to `'Advanced Edition'`.
 2. Set `sp_fast_erase_target` to `'partitions of a logical drive'` and `sp_secure_erase_target` to `'all data on a physical drive'`.

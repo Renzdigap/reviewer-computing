@@ -32,6 +32,11 @@ In Linux, **everything is a file**—regular files, directories, character/block
 | **`/srv` & `/sys`** | `/srv` stores service data; `/sys` mounts `sysfs` (introduced in Linux 2.6 kernel for hardware/kernel objects). |
 | **`/tmp` & `/var`** | `/tmp` stores temporary files; `/var` stores constantly expanding variable files such as **logs (`/var/log`)**. |
 | **`/usr`** | User applications and files (similar to Windows `Program Files`). |
+<!-- PDF_FIGS_START -->
+![Linux Root File Directory Structure Tree (FHS) (Official Reference: p. 79)](../assets/images/p2_h2s2_linux_fhs_tree.png)
+*Figure: Linux Root File Directory Structure Tree (FHS) (Official Reference: p. 79)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -35,6 +35,11 @@ Look closely at the official flowchart and step descriptions on **Ch.05 Page 345
 6. **Initializing the installation environment (`gs_preinstall`)**: Run the **`gs_preinstall`** command (as `root`) to prepare and initialize the OS installation environment based on the XML file.
 7. **Performing the installation (`gs_install`)**: Switch to the database O&M user (e.g., `omm`) and run the **`gs_install`** command with the XML file to install openGauss.
 8. **(Optional) Setting the standby node to readable**: Configure the standby node to be readable to meet read-scalability and data consistency requirements.
+<!-- PDF_FIGS_START -->
+![openGauss Installation and Deployment Stages Flowchart (Official Reference: p. 345)](../assets/images/p1_h7s4_opengauss_deploy_flow.png)
+*Figure: openGauss Installation and Deployment Stages Flowchart (Official Reference: p. 345)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

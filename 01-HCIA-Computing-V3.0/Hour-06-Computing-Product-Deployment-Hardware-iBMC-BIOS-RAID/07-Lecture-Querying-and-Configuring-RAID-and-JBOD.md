@@ -49,6 +49,14 @@
 - **Method 2 — Using iBMC WebUI (pp. 324–325)**:
   1. Choose **`System > Storage Management`**, expand **`PCIe Card`**, and click **`Add`** next to the RAID card to open **Create Logical Drive**.
   2. Example (p. 325): Set **Name** = `Data`, **Initialization State** = `Quick Init`, **RAID Level** = `5`. With **four 8 TB SATA HDDs** installed, each 8 TB decimal HDD has an actual binary available capacity of about **`7.2 TB`** in Storage Management (so a 4-drive RAID 5 provides 3 × 7.2 TB ≈ 21.6 TB).
+<!-- PDF_FIGS_START -->
+![Avago MegaRAID BIOS VNC Create Virtual Drive Interface (Official Reference: p. 322)](../assets/images/p1_h6s4_raid_vnc_create.png)
+*Figure: Avago MegaRAID BIOS VNC Create Virtual Drive Interface (Official Reference: p. 322)*
+
+![iBMC WebUI Storage Management RAID Creation Screen (Official Reference: p. 324)](../assets/images/p1_h6s4_raid_webui_config.png)
+*Figure: iBMC WebUI Storage Management RAID Creation Screen (Official Reference: p. 324)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 You are managing container images on an openEuler host (following Ch.07 pp. 435–438). Pull `openeuler/busybox:latest`, re-tag it as `busybox:test`, list all local images to verify they share the same `IMAGE ID`, and then remove the `busybox:test` tag using `isula rmi`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Layered Structure of Container Images (Read-Write Container Layer + R/O Image Layers) (Official Reference: p. 429)](../assets/images/p2_h8s4_image_layers.png)
+*Figure: Layered Structure of Container Images (Read-Write Container Layer + R/O Image Layers) (Official Reference: p. 429)*
+
+![OverlayFS Structure (lowerdir, upperdir, merged File Overlay) (Official Reference: p. 433)](../assets/images/p2_h8s4_overlayfs_layers.png)
+*Figure: OverlayFS Structure (lowerdir, upperdir, merged File Overlay) (Official Reference: p. 433)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Pull the `openeuler/busybox:latest` image using `isula pull openeuler/busybox:latest`.
 2. Step 2: Tag `openeuler/busybox:latest` as `busybox:test` using `isula tag openeuler/busybox:latest busybox:test` and list local images with `isula images`.

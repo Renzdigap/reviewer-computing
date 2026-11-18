@@ -398,6 +398,129 @@ p { margin-bottom: 10px; }
       #code-editor { min-height: 240px; }
       .console-body { height: 220px; }
     }
+
+/* PDF_FIGURES_CSS */
+.pdf-figures-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 14px;
+  margin: 16px 0 20px 0;
+}
+.pdf-figures-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 12px 0 16px 0;
+}
+.pdf-figure {
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  transition: border-color 0.2s ease;
+}
+.pdf-figure:hover {
+  border-color: #38bdf8;
+}
+.pdf-figure-frame {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.pdf-figure-frame img {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: zoom-in;
+  display: block;
+}
+.pdf-figures-compact .pdf-figure-frame img {
+  max-height: 210px;
+}
+.pdf-figure figcaption {
+  margin-top: 9px;
+  font-size: 12.5px;
+  color: #d1d5db;
+  text-align: center;
+  line-height: 1.4;
+}
+.pdf-figure figcaption strong {
+  color: #f9fafb;
+  display: block;
+  margin-bottom: 2px;
+}
+.pdf-ref-tag {
+  color: #9ca3af;
+  font-size: 11px;
+}
+.img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 15, 0.92);
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox.open {
+  display: flex;
+}
+.img-lightbox-box {
+  max-width: 94vw;
+  max-height: 84vh;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox-box img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+}
+.img-lightbox-bar {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #f3f4f6;
+  font-size: 13.5px;
+  max-width: 90vw;
+  text-align: center;
+}
+.img-lightbox-close {
+  background: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.img-lightbox-close:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+}
+
   </style>
   <script src="../../sync_engine.js"></script>
 </head>
@@ -451,6 +574,8 @@ p { margin-bottom: 10px; }
 <li><strong>Isolation (I)</strong>: Concurrent transactions execute independently without interfering with each other or exposing uncommitted intermediate states.</li>
 <li><strong>Durability (D)</strong>: Once committed, changes are permanent and survive power loss or system crashes (implemented via <strong>WAL — Write-Ahead Logging</strong>).</li>
 </ul>
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_tx_states.png" alt="Database Transaction Execution State Machine (Active, Committed, Failed, End)" data-caption="Database Transaction Execution State Machine (Active, Committed, Failed, End) (Official Reference: p. 20)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Database Transaction Execution State Machine (Active, Committed, Failed, End)</strong><span class="pdf-ref-tag">Official Reference: p. 20 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_acid_isolation.png" alt="ACID Isolation Concurrent Transactions (T1 and T2)" data-caption="ACID Isolation Concurrent Transactions (T1 and T2) (Official Reference: p. 22)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>ACID Isolation Concurrent Transactions (T1 and T2)</strong><span class="pdf-ref-tag">Official Reference: p. 22 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+
 <p>---</p>
 <h3>2. NoSQL (CAP Theory) vs. NewSQL</h3>
 <ul class="md-list">
@@ -482,7 +607,9 @@ p { margin-bottom: 10px; }
 <li><strong>OLTP</strong>: Routine short transactions (insert/update/delete), read/write, dozens of rows via index/hash, 100 MB–GB scale, measured by <strong>transaction throughput (tpmC)</strong> and memory efficiency.</li>
 <li><strong>OLAP</strong>: Decision support &amp; data warehousing, complex multi-dimensional aggregation queries, mostly reads, millions of rows via full/partition scans, 100 GB–TB+ scale, measured by <strong>disk I/O bandwidth and query response time</strong>.</li>
 </ul>
-          </div>
+          
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_arch_evolution.png" alt="Relational Database Deployment Architecture Taxonomy" data-caption="Relational Database Deployment Architecture Taxonomy (Official Reference: p. 31)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Relational Database Deployment Architecture Taxonomy</strong><span class="pdf-ref-tag">Official Reference: p. 31 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_single_node.png" alt="Single Node vs Standalone Database Deployment" data-caption="Single Node vs Standalone Database Deployment (Official Reference: p. 32)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Single Node vs Standalone Database Deployment</strong><span class="pdf-ref-tag">Official Reference: p. 32 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_master_backup.png" alt="Grouping Deployment: Master/Backup Topology" data-caption="Grouping Deployment: Master/Backup Topology (Official Reference: p. 33)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Grouping Deployment: Master/Backup Topology</strong><span class="pdf-ref-tag">Official Reference: p. 33 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_master_slave.png" alt="Grouping Deployment: Master/Slave (Read/Write Split) Topology" data-caption="Grouping Deployment: Master/Slave (Read/Write Split) Topology (Official Reference: p. 34)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Grouping Deployment: Master/Slave (Read/Write Split) Topology</strong><span class="pdf-ref-tag">Official Reference: p. 34 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_multi_master.png" alt="Grouping Deployment: Multi-Master Topology" data-caption="Grouping Deployment: Multi-Master Topology (Official Reference: p. 35)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Grouping Deployment: Multi-Master Topology</strong><span class="pdf-ref-tag">Official Reference: p. 35 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_shared_disk.png" alt="Shared Disk Multi-Master Cluster Topology" data-caption="Shared Disk Multi-Master Cluster Topology (Official Reference: p. 36)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Shared Disk Multi-Master Cluster Topology</strong><span class="pdf-ref-tag">Official Reference: p. 36 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_sharding_split.png" alt="Horizontal vs Vertical Database Sharding Diagram" data-caption="Horizontal vs Vertical Database Sharding Diagram (Official Reference: p. 37)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Horizontal vs Vertical Database Sharding Diagram</strong><span class="pdf-ref-tag">Official Reference: p. 37 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_shared_nothing.png" alt="Shared-Nothing Distributed Architecture" data-caption="Shared-Nothing Distributed Architecture (Official Reference: p. 38)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Shared-Nothing Distributed Architecture</strong><span class="pdf-ref-tag">Official Reference: p. 38 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h1s2_mpp_architecture.png" alt="Massively Parallel Processing (MPP) Execution Topology" data-caption="Massively Parallel Processing (MPP) Execution Topology (Official Reference: p. 39)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Massively Parallel Processing (MPP) Execution Topology</strong><span class="pdf-ref-tag">Official Reference: p. 39 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+</div>
 
           <div class="takeaways-card">
             <h3>High-Yield Summary & Takeaways</h3>
@@ -692,5 +819,31 @@ p { margin-bottom: 10px; }
       if (correctCount === qs.length) markUnitCompleted();
     }
   </script>
+
+  <div id="img-lightbox" class="img-lightbox" onclick="if(event.target===this) closeImgZoom()">
+    <div class="img-lightbox-box">
+      <img id="img-lightbox-target" src="" alt="Zoomed Diagram" />
+    </div>
+    <div class="img-lightbox-bar">
+      <span id="img-lightbox-caption"></span>
+      <button type="button" class="img-lightbox-close" onclick="closeImgZoom()">Close</button>
+    </div>
+  </div>
+  <script>
+    function openImgZoom(imgEl) {
+      if (!imgEl) return;
+      document.getElementById('img-lightbox-target').src = imgEl.src;
+      document.getElementById('img-lightbox-caption').textContent = imgEl.getAttribute('data-caption') || imgEl.alt || '';
+      document.getElementById('img-lightbox').classList.add('open');
+    }
+    function closeImgZoom() {
+      document.getElementById('img-lightbox').classList.remove('open');
+      document.getElementById('img-lightbox-target').src = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImgZoom();
+    });
+  </script>
+
 </body>
 </html>

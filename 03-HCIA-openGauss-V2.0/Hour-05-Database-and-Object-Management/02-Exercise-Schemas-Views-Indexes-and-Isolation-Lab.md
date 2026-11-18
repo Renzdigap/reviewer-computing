@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Create a dedicated schema `hr_schema`, rename it to `hr_prod`, create a partial index on `customer_t1(Amount)` for high-value orders (`WHERE Amount > 1000`), and create a view `vip_customers`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss Tablespace, Database, Table, and Data Block Hierarchy (Official Reference: p. 277)](../assets/images/p3_h5s1_logical_arch.png)
+*Figure: openGauss Tablespace, Database, Table, and Data Block Hierarchy (Official Reference: p. 277)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Create schema `hr_schema` and rename it to `hr_prod` using `ALTER SCHEMA hr_schema RENAME TO hr_prod;`.
 2. Step 2: Create a partial index `idx_high_amount` on `customer_t1 (Amount) WHERE Amount > 1000;`.

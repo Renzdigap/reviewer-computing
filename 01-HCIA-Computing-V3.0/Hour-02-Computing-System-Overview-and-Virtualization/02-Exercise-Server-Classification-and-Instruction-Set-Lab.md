@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Write a verification script that checks the chronological evolution of servers, rack unit dimensions, and instruction set mappings.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Server Classification by Appearance (Tower, Blade, Rack) (Official Reference: p. 77)](../assets/images/p1_h2s1_server_form_factors.png)
+*Figure: Server Classification by Appearance (Tower, Blade, Rack) (Official Reference: p. 77)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Complete `server_timeline` in chronological order: `'mainframes'`, `'midrange'`, `'microcomputers'`, `'general-purpose'`.
 2. Set `one_u_cm` to `4.45` and `rack_width_inches` to `19`.

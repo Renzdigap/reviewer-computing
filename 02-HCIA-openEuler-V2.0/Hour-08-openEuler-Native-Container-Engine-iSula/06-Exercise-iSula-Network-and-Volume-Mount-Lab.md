@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are configuring CNI networking and persistent volumes for `iSula` containers (following Ch.07 pp. 423–426). Create a CNI bridge network named `cni0`, launch a `busybox` container attached to `cni0` using `--net cni0`, and launch a container mounting `/root/test1.txt` as `rw` and `/root/test2.txt` as `ro`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![CNI and iSula Bridge Network Topology (Official Reference: p. 420)](../assets/images/p2_h8s3_cni_bridge_network.png)
+*Figure: CNI and iSula Bridge Network Topology (Official Reference: p. 420)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Create the iSula network `cni0` (`isula network create cni0`) and list existing networks (`isula network ls`).
 2. Step 2: Start a background container attached to `cni0` using `isula run --net cni0 -d -it isulad/busybox sleep 99d`.

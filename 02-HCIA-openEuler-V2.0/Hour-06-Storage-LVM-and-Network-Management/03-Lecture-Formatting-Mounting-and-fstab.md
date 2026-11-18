@@ -30,6 +30,11 @@ Formatting initializes a partition with a file system structure (deleting existi
   * **`-c`:** Checks the partition for **bad blocks** before building the file system.
   * **`-l bad_blocks_file`:** Reads bad block information from `bad_blocks_file`.
   * **`-V`:** Produces verbose output.
+<!-- PDF_FIGS_START -->
+![Drive Formatting Workflow (View, Format mkfs, Confirm) (Official Reference: p. 278)](../assets/images/p2_h6s2_drive_formatting.png)
+*Figure: Drive Formatting Workflow (View, Format mkfs, Confirm) (Official Reference: p. 278)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -42,6 +47,11 @@ Because Linux follows the *"Everything is a file"* design, a formatted partition
   Mounts `/dev/sda5` to `/test` immediately, **but becomes invalid after the system is restarted!**
 * **Permanent Mounting (`/etc/fstab`):**
   The OS automatically reads **`/etc/fstab`** at boot (or when **`mount -a`** is run) and mounts all listed file systems.
+<!-- PDF_FIGS_START -->
+![Temporary Mounting (mount) vs Permanent Mounting (/etc/fstab) (Official Reference: p. 280)](../assets/images/p2_h6s2_drive_mounting.png)
+*Figure: Temporary Mounting (mount) vs Permanent Mounting (/etc/fstab) (Official Reference: p. 280)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

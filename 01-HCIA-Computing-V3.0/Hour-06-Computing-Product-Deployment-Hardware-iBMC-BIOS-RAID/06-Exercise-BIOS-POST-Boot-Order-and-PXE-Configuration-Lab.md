@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure the Remote Virtual Console concurrency parameters and the BIOS boot/PXE settings for automated UEFI PXE network installation.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Server Power-On Self-Test (POST) Execution Sequence (Official Reference: p. 312)](../assets/images/p1_h6s3_post_flow.png)
+*Figure: Server Power-On Self-Test (POST) Execution Sequence (Official Reference: p. 312)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `shared_console_max_local_users` to `2` and `shared_console_max_vnc_users` to `5`.
 2. Set `bios_entry_keys` to `'Delete or F4'` and `bios_save_exit_key` to `'F10'`.

@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Create a column-store analytical table `orders_olap` with high compression, declare multi-column statistics on `(region, category)`, and run `ANALYZE` so the CBO/ABO can generate optimal execution plans.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Row-Store vs Column-Store Storage Model Visual Comparison (Official Reference: p. 171)](../assets/images/p3_h3s3_row_vs_column_store.png)
+*Figure: Row-Store vs Column-Store Storage Model Visual Comparison (Official Reference: p. 171)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Create table `orders_olap (order_id INT, region VARCHAR(20), category VARCHAR(20), amount NUMERIC(10,2))` as a column-store table using `WITH (ORIENTATION = COLUMN, COMPRESSION = HIGH);`.
 2. Step 2: Collect statistics on `orders_olap` for columns `(region, category)` using `ANALYZE orders_olap (region, category);`.

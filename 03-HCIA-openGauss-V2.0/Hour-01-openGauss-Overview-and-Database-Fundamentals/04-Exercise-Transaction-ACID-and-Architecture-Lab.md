@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Implement the Chapter 01 (p. 62) bank transfer scenario where Zhang (Account 1, balance 500) starts transferring 200 to Wang (Account 2, balance 100) but cancels (`ROLLBACK`), while Li (Account 3, balance 600) transfers 300 to Wang and commits (`COMMIT`).
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Horizontal vs Vertical Database Sharding Diagram (Official Reference: p. 37)](../assets/images/p3_h1s2_sharding_split.png)
+*Figure: Horizontal vs Vertical Database Sharding Diagram (Official Reference: p. 37)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Start a transaction with `START TRANSACTION;`, deduct 200 from Zhang (`id = 1`), add 200 to Wang (`id = 2`), and then cancel the transaction with `ROLLBACK;`.
 2. Step 2: Start a second transaction with `START TRANSACTION;`, deduct 300 from Li (`id = 3`), add 300 to Wang (`id = 2`), and permanently save it with `COMMIT;`.

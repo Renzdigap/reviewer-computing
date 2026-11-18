@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are tuning a join query between `client c` and `bank_card b`. Check the default transaction isolation level, and use an openGauss SQL Plan Hint (`/*+ ... */`) with `EXPLAIN` to force a `HashJoin(c b)` and `IndexScan(c)`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Write-Ahead Logging (WAL) Redo Buffer and Checkpoint Disk Flush Flow (Official Reference: p. 63)](../assets/images/p3_h1s4_wal_redo_mechanism.png)
+*Figure: Write-Ahead Logging (WAL) Redo Buffer and Checkpoint Disk Flush Flow (Official Reference: p. 63)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Run `SHOW default_transaction_isolation;` to verify the default isolation level is `read committed`.
 2. Step 2: Use `EXPLAIN SELECT /*+ HashJoin(c b) IndexScan(c) */ c.c_id, b.b_number FROM client c JOIN bank_card b ON c.c_id = b.b_c_id;` to inspect the hinted execution plan.

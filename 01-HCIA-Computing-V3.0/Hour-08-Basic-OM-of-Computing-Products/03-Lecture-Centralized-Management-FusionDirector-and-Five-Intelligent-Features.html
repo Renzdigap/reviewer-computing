@@ -398,6 +398,129 @@ p { margin-bottom: 10px; }
       #code-editor { min-height: 240px; }
       .console-body { height: 220px; }
     }
+
+/* PDF_FIGURES_CSS */
+.pdf-figures-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 14px;
+  margin: 16px 0 20px 0;
+}
+.pdf-figures-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 12px 0 16px 0;
+}
+.pdf-figure {
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  transition: border-color 0.2s ease;
+}
+.pdf-figure:hover {
+  border-color: #38bdf8;
+}
+.pdf-figure-frame {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.pdf-figure-frame img {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: zoom-in;
+  display: block;
+}
+.pdf-figures-compact .pdf-figure-frame img {
+  max-height: 210px;
+}
+.pdf-figure figcaption {
+  margin-top: 9px;
+  font-size: 12.5px;
+  color: #d1d5db;
+  text-align: center;
+  line-height: 1.4;
+}
+.pdf-figure figcaption strong {
+  color: #f9fafb;
+  display: block;
+  margin-bottom: 2px;
+}
+.pdf-ref-tag {
+  color: #9ca3af;
+  font-size: 11px;
+}
+.img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 15, 0.92);
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox.open {
+  display: flex;
+}
+.img-lightbox-box {
+  max-width: 94vw;
+  max-height: 84vh;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox-box img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+}
+.img-lightbox-bar {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #f3f4f6;
+  font-size: 13.5px;
+  max-width: 90vw;
+  text-align: center;
+}
+.img-lightbox-close {
+  background: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.img-lightbox-close:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+}
+
   </style>
   <script src="../../sync_engine.js"></script>
 </head>
@@ -446,6 +569,8 @@ p { margin-bottom: 10px; }
 <ul class="md-list">
 <li><strong>One-Click Log Collection (p. 380)</strong>: Exports logs of <strong>a maximum of 100 servers at a time</strong> in one-click mode.</li>
 </ul>
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h8s2_fusiondirector_arch.png" alt="FusionDirector Centralized Management Overview Topology" data-caption="FusionDirector Centralized Management Overview Topology (Official Reference: p. 378)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>FusionDirector Centralized Management Overview Topology</strong><span class="pdf-ref-tag">Official Reference: p. 378 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+
 <p>---</p>
 <h3>2. FusionDirector's Five Intelligent Features (pp. 382–400)</h3>
 <ol class="md-list">
@@ -466,7 +591,9 @@ p { margin-bottom: 10px; }
 <li><strong>Intelligent Fault Management (pp. 395–396)</strong>: AI-based <strong>Disk Fault Prediction</strong> (risk charts) and <strong>Memory Fault Prediction</strong> (DIMM health &amp; historical self-healing records).</li>
 <li><strong>Intelligent Energy Efficiency Management (pp. 397–400)</strong>: Solves data center pain points (rack space utilization only 40%–50%, rack power usage 50%, electricity ≥ 78% of op costs). Provides AI rack power prediction, <strong>cabinet-level power capping</strong>, PSU hibernation, and 4 optimization analyses: <strong>Power distribution</strong> (batch power capping), <strong>Temperature risk</strong> (power off overheated air-intake servers), <strong>Load optimization</strong> (batch operations on low-load servers), and <strong>Space optimization</strong>.</li>
 </ol>
-          </div>
+          
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h8s2_five_intelligent.png" alt="FusionDirector Five Intelligent Management Features" data-caption="FusionDirector Five Intelligent Management Features (Official Reference: p. 382)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>FusionDirector Five Intelligent Management Features</strong><span class="pdf-ref-tag">Official Reference: p. 382 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h8s2_server_profile.png" alt="FusionDirector 1-to-N Server Profile Binding Architecture" data-caption="FusionDirector 1-to-N Server Profile Binding Architecture (Official Reference: p. 383)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>FusionDirector 1-to-N Server Profile Binding Architecture</strong><span class="pdf-ref-tag">Official Reference: p. 383 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p1_h8s2_version_ota.png" alt="FusionDirector Intelligent Version Upgrade (HOUP/OTA Flow)" data-caption="FusionDirector Intelligent Version Upgrade (HOUP/OTA Flow) (Official Reference: p. 390)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>FusionDirector Intelligent Version Upgrade (HOUP/OTA Flow)</strong><span class="pdf-ref-tag">Official Reference: p. 390 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+</div>
 
           <div class="takeaways-card">
             <h3>High-Yield Summary & Takeaways</h3>
@@ -676,5 +803,31 @@ p { margin-bottom: 10px; }
       if (correctCount === qs.length) markUnitCompleted();
     }
   </script>
+
+  <div id="img-lightbox" class="img-lightbox" onclick="if(event.target===this) closeImgZoom()">
+    <div class="img-lightbox-box">
+      <img id="img-lightbox-target" src="" alt="Zoomed Diagram" />
+    </div>
+    <div class="img-lightbox-bar">
+      <span id="img-lightbox-caption"></span>
+      <button type="button" class="img-lightbox-close" onclick="closeImgZoom()">Close</button>
+    </div>
+  </div>
+  <script>
+    function openImgZoom(imgEl) {
+      if (!imgEl) return;
+      document.getElementById('img-lightbox-target').src = imgEl.src;
+      document.getElementById('img-lightbox-caption').textContent = imgEl.getAttribute('data-caption') || imgEl.alt || '';
+      document.getElementById('img-lightbox').classList.add('open');
+    }
+    function closeImgZoom() {
+      document.getElementById('img-lightbox').classList.remove('open');
+      document.getElementById('img-lightbox-target').src = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImgZoom();
+    });
+  </script>
+
 </body>
 </html>

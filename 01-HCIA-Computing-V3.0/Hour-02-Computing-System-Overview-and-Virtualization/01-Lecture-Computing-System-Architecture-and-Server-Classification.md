@@ -47,6 +47,14 @@ Servers evolved strictly in the following chronological sequence:
 - **Processor Instruction Sets (pp. 82–83)**:
   - **CISC (Complex Instruction Set Computing)**: **x86** (Intel Core, AMD Ryzen). Uses microprograms in ROM; variable instruction length; complex hardware structure, **beneficial for compiler development**.
   - **RISC (Reduced Instruction Set Computing)**: Proposed by **Prof. David Patterson (1979)** after observing **80% of computing uses only 20% of instructions**. Includes **Arm** (Huawei Kunpeng, Apple A-series), **RISC-V** (Qualcomm Snapdragon Wear), and **MIPS** (Loongson 2). Fixed instruction length, register-based operations, simpler CPU hardware, **higher requirements on compiler design**. Software compiled for CISC cannot run directly on RISC without recompilation or binary translation.
+<!-- PDF_FIGS_START -->
+![Server Classification by Appearance (Tower, Blade, Rack) (Official Reference: p. 77)](../assets/images/p1_h2s1_server_form_factors.png)
+*Figure: Server Classification by Appearance (Tower, Blade, Rack) (Official Reference: p. 77)*
+
+![Server Classification by Usage Scenarios (Official Reference: p. 81)](../assets/images/p1_h2s1_server_usage.png)
+*Figure: Server Classification by Usage Scenarios (Official Reference: p. 81)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

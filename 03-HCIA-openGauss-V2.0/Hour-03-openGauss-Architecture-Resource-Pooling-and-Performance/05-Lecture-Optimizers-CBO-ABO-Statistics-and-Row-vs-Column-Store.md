@@ -55,6 +55,11 @@
 CREATE TABLE sales_col (id INT, region VARCHAR(20), amount NUMERIC(10,2))
 WITH (ORIENTATION = COLUMN, COMPRESSION = HIGH);
 ```
+<!-- PDF_FIGS_START -->
+![Row-Store vs Column-Store Storage Model Visual Comparison (Official Reference: p. 171)](../assets/images/p3_h3s3_row_vs_column_store.png)
+*Figure: Row-Store vs Column-Store Storage Model Visual Comparison (Official Reference: p. 171)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

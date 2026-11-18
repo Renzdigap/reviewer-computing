@@ -22,6 +22,14 @@
 | **Column Width & Projection** | Narrow tables or queries reading most columns | Wide tables where queries touch **< 50% of columns** | All data **AND** indexes fit in RAM |
 | **Query Pattern** | Index point queries returning a few rows | Statistical aggregation (`SUM`, `AVG`, `GROUP BY`) & ad-hoc scans | High-concurrency, high-contention OLTP |
 | **Compression** | Moderate compression | **High compression ratio** (trades higher CPU usage for smaller I/O) | In-memory NUMA-aware row store |
+<!-- PDF_FIGS_START -->
+![Row-Store Table Sequential Tuple Disk Layout (Official Reference: p. 296)](../assets/images/p3_h5s2_rowstore_table.png)
+*Figure: Row-Store Table Sequential Tuple Disk Layout (Official Reference: p. 296)*
+
+![Column-Store Table Columnar Compression Layout (Official Reference: p. 298)](../assets/images/p3_h5s2_columnstore_table.png)
+*Figure: Column-Store Table Columnar Compression Layout (Official Reference: p. 298)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -34,6 +42,11 @@
   - **Throughput**: **2.5x to 4x** higher than disk tables (**2.5x** gain on 2-socket servers; **4.8 million tpmC** on 4-socket 256-core Arm servers).
   - **Latency**: Reduces transaction latency by **3x to 5.5x**.
   - **Resource Utilization**: Reaches **99% CPU utilization** on 4-socket servers under high load and high contention.
+<!-- PDF_FIGS_START -->
+![openGauss Dual Storage Architecture: Disk Engine vs Memory-Optimized Table (MOT) (Official Reference: p. 303)](../assets/images/p3_h5s2_dual_storage_mot.png)
+*Figure: openGauss Dual Storage Architecture: Disk Engine vs Memory-Optimized Table (MOT) (Official Reference: p. 303)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

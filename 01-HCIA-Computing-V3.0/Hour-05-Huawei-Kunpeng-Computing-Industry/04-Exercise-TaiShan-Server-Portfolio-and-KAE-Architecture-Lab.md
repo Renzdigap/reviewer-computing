@@ -10,6 +10,19 @@
 ## Part A: Practical Lab Scenario
 Complete the TaiShan 200 hardware specification and KAE subsystem mapping for a Kunpeng data center deployment.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Traditional PCIe Crypto Card vs Kunpeng On-Chip KAE Engine (Official Reference: p. 240)](../assets/images/p1_h5s2_kae_onchip.png)
+*Figure: Traditional PCIe Crypto Card vs Kunpeng On-Chip KAE Engine (Official Reference: p. 240)*
+
+![Internal Component Layout of TaiShan 2280 Balanced Server (Official Reference: p. 250)](../assets/images/p1_h5s2_ts2280_internal.png)
+*Figure: Internal Component Layout of TaiShan 2280 Balanced Server (Official Reference: p. 250)*
+
+![Internal Component Layout of TaiShan 5280 Storage Server (Official Reference: p. 254)](../assets/images/p1_h5s2_ts5280_internal.png)
+*Figure: Internal Component Layout of TaiShan 5280 Storage Server (Official Reference: p. 254)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `kae_app_libraries` to `'OpenSSL/zlib'`, `kae_license_manager` to `'BMC'`, and `kae_acpi_reporter` to `'BIOS'`.
 2. Set `taishan_cpu_replaceable_separately` to `False`.

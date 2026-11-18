@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Classify scientific workloads into the four official HPC categories and configure the HPCKit toolchain manifest.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Huawei HPC Solution Architecture (HPCKit, DonaeKit, Hyper MPI) (Official Reference: p. 276)](../assets/images/p1_h5s4_hpc_solution_stack.png)
+*Figure: Huawei HPC Solution Architecture (HPCKit, DonaeKit, Hyper MPI) (Official Reference: p. 276)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Map the workloads: `numerical_calculation` -> `'Memory-constrained'`, `meteorology_and_aerospace` -> `'Computing-intensive'`, `animation_and_gene_analysis` -> `'I/O-intensive'`, and `cae_simulation` -> `'Network-intensive'`.
 2. Set `bisheng_compiler_base` to `'LLVM'` and `hyper_mpi_standard` to `'MPI-3.1'`.

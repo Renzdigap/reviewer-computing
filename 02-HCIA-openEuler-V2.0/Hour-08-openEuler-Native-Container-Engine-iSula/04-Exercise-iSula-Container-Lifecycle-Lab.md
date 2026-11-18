@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are deploying an `nginx` web container using `iSula` on openEuler (following Ch.07 pp. 408–417). Start a background container named `test` mapping host port `8081` to container port `80` with environment variable `A=100`, execute `/bin/bash` inside `test` using `isula exec -it`, list the latest 2 containers, and forcibly delete container `test`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Container State Machine Lifecycle (Created, Running, Paused, Stopped, Deleted) (Official Reference: p. 404)](../assets/images/p2_h8s2_container_lifecycle.png)
+*Figure: Container State Machine Lifecycle (Created, Running, Paused, Stopped, Deleted) (Official Reference: p. 404)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Run `nginx` in the background (`-d`) named `test` (`--name test`) with port mapping `-p 8081:80` and environment variable `-e A=100` (`isula run -d --name test -p 8081:80 -e A=100 nginx`).
 2. Step 2: Execute an interactive shell in container `test` using `isula exec -it test /bin/bash` and list the latest 2 containers using `isula ps -n 2`.

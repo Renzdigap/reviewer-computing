@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Write a Python script to compute usable capacities for a server with 8 × 4 TB drives across RAID 5, RAID 6, RAID 10, and RAID 60 (with M=2 spans), and verify minimum disk counts.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![RAID 0, RAID 1, RAID 5, RAID 10 Block Striping, Mirroring and Parity (Official Reference: p. 160)](../assets/images/p1_h4s1_raid_levels_1.png)
+*Figure: RAID 0, RAID 1, RAID 5, RAID 10 Block Striping, Mirroring and Parity (Official Reference: p. 160)*
+
+![RAID 6 (Dual Parity P+Q), RAID 1E, RAID 50, RAID 60 Block Layouts (Official Reference: p. 161)](../assets/images/p1_h4s1_raid_levels_2.png)
+*Figure: RAID 6 (Dual Parity P+Q), RAID 1E, RAID 50, RAID 60 Block Layouts (Official Reference: p. 161)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `raid5_min_disks` to `3`, `raid50_min_disks` to `6`, and `raid60_min_disks` to `8`.
 2. For `N = 8` disks of `4` TB each (total raw = 32 TB, `M = 2` spans): set `usable_tb_raid5` to `28` ($(8-1)× 4), `usable_tb_raid6` to `24` ((8-2)× 4), and `usable_tb_raid60` to `16` ((8 - 2× 2)× 4$).

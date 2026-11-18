@@ -21,6 +21,14 @@
 - **Running Processes Comparison (p. 206)**:
   - **Conventional BIOS Process (6 steps)**: Power on & start device \rightarrow CPU loads BIOS \rightarrow Initialize hardware \rightarrow Perform **POST** (Power-On Self-Test) & hardware self-check \rightarrow Load boot options \rightarrow Process system instructions.
   - **UEFI Process (4 steps)**: Power on & start device \rightarrow Initialize UEFI \rightarrow Boot the OS \rightarrow Enter the OS.
+<!-- PDF_FIGS_START -->
+![Position of BIOS Between Hardware and Operating System (Official Reference: p. 204)](../assets/images/p1_h4s4_bios_stack.png)
+*Figure: Position of BIOS Between Hardware and Operating System (Official Reference: p. 204)*
+
+![Conventional BIOS vs UEFI Running Process Flowchart (Official Reference: p. 206)](../assets/images/p1_h4s4_bios_vs_uefi.png)
+*Figure: Conventional BIOS vs UEFI Running Process Flowchart (Official Reference: p. 206)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -31,6 +39,11 @@
 - **Unix & Linux Historical Timeline (pp. 214, 217)**:
   - **1964**: Multics released \rightarrow **1969**: First Unix \rightarrow **1973**: C-based Unix v3 \rightarrow **1977**: BSD \rightarrow **1979**: Unix System V7 \rightarrow **Sept 27, 1983 / 1984**: **Richard Stallman** announced **GNU Project** (*"GNU's Not Unix"*) \rightarrow **1987**: **MINIX** (educational Unix-like OS) \rightarrow **Sept/Oct 5, 1991**: **Linus Torvalds** (Univ. of Helsinki) released the first **Linux kernel** (10,000 lines of code) \rightarrow **1993**: Slackware/Debian \rightarrow **1994**: Red Hat/SUSE 1.0 \rightarrow **2004**: Ubuntu \rightarrow **2019**: **EulerOS open-sourced as openEuler**.
 - **Linux Core Features (p. 218)**: Multi-platform, Multi-user & multitasking, Free/open-source (**GPL**), **Fully compatible with POSIX.1** (**IEEE 1003 / ISO/IEC 9945**), and **"Everything is a file"** (files, directories, character/block devices, sockets, printers, processes, pipes accessed via `fopen()`, `fclose()`, `fwrite()`, `fread()`).
+<!-- PDF_FIGS_START -->
+![OS Kernel Subsystems, System Calls and User Space (Official Reference: p. 208)](../assets/images/p1_h4s4_os_architecture.png)
+*Figure: OS Kernel Subsystems, System Calls and User Space (Official Reference: p. 208)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -45,6 +58,11 @@
 | **`/media`** | Removable media devices (USB flash drives, CD-ROMs) **automatically identified and mounted** by Linux. |
 | **`/mnt`** | **Temporary mount point** for manual mounting of other file systems (e.g., mounting CD-ROM to `/mnt`). |
 | **`/opt`** | Stores **additional third-party application software** installed on the host (e.g., Oracle installation packages); empty by default. |
+<!-- PDF_FIGS_START -->
+![Linux Root File Directory Structure Tree (Official Reference: p. 219)](../assets/images/p1_h4s4_linux_dir_tree.png)
+*Figure: Linux Root File Directory Structure Tree (Official Reference: p. 219)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

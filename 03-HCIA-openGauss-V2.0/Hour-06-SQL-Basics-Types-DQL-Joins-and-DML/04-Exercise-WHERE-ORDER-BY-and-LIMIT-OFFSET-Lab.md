@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Write three DQL queries against the `employees` and `student` tables to verify exact Huawei exam syntax for `WHERE` filtering, positional `ORDER BY`, and `LIMIT / OFFSET` pagination.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Relational Operations: SELECT (Rows), PROJECT (Columns), JOIN (Merge) (Official Reference: p. 374)](../assets/images/p3_h6s2_sql_ops_visual.png)
+*Figure: Relational Operations: SELECT (Rows), PROJECT (Columns), JOIN (Merge) (Official Reference: p. 374)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Query all columns from `employees` where `Position = 'Engineer' AND Salary > 6000` and `age BETWEEN 20 AND 30`.
 2. Step 2: Query `name, age, score` from `student` sorted by `age` descending and `score` ascending using positional numbers (`ORDER BY 2 DESC, 3 ASC`).

@@ -29,6 +29,14 @@
 | **CCManager** | **Cross-stack and cross-domain** management for **data centers**. |
 | **eService** | **24/7 Remote O&M platform** for **long-tail customers** (small device counts, unwilling to invest in dedicated O&M; provides **Call Home**). |
 | **HMM / IES** | **HMM** (*Hyper Management Module* for X6800/E9000 chassis power/fan/IPMI 2.0); **IES** (*Intelligent Edge System* for Atlas 500 edge station). |
+<!-- PDF_FIGS_START -->
+![Overall Architecture of Huawei Computing O&M Software (Official Reference: p. 356)](../assets/images/p1_h8s1_om_overall_arch.png)
+*Figure: Overall Architecture of Huawei Computing O&M Software (Official Reference: p. 356)*
+
+![Computing O&M In-Band and Out-of-Band Deployment Scenarios (Official Reference: p. 357)](../assets/images/p1_h8s1_om_scenarios.png)
+*Figure: Computing O&M In-Band and Out-of-Band Deployment Scenarios (Official Reference: p. 357)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -39,6 +47,14 @@
   - **BOB (*BMC Out-of-Band*)**: Forwarding tool enabling a remote host on the in-band network to communicate with the local iBMC (via SSH, IPMI, HTTPS, SNMP traps). Managed via **`bobCmd`** CLI (persistent online configuration, does not support independent deployment).
   - **Key iBMA Functions (p. 361)**: System info (OS, NIC, IB, drive, RAID), file upload & driver/software upgrade via Redfish, iBMC event dump to OS logs, NIC config tracing (`log/ethtool_log`), Mellanox NIC internal error detection (`log/common.log`), storage diagnosis (Sense Code, MD SoftRAID), **Memory soft isolation** of faulty physical memory pages via Redfish, and **black box**.
 - **iBMC Six WebUI Menus (pp. 363–370)**: **Home**, **System Info**, **Maintenance** (alarms, video/screenshots, PCIe/black box/serial logs, iBMC logs), **User & Security** (Local users, LDAP, Kerberos, 2FA, SSL), **Services** (Port, Web, KVM, Virtual Media, VNC, SNMP), and **iBMC Settings** (Firmware upgrade, Network, iBMA, Smart Provisioning). *Note: Deploying an OS through Redfish requires an **iBMC Advanced Edition license** (p. 364)!*
+<!-- PDF_FIGS_START -->
+![iBMA and BOB In-Band vs Out-of-Band Communication Paths (Official Reference: p. 360)](../assets/images/p1_h8s1_ibma_bob_paths.png)
+*Figure: iBMA and BOB In-Band vs Out-of-Band Communication Paths (Official Reference: p. 360)*
+
+![iBMC Embedded Chip (Hi1710/Hi1711) and Software Stack (Official Reference: p. 363)](../assets/images/p1_h8s1_ibmc_hw_stack.png)
+*Figure: iBMC Embedded Chip (Hi1710/Hi1711) and Software Stack (Official Reference: p. 363)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -51,6 +67,11 @@
 6. **Toolbox — Drive Erasure**:
    - **Fast mode**: Erases **partitions of a logical drive**.
    - **Secure mode**: Erases **all data on a physical drive**.
+<!-- PDF_FIGS_START -->
+![Smart Provisioning Embedded Capabilities Block Diagram (Official Reference: p. 371)](../assets/images/p1_h8s1_smart_provisioning.png)
+*Figure: Smart Provisioning Embedded Capabilities Block Diagram (Official Reference: p. 371)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

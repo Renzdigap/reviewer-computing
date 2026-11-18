@@ -22,6 +22,11 @@
 - **RBAC (Role-Based Access Control)**:
   - Defines relationships among **Who** (subject/user/role), **What** (target database object), and **How** (specific positive/negative permission).
   - Supports many-to-many mappings (users <-> roles <-> permissions) and enforces the **principle of least privilege**.
+<!-- PDF_FIGS_START -->
+![Role-Based Access Control (RBAC) User-Role-Permission Mapping (Official Reference: p. 210)](../assets/images/p3_h4s2_rbac_model.png)
+*Figure: Role-Based Access Control (RBAC) User-Role-Permission Mapping (Official Reference: p. 210)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

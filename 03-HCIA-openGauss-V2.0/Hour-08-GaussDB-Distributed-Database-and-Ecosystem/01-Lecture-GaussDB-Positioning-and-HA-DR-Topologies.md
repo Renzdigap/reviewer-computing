@@ -43,6 +43,23 @@
 4. **Dual-Cluster Remote DR (via OBS Log Synchronization, p. 486)**:
    - Primary Cluster (AZ 1 + AZ 2 intra-city active-active) ships incremental logs via **OBS** to a remote DR Cluster (AZ 3) for physical log replay.
    - **Specifications**: **`RPO = 10 seconds`**, **`RTO = 10 minutes`**.
+<!-- PDF_FIGS_START -->
+![GaussDB HA Centralized Cluster Topology (CMS, ETCD, OMA, Primary/Standby DN) (Official Reference: p. 482)](../assets/images/p3_h8s1_ha_centralized.png)
+*Figure: GaussDB HA Centralized Cluster Topology (CMS, ETCD, OMA, Primary/Standby DN) (Official Reference: p. 482)*
+
+![GaussDB Intra-City Active-Active Distributed Cluster Topology (Official Reference: p. 483)](../assets/images/p3_h8s1_ha_active_active.png)
+*Figure: GaussDB Intra-City Active-Active Distributed Cluster Topology (Official Reference: p. 483)*
+
+![GaussDB Intra-City 3-AZ Multi-Active Distributed Topology (Official Reference: p. 484)](../assets/images/p3_h8s1_ha_3az_multiactive.png)
+*Figure: GaussDB Intra-City 3-AZ Multi-Active Distributed Topology (Official Reference: p. 484)*
+
+![GaussDB 3DC Geo-Redundant Multi-Region Cluster Topology (Official Reference: p. 485)](../assets/images/p3_h8s1_ha_3dc_georedundant.png)
+*Figure: GaussDB 3DC Geo-Redundant Multi-Region Cluster Topology (Official Reference: p. 485)*
+
+![GaussDB Remote Disaster Recovery (Physical Log Replay, RPO 10s / RTO 10m) (Official Reference: p. 486)](../assets/images/p3_h8s1_ha_remote_dr.png)
+*Figure: GaussDB Remote Disaster Recovery (Physical Log Replay, RPO 10s / RTO 10m) (Official Reference: p. 486)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

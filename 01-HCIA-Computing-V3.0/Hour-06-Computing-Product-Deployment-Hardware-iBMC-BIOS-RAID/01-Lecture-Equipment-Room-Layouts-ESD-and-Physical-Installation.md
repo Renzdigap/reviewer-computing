@@ -19,6 +19,11 @@ Equipment rooms can use **air-cooled** or **water-cooled** layouts across three 
 1. **Best Option**: **In-row air conditioners with contained aisles** (water-cooled or air-cooled).
 2. **Second Best**: **In-room air conditioners with contained aisles**.
 3. **Least Optimal**: **In-room air conditioners with open aisles**.
+<!-- PDF_FIGS_START -->
+![Data Center Equipment Room Water-Cooled vs Air-Cooled Layouts (1-6) (Official Reference: p. 289)](../assets/images/p1_h6s1_room_layouts.png)
+*Figure: Data Center Equipment Room Water-Cooled vs Air-Cooled Layouts (1-6) (Official Reference: p. 289)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -40,6 +45,14 @@ Equipment rooms can use **air-cooled** or **water-cooled** layouts across three 
 - **Power-On & Circuit Breaker Specifications (p. 295)**:
   - External power circuit breaker current rating connected to the server: **32 A AC** or **63 A DC**.
   - **Default Power-On Behavior**: The default value of *System State Upon Power Supply* is **Power on** — the server **automatically powers on as soon as power is supplied to the PSUs**! To change this, log in to the iBMC WebUI and choose **Power > Power Control**.
+<!-- PDF_FIGS_START -->
+![Rack Guide Rail Sliding and Mounting Ear Fastening (Official Reference: p. 294)](../assets/images/p1_h6s1_rail_install.png)
+*Figure: Rack Guide Rail Sliding and Mounting Ear Fastening (Official Reference: p. 294)*
+
+![TaiShan Server PSU Power Cable Wiring (Official Reference: p. 295)](../assets/images/p1_h6s1_power_cables.png)
+*Figure: TaiShan Server PSU Power Cable Wiring (Official Reference: p. 295)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

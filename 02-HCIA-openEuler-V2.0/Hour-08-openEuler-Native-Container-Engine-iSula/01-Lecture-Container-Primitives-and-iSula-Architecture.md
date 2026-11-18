@@ -31,6 +31,11 @@ Container technology evolved from `chroot` (1982), FreeBSD `Jail` (1998), `Linux
 * **`cgroups` (Linux Control Groups) — Function: Resource Limitation (Ch.07, p.392):**
   * **Limits system resources** (CPU, memory, block I/O) available to a set of processes, controls process priorities, and suspends/restores processes.
   * Organized as files and directories in **`/sys/fs/cgroup`**.
+<!-- PDF_FIGS_START -->
+![Development Timeline of Container Virtualization (chroot to iSula) (Official Reference: p. 390)](../assets/images/p2_h8s1_container_history.png)
+*Figure: Development Timeline of Container Virtualization (chroot to iSula) (Official Reference: p. 390)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -41,6 +46,11 @@ Container technology evolved from `chroot` (1982), FreeBSD `Jail` (1998), `Linux
   * **Communication Modes:** **Lightweight mode (REST interface)** and **Performance mode (gRPC interface)**.
   * **Core Daemon (`iSulad`):** Image Service, Execution Service, Content Service, and Rootfs Service (separated to isolate operations).
   * **Southbound OCI Runtimes:** Interconnects with OCI-compliant runtimes: **LCR (Lightweight Container Runtime — default, written in C)**, **`runC`**, and **`Kata`**.
+<!-- PDF_FIGS_START -->
+![iSula Container Engine Architecture Stack (isulad, CRI, sysCall) (Official Reference: p. 394)](../assets/images/p2_h8s1_isula_architecture.png)
+*Figure: iSula Container Engine Architecture Stack (isulad, CRI, sysCall) (Official Reference: p. 394)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -51,6 +61,14 @@ Container technology evolved from `chroot` (1982), FreeBSD `Jail` (1998), `Linux
    * **75% faster image download** via smart on-demand loading.
    * **15% faster image building (`isula-build`)** via **DAG-based building** (unlike `docker build`, `isula-build` does **not** start a container for every Dockerfile instruction—only for necessary instructions like `RUN`).
 3. **Easy-to-Use Toolkit:** **`isula-build`** (Dockerfile image builder) and **`isula-transform`** (cold/live migration tool converting Docker containers to iSulad).
+<!-- PDF_FIGS_START -->
+![iSula vs Docker Memory Usage Comparison (100 Containers) (Official Reference: p. 395)](../assets/images/p2_h8s1_isula_vs_docker_mem.png)
+*Figure: iSula vs Docker Memory Usage Comparison (100 Containers) (Official Reference: p. 395)*
+
+![iSula Container Compatibility (isula-build, isula-transform, OCI runtimes) (Official Reference: p. 397)](../assets/images/p2_h8s1_isula_ecosystem.png)
+*Figure: iSula Container Compatibility (isula-build, isula-transform, OCI runtimes) (Official Reference: p. 397)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

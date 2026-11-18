@@ -38,6 +38,11 @@
    - Hardware-accelerated mathematical library optimized for Kunpeng processors, supporting **Fast Fourier Transform (FFT)**, matrix calculation, vectorization, and trigonometric/logarithmic functions.
 3. **BiSheng Compiler**:
    - High-performance compiler developed based on **LLVM** and optimized for Kunpeng, adding **Fortran front-end** support, middle-/back-end optimizations, and the **Autotuner** automatic tuning feature.
+<!-- PDF_FIGS_START -->
+![Huawei HPC Solution Architecture (HPCKit, DonaeKit, Hyper MPI) (Official Reference: p. 276)](../assets/images/p1_h5s4_hpc_solution_stack.png)
+*Figure: Huawei HPC Solution Architecture (HPCKit, DonaeKit, Hyper MPI) (Official Reference: p. 276)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Protect customer privacy on `user1.table1`: create a resource label `label_for_creditcard` on column `user1.table1.creditcard` and apply the `creditcardmasking` policy `msk_creditcard` so only the last 4 digits are visible.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss Fully-Encrypted Database Equality Query (Client Driver to TEE) (Official Reference: p. 56)](../assets/images/p3_h1s4_fully_encrypted_tee.png)
+*Figure: openGauss Fully-Encrypted Database Equality Query (Client Driver to TEE) (Official Reference: p. 56)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Create the resource label using `CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);`.
 2. Step 2: Create the masking policy using `CREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);`.

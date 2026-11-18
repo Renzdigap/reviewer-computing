@@ -28,6 +28,11 @@
   * **`-qf <filepath>`:** Queries **which RPM package owns a specific file** on the server.
   * **`-qc <pkg>` / `-qd <pkg>`:** Lists **configuration files (`-qc`)** or **documentation files (`-qd`)**.
   * **`-Va`:** Validates all installed RPM packages to detect missing or modified files.
+<!-- PDF_FIGS_START -->
+![RPM Package Naming Convention Anatomy (name-version-release.arch.rpm) (Official Reference: p. 195)](../assets/images/p2_h5s1_rpm_naming.png)
+*Figure: RPM Package Naming Convention Anatomy (name-version-release.arch.rpm) (Official Reference: p. 195)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

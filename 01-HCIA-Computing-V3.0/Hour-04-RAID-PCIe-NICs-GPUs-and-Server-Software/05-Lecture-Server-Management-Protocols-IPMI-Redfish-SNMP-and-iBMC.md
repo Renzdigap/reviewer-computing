@@ -26,6 +26,14 @@
     - **Fault diagnosis**: CPU CATERR event, PSU failure, overtemperature alarm, sub-healthy fan, storage medium fault.
     - **Running records**: Power-on/off recording, serial port voice/data recording, breakdown screenshot & breakdown video recording.
     - **Diagnosis assistance**: Black box (**Kbox**) and parsing tool (**HWKbox**).
+<!-- PDF_FIGS_START -->
+![IPMI Embedded BMC and Remote Management Path (Official Reference: p. 193)](../assets/images/p1_h4s3_ipmi_arch.png)
+*Figure: IPMI Embedded BMC and Remote Management Path (Official Reference: p. 193)*
+
+![Huawei iBMC Four Core Management Functions (Official Reference: p. 202)](../assets/images/p1_h4s3_ibmc_pillars.png)
+*Figure: Huawei iBMC Four Core Management Functions (Official Reference: p. 202)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -37,6 +45,14 @@
   - `PATCH` \rightarrow `patchRequest` (update/modify parameters)
   - `DELETE` \rightarrow `deleteRequest` (remove resource)
 - **iBMA 2.0 (In-Band Management Agent, p. 195)**: Runs inside the host OS to obtain in-band metrics unavailable to out-of-band BMC (process info, CPU performance, RAID controller details) and integrates with **iBMC** via **vNIC** and **BOB** (*Baseboard Management Controller Out-of-Band*).
+<!-- PDF_FIGS_START -->
+![iBMA In-Band and Out-of-Band (BOB / vNIC) Architecture (Official Reference: p. 195)](../assets/images/p1_h4s3_ibma_bob.png)
+*Figure: iBMA In-Band and Out-of-Band (BOB / vNIC) Architecture (Official Reference: p. 195)*
+
+![Redfish HTTP Methods and Internal Interface Call Stack (Official Reference: p. 196)](../assets/images/p1_h4s3_redfish_stack.png)
+*Figure: Redfish HTTP Methods and Internal Interface Call Stack (Official Reference: p. 196)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -47,6 +63,11 @@ SNMP is an application-layer TCP/IP network management protocol carried over **U
   2. **Agent**: Process running on the managed device; queries/updates the **MIB** and sends **Traps** when faults/events occur.
   3. **Managed Object (MO)**: Hardware or software configuration parameters on a managed device (one device can have multiple MOs).
   4. **MIB (Management Information Base)**: Hierarchical database schema defining the variables maintained by the agent.
+<!-- PDF_FIGS_START -->
+![Basic SNMP Components and Operations (Steps 1-6) (Official Reference: p. 198)](../assets/images/p1_h4s3_snmp_flow.png)
+*Figure: Basic SNMP Components and Operations (Steps 1-6) (Official Reference: p. 198)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

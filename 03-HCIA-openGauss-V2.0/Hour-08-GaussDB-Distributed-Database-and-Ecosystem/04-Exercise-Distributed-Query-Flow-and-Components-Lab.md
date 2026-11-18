@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Complete the GaussDB distributed component responsibility lookup query so that every component from Chapter 06 Slide 20 (p. 495) is accurately matched to its official role.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![GaussDB Distributed Components Architecture and Control/Data Planes (CM, GTM, CN, DN, ETCD, CMS) (Official Reference: p. 495)](../assets/images/p3_h8s2_distributed_components.png)
+*Figure: GaussDB Distributed Components Architecture and Control/Data Planes (CM, GTM, CN, DN, ETCD, CMS) (Official Reference: p. 495)*
+
+![GaussDB Distributed SQL Execution 5-Step Flow Across CN and DNs (Official Reference: p. 487)](../assets/images/p3_h8s2_distributed_exec_flow.png)
+*Figure: GaussDB Distributed SQL Execution 5-Step Flow Across CN and DNs (Official Reference: p. 487)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Match `'CN'` to receiving application SQL requests and distributing task fragments, and `'DN'` to storing service data and executing query tasks.
 2. Step 2: Match `'GTM'` to generating global transaction IDs, snapshots, timestamps, and sequences.

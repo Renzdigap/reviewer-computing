@@ -46,6 +46,14 @@
 - **Two Working Modes of a Postfix Email System (p. 341)**:
   1. **Local Linux users** (`root@example.com`, limited by allowed number of OS users).
   2. **Virtual users** (not associated with real Linux users; each has separate drive space; overcomes OS user count limits, enhances security, suitable for multi-user scenarios).
+<!-- PDF_FIGS_START -->
+![Linux Mail Server Architecture (Postfix, Dovecot, MySQL) (Official Reference: p. 340)](../assets/images/p1_h7s3_mail_server_arch.png)
+*Figure: Linux Mail Server Architecture (Postfix, Dovecot, MySQL) (Official Reference: p. 340)*
+
+![Enterprise Email Flow (MUA, SMTP, POP3/IMAP) (Official Reference: p. 342)](../assets/images/p1_h7s3_mail_flow.png)
+*Figure: Enterprise Email Flow (MUA, SMTP, POP3/IMAP) (Official Reference: p. 342)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

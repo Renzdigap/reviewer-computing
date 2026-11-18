@@ -30,6 +30,14 @@
 | **PCIe 5.0** | 2019 | **32.0 GT/s** | 3938 MB/s | 15.75 GB/s | 31.51 GB/s | **63.0 GB/s** |
 
 *(Pin counts & lengths: × 1 = 36 pins / 25 mm; × 4 = 64 pins / 39 mm; × 8 = 98 pins / 56 mm; × 16 = 164 pins / 89 mm.)*
+<!-- PDF_FIGS_START -->
+![Single Bus System Interconnection Diagram (Official Reference: p. 170)](../assets/images/p1_h4s2_system_bus.png)
+*Figure: Single Bus System Interconnection Diagram (Official Reference: p. 170)*
+
+![TaiShan 200 Riser Cards and PCIe I/O Module Slot Mapping (Official Reference: p. 172)](../assets/images/p1_h4s2_riser_pcie_slots.png)
+*Figure: TaiShan 200 Riser Cards and PCIe I/O Module Slot Mapping (Official Reference: p. 172)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -43,6 +51,20 @@
 - **Huawei Intelligent Converged Network Chips & IN200 iNIC (pp. 179–180)**:
   - Evolution: **FE308 (2004, 1st-gen)** \rightarrow **Hi1821 (2014, 2nd-gen)** \rightarrow **Hi1822 (2018, 3rd-gen)**.
   - **Hi1822 / IN200 iNIC**: Converged Ethernet (25GE–100GE) & FC (16G–32G), **48 built-in programmable data forwarding cores**, OVS (15 Mpps) & **RoCE v1/v2** offloading, SR-IOV, PCIe 3.0 x16 HHHL card.
+<!-- PDF_FIGS_START -->
+![Server NIC Physical Board and Main Control Chip (Official Reference: p. 174)](../assets/images/p1_h4s2_nic_main_chip.png)
+*Figure: Server NIC Physical Board and Main Control Chip (Official Reference: p. 174)*
+
+![Electrical (TM210 4xGE) vs Optical (TM280 4x25GE) FlexIO Ports (Official Reference: p. 175)](../assets/images/p1_h4s2_flexio_ports.png)
+*Figure: Electrical (TM210 4xGE) vs Optical (TM280 4x25GE) FlexIO Ports (Official Reference: p. 175)*
+
+![Huawei Server NIC Types: LOM, PCIe, FlexIO and Mezzanine Cards (Official Reference: p. 177)](../assets/images/p1_h4s2_nic_form_factors.png)
+*Figure: Huawei Server NIC Types: LOM, PCIe, FlexIO and Mezzanine Cards (Official Reference: p. 177)*
+
+![Huawei IN Series Intelligent NIC (Hi1822) Hardware Callouts (Official Reference: p. 180)](../assets/images/p1_h4s2_inic_hi1822.png)
+*Figure: Huawei IN Series Intelligent NIC (Hi1822) Hardware Callouts (Official Reference: p. 180)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -59,6 +81,17 @@
 - **Server Power Supplies (pp. 188–189)**:
   - **ATX** (125–350 W, 20-pin, ATX12V added 4-pin 12V for Pentium 4) vs. **SSI** (Server System Infrastructure, supplies UPS/HVDC).
   - **Width standards**: **73.5 mm** (CRPS 800W/1300W) and **68.0 mm** (Kunpeng 900W/2000W used in **TaiShan 200 2280** and **2288X V5**; AC input `90V–264V AC`, DC input `180V–300V/320V DC`, output `12V DC`).
+<!-- PDF_FIGS_START -->
+![CPU vs GPU Die Resource Allocation (Control/Cache vs ALU) (Official Reference: p. 181)](../assets/images/p1_h4s2_cpu_vs_gpu.png)
+*Figure: CPU vs GPU Die Resource Allocation (Control/Cache vs ALU) (Official Reference: p. 181)*
+
+![Indirect Liquid Cooling Cold-Plate Heat Exchange Schematic (Official Reference: p. 187)](../assets/images/p1_h4s2_liquid_cooling.png)
+*Figure: Indirect Liquid Cooling Cold-Plate Heat Exchange Schematic (Official Reference: p. 187)*
+
+![SSI Server Power Supply Module Photo (Official Reference: p. 188)](../assets/images/p1_h4s2_ssi_psu.png)
+*Figure: SSI Server Power Supply Module Photo (Official Reference: p. 188)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

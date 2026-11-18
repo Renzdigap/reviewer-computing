@@ -30,6 +30,11 @@
       - **`TRUE OR NULL` -> `TRUE`**; **`FALSE OR NULL` -> `NULL`**.
       - **`FALSE AND NULL` -> `FALSE`**; **`TRUE AND NULL` -> `NULL`**.
       - **`NOT NULL` -> `NULL`**.
+<!-- PDF_FIGS_START -->
+![Relational Operations: SELECT (Rows), PROJECT (Columns), JOIN (Merge) (Official Reference: p. 374)](../assets/images/p3_h6s2_sql_ops_visual.png)
+*Figure: Relational Operations: SELECT (Rows), PROJECT (Columns), JOIN (Merge) (Official Reference: p. 374)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

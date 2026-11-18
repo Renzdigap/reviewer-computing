@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are writing an automated Ansible playbook for TaiShan 200 accelerator/NIC cards that handles both Initial Installation and Overwrite Installation according to Huawei's official Ch.05 p.335 flowchart.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Driver and Firmware Initial vs Overwrite Installation Decision Flow (Official Reference: p. 335)](../assets/images/p1_h7s2_driver_firmware_flow.png)
+*Figure: Driver and Firmware Initial vs Overwrite Installation Decision Flow (Official Reference: p. 335)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `driver_serves` to `'software'` and `firmware_serves` to `'hardware'` (stored in `'ROM'`).
 2. For `initial_installation_order`, specify `['Install the driver', 'Install the firmware']`.

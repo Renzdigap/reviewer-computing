@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are validating a server bill-of-materials (BOM) before deploying Huawei FusionCompute VRM and CNA compute nodes.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![FusionCompute Virtual Network (DVS and VLAN Port Groups) (Official Reference: p. 112)](../assets/images/p1_h2s3_virtual_network.png)
+*Figure: FusionCompute Virtual Network (DVS and VLAN Port Groups) (Official Reference: p. 112)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `vrm_min_system_disk_gb` to `270` and `compute_node_min_system_disk_gb` to `150`.
 2. Set `recommended_system_raid` to `'RAID 1'`, `min_memory_gb` to `8`, and `recommended_memory_gb` to `48`.

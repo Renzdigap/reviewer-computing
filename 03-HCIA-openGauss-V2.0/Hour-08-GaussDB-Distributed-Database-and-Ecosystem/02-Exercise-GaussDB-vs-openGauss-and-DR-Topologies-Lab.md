@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are architecting a financial-grade GaussDB deployment. Record the official GaussDB scale-out limits (4 PB max storage, 256 max shards, 100,000 concurrent connections) and Dual-Cluster Remote DR RPO/RTO metrics.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![GaussDB 3DC Geo-Redundant Multi-Region Cluster Topology (Official Reference: p. 485)](../assets/images/p3_h8s1_ha_3dc_georedundant.png)
+*Figure: GaussDB 3DC Geo-Redundant Multi-Region Cluster Topology (Official Reference: p. 485)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Specify `4` (PB) as the maximum storage capacity, `256` as the maximum number of shards/DNs in a single large cluster, and `100000` as the cluster concurrent connections.
 2. Step 2: Specify `'10 seconds'` as the RPO and `'10 minutes'` as the RTO for Dual-Cluster Remote DR.

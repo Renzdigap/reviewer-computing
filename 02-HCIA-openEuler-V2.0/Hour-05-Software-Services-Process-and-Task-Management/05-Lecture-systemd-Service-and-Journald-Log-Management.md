@@ -22,6 +22,11 @@
   3. **`kdbus`**: Kernel message passing.
 * **12 `systemd` Unit Types:**
   * **`service`** (system service), **`target`** (group of units / runlevel, e.g., `multi-user.target`, `graphical.target`), **`automount`**, **`device`**, **`mount`**, **`path`**, **`scope`** (externally created process), **`snapshot`**, **`slice`** (hierarchical cgroup process tree), **`socket`** (IPC socket), **`swap`**, and **`timer`**.
+<!-- PDF_FIGS_START -->
+![systemd Service Manager Architecture Stack (Official Reference: p. 217)](../assets/images/p2_h5s3_systemd_arch.png)
+*Figure: systemd Service Manager Architecture Stack (Official Reference: p. 217)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

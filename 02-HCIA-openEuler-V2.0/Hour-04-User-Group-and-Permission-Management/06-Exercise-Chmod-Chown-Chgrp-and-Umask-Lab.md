@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are securing the directory `usertxt` on openEuler (following the exact official lab on pp. 177–183). Set its permissions to `644`, change both its owner and group to `user:usergroup` using `chown`, change its group to `usergroup01` using `chgrp`, and set the system `umask` to `022`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![9-Bit File Permission Structure (File Type, Owner, Group, Other) (Official Reference: p. 173)](../assets/images/p2_h4s3_permission_bits.png)
+*Figure: 9-Bit File Permission Structure (File Type, Owner, Group, Other) (Official Reference: p. 173)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Modify the permissions of `usertxt` to `644` using `chmod 644 usertxt`.
 2. Step 2: Change both the owner and group of `usertxt` to `user:usergroup` using `chown user:usergroup usertxt`, then change its group to `usergroup01` using `chgrp usergroup01 usertxt`.

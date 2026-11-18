@@ -25,6 +25,11 @@
 | **`maintenance_work_mem`** | Local (Session) | Local memory used for maintenance tasks: `VACUUM`, `CREATE INDEX`, and `ALTER TABLE`. |
 | **`work_mem`** | Local (Session) | Local memory per query operator for **sorting (`Sort`)** and **hash tables (`HashJoin`/`HashAgg`)**. |
 | **`temp_buffers` (temp buffer)** | Local (Session) | Session-private buffer for accessing **temporary tables**. |
+<!-- PDF_FIGS_START -->
+![openGauss Instance Architecture (GaussMaster, Background Threads, Memory Pools, Storage) (Official Reference: p. 135)](../assets/images/p3_h3s1_instance_architecture.png)
+*Figure: openGauss Instance Architecture (GaussMaster, Background Threads, Memory Pools, Storage) (Official Reference: p. 135)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -50,6 +55,14 @@
   - **`pg_clog/` & `pg_csnlog/`**: Transaction commit status logs and Commit Sequence Number logs.
   - **`pg_audit/` & `pg_log/`**: Audit logs (`0600`) and instance run logs (`<= 0640`).
   - **`postgresql.conf` / `pg_hba.conf` / `postmaster.opts`**: Parameter file, client auth file, and startup CLI args.
+<!-- PDF_FIGS_START -->
+![openGauss Primary/Standby Logical Architecture (Official Reference: p. 139)](../assets/images/p3_h3s1_logical_primary_standby.png)
+*Figure: openGauss Primary/Standby Logical Architecture (Official Reference: p. 139)*
+
+![Database Logical Objects to Physical Datafile Segments and 8KB Blocks (Official Reference: p. 141)](../assets/images/p3_h3s1_db_physical_mapping.png)
+*Figure: Database Logical Objects to Physical Datafile Segments and 8KB Blocks (Official Reference: p. 141)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

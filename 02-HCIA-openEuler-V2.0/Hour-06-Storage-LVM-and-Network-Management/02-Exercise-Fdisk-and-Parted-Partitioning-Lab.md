@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 You have attached a new 4 TB disk `/dev/sdb` to an openEuler server. Because it exceeds 2 TB, you must inspect existing disks with `fdisk -l` and `lsblk -f`, and then use `parted` in non-interactive mode to initialize `/dev/sdb` with a `gpt` partition table and create a primary partition.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Linux Disk Partition Device Naming (/dev/xx[a-z][1-N]) (Official Reference: p. 268)](../assets/images/p2_h6s1_device_naming.png)
+*Figure: Linux Disk Partition Device Naming (/dev/xx[a-z][1-N]) (Official Reference: p. 268)*
+
+![MBR Disk Partition Types (Primary, Extended, Logical Partition Relationship) (Official Reference: p. 267)](../assets/images/p2_h6s1_mbr_partitions.png)
+*Figure: MBR Disk Partition Types (Primary, Extended, Logical Partition Relationship) (Official Reference: p. 267)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: View all disks and partitions using `fdisk -l` and check file system types using `lsblk -f`.
 2. Step 2: Use `parted` in non-interactive mode to convert `/dev/sdb` to a GPT partition table (`parted /dev/sdb mklabel gpt`).

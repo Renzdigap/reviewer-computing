@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are configuring networking on an openEuler server (following Ch.05 pp. 305–317). Permanently set the hostname to `openEuler01`, create and activate an Ethernet connection named `Demo` on `enp4s0`, add a static route `192.168.122.0/24` via `10.10.10.1` to `enp3s0`, and inspect listening TCP sockets with `ss -talnp`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Predictable NIC Naming Rules Breakdown (enp0s3) (Official Reference: p. 306)](../assets/images/p2_h6s4_nic_naming_rules.png)
+*Figure: Predictable NIC Naming Rules Breakdown (enp0s3) (Official Reference: p. 306)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Set the permanent hostname to `openEuler01` using `hostnamectl set-hostname openEuler01`.
 2. Step 2: Create connection `Demo` on `enp4s0` (`nmcli connection add con-name 'Demo' type Ethernet ifname enp4s0`) and activate it (`nmcli connection up 'Demo'`).

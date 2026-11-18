@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Inspect the openEuler root filesystem (`/`) and verify the exact standard directories for configuration files, peripheral devices, temporary mounts, and third-party software packages.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Conventional BIOS vs UEFI Running Process Flowchart (Official Reference: p. 206)](../assets/images/p1_h4s4_bios_vs_uefi.png)
+*Figure: Conventional BIOS vs UEFI Running Process Flowchart (Official Reference: p. 206)*
+
+![Linux Root File Directory Structure Tree (Official Reference: p. 219)](../assets/images/p1_h4s4_linux_dir_tree.png)
+*Figure: Linux Root File Directory Structure Tree (Official Reference: p. 219)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Run `ls /` to list the top-level directories under the root filesystem.
 2. Set `CONFIG_DIR` to `'/etc'`, `DEVICE_DIR` to `'/dev'`, `TEMP_MOUNT_DIR` to `'/mnt'`, and `THIRD_PARTY_APP_DIR` to `'/opt'`.

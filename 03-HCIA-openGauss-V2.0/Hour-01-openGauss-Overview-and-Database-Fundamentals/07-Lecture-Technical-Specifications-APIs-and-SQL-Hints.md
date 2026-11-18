@@ -22,6 +22,17 @@
   2. **Control plan nodes** (Flow control): `Limit`, `RecursiveUnion`, `Union`.
   3. **Materialize plan nodes** (Cache lower-layer data; return only after all data is scanned): `Agg`, `Sort`.
   4. **Join plan nodes** (Multiple inputs): `MergeJoin`, `SortJoin` / `NestLoop`, `HashJoin`.
+<!-- PDF_FIGS_START -->
+![openGauss Execution Engine Pipeline (Scan, Plan, Materialization, Join) (Official Reference: p. 53)](../assets/images/p3_h1s4_execution_engine.png)
+*Figure: openGauss Execution Engine Pipeline (Scan, Plan, Materialization, Join) (Official Reference: p. 53)*
+
+![openGauss Storage Engine Layered Stack (Official Reference: p. 54)](../assets/images/p3_h1s4_storage_engine.png)
+*Figure: openGauss Storage Engine Layered Stack (Official Reference: p. 54)*
+
+![Kunpeng Multi-Core CPU Architecture and Dual-Socket Performance (Official Reference: p. 55)](../assets/images/p3_h1s4_kunpeng_numa_perf.png)
+*Figure: Kunpeng Multi-Core CPU Architecture and Dual-Socket Performance (Official Reference: p. 55)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -51,6 +62,14 @@
   - Default transaction isolation level is **`READ COMMITTED`** (prevents dirty reads).
   - Durability is guaranteed by **WAL (Write-Ahead Logging)** — redo logs are flushed to disk upon commit before data pages, while **Checkpoints** flush dirty buffers from the dirty buffer queue to data files.
 - **SQL Plan Hints (`/*+ ... */`)**: Override the optimizer's execution plan by specifying join order, join method (`HashJoin`, `MergeJoin`, `NestLoop`), scan method (`IndexScan`, `SeqScan`), stream mode, or row estimates.
+<!-- PDF_FIGS_START -->
+![openGauss Fully-Encrypted Database Equality Query (Client Driver to TEE) (Official Reference: p. 56)](../assets/images/p3_h1s4_fully_encrypted_tee.png)
+*Figure: openGauss Fully-Encrypted Database Equality Query (Client Driver to TEE) (Official Reference: p. 56)*
+
+![Write-Ahead Logging (WAL) Redo Buffer and Checkpoint Disk Flush Flow (Official Reference: p. 63)](../assets/images/p3_h1s4_wal_redo_mechanism.png)
+*Figure: Write-Ahead Logging (WAL) Redo Buffer and Checkpoint Disk Flush Flow (Official Reference: p. 63)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

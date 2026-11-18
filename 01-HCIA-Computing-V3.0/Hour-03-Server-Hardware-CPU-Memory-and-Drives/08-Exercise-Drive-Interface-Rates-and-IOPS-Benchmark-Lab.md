@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Complete the storage benchmark script comparing SATA 3.0, SAS 3.0, and NVMe SSD interface rates, form factors, and 4 KB random write IOPS.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Physical Drive Interfaces: SATA (Notched Gap) vs SAS vs PCIe (Official Reference: p. 155)](../assets/images/p1_h3s4_drive_interfaces.png)
+*Figure: Physical Drive Interfaces: SATA (Notched Gap) vs SAS vs PCIe (Official Reference: p. 155)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `sata_3_rate_gbps` to `6` and `sas_3_rate_gbps` to `12`.
 2. Set `lff_inches` to `3.5` and `sff_inches` to `2.5`.

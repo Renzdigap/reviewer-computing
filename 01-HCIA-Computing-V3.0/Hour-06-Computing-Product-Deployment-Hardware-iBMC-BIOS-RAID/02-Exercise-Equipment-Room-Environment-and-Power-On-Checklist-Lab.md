@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Complete the pre-installation site survey checklist for deploying TaiShan 200 (model 2280) servers in a customer equipment room.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Data Center Equipment Room Water-Cooled vs Air-Cooled Layouts (1-6) (Official Reference: p. 289)](../assets/images/p1_h6s1_room_layouts.png)
+*Figure: Data Center Equipment Room Water-Cooled vs Air-Cooled Layouts (1-6) (Official Reference: p. 289)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `optimal_cooling_layout` to `'In-row air conditioners with contained aisles'` and `cabinet_standard` to `'IEC 297'`.
 2. Set `min_cabinet_depth_mm` to `1000` and `front_rear_clearance_mm` to `800`.

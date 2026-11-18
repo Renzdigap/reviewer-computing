@@ -22,6 +22,11 @@ Protects data privacy across its **entire lifecycle (transmission, computing, an
   3. **Column Encryption Key (`CEK`)**: Encrypted by the CMK on the client and stored as ciphertext on the server; used by the **client driver (`ODBC`/`JDBC`/`gsql -C`)** to encrypt/decrypt column data.
   - **Encryption Types (`enc_type`)**: **`DETERMINISTIC`** (supports equality queries `=`; server column type becomes `BYTEAWITHOUTORDERWITHEQUALCOL`) vs. **`RANDOMIZED`** (higher security, non-deterministic ciphertext).
   - **Hardware TEE Support**: Can leverage Intel SGX / Huawei Kunpeng ARM **TEE (`secGear`)** for isolated computation.
+<!-- PDF_FIGS_START -->
+![openGauss Fully-Encrypted Database Equality Query (Client Driver to TEE) (Official Reference: p. 56)](../assets/images/p3_h1s4_fully_encrypted_tee.png)
+*Figure: openGauss Fully-Encrypted Database Equality Query (Client Driver to TEE) (Official Reference: p. 56)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 Complete the hardware specification file for the Kunpeng S920X00 mainboard and classify enterprise HDD/SSD drive parameters.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![TaiShan 200 (2280) Front Panel Components and Indicators (1-9) (Official Reference: p. 151)](../assets/images/p1_h3s3_front_panel_2280.png)
+*Figure: TaiShan 200 (2280) Front Panel Components and Indicators (1-9) (Official Reference: p. 151)*
+
+![TaiShan 200 (2280) Rear Panel Ports and I/O Modules (1-12) (Official Reference: p. 152)](../assets/images/p1_h3s3_rear_panel_2280.png)
+*Figure: TaiShan 200 (2280) Rear Panel Ports and I/O Modules (1-12) (Official Reference: p. 152)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `mainboard_model` to `'S920X00'`, `bmc_management_chip` to `'Hi1710'`, and `pcie_4_slots` to `8`.
 2. Set `sas_mtbf_hours` to `1600000` and `ssd_mtbf_hours` to `2000000`.

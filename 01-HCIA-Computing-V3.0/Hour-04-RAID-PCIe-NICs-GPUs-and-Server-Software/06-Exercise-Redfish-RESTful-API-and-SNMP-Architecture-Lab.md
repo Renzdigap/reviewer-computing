@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 You are configuring out-of-band server management using Redfish HTTPS calls and verifying SNMP and iBMC Kbox parameters.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![iBMA In-Band and Out-of-Band (BOB / vNIC) Architecture (Official Reference: p. 195)](../assets/images/p1_h4s3_ibma_bob.png)
+*Figure: iBMA In-Band and Out-of-Band (BOB / vNIC) Architecture (Official Reference: p. 195)*
+
+![Basic SNMP Components and Operations (Steps 1-6) (Official Reference: p. 198)](../assets/images/p1_h4s3_snmp_flow.png)
+*Figure: Basic SNMP Components and Operations (Steps 1-6) (Official Reference: p. 198)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Complete the `curl` command using the HTTPS protocol and `GET` method to query the Redfish `/redfish/v1/Systems` endpoint on iBMC.
 2. Specify the four Redfish HTTP methods (`GET, POST, PATCH, DELETE`) in the verification variable.

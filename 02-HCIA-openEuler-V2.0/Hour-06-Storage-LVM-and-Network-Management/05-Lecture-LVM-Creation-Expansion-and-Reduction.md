@@ -24,6 +24,11 @@
 | **PE (Physical Extent)** | **Smallest unit that can be addressed by LVM.** Default size is **4 MB**. **Once a VG's PE size is determined (`vgcreate -s`), it CANNOT be changed**, and all PVs in the same VG share the same PE size. |
 | **LE (Logical Extent)** | **Minimum storage unit that can be allocated** in LVM. In the same VG, **LE size = PE size** (1:1 correspondence). |
 | **LV (Logical Volume)** | Logical partition carved out of a VG, formatted with `mkfs` and mounted for end users. |
+<!-- PDF_FIGS_START -->
+![LVM Physical Structure: PE to Physical Volume (PV), VG and LV (Official Reference: p. 285)](../assets/images/p2_h6s3_lvm_principles.png)
+*Figure: LVM Physical Structure: PE to Physical Volume (PV), VG and LV (Official Reference: p. 285)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -37,6 +42,11 @@
 3. **LV Commands:**
    * Create: **`lvcreate -L 200M [-n lvname] vg1000`** (`-L` specifies size in K/M/G/T; **`-l`** specifies number of **LEs**; **`-s`** creates a snapshot).
    * Inspect/Manage: **`lvs`**, **`lvdisplay [-m]`**, **`lvscan`**, **`lvextend [--resizefs]`**, **`lvreduce`**, **`lvresize`**, **`lvremove`**, **`lvrename`**, **`lvconvert`**.
+<!-- PDF_FIGS_START -->
+![LVM Layer Creation Stack (Drive, Partition, PV, VG, LV) (Official Reference: p. 288)](../assets/images/p2_h6s3_lvm_creation_layers.png)
+*Figure: LVM Layer Creation Stack (Drive, Partition, PV, VG, LV) (Official Reference: p. 288)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -51,6 +61,14 @@
   3. **Shrink the file system first:** **`resize2fs device TARGET_SIZE`**.
   4. **Shrink the LV second:** **`lvreduce -L TARGET_SIZE lv_device`**.
   5. **Mount** the file system again (**`mount`**).
+<!-- PDF_FIGS_START -->
+![Online Expanding Logical Volume Capacity Workflow (vgs, lvextend, resize2fs) (Official Reference: p. 298)](../assets/images/p2_h6s3_lvm_expand.png)
+*Figure: Online Expanding Logical Volume Capacity Workflow (vgs, lvextend, resize2fs) (Official Reference: p. 298)*
+
+![Offline Reducing Logical Volume Safe Workflow (umount, e2fsck, resize2fs, lvreduce, mount) (Official Reference: p. 299)](../assets/images/p2_h6s3_lvm_reduce.png)
+*Figure: Offline Reducing Logical Volume Safe Workflow (umount, e2fsck, resize2fs, lvreduce, mount) (Official Reference: p. 299)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

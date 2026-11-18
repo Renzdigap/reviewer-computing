@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are administering the `sshd` and `k3s` services on openEuler. Restart and enable `sshd.service`, list all running service units using `systemctl list-units --type service`, and query the complete service logs of `k3s` using `journalctl -u k3s`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![systemd Service Manager Architecture Stack (Official Reference: p. 217)](../assets/images/p2_h5s3_systemd_arch.png)
+*Figure: systemd Service Manager Architecture Stack (Official Reference: p. 217)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Restart `sshd.service` (`systemctl restart sshd.service`) and enable it to start at boot (`systemctl enable sshd.service`).
 2. Step 2: Display all running service units using `systemctl list-units --type service`.

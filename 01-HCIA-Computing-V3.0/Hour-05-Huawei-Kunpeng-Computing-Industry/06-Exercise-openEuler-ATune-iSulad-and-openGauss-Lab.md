@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure the Kunpeng base software manifest verifying openEuler 22.03 LTS and openGauss technical specifications.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openEuler A-Tune Sensing-Decision-Execution Closed Loop (Official Reference: p. 261)](../assets/images/p1_h5s3_atune_loop.png)
+*Figure: openEuler A-Tune Sensing-Decision-Execution Closed Loop (Official Reference: p. 261)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `openeuler_2203_kernel` to `'5.10'`, `ai_tuning_engine` to `'A-Tune'`, and `container_engine` to `'iSulad'`.
 2. Set `opengauss_license` to `'Mulan PSL v2'` and `opengauss_2p_tpmc` to `1500000`.

@@ -27,6 +27,11 @@ To install **openEuler 22.03 LTS (`openEuler-22.03-LTS-aarch64-dvd.iso`)** via t
 2. On the virtual console menu bar, mount the image file **`openEuler-22.03-LTS-aarch64-dvd.iso`** to the virtual **DVD-ROM** and change the boot option to **`DVD-ROM drive`** (Official Ch.05 Quiz Q1 on p. 346!).
 3. Restart the server and select **`Install openEuler 22.03-LTS`** in the GRUB installation menu.
 4. Select the language for installation on the openEuler welcome page.
+<!-- PDF_FIGS_START -->
+![iBMC Virtual Console Mounting ISO Image to DVD-ROM (Official Reference: p. 329)](../assets/images/p1_h7s1_mount_iso.png)
+*Figure: iBMC Virtual Console Mounting ISO Image to DVD-ROM (Official Reference: p. 329)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -55,6 +60,11 @@ To install **openEuler 22.03 LTS (`openEuler-22.03-LTS-aarch64-dvd.iso`)** via t
     - **`swap`**: Virtual memory swap partition
     - **`/`**: Root file system partition
   - Once installation completes, **detach the ISO file** from the virtual DVD-ROM and click **Reboot System**.
+<!-- PDF_FIGS_START -->
+![openEuler Drive Partitioning Scheme on TaiShan 2280 (Official Reference: p. 332)](../assets/images/p1_h7s1_partition_scheme.png)
+*Figure: openEuler Drive Partitioning Scheme on TaiShan 2280 (Official Reference: p. 332)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

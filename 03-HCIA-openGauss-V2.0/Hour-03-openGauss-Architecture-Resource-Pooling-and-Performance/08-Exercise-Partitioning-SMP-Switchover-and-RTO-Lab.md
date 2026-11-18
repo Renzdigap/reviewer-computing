@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 You need to enable Ultimate RTO parallel recovery (`recovery_parse_workers = 4`, `recovery_parallelism = 4`), perform a planned primary/standby switchover on standby node `/home/omm/cluster/dn1/`, and persist the new cluster role topology.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Unscheduled Thread Migration vs NUMA-Pinned Core Binding (Official Reference: p. 186)](../assets/images/p3_h3s4_numa_thread_binding.png)
+*Figure: Unscheduled Thread Migration vs NUMA-Pinned Core Binding (Official Reference: p. 186)*
+
+![RPO vs RTO Disaster Recovery Metrics on Time Axis (Official Reference: p. 196)](../assets/images/p3_h3s4_rpo_vs_rto_timeline.png)
+*Figure: RPO vs RTO Disaster Recovery Metrics on Time Axis (Official Reference: p. 196)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Set `recovery_parse_workers=4` and `recovery_parallelism=4` using `gs_guc set`.
 2. Step 2: Promote standby `/home/omm/cluster/dn1/` via planned switchover using `gs_ctl switchover -D /home/omm/cluster/dn1/`.

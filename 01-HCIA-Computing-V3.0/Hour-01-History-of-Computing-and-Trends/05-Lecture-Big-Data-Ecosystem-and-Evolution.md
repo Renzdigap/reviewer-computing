@@ -35,6 +35,11 @@ Big data is a combination of structured, semi-structured, and unstructured data 
 - **Big Data 1.0 (2003, Web app era — Programmer-oriented)**: Distributed storage + query + batch processing (Google GFS, MapReduce, Bigtable).
 - **Big Data 2.0 (2010, Mobile Internet era — Analyst-oriented)**: Interactive analysis + incremental refreshing + graph computing (Spark, Storm, Solr, YARN).
 - **Big Data 3.0 (Intelligent brain / IoT & AI era — Engineer-oriented)**: Intelligent analysis + cloud service (Google Brain, Cloud DataFlow, Spanner).
+<!-- PDF_FIGS_START -->
+![Big Data 1.0 to 3.0 Computing Demands and Key Technologies (Official Reference: p. 55)](../assets/images/p1_h1s3_bigdata_evolution.png)
+*Figure: Big Data 1.0 to 3.0 Computing Demands and Key Technologies (Official Reference: p. 55)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -59,6 +64,11 @@ Big data is a combination of structured, semi-structured, and unstructured data 
 2. **Stream computing**: Real-time stream data — **Spark, Storm, Flink, Flume, DStream**.
 3. **Graph computing**: Massive graph data — **GraphX** (built-in Spark library), **Gelly** (built-in Flink library), **Giraph** (open-source counterpart to Google Pregel), **PowerGraph** (vertex-cuts for power-law natural graphs).
 4. **Query analytics and computing**: Massive storage & SQL query analytics — **Hive, Impala** (Cloudera, faster than Hive), **Dremel** (Google interactive analysis, referenced by Impala), **Cassandra** (Facebook open-source NoSQL combining Amazon Dynamo + Google Bigtable).
+<!-- PDF_FIGS_START -->
+![Hadoop Big Data Ecosystem Component Stack (Official Reference: p. 44)](../assets/images/p1_h1s3_hadoop_ecosystem.png)
+*Figure: Hadoop Big Data Ecosystem Component Stack (Official Reference: p. 44)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

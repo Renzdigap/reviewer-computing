@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Enable Row-Level Security on `tb_for_audit` so each user can only query rows where `role = CURRENT_USER`, and create a Unified Audit Policy `adt3` that audits `CREATE` operations on resource label `adt_lb0` for role `dev_audit`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Role-Based Access Control (RBAC) User-Role-Permission Mapping (Official Reference: p. 210)](../assets/images/p3_h4s2_rbac_model.png)
+*Figure: Role-Based Access Control (RBAC) User-Role-Permission Mapping (Official Reference: p. 210)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Enable RLS on `tb_for_audit` using `ALTER TABLE tb_for_audit ENABLE ROW LEVEL SECURITY;`.
 2. Step 2: Create RLS policy `tb_rls` on `tb_for_audit` with `CREATE ROW LEVEL SECURITY POLICY tb_rls ON tb_for_audit USING(role = CURRENT_USER);`.

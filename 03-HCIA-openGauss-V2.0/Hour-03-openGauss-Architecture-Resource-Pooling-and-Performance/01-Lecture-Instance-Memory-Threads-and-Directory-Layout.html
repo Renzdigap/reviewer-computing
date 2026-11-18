@@ -398,6 +398,129 @@ p { margin-bottom: 10px; }
       #code-editor { min-height: 240px; }
       .console-body { height: 220px; }
     }
+
+/* PDF_FIGURES_CSS */
+.pdf-figures-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 14px;
+  margin: 16px 0 20px 0;
+}
+.pdf-figures-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 12px 0 16px 0;
+}
+.pdf-figure {
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  transition: border-color 0.2s ease;
+}
+.pdf-figure:hover {
+  border-color: #38bdf8;
+}
+.pdf-figure-frame {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.pdf-figure-frame img {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: zoom-in;
+  display: block;
+}
+.pdf-figures-compact .pdf-figure-frame img {
+  max-height: 210px;
+}
+.pdf-figure figcaption {
+  margin-top: 9px;
+  font-size: 12.5px;
+  color: #d1d5db;
+  text-align: center;
+  line-height: 1.4;
+}
+.pdf-figure figcaption strong {
+  color: #f9fafb;
+  display: block;
+  margin-bottom: 2px;
+}
+.pdf-ref-tag {
+  color: #9ca3af;
+  font-size: 11px;
+}
+.img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 15, 0.92);
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox.open {
+  display: flex;
+}
+.img-lightbox-box {
+  max-width: 94vw;
+  max-height: 84vh;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox-box img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+}
+.img-lightbox-bar {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #f3f4f6;
+  font-size: 13.5px;
+  max-width: 90vw;
+  text-align: center;
+}
+.img-lightbox-close {
+  background: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.img-lightbox-close:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+}
+
   </style>
   <script src="../../sync_engine.js"></script>
 </head>
@@ -443,6 +566,8 @@ p { margin-bottom: 10px; }
 <tr><td><strong><code class="inline-code">work_mem</code></strong></td><td>Local (Session)</td><td>Local memory per query operator for <strong>sorting (<code class="inline-code">Sort</code>)</strong> and <strong>hash tables (<code class="inline-code">HashJoin</code>/<code class="inline-code">HashAgg</code>)</strong>.</td></tr>
 <tr><td><strong><code class="inline-code">temp_buffers</code> (temp buffer)</strong></td><td>Local (Session)</td><td>Session-private buffer for accessing <strong>temporary tables</strong>.</td></tr>
 </tbody></table></div>
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h3s1_instance_architecture.png" alt="openGauss Instance Architecture (GaussMaster, Background Threads, Memory Pools, Storage)" data-caption="openGauss Instance Architecture (GaussMaster, Background Threads, Memory Pools, Storage) (Official Reference: p. 135)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>openGauss Instance Architecture (GaussMaster, Background Threads, Memory Pools, Storage)</strong><span class="pdf-ref-tag">Official Reference: p. 135 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+
 <p>---</p>
 <h3>2. Main Threads in <code class="inline-code">gaussdb</code> (pp. 135, 138)</h3>
 <ul class="md-list">
@@ -468,7 +593,9 @@ p { margin-bottom: 10px; }
 <li><strong><code class="inline-code">pg_audit/</code> &amp; <code class="inline-code">pg_log/</code></strong>: Audit logs (<code class="inline-code">0600</code>) and instance run logs (<code class="inline-code">&lt;= 0640</code>).</li>
 <li><strong><code class="inline-code">postgresql.conf</code> / <code class="inline-code">pg_hba.conf</code> / <code class="inline-code">postmaster.opts</code></strong>: Parameter file, client auth file, and startup CLI args.</li>
 </ul>
-          </div>
+          
+<!-- PDF_FIGS_START --><div class="pdf-figures-group"><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h3s1_logical_primary_standby.png" alt="openGauss Primary/Standby Logical Architecture" data-caption="openGauss Primary/Standby Logical Architecture (Official Reference: p. 139)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>openGauss Primary/Standby Logical Architecture</strong><span class="pdf-ref-tag">Official Reference: p. 139 | Click image to zoom</span></figcaption></figure><figure class="pdf-figure"><div class="pdf-figure-frame"><img src="../assets/images/p3_h3s1_db_physical_mapping.png" alt="Database Logical Objects to Physical Datafile Segments and 8KB Blocks" data-caption="Database Logical Objects to Physical Datafile Segments and 8KB Blocks (Official Reference: p. 141)" onclick="openImgZoom(this)" loading="lazy" /></div><figcaption><strong>Database Logical Objects to Physical Datafile Segments and 8KB Blocks</strong><span class="pdf-ref-tag">Official Reference: p. 141 | Click image to zoom</span></figcaption></figure></div><!-- PDF_FIGS_END -->
+</div>
 
           <div class="takeaways-card">
             <h3>High-Yield Summary & Takeaways</h3>
@@ -678,5 +805,31 @@ p { margin-bottom: 10px; }
       if (correctCount === qs.length) markUnitCompleted();
     }
   </script>
+
+  <div id="img-lightbox" class="img-lightbox" onclick="if(event.target===this) closeImgZoom()">
+    <div class="img-lightbox-box">
+      <img id="img-lightbox-target" src="" alt="Zoomed Diagram" />
+    </div>
+    <div class="img-lightbox-bar">
+      <span id="img-lightbox-caption"></span>
+      <button type="button" class="img-lightbox-close" onclick="closeImgZoom()">Close</button>
+    </div>
+  </div>
+  <script>
+    function openImgZoom(imgEl) {
+      if (!imgEl) return;
+      document.getElementById('img-lightbox-target').src = imgEl.src;
+      document.getElementById('img-lightbox-caption').textContent = imgEl.getAttribute('data-caption') || imgEl.alt || '';
+      document.getElementById('img-lightbox').classList.add('open');
+    }
+    function closeImgZoom() {
+      document.getElementById('img-lightbox').classList.remove('open');
+      document.getElementById('img-lightbox-target').src = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImgZoom();
+    });
+  </script>
+
 </body>
 </html>

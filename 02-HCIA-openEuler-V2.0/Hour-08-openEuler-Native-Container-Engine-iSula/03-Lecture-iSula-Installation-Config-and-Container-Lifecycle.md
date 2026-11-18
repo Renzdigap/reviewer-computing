@@ -31,6 +31,11 @@
   * **`B. Exited`** (stopped container)
   * **`C. Up`** (running container after `isula start` or `isula run`)
   * **`D. Paused`** (suspended via `isula pause`) -> **Answer: `ABCD`!**
+<!-- PDF_FIGS_START -->
+![Container State Machine Lifecycle (Created, Running, Paused, Stopped, Deleted) (Official Reference: p. 404)](../assets/images/p2_h8s2_container_lifecycle.png)
+*Figure: Container State Machine Lifecycle (Created, Running, Paused, Stopped, Deleted) (Official Reference: p. 404)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

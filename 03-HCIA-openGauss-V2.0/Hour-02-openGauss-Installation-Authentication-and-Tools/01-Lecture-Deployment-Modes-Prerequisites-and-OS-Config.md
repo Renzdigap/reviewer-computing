@@ -23,6 +23,17 @@
 | **3. One Primary + Multiple Standbys (Quorum)** | **2 to 4 copies** (typically 1P + 2S = **3 copies**; up to 8 standbys in v2.0+) | **RPO = 0**, Instance fault **RTO < 10s**, **99.99% reliability** | Quorum replication synchronizes data to at least one standby node for max performance. Primary and standby nodes **cannot** be on the same physical machine. |
 
 > **CRITICAL EXAM NOTE (Ch.03 Quiz Q1)**: openGauss supports **Single-node**, **One primary + one standby**, and **One primary + multiple standbys**. It **DOES NOT** support "Dual primary nodes" deployment!
+<!-- PDF_FIGS_START -->
+![openGauss Standalone Deployment Architecture (Official Reference: p. 78)](../assets/images/p3_h2s1_standalone_deploy.png)
+*Figure: openGauss Standalone Deployment Architecture (Official Reference: p. 78)*
+
+![openGauss Primary/Standby Deployment Topology (Official Reference: p. 79)](../assets/images/p3_h2s1_primary_standby.png)
+*Figure: openGauss Primary/Standby Deployment Topology (Official Reference: p. 79)*
+
+![openGauss One Primary and Multiple Standbys Topology (Official Reference: p. 80)](../assets/images/p3_h2s1_one_primary_multi_standby.png)
+*Figure: openGauss One Primary and Multiple Standbys Topology (Official Reference: p. 80)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

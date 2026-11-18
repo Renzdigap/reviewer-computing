@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Configure the Kunpeng HPC solution stack manifest and verify the industry software ecosystem characteristics for the Huawei ICT Competition.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Kunpeng High-Performance Computing (HPC) Full Stack (Official Reference: p. 118)](../assets/images/p1_h2s4_kunpeng_hpc_arch.png)
+*Figure: Kunpeng High-Performance Computing (HPC) Full Stack (Official Reference: p. 118)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Set `hpc_storage_product` to `'OceanStor Pacific'` and `parallel_filesystem` to `'OceanFS'`.
 2. Set `cluster_scheduler_suite` to `'DonauKit'` and `compiler_mpi_math_suite` to `'HPCKit'`.

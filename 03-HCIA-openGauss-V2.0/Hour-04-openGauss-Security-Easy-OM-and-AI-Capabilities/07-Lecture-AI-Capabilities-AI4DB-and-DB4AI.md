@@ -17,6 +17,11 @@
 ### 1. openGauss AI Architecture (`DBMind`: `AI4DB` + `DB4AI`, p. 244)
 - **AI4DB (AI for Database)**: Uses AI to make the database self-tuning, self-diagnosing, self-healing, and self-securing. Includes **`X-Tuner`**, **`SQLdiag`**, **`Index-advisor`**, and **`Anomaly-detection`**.
 - **DB4AI (Database for AI)**: Runs machine learning and deep learning directly inside the database engine using SQL-like syntax without moving data across platforms. Includes **`DeepSQL`** and the **`Native DB4AI Engine`**.
+<!-- PDF_FIGS_START -->
+![openGauss AI4DB (Self-Tuning, Diagnosis) and DB4AI Full Stack (Official Reference: p. 244)](../assets/images/p3_h4s4_ai_overview.png)
+*Figure: openGauss AI4DB (Self-Tuning, Diagnosis) and DB4AI Full Stack (Official Reference: p. 244)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -52,6 +57,11 @@
    ```bash
    python index_advisor_workload.py 6001 postgres tpcc_log.txt --max_index_num 10 --multi_iter_mode
    ```
+<!-- PDF_FIGS_START -->
+![X-Tuner Deep Reinforcement Learning Parameter Optimization Loop (Official Reference: p. 246)](../assets/images/p3_h4s4_xtuner_drl.png)
+*Figure: X-Tuner Deep Reinforcement Learning Parameter Optimization Loop (Official Reference: p. 246)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

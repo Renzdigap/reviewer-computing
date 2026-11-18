@@ -23,6 +23,14 @@
   * **`TASK_UNINTERRUPTIBLE` (`uninterruptible/2`):** Sleeping on hardware I/O; **cannot** be woken by signals.
   * **`TASK_ZOMBIE` (`zombie/3`):** Terminated, but process control block (PCB) is not yet released by parent `wait()`.
   * **`TASK_STOPPED` (`stopped/4`):** Stopped (e.g., by debugger or `SIGSTOP`/`SIGTSTP`).
+<!-- PDF_FIGS_START -->
+![Linux Process Life Cycle (fork, exec, exit, wait, Zombie) (Official Reference: p. 226)](../assets/images/p2_h5s4_process_lifecycle.png)
+*Figure: Linux Process Life Cycle (fork, exec, exit, wait, Zombie) (Official Reference: p. 226)*
+
+![Process State Transition State Machine (R, S, D, T, Z) (Official Reference: p. 227)](../assets/images/p2_h5s4_process_states.png)
+*Figure: Process State Transition State Machine (R, S, D, T, Z) (Official Reference: p. 227)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 
@@ -36,6 +44,11 @@
 * **Foreground/Background & Signals (`kill` / `killall`):**
   * **`&`** (run in background), **`Ctrl+Z`** (suspend foreground job to background), **`jobs`** (list background jobs), **`fg`** (bring to foreground), **`bg`** (resume in background).
   * **Key Signals:** **`1` (`HUP` - Hangup/reload)**, **`2` (`INT` - `Ctrl+C` interrupt)**, **`3` (`QUIT`)**, **`9` (`KILL` - unconditional termination)**, **`11` (`SEGV` - segment error)**, **`15` (`TERM` - default termination signal of `kill PID`)**, **`17` (`STOP`)**, **`18` (`TSTP` - `Ctrl+Z`)**, **`19` (`CONT` - continue)**. Note: `killall python*` supports wildcards by process name!
+<!-- PDF_FIGS_START -->
+![Process Priority Ranges (Real-Time 0-99 vs Common 100-139) and Nice (Official Reference: p. 229)](../assets/images/p2_h5s4_priority_nice.png)
+*Figure: Process Priority Ranges (Real-Time 0-99 vs Common 100-139) and Nice (Official Reference: p. 229)*
+<!-- PDF_FIGS_END -->
+
 
 ---
 

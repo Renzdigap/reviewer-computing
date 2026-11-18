@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 Perform a simplified single-node installation of openGauss using `install.sh`, verify the instance state with `gs_ctl query`, start/stop the cluster with `gs_om`, and write the uninstallation command.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![openGauss End-to-End Installation Pipeline (Official Reference: p. 82)](../assets/images/p3_h2s1_install_flowchart.png)
+*Figure: openGauss End-to-End Installation Pipeline (Official Reference: p. 82)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Run `sh install.sh -w Kunpeng@2026` inside `/opt/software/openGauss/simpleInstall`.
 2. Step 2: Query the instance status using `gs_ctl query -D /opt/software/openGauss/data/single_node`.

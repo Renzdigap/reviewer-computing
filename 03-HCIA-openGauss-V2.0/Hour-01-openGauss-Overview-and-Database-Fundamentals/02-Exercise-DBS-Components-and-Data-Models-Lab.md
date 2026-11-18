@@ -10,6 +10,13 @@
 ## Part A: Practical Lab Scenario
 You are onboarding junior DBAs onto an openGauss environment. Create a reference relational table `dbs_audit` that models a normalized relational structure (with indivisible attributes) and records the three historical data management stages and their characteristics.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![Hierarchical (Tree), Network (Graph), and Relational Models (Official Reference: p. 18)](../assets/images/p3_h1s1_database_models.png)
+*Figure: Hierarchical (Tree), Network (Graph), and Relational Models (Official Reference: p. 18)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Write a `CREATE TABLE dbs_audit` statement with columns `stage_id INT PRIMARY KEY`, `stage_name VARCHAR(30)`, `manager VARCHAR(20)`, and `independence VARCHAR(40)`.
 2. Step 2: Insert the three official stages (`'Manual management'`, `'File system'`, and `'DBS'`) using `INSERT INTO dbs_audit VALUES ...`.

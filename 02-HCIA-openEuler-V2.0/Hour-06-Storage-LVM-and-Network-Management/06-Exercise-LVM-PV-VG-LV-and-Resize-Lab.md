@@ -10,6 +10,16 @@
 ## Part A: Practical Lab Scenario
 You are building an LVM storage pool on openEuler using `/dev/sdb1` and `/dev/sdb2` (following Ch.05 pp. 290–300). Initialize both partitions as PVs, combine them into volume group `vg1000`, create a `200M` logical volume on `vg1000`, and expand `/dev/vg1000/lvol0` online by `+200M` followed by `resize2fs`.
 
+<!-- PDF_FIGS_START -->
+#### Reference Diagrams
+
+![LVM Physical Structure: PE to Physical Volume (PV), VG and LV (Official Reference: p. 285)](../assets/images/p2_h6s3_lvm_principles.png)
+*Figure: LVM Physical Structure: PE to Physical Volume (PV), VG and LV (Official Reference: p. 285)*
+
+![LVM Layer Creation Stack (Drive, Partition, PV, VG, LV) (Official Reference: p. 288)](../assets/images/p2_h6s3_lvm_creation_layers.png)
+*Figure: LVM Layer Creation Stack (Drive, Partition, PV, VG, LV) (Official Reference: p. 288)*
+<!-- PDF_FIGS_END -->
+
 ### Step-by-Step Instructions
 1. Step 1: Initialize `/dev/sdb1` and `/dev/sdb2` as PVs (`pvcreate /dev/sdb1 /dev/sdb2`) and create volume group `vg1000` (`vgcreate vg1000 /dev/sdb1 /dev/sdb2`).
 2. Step 2: Create a `200M` logical volume on `vg1000` using `lvcreate -L 200M vg1000`.
