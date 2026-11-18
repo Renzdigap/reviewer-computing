@@ -8,3 +8,8 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# Personal local study progress (kept on each student's PC only, never pushed to Git)
+progress.json
+progress.json.tmp
+huawei_study_progress*.json

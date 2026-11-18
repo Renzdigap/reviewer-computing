@@ -1,19 +1,18 @@
 /**
- * sync_engine.js — Persistent Study Progress Synchronization Engine
+ * sync_engine.js — Local PC Study Progress Synchronization Engine
  * Huawei ICT Competition (Computing Track) Study Reviewer
  *
- * Capabilities:
- * 1. Automatic background synchronization with local Python server (progress.json).
- * 2. Real-time interception of localStorage updates to persist immediately to disk.
- * 3. Export / Import progress as JSON for backup and cross-device migration.
- * 4. Automatic Git Commit & Push via local server API.
+ * Guarantees:
+ * 1. Progress is saved STRICTLY on this PC (to local progress.json and localStorage).
+ * 2. Never pushes to Git, so teammates pulling the repo have their own individual progress.
+ * 3. Export / Import progress as JSON for manual personal backup across personal devices.
  */
 (function() {
   const STORAGE_KEY = 'huawei_study_progress_v1';
   let isConnectedToServer = false;
   let syncDebounceTimer = null;
 
-  // Intercept localStorage.setItem to auto-save to /api/progress on HTTP
+  // Intercept localStorage.setItem to auto-save to local progress.json on HTTP
   const originalSetItem = localStorage.setItem.bind(localStorage);
   localStorage.setItem = function(key, val) {
     originalSetItem(key, val);
@@ -30,19 +29,19 @@
           .then(res => res.json())
           .then(data => {
             if (data && data.status === 'ok') {
-              window.dispatchEvent(new CustomEvent('huawei_progress_synced', { detail: data }));
+              window.dispatchEvent(new CustomEvent('huawei_progress_saved', { detail: data }));
             }
           })
-          .catch(err => console.debug('[SyncEngine] Background save offline:', err));
+          .catch(err => console.debug('[LocalSync] Offline save:', err));
         } catch (e) {}
       }, 300);
     }
   };
 
   // Pull latest progress from local server on load
-  function initServerSync() {
+  function initLocalServerSync() {
     if (!window.location.protocol.startsWith('http')) {
-      updateSyncUI(false, 'Offline (file:// mode - saving to LocalStorage)');
+      updateSyncUI(false, '💾 Stored locally in Browser (file:// mode)');
       return;
     }
 
@@ -55,11 +54,10 @@
         isConnectedToServer = true;
         if (data && data.progress) {
           const local = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-          // Merge server data with local data (server wins ties on score, local wins if newer completed)
           const merged = Object.assign({}, data.progress, local);
           originalSetItem(STORAGE_KEY, JSON.stringify(merged));
 
-          // If local had unsynced keys not on server, post merged back
+          // If local had unsynced keys not on server, write merged back
           if (Object.keys(local).length > 0) {
             fetch('/api/progress', {
               method: 'POST',
@@ -73,11 +71,11 @@
           if (typeof window.renderSidebar === 'function') window.renderSidebar();
           if (typeof window.refreshDoneBadge === 'function') window.refreshDoneBadge();
         }
-        updateSyncUI(true, '🟢 Synced with progress.json on disk');
+        updateSyncUI(true, '🟢 Saved locally to progress.json on this PC');
       })
       .catch(err => {
         isConnectedToServer = false;
-        updateSyncUI(false, '⚠️ Local server not running (saved to LocalStorage)');
+        updateSyncUI(false, '💾 Stored in Browser LocalStorage');
       });
   }
 
@@ -85,15 +83,15 @@
     const el = document.getElementById('sync-status-indicator');
     if (el) {
       el.innerHTML = message;
-      el.style.color = connected ? '#34d399' : '#fbbf24';
+      el.style.color = connected ? '#34d399' : '#38bdf8';
     }
   }
 
-  // Global Sync Helpers
+  // Global Sync & Backup Helpers
   window.HuaweiSync = {
     isConnected: function() { return isConnectedToServer; },
 
-    // Export progress to downloadable JSON file
+    // Export progress to personal downloadable JSON backup
     exportJSON: function() {
       const data = localStorage.getItem(STORAGE_KEY) || '{}';
       const parsed = JSON.parse(data);
@@ -107,14 +105,14 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `huawei_study_progress_${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `my_personal_study_progress_${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     },
 
-    // Import progress from JSON file
+    // Import progress from personal JSON file
     importJSON: function(file, onComplete) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -125,7 +123,7 @@
           const merged = Object.assign({}, current, incoming);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
 
-          // Post to server if connected
+          // Save to local server if running
           if (window.location.protocol.startsWith('http')) {
             fetch('/api/progress', {
               method: 'POST',
@@ -145,45 +143,25 @@
       reader.readAsText(file);
     },
 
-    // Trigger server-side git commit and push
-    gitPush: function(btnElement) {
-      if (!window.location.protocol.startsWith('http')) {
-        alert('Git Sync requires launching via "py run_reviewer.py" with the local server active.');
-        return;
+    // Clear personal progress on this device
+    resetLocal: function() {
+      if (!confirm('Are you sure you want to reset all your study progress on this PC?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      if (window.location.protocol.startsWith('http')) {
+        fetch('/api/progress', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ progress: {} })
+        }).catch(() => {});
       }
-      const originalText = btnElement ? btnElement.innerHTML : '';
-      if (btnElement) {
-        btnElement.innerHTML = '⏳ Committing & Pushing to GitHub...';
-        btnElement.disabled = true;
-      }
-
-      fetch('/api/git-sync', { method: 'POST' })
-        .then(r => r.json())
-        .then(res => {
-          if (btnElement) {
-            btnElement.innerHTML = originalText;
-            btnElement.disabled = false;
-          }
-          if (res.status === 'ok') {
-            alert('✅ Git Sync Successful!\n\n' + res.message);
-          } else {
-            alert('⚠️ Git Sync Warning:\n\n' + res.message);
-          }
-        })
-        .catch(err => {
-          if (btnElement) {
-            btnElement.innerHTML = originalText;
-            btnElement.disabled = false;
-          }
-          alert('❌ Git Sync Request Failed: ' + err.message);
-        });
+      window.location.reload();
     }
   };
 
   // Run on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initServerSync);
+    document.addEventListener('DOMContentLoaded', initLocalServerSync);
   } else {
-    initServerSync();
+    initLocalServerSync();
   }
 })();

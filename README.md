@@ -8,20 +8,20 @@ Welcome to your **DataCamp-Style Active Learning & Exam-Ready Study Reviewer** f
 
 ---
 
-## 🚀 Quick Launch & Persistent Progress Synchronization
+## 🚀 Quick Launch & Private Local Progress Tracking
 
-- **Interactive Web Platform via Local Server (Recommended for permanent disk sync):**
+- **Interactive Web Platform via Local Server (Recommended for permanent disk storage on your PC):**
   ```powershell
   py run_reviewer.py
   # Select [0] to launch the local web server and open the master dashboard in your browser
   ```
   - **Fixed Port**: Default `http://127.0.0.1:8080` (retains browser origin across computer restarts).
-  - **File-Backed Persistence**: Automatically persists progress to [`progress.json`](./progress.json) in real time via background REST endpoints (`GET/POST /api/progress`).
-  - **Automatic Git Push**: Click **"🔄 Commit & Push to GitHub"** on any dashboard (or select `[s]` in `run_reviewer.py` / `practice_cli.py`) to commit and push your study progress directly to GitHub.
-  - **Export / Import JSON**: One-click download and upload for backups and seamless progress transfer across devices.
+  - **File-Backed Local Persistence**: Automatically persists your progress in real time to your local `progress.json` file.
+  - **🔒 Strictly Private & Local (Team-Friendly)**: `progress.json` is completely ignored by Git (`.gitignore`). When teammates clone or pull this repository, they get a fresh, clean reviewer and their progress stays 100% private on their own machine without clashing with yours.
+  - **Export / Import Backup (.json)**: One-click download and upload buttons on the dashboard for making personal backups or migrating your progress between your own personal computers (e.g. PC to laptop).
 
 - **Direct Offline Browser Launch:** Double-click **[`index.html`](./index.html)** (or open any Pillar's `index.html`). Works 100% offline with zero external dependencies, saving to `localStorage`.
-- **Interactive Terminal / CLI Mode:** Run `py run_reviewer.py` and select `[1]`, `[2]`, or `[3]`, or run `py practice_cli.py` inside any pillar folder. Directly syncs completed units and mock exam scores with `progress.json`.
+- **Interactive Terminal / CLI Mode:** Run `py run_reviewer.py` and select `[1]`, `[2]`, or `[3]`, or run `py practice_cli.py` inside any pillar folder. Directly syncs completed units and mock exam scores with your local `progress.json`.
 
 ---
 

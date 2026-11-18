@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-Master Launcher & Sync Server for Huawei ICT Competition National Stage Study Reviewer
+Master Launcher & Local Server for Huawei ICT Competition National Stage Study Reviewer
 Features:
-- Fixed-port HTTP server with auto-discovery (defaults to 8080)
-- /api/progress endpoint: persists progress to progress.json on disk
-- /api/git-sync endpoint: automatically stages, commits, and pushes progress to GitHub
-- Terminal CLI practice mode with direct progress.json synchronization
+- Fixed-port HTTP server (defaults to 8080) for stable browser origin
+- /api/progress endpoint: persists progress strictly to local progress.json on this PC
+- Keeps your study progress completely private/local so teammates can use the repo independently
 Run with: py run_reviewer.py
 """
 import functools
@@ -31,15 +30,13 @@ PILLARS = [
 DEFAULT_PORT = 8080
 
 
-class SyncReviewerHandler(http.server.SimpleHTTPRequestHandler):
+class LocalReviewerHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=ROOT, **kwargs)
 
     def log_message(self, format, *args):
-        # Keep console clean; log only API calls if needed
-        if args and any(api in str(args[0]) for api in ["/api/"]):
-            sys.stdout.write(f"\r[Server API] {args[0]}\nSelect an option: ")
-            sys.stdout.flush()
+        # Keep terminal clean; suppress standard GET/POST file logs
+        pass
 
     def send_json(self, status_code, payload):
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -82,13 +79,6 @@ class SyncReviewerHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_json(200, {"status": "ok", "last_synced": saved.get("last_synced")})
             except Exception as e:
                 self.send_json(400, {"status": "error", "message": str(e)})
-
-        elif path == "/api/git-sync":
-            try:
-                ok, msg = progress_manager.git_sync_progress()
-                self.send_json(200 if ok else 500, {"status": "ok" if ok else "error", "message": msg})
-            except Exception as e:
-                self.send_json(500, {"status": "error", "message": str(e)})
         else:
             self.send_json(404, {"status": "not_found"})
 
@@ -99,7 +89,7 @@ def start_local_server():
     # Attempt binding starting from DEFAULT_PORT
     for try_port in range(DEFAULT_PORT, DEFAULT_PORT + 20):
         try:
-            httpd = socketserver.TCPServer(("127.0.0.1", try_port), SyncReviewerHandler)
+            httpd = socketserver.TCPServer(("127.0.0.1", try_port), LocalReviewerHandler)
             port = try_port
             break
         except OSError:
@@ -107,15 +97,15 @@ def start_local_server():
 
     if httpd is None:
         # Fallback to ephemeral port if range 8080-8100 is completely blocked
-        httpd = socketserver.TCPServer(("127.0.0.1", 0), SyncReviewerHandler)
+        httpd = socketserver.TCPServer(("127.0.0.1", 0), LocalReviewerHandler)
         port = httpd.server_address[1]
 
     t = threading.Thread(target=httpd.serve_forever, daemon=True)
     t.start()
     url = f"http://127.0.0.1:{port}/index.html"
     print(f"\n🌐 Serving Reviewer at: {url}")
-    print(f"💾 Persistent Progress Store: {progress_manager.PROGRESS_FILE}")
-    print(f"🔄 Real-Time Disk Sync & API Active on port {port}")
+    print(f"💾 Local PC Storage: {progress_manager.PROGRESS_FILE}")
+    print("🔒 Private: Progress stays strictly on this machine (ignored by Git)")
     webbrowser.open(url)
     return httpd, port
 
@@ -128,16 +118,17 @@ def main():
             curr_prog = progress_manager.get_progress().get("progress", {})
             total_saved = len(curr_prog)
             print("\n" + "=" * 78)
-            print("  HUAWEI ICT COMPETITION (COMPUTING TRACK) — STUDY REVIEWER & SYNC HUB")
+            print("  HUAWEI ICT COMPETITION (COMPUTING TRACK) — STUDY REVIEWER")
             print("=" * 78)
             server_status = f"Running on http://127.0.0.1:{server_port}" if httpd else "Not running"
-            print(f"  Status: Web Server [{server_status}] | Progress Entries Saved: [{total_saved}]")
+            print(f"  Status: Web Server [{server_status}] | Local Progress Units Saved: [{total_saved}]")
+            print("  Storage: Strictly Local PC (progress.json is gitignored for teammate privacy)")
             print("-" * 78)
-            print("  [0] 🌐 Launch / Open Web Platform in Browser (Persistent Sync to progress.json)")
-            print("  [s] 🔄 Git Sync Now (Commit & Push progress.json to GitHub)")
+            print("  [0] 🌐 Launch / Open Web Platform in Browser (Saves locally to progress.json)")
             print("  [f] 📂 Open index.html directly via file://")
             for idx, (folder, label) in enumerate(PILLARS, 1):
                 print(f"  [{idx}] 📚 Launch {label} (Terminal CLI Mode)")
+            print("  [r] 🗑️  Reset Local Progress (Clear study history on this PC)")
             print("  [q] Quit")
             c = input("\nSelect an option: ").strip().lower()
             if c == "q":
@@ -149,14 +140,15 @@ def main():
                     url = f"http://127.0.0.1:{server_port}/index.html"
                     print(f"\nRe-opening browser at {url}...")
                     webbrowser.open(url)
-            elif c == "s":
-                print("\nInitiating automatic Git Commit & Push for progress.json...")
-                ok, msg = progress_manager.git_sync_progress()
-                print(("✅ " if ok else "⚠️ ") + msg)
             elif c == "f":
                 p = os.path.join(ROOT, "index.html")
                 webbrowser.open(p)
                 print(f"\nOpened {p}")
+            elif c == "r":
+                confirm = input("Are you sure you want to reset all your local progress? (y/N): ").strip().lower()
+                if confirm == "y":
+                    progress_manager.reset_local_progress()
+                    print("✅ Local progress has been reset to zero.")
             elif c in ["1", "2", "3"]:
                 folder = PILLARS[int(c) - 1][0]
                 script = os.path.join(ROOT, folder, "practice_cli.py")

@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-Progress Manager for Huawei ICT Competition National Stage Study Reviewer
-Handles loading, merging, atomic saving of progress.json, and Git synchronization.
+Local Progress Manager for Huawei ICT Competition National Stage Study Reviewer
+Handles loading, merging, and atomic saving of progress.json strictly on the user's local PC.
+NOTE: progress.json is ignored by Git so teammates can pull and track their own progress individually.
 """
 import datetime
 import json
 import os
-import subprocess
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROGRESS_FILE = os.path.join(ROOT_DIR, "progress.json")
 
 
 def get_progress():
-    """Load progress data from progress.json. If missing, initializes default."""
+    """Load local progress data from progress.json. If missing, initializes default."""
     if not os.path.exists(PROGRESS_FILE):
         return {
             "version": 1,
@@ -27,7 +27,7 @@ def get_progress():
                 data = {"version": 1, "last_synced": "", "progress": data}
             return data
     except Exception as e:
-        print(f"[ProgressManager] Warning loading progress.json: {e}")
+        print(f"[ProgressManager] Warning loading local progress.json: {e}")
         return {"version": 1, "last_synced": "", "progress": {}}
 
 
@@ -63,7 +63,7 @@ def merge_and_save(incoming_prog):
     current["last_synced"] = now_iso
     current["progress"] = curr_prog
 
-    # Atomic write to progress.json
+    # Atomic write to progress.json on local PC
     temp_file = PROGRESS_FILE + ".tmp"
     with open(temp_file, "w", encoding="utf-8") as f:
         json.dump(current, f, indent=2, ensure_ascii=False)
@@ -72,39 +72,18 @@ def merge_and_save(incoming_prog):
     return current
 
 
-def git_sync_progress(message=None):
-    """
-    Automatically stage progress.json, commit with timestamp, and push to origin/main.
-    Returns (success: bool, message: str)
-    """
-    if not os.path.exists(PROGRESS_FILE):
-        return False, "progress.json does not exist yet."
-
-    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    commit_msg = message or f"feat(progress): sync study progress ({now_str})"
-
-    try:
-        # Check git status for progress.json
-        subprocess.run(["git", "add", "progress.json"], cwd=ROOT_DIR, check=True, capture_output=True, text=True)
-
-        status_res = subprocess.run(["git", "status", "--porcelain", "progress.json"], cwd=ROOT_DIR, capture_output=True, text=True)
-        if not status_res.stdout.strip():
-            return True, "No new progress changes to commit (already in sync with git)."
-
-        commit_res = subprocess.run(["git", "commit", "-m", commit_msg], cwd=ROOT_DIR, capture_output=True, text=True)
-        if commit_res.returncode != 0:
-            return False, f"Git commit failed: {commit_res.stderr.strip()}"
-
-        push_res = subprocess.run(["git", "push", "origin", "main"], cwd=ROOT_DIR, capture_output=True, text=True)
-        if push_res.returncode != 0:
-            return False, f"Git push failed: {push_res.stderr.strip()}"
-
-        return True, f"Successfully pushed progress to GitHub ({commit_msg})!"
-    except Exception as e:
-        return False, f"Git sync error: {str(e)}"
+def reset_local_progress():
+    """Reset all local progress back to zero."""
+    blank = {
+        "version": 1,
+        "last_synced": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "progress": {}
+    }
+    with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
+        json.dump(blank, f, indent=2, ensure_ascii=False)
+    return blank
 
 
 if __name__ == "__main__":
-    # Test initialization
     curr = get_progress()
-    print("Loaded progress entries:", len(curr.get("progress", {})))
+    print("Loaded local progress entries:", len(curr.get("progress", {})))

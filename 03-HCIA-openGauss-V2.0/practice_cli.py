@@ -61,7 +61,6 @@ def run_cli():
         print(f"  Progress (progress.json): {done_units}/{total_units} Units ({pct}%) | Mock Exam: {mock_score_str}")
         print("=" * 74)
         print("  [0] 🌐 Open Interactive Web App (index.html) in Browser")
-        print("  [s] 🔄 Git Sync Now (Commit & Push progress.json to GitHub)")
 
         for h in data["hours"]:
             h_units = 0
@@ -81,16 +80,12 @@ def run_cli():
         print(f"  [9] 🏆 Hour 09: {data['mock_exam']['title']} [{mock_status}]")
         print("  [q] Quit")
 
-        choice = input("\nSelect an option (0-9, s, or q): ").strip().lower()
+        choice = input("\nSelect an option (0-9 or q): ").strip().lower()
         if choice == "q":
             break
         elif choice == "0":
             webbrowser.open(os.path.join(HERE, "index.html"))
             print("Launched index.html in your default browser!")
-        elif choice == "s":
-            print("\nSyncing progress.json with GitHub...")
-            ok, msg = progress_manager.git_sync_progress()
-            print(("✅ " if ok else "⚠️ ") + msg)
         elif choice in [str(i) for i in range(1, 9)]:
             h = data["hours"][int(choice) - 1]
             study_hour(h, pillar_id)
