@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Configuring Resource Labels & Dynamic Data Masking Policies
+# Hands-On Lab: Configuring Resource Labels & Dynamic Data Masking Policies
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Protect customer privacy on `user1.table1`: create a resource label `label_for_creditcard` on column `user1.table1.creditcard` and apply the `creditcardmasking` policy `msk_creditcard` so only the last 4 digits are visible.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Create the resource label using `CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);`.
 2. Step 2: Create the masking policy using `CREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);`.
 3. Step 3: Query `SELECT creditcard FROM user1.table1;` to verify the masked output.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Create a resource label on user1.table1.creditcard
 CREATE ____ LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);
@@ -28,7 +28,7 @@ SELECT creditcard FROM user1.table1;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `CREATE RESOURCE LABEL <label_name> ADD COLUMN(<schema.table.col>);`.
 - Use `CREATE MASKING POLICY <policy_name> creditcardmasking ON LABEL(<label_name>);`.
@@ -36,7 +36,7 @@ SELECT creditcard FROM user1.table1;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -60,7 +60,7 @@ CREATE MASKING POLICY
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In openGauss Dynamic Data Masking, how will the string `'abcd@gmail.com'` be displayed when masked by `basicemailmasking` versus `fullemailmasking`?**
@@ -71,7 +71,7 @@ CREATE MASKING POLICY
 - D. `basicemailmasking`: `'abcd@xxxxx.com'`; `fullemailmasking`: `'xxxx@gmail.com'`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Per Chapter 03 (p. 207), `basicemailmasking` masks all text before `@` (`'xxxx@gmail.com'`), whereas `fullemailmasking` masks all text before the first dot `.` except `@` (`'xxxx@xxxxx.com'`).
@@ -86,7 +86,7 @@ CREATE MASKING POLICY
 - D. Plaintext encryption keys are stored in the `pg_class` system catalog on the server so the server can decrypt columns before comparison
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 01 (p. 56) and Chapter 03 (p. 201), A, B, and C are true. Option D is false: plaintext key information is NEVER stored on the database server, and the server cannot decrypt ciphertext.
@@ -99,7 +99,7 @@ CREATE MASKING POLICY
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.03 p. 208). A dynamic data masking policy must be created by a user with the `POLADMIN` or `SYSADMIN` attribute, or by the initial user.

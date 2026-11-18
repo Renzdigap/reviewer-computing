@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Configuring Row-Level Security (RLS) & Unified Audit Policies
+# Hands-On Lab: Configuring Row-Level Security (RLS) & Unified Audit Policies
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Enable Row-Level Security on `tb_for_audit` so each user can only query rows where `role = CURRENT_USER`, and create a Unified Audit Policy `adt3` that audits `CREATE` operations on resource label `adt_lb0` for role `dev_audit`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Enable RLS on `tb_for_audit` using `ALTER TABLE tb_for_audit ENABLE ROW LEVEL SECURITY;`.
 2. Step 2: Create RLS policy `tb_rls` on `tb_for_audit` with `CREATE ROW LEVEL SECURITY POLICY tb_rls ON tb_for_audit USING(role = CURRENT_USER);`.
 3. Step 3: Create unified audit policy `adt3` with `CREATE AUDIT POLICY adt3 PRIVILEGES CREATE ON LABEL(adt_lb0) FILTER ON ROLES(dev_audit);`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Enable Row-Level Security on tb_for_audit
 ALTER TABLE tb_for_audit ENABLE ____;
@@ -28,7 +28,7 @@ CREATE ____ POLICY adt3 PRIVILEGES CREATE ON LABEL(adt_lb0) FILTER ON ROLES(dev_
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `ALTER TABLE <table_name> ENABLE ROW LEVEL SECURITY;`.
 - In `CREATE ROW LEVEL SECURITY POLICY`, use the `USING(role = CURRENT_USER)` clause.
@@ -37,7 +37,7 @@ CREATE ____ POLICY adt3 PRIVILEGES CREATE ON LABEL(adt_lb0) FILTER ON ROLES(dev_
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -58,7 +58,7 @@ CREATE AUDIT POLICY
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which SQL operations can be restricted by a Row-Level Security (RLS) policy in openGauss?**
@@ -69,7 +69,7 @@ CREATE AUDIT POLICY
 - D. CREATE, ALTER, and DROP only
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 03 (pp. 213, 215), Row-Level Security policies can be applied only to `SELECT`, `UPDATE`, and `DELETE` operations, and cannot be applied to `INSERT` and `MERGE` operations.
@@ -84,7 +84,7 @@ CREATE AUDIT POLICY
 - D. TDE supports encrypting column-store tables, Ustore tables, indexes, and Xlogs
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 03 (pp. 225–226), A, B, and C are true. Option D is false: TDE supports only heap row-store tables; column-store, Ustore, materialized views, indexes, sequences, Xlogs, and MOTs are NOT supported.
@@ -97,7 +97,7 @@ CREATE AUDIT POLICY
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.03 p. 224). The unified audit policy syntax applies to either DDL or DML operations; a single unified audit policy cannot contain both DDL and DML operations.

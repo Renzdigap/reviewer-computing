@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Vim Command-Line Configuration, Global Substitution & Crash Recovery
+# Hands-On Lab: Vim Command-Line Configuration, Global Substitution & Crash Recovery
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are configuring `/etc/vimrc` and automating a Vim batch script for server configuration files. Specify the exact Vim commands to display line numbers, enable search highlighting, replace all occurrences of `word1` with `word2` case-insensitively across the entire file, and forcibly save and exit.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Write the Vim command to display line numbers (`:set nu`) and highlight search results (`:set hlsearch`).
 2. Step 2: Write the Vim substitution command to replace all occurrences of `word1` with `word2` across the entire file case-insensitively (`:%s/word1/word2/gi`).
 3. Step 3: Write the Vim command to forcibly save and exit (`:wq!`).
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Enable line numbers and search highlighting in Vim
 <vim_line_numbers>
@@ -29,7 +29,7 @@ You are configuring `/etc/vimrc` and automating a Vim batch script for server co
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `:set nu` to show line numbers and `:set hlsearch` to highlight search matches.
 - Use `:%s/word1/word2/gi` for full-file (`%`), global (`g`), case-insensitive (`i`) replacement.
@@ -38,7 +38,7 @@ You are configuring `/etc/vimrc` and automating a Vim batch script for server co
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -65,7 +65,7 @@ You are configuring `/etc/vimrc` and automating a Vim batch script for server co
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **When starting Vim from the command line, which option opens a file in strict read-only mode and does NOT allow you to forcibly save the file?**
@@ -76,7 +76,7 @@ You are configuring `/etc/vimrc` and automating a Vim batch script for server co
 - D. vim -c
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (p.124), `-R` opens a file in read-only mode but allows you to forcibly save the file, whereas `-M` opens a file in read-only mode and does NOT allow you to forcibly save the file.
@@ -91,7 +91,7 @@ You are configuring `/etc/vimrc` and automating a Vim batch script for server co
 - D. yy
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (p.132), `u` undoes the latest change, `U` undoes all changes on the current line, and `Ctrl+R` redoes the last undo operation.
@@ -106,7 +106,7 @@ You are configuring `/etc/vimrc` and automating a Vim batch script for server co
 - D. Pressing `gg` moves the cursor to the last line of the file, while `G` moves it to the first line.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.03 (pp.126–130), A, B, and C are true. Option D is reversed: `gg` moves the cursor to the first line of the file, and `G` moves it to the last line.

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Enterprise RAID Capacity & Fault Tolerance Calculator
+# Hands-On Lab: Enterprise RAID Capacity & Fault Tolerance Calculator
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 04 — RAID Arrays, PCIe Bus, NICs/iNICs, GPU/NPU, Power/Cooling & Server Software (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Write a Python script to compute usable capacities for a server with 8 × 4 TB drives across RAID 5, RAID 6, RAID 10, and RAID 60 (with M=2 spans), and verify minimum disk counts.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `raid5_min_disks` to `3`, `raid50_min_disks` to `6`, and `raid60_min_disks` to `8`.
 2. For `N = 8` disks of `4` TB each (total raw = 32 TB, `M = 2` spans): set `usable_tb_raid5` to `28` ($(8-1)× 4), `usable_tb_raid6` to `24` ((8-2)× 4), and `usable_tb_raid60` to `16` ((8 - 2× 2)× 4$).
 3. Set `software_raid_supports_bootable_array` to `False`.
 
-### 📝 Starter Workspace (`python3@taishan-raid:~$`)
+### Starter Workspace (`python3@taishan-raid:~$`)
 ```bash
 # RAID Capacity & Fault Tolerance Calculator (8 x 4 TB Drives, M = 2 Spans)
 raid5_min_disks = ___
@@ -32,7 +32,7 @@ print(f"Usable TB (R5/R6/R60): {usable_tb_raid5}T / {usable_tb_raid6}T / {usable
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - RAID 5 requires >= 3 disks, RAID 50 requires >= 6 disks, and RAID 60 requires >= 8 disks (Ch.03, pp. 161–162).
 - With 8 × 4 TB drives: RAID 5 usable = 7 × 4 = 28 TB; RAID 6 usable = 6 × 4 = 24 TB; RAID 60 (2 spans) usable = (8 - 4) × 4 = 16 TB.
@@ -40,7 +40,7 @@ print(f"Usable TB (R5/R6/R60): {usable_tb_raid5}T / {usable_tb_raid6}T / {usable
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -68,7 +68,7 @@ Usable TB (R5/R6/R60): 28T / 24T / 16T
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **If a server is configured with N member drives arranged in M spans in a RAID 60 array, what is the drive utilization formula, and what is the theoretical minimum number of drives required to construct RAID 60?**
@@ -79,7 +79,7 @@ Usable TB (R5/R6/R60): 28T / 24T / 16T
 - D. 50%; at least 4 drives
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 pp. 161–163, RAID 60 sets up RAID 6 (at least 4 drives per span) first and then RAID 0 across M spans, requiring at least 8 drives with drive utilization (N - M × 2)/N.
@@ -94,7 +94,7 @@ Usable TB (R5/R6/R60): 28T / 24T / 16T
 - D. S.M.A.R.T. for disks
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** According to Ch.03 p.167, Software RAID does not support hot swap of hard disks, hot spare of hard disks, remote array management, bootable arrays, array configuration on hard disks, or S.M.A.R.T. for disks.
@@ -107,7 +107,7 @@ Usable TB (R5/R6/R60): 28T / 24T / 16T
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False. According to Ch.03 p.165, RAID cannot be used as an alternative to data backup because it cannot prevent data loss caused by non-disk faults such as viruses, man-made damage, or accidental deletion.

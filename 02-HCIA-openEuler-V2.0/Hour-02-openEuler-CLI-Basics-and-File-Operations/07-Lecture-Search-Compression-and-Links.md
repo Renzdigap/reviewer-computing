@@ -1,4 +1,4 @@
-# 📖 File Search (`find`, `locate`, `which`), Compression (`gzip`, `tar`) & Links (`ln`)
+# File Search (`find`, `locate`, `which`), Compression (`gzip`, `tar`) & Links (`ln`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Search files in real time with `find` (`-name`, `-type`, `-mtime`, `-user`, `-size`, `-empty`, `-exec`), index-based `locate`/`updatedb`, and `$PATH`-based `which`
 - Compress and archive files using `gzip` (60–70% compression ratio) and `tar` (`-c`, `-x`, `-t`, `-z`, `-j`, `-J`, `-v`, `-f`, `-C`)
 - Compare and create hard links (`ln`) vs. symbolic/soft links (`ln -s`) and trace their behavior when source files are deleted
@@ -55,12 +55,12 @@ By default, **`ln Source Target` creates a hard link**; adding **`-s`** (`ln -s 
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **find /var/log/anaconda/ -type f -mtime +7 searches for regular files modified more than 7 days ago; locate requires updatedb to update /var/lib/mlocate/mlocate.db.**
 - **tar -zcf packs with gzip (.tar.gz), tar -jcf uses bzip2 (.tar.bz2), tar -Jcf uses xz (.tar.xz), and -C specifies the extraction target directory.**
 - **ln creates a hard link by default (survives source file deletion, cannot cross filesystems or link directories); ln -s creates a soft/symbolic link (breaks if source is deleted, can link directories and cross filesystems).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: If you create a soft link 'ln -s passwd link_s', delete 'passwd', and then copy a new 'passwd' back to the same name, the soft link 'link_s' works again (points by path), whereas a hard link 'link_h' still points to the old inode and is no longer synchronized with the new 'passwd' file (Ch.03 p.117)!
 
@@ -69,5 +69,5 @@ By default, **`ln Source Target` creates a hard link**; adding **`-s`** (`ln -s 
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Find-Tar-and-Links-Lab.html`](./08-Exercise-Find-Tar-and-Links-Lab.html)** (or [`08-Exercise-Find-Tar-and-Links-Lab.md`](./08-Exercise-Find-Tar-and-Links-Lab.md)) to apply this concept in an interactive lab workbench!

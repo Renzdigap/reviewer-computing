@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Writing `INNER JOIN`, `LEFT JOIN`, and `FULL JOIN` Queries
+# Hands-On Lab: Writing `INNER JOIN`, `LEFT JOIN`, and `FULL JOIN` Queries
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 06 — SQL Basics — Classification, Data Types, DQL, Joins & DML (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Using the official `education e` (`staff_id` 11, 12, 13) and `training t` (`staff_id` 10, 11, 12) tables from Chapter 05 (pp. 387–389), write `LEFT JOIN`, `RIGHT JOIN`, and `FULL JOIN` queries to compare how unmatched rows are padded with `NULL`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Write a `LEFT JOIN` query between `education e` and `training t` on `e.staff_id = t.staff_id`.
 2. Step 2: Write a `RIGHT JOIN` query between `education e` and `training t` on `e.staff_id = t.staff_id`.
 3. Step 3: Write a `FULL JOIN` query between `education e` and `training t` on `e.staff_id = t.staff_id`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Preserve all rows from the first table (education e)
 SELECT e.staff_id, e.higest_degree, t.score
@@ -31,14 +31,14 @@ FROM education e ____ JOIN training t ON (e.staff_id = t.staff_id);
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `LEFT JOIN`, `RIGHT JOIN`, and `FULL JOIN` respectively.
 
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -80,7 +80,7 @@ staff_id | higest_degree | score
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **If table A has 4 records and 3 columns, and table B has 5 records and 2 columns, how many records and columns are returned by `SELECT * FROM A, B;` without a `WHERE` condition?**
@@ -91,7 +91,7 @@ staff_id | higest_degree | score
 - D. 4 records and 3 columns
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 05 (p. 383), the Cartesian product of X (I tuples, N attributes) and Y (J tuples, M attributes) has I * J tuples (4 * 5 = 20 records) and N + M attributes (3 + 2 = 5 columns).
@@ -106,7 +106,7 @@ staff_id | higest_degree | score
 - D. FULL OUTER JOIN
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `D`
 - **Explanation:** Per Chapter 05 (p. 386 & p. 389), `FULL [OUTER] JOIN` returns all joined rows plus unmatched rows from both the left and right tables, filling missing columns with `NULL`.
@@ -119,7 +119,7 @@ staff_id | higest_degree | score
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True (Ch.05 p. 385). In `INNER JOIN`, the `INNER` keyword can be omitted.

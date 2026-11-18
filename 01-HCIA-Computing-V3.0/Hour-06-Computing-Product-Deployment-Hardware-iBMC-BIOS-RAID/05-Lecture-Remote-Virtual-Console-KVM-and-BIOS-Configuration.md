@@ -1,4 +1,4 @@
-# 📖 Remote Virtual Console (KVM) & BIOS/PXE Configuration
+# Remote Virtual Console (KVM) & BIOS/PXE Configuration
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish Private vs. Shared modes of Java and HTML5 Integrated Remote Consoles on iBMC
 - Master BIOS entry keys (`Delete` or `F4`), the 7-step BIOS POST sequence, and saving changes (`F10`)
 - Configure Boot Sequence (`Boot > Boot Type Order`), onboard NIC UEFI PXE (`Advanced > LOM Configuration > PXE Configuration`), and iBMC WebUI `System > BIOS Settings`
@@ -45,13 +45,13 @@ On the iBMC WebUI **Home** page, clicking **Virtual Console \rightarrow Start** 
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Remote Virtual Console (Private) allows 1 local or VNC user; (Shared) allows up to 2 local users or 5 VNC users simultaneously.**
 - **Press Delete or F4 during boot to enter the TaiShan 200 BIOS; use + or - to adjust Boot Type Order; press F10 to save and exit.**
 - **The 7-step BIOS POST order is: Data/control bus init -> CPU self-check -> Memory self-check -> Graphics card self-check -> Drives/peripherals self-check -> Result presentation (beep codes/messages) -> OS startup.**
 - **Enable PXE for the onboard NIC at Advanced > LOM Configuration > PXE Configuration (supports UEFI: IPv4, UEFI: IPv6, or UEFI: IPv4/IPv6).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In Shared mode of the HTML5/Java Integrated Remote Console, the concurrency limit is up to 2 local users OR 5 VNC users (not 10 users)!
 
@@ -60,5 +60,5 @@ On the iBMC WebUI **Home** page, clicking **Virtual Console \rightarrow Start** 
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-BIOS-POST-Boot-Order-and-PXE-Configuration-Lab.html`](./06-Exercise-BIOS-POST-Boot-Order-and-PXE-Configuration-Lab.html)** (or [`06-Exercise-BIOS-POST-Boot-Order-and-PXE-Configuration-Lab.md`](./06-Exercise-BIOS-POST-Boot-Order-and-PXE-Configuration-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Verifying Kernel `cgroups` Mounts and iSula Architecture Specifications
+# Hands-On Lab: Verifying Kernel `cgroups` Mounts and iSula Architecture Specifications
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are preparing an engineering specification for migrating edge and cloud workloads from Docker to openEuler iSula. Complete the specification mapping kernel primitives, `iSulad` implementation language, default runtime, and toolkit components.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Specify the kernel feature for resource isolation (`Namespaces`) and the `/sys/fs/cgroup` feature for resource limitation (`cgroups`), plus the namespace that isolates hostnames (`UTS`).
 2. Step 2: Specify the programming language of `iSulad` (`C/C++`) and its default OCI runtime (`LCR`).
 3. Step 3: Specify the DAG-based image builder (`isula-build`) and Docker container migration tool (`isula-transform`).
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # iSula & Kernel Container Specification
 RESOURCE_ISOLATION="<kernel_isolation_feature>"
@@ -27,7 +27,7 @@ CONTAINER_TOOLKIT="<image_builder>, <migration_tool>"
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Namespaces handle resource isolation (`UTS` isolates hostnames/domain names) and `cgroups` handle resource limitation.
 - `iSulad` is written in `C/C++` and uses `LCR` (Lightweight Container Runtime) by default.
@@ -36,7 +36,7 @@ CONTAINER_TOOLKIT="<image_builder>, <migration_tool>"
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -59,7 +59,7 @@ CONTAINER_TOOLKIT="isula-build, isula-transform"
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In the Linux kernel, what are the respective functions of `Namespaces` and `cgroups` in container virtualization?**
@@ -70,7 +70,7 @@ CONTAINER_TOOLKIT="isula-build, isula-transform"
 - D. Namespaces encrypt network traffic; cgroups compile C/C++ code
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.07 (pp.391–392), Namespaces provide resource isolation (PID, Mount, Network, User, UTS, IPC), while `cgroups` (organized in `/sys/fs/cgroup`) limit the system resources (CPU, memory, block I/O) available to a set of processes.
@@ -85,7 +85,7 @@ CONTAINER_TOOLKIT="isula-build, isula-transform"
 - D. Mount namespace
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Ch.07 (p.391), the UTS namespace (`CLONE_NEWUTS`) isolates host names and domain names.
@@ -100,7 +100,7 @@ CONTAINER_TOOLKIT="isula-build, isula-transform"
 - D. `iSula` supports Lightweight mode (REST interface) and Performance mode (gRPC interface).
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.07 (pp.393–398), all four statements are core technical highlights of `iSula` in the official Huawei training material.

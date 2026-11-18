@@ -1,4 +1,4 @@
-# 📖 Loop Statements (`for`, `while`, `until`), `break`/`continue`, Debugging (`bash -x`) & Best Practices
+# Loop Statements (`for`, `while`, `until`), `break`/`continue`, Debugging (`bash -x`) & Best Practices
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 07 — Shell Scripting, Variables, Control Flow & Automation (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Write `for` (shell-style & C-style), `while`, and `until` loops, including the official Odd Accumulator (`{1..100..2}`) and 9×9 Multiplication Table scripts
 - Control loop execution with `break` (exit entire loop) and `continue` (skip current round to next iteration)
 - Debug shell scripts using `#!/bin/bash -x` / `bash -x`, evaluate `$?` exit status codes (`0` vs. `2` for missing file in `ls`), and apply shell coding style best practices
@@ -57,12 +57,12 @@ Bash provides three loop constructs (**`for`**, **`while`**, **`until`**), all u
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **while (( i <= 100 )) loops while the condition is true; until (( i > 100 )) loops until the condition becomes true.**
 - **break exits the entire loop immediately, whereas continue skips only the current iteration and proceeds to the next loop round.**
 - **Enable script trace debugging with '#!/bin/bash -x' or 'bash -x script.sh'; check the previous command's exit status code with 'echo $?' (0 = success).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse 'while' and 'until' conditions! For the Odd Accumulator (1 to 100), 'while' uses 'while (( i <= 100 ))', whereas 'until' uses the opposite termination condition 'until (( i > 100 ))'!
 
@@ -71,5 +71,5 @@ Bash provides three loop constructs (**`for`**, **`while`**, **`until`**), all u
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Odd-Accumulator-and-Bash-Debug-Lab.html`](./08-Exercise-Odd-Accumulator-and-Bash-Debug-Lab.html)** (or [`08-Exercise-Odd-Accumulator-and-Bash-Debug-Lab.md`](./08-Exercise-Odd-Accumulator-and-Bash-Debug-Lab.md)) to apply this concept in an interactive lab workbench!

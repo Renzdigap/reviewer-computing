@@ -1,4 +1,4 @@
-# 📖 `systemd` Service Architecture, Unit Files & `journald` Log Management
+# `systemd` Service Architecture, Unit Files & `journald` Log Management
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain `systemd` (PID 1) advantages over SysVinit, its 3 invoked kernel modules (`cgroups`, `autofs`, `kdbus`), and its 12 Unit types
 - Parse the 3 sections of a `systemd` unit file (`[Unit]`, `[Service]`, `[Install]`) and key directives (`After=`, `Requires=`, `Wants=`, `ExecStart=`, `WantedBy=`)
 - Control service lifecycle with `systemctl` and query centralized service logs with `journalctl -u <service>`
@@ -48,12 +48,12 @@ A complete `.service` unit file consists of **three sections** (Ch.04, p.219):
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **systemd is PID 1 and directly invokes 3 kernel modules: cgroups (resource control), autofs (auto-mounting), and kdbus (message passing).**
 - **A systemd unit file has 3 sections: [Unit] (Description, After, Requires [hard dependency], Wants [soft dependency]), [Service] (ExecStart [mandatory], ExecStop, Restart, User), and [Install] (WantedBy).**
 - **Use 'systemctl start/stop/restart/enable/disable/status <name>.service' to manage services, and 'journalctl -u <service>' to view complete service logs.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In the [Unit] section, 'Requires=' declares a HARD dependency (service fails if dependency is missing), whereas 'Wants=' declares a SOFT dependency (service still starts if dependency is missing)!
 
@@ -62,5 +62,5 @@ A complete `.service` unit file consists of **three sections** (Ch.04, p.219):
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Systemctl-and-Journalctl-Service-Lab.html`](./06-Exercise-Systemctl-and-Journalctl-Service-Lab.html)** (or [`06-Exercise-Systemctl-and-Journalctl-Service-Lab.md`](./06-Exercise-Systemctl-and-Journalctl-Service-Lab.md)) to apply this concept in an interactive lab workbench!

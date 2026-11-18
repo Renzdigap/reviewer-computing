@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Repository Management (`dnf config-manager`), Dependency Download & Group Installation
+# Hands-On Lab: Repository Management (`dnf config-manager`), Dependency Download & Group Installation
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are configuring software packages on an openEuler node. Add the local repository `file:///mnt/local_repo` using `dnf config-manager`, download the `httpd` package along with its uninstalled dependencies, and list all available DNF package groups.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Add the repository `file:///mnt/local_repo` using `dnf config-manager --add-repo file:///mnt/local_repo`.
 2. Step 2: Download the `httpd` RPM package and all its uninstalled dependencies using `dnf download --resolve httpd`.
 3. Step 3: List all installed and available software package groups using `dnf group list`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Add local repository file:///mnt/local_repo
 <dnf_add_repo_command>
@@ -28,7 +28,7 @@ You are configuring software packages on an openEuler node. Add the local reposi
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `dnf config-manager --add-repo file:///mnt/local_repo`.
 - Use `dnf download --resolve httpd` (Ch.04 p.212).
@@ -37,7 +37,7 @@ You are configuring software packages on an openEuler node. Add the local reposi
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ Available Groups:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which command generates a new `.repo` configuration file in `/etc/yum.repos.d/` from a specified repository URL?**
@@ -82,7 +82,7 @@ Available Groups:
 - D. `rpm -ivh repository_url`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.207), running `dnf config-manager --add-repo repository_url` as user `root` automatically generates the corresponding `.repo` file in `/etc/yum.repos.d/`.
@@ -97,7 +97,7 @@ Available Groups:
 - D. --database
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.212), if you need to download a dependency that is not installed, add `--resolve` (`dnf download --resolve package_name`).
@@ -112,7 +112,7 @@ Available Groups:
 - D. `dnf group install group_name/groupid` and `dnf group remove group_name/groupid`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.04 (pp.208, 213–214), all four command sets are standard DNF operations in openEuler.

@@ -1,4 +1,4 @@
-# 📖 OS Compatibility & Installing openEuler 22.03 LTS on TaiShan 2280
+# OS Compatibility & Installing openEuler 22.03 LTS on TaiShan 2280
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Verify OS and hardware component compatibility using the Kunpeng Computing Compatibility Checker before OS installation
 - Mount `openEuler-22.03-LTS-aarch64-dvd.iso` via the iBMC Remote Virtual Console and select the DVD-ROM drive boot option (Ch.05 Quiz Q1!)
 - Trace the complete openEuler 22.03 LTS installation flow and custom storage partitioning (`/boot`, `/boot/efi`, `swap`, `/`)
@@ -58,12 +58,12 @@ To install **openEuler 22.03 LTS (`openEuler-22.03-LTS-aarch64-dvd.iso`)** via t
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Always check both OS compatibility and component compatibility using the Kunpeng Computing Compatibility Checker before installing an OS.**
 - **To install openEuler using `openEuler-22.03-LTS-aarch64-dvd.iso` on the iBMC Remote Virtual Console, select the 'DVD-ROM drive' boot option (Ch.05 Quiz Q1).**
 - **Partitions are configured automatically by default; choose 'Custom' under Storage Configuration to manually create `/boot/efi`, `/boot`, `swap`, and `/`, and detach the ISO before rebooting.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 Quiz Q1): 'To install the OS using the openEuler-22.03-LTS-aarch64-dvd.iso file, which of the following boot options needs to be used?' -> B. DVD-ROM drive (NOT Hard disk drive, Floppy drive, or PXE)!
 
@@ -72,5 +72,5 @@ To install **openEuler 22.03 LTS (`openEuler-22.03-LTS-aarch64-dvd.iso`)** via t
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Mounting-ISO-and-openEuler-Partitioning-Lab.html`](./02-Exercise-Mounting-ISO-and-openEuler-Partitioning-Lab.html)** (or [`02-Exercise-Mounting-ISO-and-openEuler-Partitioning-Lab.md`](./02-Exercise-Mounting-ISO-and-openEuler-Partitioning-Lab.md)) to apply this concept in an interactive lab workbench!

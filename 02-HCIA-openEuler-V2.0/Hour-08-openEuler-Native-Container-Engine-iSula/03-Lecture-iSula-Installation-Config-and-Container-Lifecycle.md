@@ -1,4 +1,4 @@
-# 📖 iSula Installation, Configuration Priority & Container Lifecycle Operations
+# iSula Installation, Configuration Priority & Container Lifecycle Operations
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Install `iSulad` via `yum`/`rpm` and apply the configuration priority order (`CLI > /etc/isulad/daemon.json > default code configurations`)
 - Identify the 4 official container states (`Created`, `Up`, `Paused`, `Exited` — Official Ch.07 Quiz Q1!)
 - Execute `isula` container lifecycle commands: `create`, `start`, `run` (`-d`, `-it`, `-p`, `-e`, `--workdir`, `--name`, `--dns`, `--restart`, `--rm`), `pause`/`unpause`, `exec`, `ps`, `inspect`, `logs`, `restart`, and `rm`
@@ -48,12 +48,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **iSulad configuration priority from highest to lowest is: CLI (isulad --xxx or /etc/sysconfig/iSulad OPTIONS) > Configuration file (/etc/isulad/daemon.json) > Default code configurations.**
 - **All four states—Created, Exited, Up, and Paused—are valid iSula container states (Official Ch.07 Quiz Q1: ABCD).**
 - **isula rm can only delete stopped containers by default; use 'isula rm -f <ID>' to forcibly delete a running container, or '--rm' on 'isula run' to auto-delete upon exit.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Official Ch.07 Quiz Q1): 'Which of the following are container states? A. Created B. Exited C. Up D. Paused' -> ABCD!
 
@@ -62,5 +62,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-iSula-Container-Lifecycle-Lab.html`](./04-Exercise-iSula-Container-Lifecycle-Lab.html)** (or [`04-Exercise-iSula-Container-Lifecycle-Lab.md`](./04-Exercise-iSula-Container-Lifecycle-Lab.md)) to apply this concept in an interactive lab workbench!

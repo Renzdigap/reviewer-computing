@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Creating CNI Bridge Networks (`isula network`) and Read-Only/Read-Write Volumes (`-v`)
+# Hands-On Lab: Creating CNI Bridge Networks (`isula network`) and Read-Only/Read-Write Volumes (`-v`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are configuring CNI networking and persistent volumes for `iSula` containers (following Ch.07 pp. 423–426). Create a CNI bridge network named `cni0`, launch a `busybox` container attached to `cni0` using `--net cni0`, and launch a container mounting `/root/test1.txt` as `rw` and `/root/test2.txt` as `ro`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Create the iSula network `cni0` (`isula network create cni0`) and list existing networks (`isula network ls`).
 2. Step 2: Start a background container attached to `cni0` using `isula run --net cni0 -d -it isulad/busybox sleep 99d`.
 3. Step 3: Mount `/root/test1.txt` (`rw`) and `/root/test2.txt` (`ro`) into `/tmp/` using `-v /root/test1.txt:/tmp/test1.txt:rw -v /root/test2.txt:/tmp/test2.txt:ro`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Create iSula network cni0 and list networks
 <isula_net_create_command>
@@ -29,7 +29,7 @@ isula run -it -n storage <volume_mounts> oepkgs/test/nginx:latest /bin/bash
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `isula network create cni0` and `isula network ls` (Ch.07 p.423).
 - Use `isula run --net cni0 -d -it isulad/busybox sleep 99d` (Ch.07 p.424).
@@ -38,7 +38,7 @@ isula run -it -n storage <volume_mounts> oepkgs/test/nginx:latest /bin/bash
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -69,7 +69,7 @@ bash: test2.txt: Read-only file system
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In `/etc/isulad/daemon.json`, what are the default directories for `cni-bin-dir` (CNI plugin binaries) and `cni-conf-dir` (CNI configuration files)?**
@@ -80,7 +80,7 @@ bash: test2.txt: Read-only file system
 - D. `/sbin/cni` and `/opt/cni/conf`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.07 (p.422), the default directory for `cni-bin-dir` is `/opt/cni/bin`, and the default directory for `cni-conf-dir` is `/etc/cni/net.d`.
@@ -95,7 +95,7 @@ bash: test2.txt: Read-only file system
 - D. No access until `chmod` is run
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.07 (p.425), when using `-v` to mount host files or directories during container creation, `-rw` (read-write permission) is the default.
@@ -110,7 +110,7 @@ bash: test2.txt: Read-only file system
 - D. `vsftpd` (transfers files over FTP)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.07 (p.423), iSula network plugins for `cni0` are `bridge,portmap,firewall`.

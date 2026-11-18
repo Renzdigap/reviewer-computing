@@ -60,7 +60,7 @@ def run_cli():
         print(f"  HUAWEI ICT COMPETITION NATIONAL STAGE — {data['title']}")
         print(f"  Progress (progress.json): {done_units}/{total_units} Units ({pct}%) | Mock Exam: {mock_score_str}")
         print("=" * 74)
-        print("  [0] 🌐 Open Interactive Web App (index.html) in Browser")
+        print("  [0] Open Interactive Web App (index.html) in Browser")
 
         for h in data["hours"]:
             h_units = 0
@@ -73,11 +73,11 @@ def run_cli():
                     h_done += 1
                 if prog_all.get(ex_uid, {}).get("completed"):
                     h_done += 1
-            status_tag = "✅ COMPLETE" if h_done == h_units else f"({h_done}/{h_units} done)"
-            print(f"  [{h['hour_number']}] ⏱️  Hour 0{h['hour_number']}: {h['title']} {status_tag}")
+            status_tag = "[COMPLETED]" if h_done == h_units else f"({h_done}/{h_units} done)"
+            print(f"  [{h['hour_number']}] Hour 0{h['hour_number']}: {h['title']} {status_tag}")
 
-        mock_status = "✅ " + mock_score_str if mock_info.get("completed") else "⏱️ 60 Questions, 60 Mins"
-        print(f"  [9] 🏆 Hour 09: {data['mock_exam']['title']} [{mock_status}]")
+        mock_status = "[PASSED] " + mock_score_str if mock_info.get("completed") else "60 Questions, 60 Mins"
+        print(f"  [9] Hour 09: {data['mock_exam']['title']} [{mock_status}]")
         print("  [q] Quit")
 
         choice = input("\nSelect an option (0-9 or q): ").strip().lower()
@@ -101,14 +101,14 @@ def study_hour(h, pillar_id):
         ex_uid = f"{pillar_id}_h{h['hour_number']}_s{s['sprint_number']}_exercise"
 
         print("\n" + "-" * 72)
-        print(f"📖 LECTURE (Hour 0{h['hour_number']} • Sprint {s['sprint_number']}/4): {lec['title']}")
+        print(f"LECTURE (Hour 0{h['hour_number']} • Sprint {s['sprint_number']}/4): {lec['title']}")
         print(f"   Ref: {lec['pdf_ref']} | Duration: {lec['duration_mins']} mins")
         print("-" * 72)
         print(lec["content_markdown"])
-        print("\n🔑 Key Takeaways:")
+        print("\nKey Takeaways:")
         for k in lec.get("key_takeaways", []):
             print(f"  • {k}")
-        print("\n⚠️ Exam Traps:")
+        print("\nExam Traps:")
         for t in lec.get("exam_traps", []):
             print(f"  ! {t}")
 
@@ -116,12 +116,12 @@ def study_hour(h, pillar_id):
         progress_manager.merge_and_save({
             lec_uid: {"completed": True, "ts": int(time.time() * 1000)}
         })
-        print(f"\n[Auto-Sync] 📖 Lecture marked completed in progress.json!")
+        print(f"\n[Auto-Sync] Lecture marked completed in progress.json!")
 
         input("\nPress Enter to start the immediate Hands-On Exercise...")
 
         print("\n" + "-" * 72)
-        print(f"💻 HANDS-ON EXERCISE: {ex['title']}")
+        print(f"HANDS-ON EXERCISE: {ex['title']}")
         print("-" * 72)
         print(f"Scenario: {ex['scenario']}\n")
         for idx, inst in enumerate(ex.get("instructions", []), 1):
@@ -135,7 +135,7 @@ def study_hour(h, pillar_id):
             for c_idx, chk in enumerate(checks, 1):
                 reqs = chk.get("required_any", [])
                 ok = (not reqs) or any(norm_ws(r) in ans_norm for r in reqs)
-                print(f"  {'✅ PASS' if ok else '❌ CHECK'} Step {c_idx}: {chk['description']}")
+                print(f"  {'[PASS]' if ok else '[CHECK]'} Step {c_idx}: {chk['description']}")
         print("\nOfficial Solution:\n" + ex.get("solution_code", ""))
         print("\nSimulated Output:\n" + ex.get("simulated_output", ""))
 
@@ -151,15 +151,15 @@ def study_hour(h, pillar_id):
             u_norm = "".join(sorted([c for c in u_ans if c.isalpha()]))
             if u_norm == target:
                 drill_correct += 1
-                print(f"✅ Correct ({target})! {q.get('explanation', '')}")
+                print(f"[CORRECT] ({target})! {q.get('explanation', '')}")
             else:
-                print(f"❌ Official Answer: {target} | {q.get('explanation', '')}")
+                print(f"[INCORRECT] Official Answer: {target} | {q.get('explanation', '')}")
 
         # Mark exercise done
         progress_manager.merge_and_save({
             ex_uid: {"completed": True, "ts": int(time.time() * 1000)}
         })
-        print(f"\n[Auto-Sync] 💻 Exercise marked completed in progress.json!")
+        print(f"\n[Auto-Sync] Exercise marked completed in progress.json!")
 
         cont = input(f"\nCompleted Sprint {s['sprint_number']}/4. Continue to next sprint? (Y/n): ").strip().lower()
         if cont == "n":
@@ -169,7 +169,7 @@ def study_hour(h, pillar_id):
 def run_mock_exam(mock, pillar_id):
     qs = mock.get("questions", [])
     print("\n" + "=" * 72)
-    print(f"🏆 {mock['title']} ({len(qs)} Questions, {mock['total_points']} pts)")
+    print(f"{mock['title']} ({len(qs)} Questions, {mock['total_points']} pts)")
     print("=" * 72)
     mode = input("Run in [1] Browser Timed GUI or [2] Terminal CLI mode? (1/2): ").strip()
     if mode == "1":
@@ -196,9 +196,9 @@ def run_mock_exam(mock, pillar_id):
             if ok:
                 earned += pts
                 correct_cnt += 1
-                print(f"✅ Correct (+{pts} pts)!")
+                print(f"[CORRECT] (+{pts} pts)!")
             else:
-                print(f"❌ Official Solution: {q.get('solution', q.get('answer', ''))}")
+                print(f"[INCORRECT] Official Solution: {q.get('solution', q.get('answer', ''))}")
             print(f"   Explanation: {q.get('explanation', '')}")
         else:
             for opt in q.get("options", []):
@@ -211,9 +211,9 @@ def run_mock_exam(mock, pillar_id):
             if u_norm == target:
                 earned += pts
                 correct_cnt += 1
-                print(f"✅ Correct (+{pts} pts)!")
+                print(f"[CORRECT] (+{pts} pts)!")
             else:
-                print(f"❌ Official Answer: {target}")
+                print(f"[INCORRECT] Official Answer: {target}")
             print(f"   Explanation: {q.get('explanation', '')}")
 
     print(f"\nFINAL SCORE: {earned} / {total} pts")
@@ -228,7 +228,7 @@ def run_mock_exam(mock, pillar_id):
                 "ts": int(time.time() * 1000)
             }
         })
-        print(f"💾 Mock exam score ({earned}/{total} pts) saved to progress.json!")
+        print(f"[Saved] Mock exam score ({earned}/{total} pts) saved to progress.json!")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# 📖 Easy Maintenance — WDR Reports, One-Click Log Collection, Slow SQL & Session Diagnosis
+# Easy Maintenance — WDR Reports, One-Click Log Collection, Slow SQL & Session Diagnosis
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Enable and generate Workload Diagnosis Reports (WDR) using `enable_wdr_snapshot`, `create_wdr_snapshot()`, and `generate_wdr_report()`
 - Distinguish WDR Summary vs. Detail report sections and configure Slow SQL diagnosis (`log_min_duration_statement`, `track_stmt_stat_level`, `statement_history`)
 - Diagnose blocked sessions and top wait events using `pg_thread_wait_status` and `DBE_PERF.local_active_session`
@@ -57,12 +57,12 @@ SELECT sessionid, block_sessionid, final_block_sessionid FROM DBE_PERF.local_act
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Generating a WDR report requires `enable_wdr_snapshot = on` (default `off`) and at least 2 snapshots (`create_wdr_snapshot()` can only be run by `sysadmin`). Default interval is 1 hour and retention is 8 days.**
 - **Slow SQL diagnosis records queries exceeding `log_min_duration_statement` (controlled by `track_stmt_stat_level`, default `'OFF,L0'`), and `statement_history` / `dbe_perf.standby_statement_history` must be queried in the `postgres` database.**
 - **Session blocking relationships are inspected via `pg_thread_wait_status` and `DBE_PERF.local_active_session`.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: If you query `statement_history` (or `dbe_perf.standby_statement_history` on a standby node) in any database other than `postgres`, the result is empty or unavailable (Ch.03 p. 238)!
 
@@ -71,5 +71,5 @@ SELECT sessionid, block_sessionid, final_block_sessionid FROM DBE_PERF.local_act
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-WDR-Snapshot-and-Session-Diagnosis-Lab.html`](./06-Exercise-WDR-Snapshot-and-Session-Diagnosis-Lab.html)** (or [`06-Exercise-WDR-Snapshot-and-Session-Diagnosis-Lab.md`](./06-Exercise-WDR-Snapshot-and-Session-Diagnosis-Lab.md)) to apply this concept in an interactive lab workbench!

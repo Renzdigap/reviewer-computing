@@ -1,4 +1,4 @@
-# 📖 RAID Levels, Parity, Hot Spare & Hardware vs. Software RAID
+# RAID Levels, Parity, Hot Spare & Hardware vs. Software RAID
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 04 — RAID Arrays, PCIe Bus, NICs/iNICs, GPU/NPU, Power/Cooling & Server Software (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand the 3 core RAID technologies (Data striping, Mirroring, Data parity) and calculate utilization and fault tolerance for RAID 0, 1, 1E, 5, 6, 10, 01, 50, and 60
 - Explain Global vs. Dedicated Hot Spare and why RAID is NOT a substitute for data backup
 - Contrast Software RAID (and its 6 unsupported features) with Built-in and External Hardware RAID
@@ -51,13 +51,13 @@ Proposed by **Prof. D.A. Patterson** at UC Berkeley in **1988**, **RAID (Redunda
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Drive utilization formulas: RAID 0 = 100%, RAID 1 / 10 / 1E = 50%, RAID 5 = (N-1)/N, RAID 6 = (N-2)/N, RAID 50 = (N-M)/N, RAID 60 = (N-2M)/N.**
 - **RAID 10 mirrors first (RAID 1) then stripes (RAID 0) and is more fault-tolerant than RAID 01 (which stripes first then mirrors).**
 - **RAID 50 requires at least 6 disks (2 × 3-disk RAID 5 spans); theoretical RAID 60 requires at least 8 disks (2 × 4-disk RAID 6 spans).**
 - **Software RAID consumes host CPU cycles and does NOT support hot swap, hot spare, remote array management, bootable arrays, or disk S.M.A.R.T.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: RAID CANNOT replace data backup because RAID cannot protect against viruses, accidental file deletion, or OS/filesystem corruption (p. 165)!
 
@@ -66,5 +66,5 @@ Proposed by **Prof. D.A. Patterson** at UC Berkeley in **1988**, **RAID (Redunda
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-RAID-Capacity-Fault-Tolerance-and-Parity-Lab.html`](./02-Exercise-RAID-Capacity-Fault-Tolerance-and-Parity-Lab.html)** (or [`02-Exercise-RAID-Capacity-Fault-Tolerance-and-Parity-Lab.md`](./02-Exercise-RAID-Capacity-Fault-Tolerance-and-Parity-Lab.md)) to apply this concept in an interactive lab workbench!

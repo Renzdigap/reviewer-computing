@@ -1,4 +1,4 @@
-# 📖 Linux History, GNU/FSF, Open Source Licenses & openEuler Community
+# Linux History, GNU/FSF, Open Source Licenses & openEuler Community
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Trace OS history from Multics (1965) and Unix (1969/1970 by Ken Thompson) to Minix (1987 by Andrew S. Tanenbaum) and Linux (1991 by Linus Torvalds)
 - Compare the 4 freedoms of the Free Software Foundation (FSF) and major open source licenses (Mulan, GPL, LGPL, BSD)
 - Distinguish openEuler Innovation releases vs. LTS releases, kernel version numbering, and openEuler community portals
@@ -52,12 +52,12 @@ In the openEuler code repository, the **`LICENSES`** directory declares the open
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Mulan is China's first open source license covering 5 aspects (copyright, patent, non-trademark, distribution restriction, disclaimer). openEuler declares its licenses in the LICENSES directory.**
 - **LGPL permits commercial software to link to LGPL libraries without open-sourcing the commercial code, whereas GPL requires any software referencing/modifying GPL code to also be GPL.**
 - **openEuler Innovation releases are published every 6 months (half a year); openEuler LTS (Long-Term Support) releases are published every 2 years.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse Innovation vs. LTS release cycles! Innovation = every half a year (6 months); LTS = every 2 years.
 
@@ -66,5 +66,5 @@ In the openEuler code repository, the **`LICENSES`** directory declares the open
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-openEuler-Releases-and-Licenses-Lab.html`](./04-Exercise-openEuler-Releases-and-Licenses-Lab.html)** (or [`04-Exercise-openEuler-Releases-and-Licenses-Lab.md`](./04-Exercise-openEuler-Releases-and-Licenses-Lab.md)) to apply this concept in an interactive lab workbench!

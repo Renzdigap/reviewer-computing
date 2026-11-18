@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Inspecting File Systems (`lsblk -f`, `fdisk -l`) and Non-Interactive GPT Partitioning (`parted`)
+# Hands-On Lab: Inspecting File Systems (`lsblk -f`, `fdisk -l`) and Non-Interactive GPT Partitioning (`parted`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You have attached a new 4 TB disk `/dev/sdb` to an openEuler server. Because it exceeds 2 TB, you must inspect existing disks with `fdisk -l` and `lsblk -f`, and then use `parted` in non-interactive mode to initialize `/dev/sdb` with a `gpt` partition table and create a primary partition.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: View all disks and partitions using `fdisk -l` and check file system types using `lsblk -f`.
 2. Step 2: Use `parted` in non-interactive mode to convert `/dev/sdb` to a GPT partition table (`parted /dev/sdb mklabel gpt`).
 3. Step 3: Use `parted` in non-interactive mode to create a 1000 MB partition on `/dev/sdb` (`parted /dev/sdb mkpart primary 0 1000`).
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: List all disks/partitions and check file system types
 <fdisk_list_command>
@@ -29,7 +29,7 @@ You have attached a new 4 TB disk `/dev/sdb` to an openEuler server. Because it 
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `fdisk -l` and `lsblk -f`.
 - Use `parted /dev/sdb mklabel gpt` (exact command from Ch.05 p.276).
@@ -38,7 +38,7 @@ You have attached a new 4 TB disk `/dev/sdb` to an openEuler server. Because it 
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -73,7 +73,7 @@ Number  Start   End     Size    File system  Name     Flags
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What is the default file system on openEuler, and what does the device name `/dev/sdb6` represent?**
@@ -84,7 +84,7 @@ Number  Start   End     Size    File system  Name     Flags
 - D. `vfat`; the 1st extended partition on the 2nd virtio disk
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.05 (p.259 & p.268), the default file system on openEuler is `ext4`. In `/dev/xxyN`, primary/extended partitions are numbered 1 to 4 and logical partitions start from 5, so `/dev/sdb6` is the second logical partition on the second SCSI disk.
@@ -99,7 +99,7 @@ Number  Start   End     Size    File system  Name     Flags
 - D. MBR max: 4 TB; GPT max: 15 partitions
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.05 (pp.269–273), MBR uses 32-bit values and cannot exceed 2 TB, whereas GPT uses 64-bit LBA (up to 18 EB) and supports up to 128 partitions per disk.
@@ -114,7 +114,7 @@ Number  Start   End     Size    File system  Name     Flags
 - D. `pwd -P`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.05 (p.260), the three commands used to check the file system type of a partition in Linux are `lsblk -f`, `blkid`, and `df -T`.

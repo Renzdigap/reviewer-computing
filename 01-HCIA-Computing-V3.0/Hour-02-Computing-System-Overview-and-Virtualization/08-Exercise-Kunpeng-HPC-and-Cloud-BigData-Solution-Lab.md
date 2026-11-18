@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Kunpeng HPC Stack & Cloud Solution Verification
+# Hands-On Lab: Kunpeng HPC Stack & Cloud Solution Verification
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure the Kunpeng HPC solution stack manifest and verify the industry software ecosystem characteristics for the Huawei ICT Competition.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `hpc_storage_product` to `'OceanStor Pacific'` and `parallel_filesystem` to `'OceanFS'`.
 2. Set `cluster_scheduler_suite` to `'DonauKit'` and `compiler_mpi_math_suite` to `'HPCKit'`.
 3. Set `education_research_software_type` to `'open-source'` and `manufacturing_cae_software_type` to `'commercial'`.
 
-### 📝 Starter Workspace (`hpc-admin@donau-portal:~#`)
+### Starter Workspace (`hpc-admin@donau-portal:~#`)
 ```bash
 # Kunpeng HPC & Cloud Solution Blueprint
 kunpeng_hpc_stack:
@@ -35,7 +35,7 @@ huawei_cloud_services:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - The HPC storage subsystem uses OceanStor Pacific and OceanFS; DonauKit handles cluster management/scheduling; HPCKit includes Hyper MPI, KML, and BiSheng Compiler.
 - Education/research and meteorology are mainly open-source, while manufacturing simulation is mainly commercial.
@@ -43,7 +43,7 @@ huawei_cloud_services:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -75,7 +75,7 @@ huawei_cloud_services:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.02 Quiz Q3) Which of the following statements are true about computing system solutions?**
@@ -86,7 +86,7 @@ huawei_cloud_services:
 - D. ModelArts is a one-stop AI development platform for developers to quickly create and deploy models.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ACD`
 - **Explanation:** A, C, and D are true (Ch.02, p.125 Quiz Q3). B is false because more than 80% of applications in the education and scientific research fields (as well as meteorology and life sciences) are open-source; closed-source commercial software is mainly used in manufacturing, EDA, and oil & gas (Ch.02, pp. 119, 122).
@@ -101,7 +101,7 @@ huawei_cloud_services:
 - D. FusionCompute
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** HPCKit integrates Hyper MPI, Kunpeng Math Library (KML), and BiSheng Compiler/GCC. DonauKit provides cluster management (Donau Portal) and job scheduling (Donau Scheduler), while DevKit provides code porting and performance profiling (Ch.02, p.118).
@@ -116,7 +116,7 @@ huawei_cloud_services:
 - D. LS-DYNA
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** WRF (Weather Research and Forecasting) is the most commonly used meteorological application, mainly using single-precision fp32 computing (180 GFlops) and high memory bandwidth (180 GB/s) (Ch.02, p.121).

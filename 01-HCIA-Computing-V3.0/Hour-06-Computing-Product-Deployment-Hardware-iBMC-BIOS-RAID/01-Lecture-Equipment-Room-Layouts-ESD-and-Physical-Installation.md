@@ -1,4 +1,4 @@
-# 📖 Equipment Room Layouts, Environment/ESD Standards & Server Installation
+# Equipment Room Layouts, Environment/ESD Standards & Server Installation
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Rank the 3 equipment room cooling/aisle layouts by resource utilization, rack power density, PUE, and safety
 - Memorize cabinet standards (IEC 297, >1000 mm depth), ambient temperature/humidity, 800 mm clearance, and ESD rules
 - Understand the TaiShan 200 (2280) installation workflow, 32 A AC / 63 A DC circuit breaker ratings, and default Power-On state
@@ -43,12 +43,12 @@ Equipment rooms can use **air-cooled** or **water-cooled** layouts across three 
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Equipment room layout ranking: In-row air conditioners with contained aisles (Best PUE/density) > In-room with contained aisles (2nd) > In-room with open aisles (Least optimal).**
 - **Environment specs: 19-inch IEC 297 cabinet > 1,000 mm deep, 800 mm front/rear clearance, 5°C–40°C temperature, 8%–90% RH non-condensing humidity.**
 - **External circuit breaker rating for TaiShan 200 (2280): 32 A AC or 63 A DC. By default, the server powers on automatically when PSUs receive power (configurable under iBMC Power > Power Control).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Heating an equipment room DECREASES indoor relative humidity and INCREASES static electricity (ESD risk) (p. 292)!
 
@@ -57,5 +57,5 @@ Equipment rooms can use **air-cooled** or **water-cooled** layouts across three 
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Equipment-Room-Environment-and-Power-On-Checklist-Lab.html`](./02-Exercise-Equipment-Room-Environment-and-Power-On-Checklist-Lab.html)** (or [`02-Exercise-Equipment-Room-Environment-and-Power-On-Checklist-Lab.md`](./02-Exercise-Equipment-Room-Environment-and-Power-On-Checklist-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Computing System Architecture & Server Classification
+# Computing System Architecture & Server Classification
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand the Computing System formula (Computing System = Computer + Data) and its 3 layers (Hardware, Software, Solutions)
 - Master the 5 RASUM server features and the chronological evolution of servers
 - Compare Tower, Blade, and Rack servers, C/S vs. B/S deployment architectures, and CISC vs. RISC instruction sets
@@ -50,12 +50,12 @@ Servers evolved strictly in the following chronological sequence:
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Server evolution order: Mainframes (1940s–50s) -> Midrange computers (1960s–70s) -> Microcomputers (1970s–80s) -> General-purpose servers (1980s–90s, Compaq SystemPro & Intel Pentium Pro).**
 - **1U equals 4.45 cm (1.75 inches), and standard rack cabinets are 19 inches (48.26 cm) wide.**
 - **CISC (x86) has complex CPU hardware but simplifies compiler design; RISC (Arm, RISC-V, MIPS) simplifies CPU hardware with fixed-length instructions but places higher requirements on compiler design.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.02 Quiz Q1): 'Servers are developed from midrange computers to general-purpose servers and then to mainframe servers.' -> FALSE! Mainframes came FIRST (1940s–50s), then Midrange (1960s–70s), Microcomputers (1970s–80s), and General-purpose servers (1980s–90s).
 
@@ -64,5 +64,5 @@ Servers evolved strictly in the following chronological sequence:
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Server-Classification-and-Instruction-Set-Lab.html`](./02-Exercise-Server-Classification-and-Instruction-Set-Lab.html)** (or [`02-Exercise-Server-Classification-and-Instruction-Set-Lab.md`](./02-Exercise-Server-Classification-and-Instruction-Set-Lab.md)) to apply this concept in an interactive lab workbench!

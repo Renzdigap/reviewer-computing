@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Inspecting openEuler Release, Kernel Version & Community Workflow
+# Hands-On Lab: Inspecting openEuler Release, Kernel Version & Community Workflow
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You have logged into a freshly provisioned openEuler server. Verify the OS release file, inspect the kernel release and processor architecture using `uname`, and check the `LICENSES` directory.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: View the openEuler release version information stored in `/etc/os-release` using `cat /etc/os-release`.
 2. Step 2: Display the running Linux kernel version and hardware architecture using `uname -r` or `uname -a`.
 3. Step 3: Echo the release cycles (`LTS=2_years`, `Innovation=6_months`) to confirm openEuler lifecycle compliance.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Display OS release details
 <command_to_view_os_release>
@@ -28,7 +28,7 @@ echo "LTS=2_years, Innovation=6_months"
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `cat /etc/os-release` or `cat /etc/openEuler-release` to inspect the distribution release.
 - Use `uname -r` or `uname -a` to print the kernel version.
@@ -37,7 +37,7 @@ echo "LTS=2_years, Innovation=6_months"
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -67,7 +67,7 @@ LTS=2_years, Innovation=6_months
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which open source license allows commercial software to reference and link to an open-source class library without requiring the commercial software's own source code to be open-sourced?**
@@ -78,7 +78,7 @@ LTS=2_years, Innovation=6_months
 - D. Copyfree Only
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.02 (p.30), LGPL (Lesser GPL) is designed for class libraries and allows commercial software to use the LGPL library in link mode without open-sourcing the commercial software code.
@@ -93,7 +93,7 @@ LTS=2_years, Innovation=6_months
 - D. Every 2 years; Every 6 months
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.02 (p.34), an openEuler Innovation release is generally released every half a year (6 months), whereas an LTS release is usually released every two years.
@@ -108,7 +108,7 @@ LTS=2_years, Innovation=6_months
 - D. Disclaimer and liability limitation
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.02 (p.29), the Mulan license involves five major aspects: copyright license, patent license, non-trademark license, distribution restriction, and disclaimer and liability limitation.

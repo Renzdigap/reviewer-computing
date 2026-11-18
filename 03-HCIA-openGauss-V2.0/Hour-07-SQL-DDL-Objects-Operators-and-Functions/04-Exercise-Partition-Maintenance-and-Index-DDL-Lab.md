@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Maintaining Partitioned Tables & Managing Indexes (`REBUILD`, `UNUSABLE`, `DROP`)
+# Hands-On Lab: Maintaining Partitioned Tables & Managing Indexes (`REBUILD`, `UNUSABLE`, `DROP`)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 2 of 4)  
@@ -7,14 +7,14 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Perform partition maintenance on the `training` range-partitioned table (`MOVE PARTITION`, `MERGE PARTITION`) and manage the `idx_bank_card` index (`REBUILD`, `UNUSABLE`, and `DROP INDEX CONCURRENTLY`).
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Move partition `training1` to tablespace `example3` (`ALTER TABLE training MOVE PARTITION training1 TABLESPACE example3;`) and merge `training1, training2` into `training3` (`ALTER TABLE training MERGE PARTITION training1, training2 INTO PARTITION training3;`).
 2. Step 2: Rebuild index `idx_bank_card` (`ALTER INDEX idx_bank_card REBUILD;`), mark it unusable (`ALTER INDEX idx_bank_card UNUSABLE;`), and drop it without locking the table (`DROP INDEX CONCURRENTLY idx_bank_card;`).
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Move partition training1 to example3 and merge training1, training2 into training3
 ALTER TABLE training ____ PARTITION training1 TABLESPACE example3;
@@ -27,7 +27,7 @@ DROP INDEX ____ idx_bank_card;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `MOVE PARTITION` and `MERGE PARTITION ... INTO PARTITION ...`.
 - Use `ALTER INDEX idx_bank_card REBUILD;`, `ALTER INDEX idx_bank_card UNUSABLE;`, and `DROP INDEX CONCURRENTLY idx_bank_card;`.
@@ -35,7 +35,7 @@ DROP INDEX ____ idx_bank_card;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -59,7 +59,7 @@ DROP INDEX
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [True / False]
 **(Official Ch.05 Quiz p. 446 Q1) When an index is created for a table, the corresponding base table is deleted if the index is canceled (dropped).**
@@ -68,7 +68,7 @@ DROP INDEX
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.05 p. 437 & p. 446). Dropping an index deletes only the index; the base table and its data remain intact.
@@ -83,7 +83,7 @@ DROP INDEX
 - D. UNUSABLE
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 05 (p. 437), `DROP INDEX CONCURRENTLY` deletes an index without locking the table, supports only one index name, does not support `CASCADE`, and cannot run within a transaction.
@@ -98,7 +98,7 @@ DROP INDEX
 - D. Dropping a single partition automatically deletes all other partitions and the entire partitioned table
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 05 (pp. 428, 432), A, B, and C are true. Option D is false: dropping a partition removes only that partition without affecting other partitions (whereas `DROP TABLE` deletes all partitions).

@@ -1,4 +1,4 @@
-# 📖 AI Capabilities — AI4DB (`X-Tuner`, `SQLdiag`, `Index-advisor`) & DB4AI (`DeepSQL`, Native DB4AI)
+# AI Capabilities — AI4DB (`X-Tuner`, `SQLdiag`, `Index-advisor`) & DB4AI (`DeepSQL`, Native DB4AI)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish the two sub-pillars of DBMind: AI4DB (X-Tuner, SQLdiag, Index-advisor, Anomaly-detection) and DB4AI (DeepSQL, Native DB4AI)
 - Operate X-Tuner (`recommend`, `train`, `tune`), SQLdiag (`train`, `predict`), and Index-advisor (`gs_index_advise`, `hypopg_create_index`, `index_advisor_workload.py`)
 - Describe DeepSQL (60+ ML/graph algorithms) and Native DB4AI (`CREATE MODEL`, `PREDICT BY`)
@@ -61,12 +61,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **X-Tuner runs in 3 modes: `recommend` (completes in seconds without DB restart), `train` (trains DRL model), and `tune` (uses DRL or global search algorithms).**
 - **SQLdiag predicts SQL execution time from historical logs using SQL vectorization and templates WITHOUT needing SQL execution plans.**
 - **Index-advisor provides 3 levels: `gs_index_advise('SELECT ...')` (single query), `hypopg_create_index(...)` with `SET enable_hypo_index = on` (virtual index), and `index_advisor_workload.py` (workload-level).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: After creating a virtual index with `hypopg_create_index()`, the optimizer will NOT use it in `EXPLAIN` unless you set `SET enable_hypo_index = on;` (default is `off`, Ch.03 p. 258)!
 
@@ -75,5 +75,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Index-Advisor-Virtual-Index-and-DB4AI-Lab.html`](./08-Exercise-Index-Advisor-Virtual-Index-and-DB4AI-Lab.html)** (or [`08-Exercise-Index-Advisor-Virtual-Index-and-DB4AI-Lab.md`](./08-Exercise-Index-Advisor-Virtual-Index-and-DB4AI-Lab.md)) to apply this concept in an interactive lab workbench!

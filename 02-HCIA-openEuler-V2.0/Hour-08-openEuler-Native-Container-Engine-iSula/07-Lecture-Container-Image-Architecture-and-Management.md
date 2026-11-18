@@ -1,4 +1,4 @@
-# 📖 Container Image Architecture (UnionFS, AUFS, OverlayFS) & Image Management (`isula images/pull/tag/rmi`)
+# Container Image Architecture (UnionFS, AUFS, OverlayFS) & Image Management (`isula images/pull/tag/rmi`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain the layered container image structure (read-only `rootfs` image layers up to 128 layers + read/write container layer) and Copy-on-Write (CoW)
 - Compare UnionFS implementations: AUFS (`aufs/diff` & `aufs/mnt`) vs. OverlayFS (`lowerdir`, `upperdir`, `merged`, `workdir`, `copy_up`, and whiteout/opaque files)
 - Parse image naming (`[registry/][path/]<imagename>[:tag]`) and manage images with `isula images`, `isula inspect`, `isula pull`, `isula tag`, and `isula rmi`
@@ -56,12 +56,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Container images encapsulate the OS rootfs and app dependencies while sharing the host OS kernel; an image is read-only/immutable and cannot exceed 128 layers.**
 - **OverlayFS uses four directories: lowerdir (R/O image layers), upperdir (R/W container layer), merged (unified container view), and workdir (invisible to users), using copy_up (CoW) for modifications and whiteout files / opaque directories for deletions.**
 - **In '[registry/][path/]<imagename>[:tag]', the default tag is 'latest'; manage images with 'isula images', 'isula pull', 'isula tag', 'isula inspect', and 'isula rmi' (Note: iSula does NOT support 'push'!).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.07 p.436): iSula supports 'isula pull', but DOES NOT support 'isula push'!
 
@@ -70,5 +70,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-iSula-Image-Pull-Tag-Inspect-Rmi-Lab.html`](./08-Exercise-iSula-Image-Pull-Tag-Inspect-Rmi-Lab.html)** (or [`08-Exercise-iSula-Image-Pull-Tag-Inspect-Rmi-Lab.md`](./08-Exercise-iSula-Image-Pull-Tag-Inspect-Rmi-Lab.md)) to apply this concept in an interactive lab workbench!

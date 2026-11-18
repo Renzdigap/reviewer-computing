@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Single-Node O&M (iBMA, iBMC & Smart Provisioning) Configuration
+# Hands-On Lab: Single-Node O&M (iBMA, iBMC & Smart Provisioning) Configuration
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure the single-node O&M mapping for iBMA, BOB, iBMC Advanced Edition, and Smart Provisioning toolbox operations.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `bob_cli_command` to `'bobCmd'` and `redfish_os_deploy_license` to `'Advanced Edition'`.
 2. Set `sp_fast_erase_target` to `'partitions of a logical drive'` and `sp_secure_erase_target` to `'all data on a physical drive'`.
 3. Set `ibmc_arm_chip` to `'Hi1710'`.
 
-### 📝 Starter Workspace (`om-eng@taishan-node:~#`)
+### Starter Workspace (`om-eng@taishan-node:~#`)
 ```bash
 # Single-Node Management (iBMA, iBMC, Smart Provisioning)
 in_band_ibma:
@@ -32,7 +32,7 @@ out_of_band_ibmc_sp:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - BOB provides the `bobCmd` CLI; Redfish OS deployment requires the iBMC Advanced Edition license.
 - Smart Provisioning Fast erasure erases 'partitions of a logical drive', while Secure erasure erases 'all data on a physical drive'.
@@ -40,7 +40,7 @@ out_of_band_ibmc_sp:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -69,7 +69,7 @@ out_of_band_ibmc_sp:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What is the technical difference between in-band management and out-of-band management in server O&M?**
@@ -80,7 +80,7 @@ out_of_band_ibmc_sp:
 - D. Out-of-band management is implemented exclusively by iBMA without iBMC.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** According to Ch.06 pp. 359 and 362, in-band management transmits both network management control information and carrier service information through a single logical channel, whereas out-of-band management uses separate channels for each.
@@ -95,7 +95,7 @@ out_of_band_ibmc_sp:
 - D. There is no difference between Fast mode and Secure mode.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.06 p.376, Fast mode erases partitions of a logical drive, while Secure mode erases all data on a physical drive.
@@ -110,7 +110,7 @@ out_of_band_ibmc_sp:
 - D. Forwarding in-band requests to the local iBMC via BOB (managed using the bobCmd CLI)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four functions are explicitly listed in the iBMA Functions table on Ch.06 pp. 360–361.

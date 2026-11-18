@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Searching Stale Logs, Packing `.tar.gz` Archives & Testing Links
+# Hands-On Lab: Searching Stale Logs, Packing `.tar.gz` Archives & Testing Links
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You need to locate all regular files in `/var/log/anaconda/` modified more than 7 days ago, pack all `.log` files in the current directory into `log.tar.gz` and extract them into `./log/`, and create both a hard link (`link_h_password`) and a soft link (`link_s_password`) to `passwd`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Search `/var/log/anaconda/` for regular files (`-type f`) with modification time earlier than 7 days (`-mtime +7`) using `find`.
 2. Step 2: Pack and compress `*.log` into `log.tar.gz` using `tar -zcf log.tar.gz *.log` and extract it to `./log/` using `tar -zxf log.tar.gz -C ./log/`.
 3. Step 3: Create a hard link `ln passwd link_h_password` and a soft link `ln -s passwd link_s_password`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Find regular files in /var/log/anaconda/ modified more than 7 days ago
 <find_command>
@@ -31,7 +31,7 @@ mkdir -p ./log
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `find /var/log/anaconda/ -type f -mtime +7`.
 - Use `tar -zcf log.tar.gz *.log` and `tar -zxf log.tar.gz -C ./log/`.
@@ -40,7 +40,7 @@ mkdir -p ./log
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -75,7 +75,7 @@ lrwxrwxrwx. 1 root root    6 Nov 17 09:35 link_s_password -> passwd
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **When you run `locate filename` on openEuler and receive the error `locate: can not open '/var/lib/mlocate/mlocate.db': No such file or directory`, which command should you run first to generate or update the index database?**
@@ -86,7 +86,7 @@ lrwxrwxrwx. 1 root root    6 Nov 17 09:35 link_s_password -> passwd
 - D. mkindex
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (pp.108–109), before running `locate` (or if `/var/lib/mlocate/mlocate.db` does not exist), you must run the `updatedb` command to generate/update the database.
@@ -101,7 +101,7 @@ lrwxrwxrwx. 1 root root    6 Nov 17 09:35 link_s_password -> passwd
 - D. -p for directory; -c, -x, -t for compression
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (p.113), `tar xf ball.tar -C /tmp` extracts to `/tmp`, and options `-z`, `-j`, and `-J` correspond to `gzip`, `bzip2`, and `xz` compression tools respectively.
@@ -116,7 +116,7 @@ lrwxrwxrwx. 1 root root    6 Nov 17 09:35 link_s_password -> passwd
 - D. Hard links support cross-file system linking by default.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.03 (pp.115–116), A, B, and C are true. Option D is false because hard links share an inode within a single file system and do NOT support cross-file system linking.

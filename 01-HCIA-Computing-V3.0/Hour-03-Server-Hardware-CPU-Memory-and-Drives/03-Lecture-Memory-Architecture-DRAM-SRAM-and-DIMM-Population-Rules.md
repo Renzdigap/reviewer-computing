@@ -1,4 +1,4 @@
-# 📖 Memory Architecture, DRAM/SRAM/ROM & DIMM Installation Rules
+# Memory Architecture, DRAM/SRAM/ROM & DIMM Installation Rules
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Identify the components of a memory module including the 8-pin 256-byte SPD EEPROM (24LC01B) and timing calibration register
 - Contrast DRAM (capacitor, periodic refresh, main memory) vs. SRAM (transistor latch, no refresh, CPU cache) vs. ROM/Flash
 - Master TaiShan 200 (2280) 32-slot (8-channel × 2 DPC) DDR4 DIMM installation and channel-balance rules
@@ -47,13 +47,13 @@ Memory (internal/main memory) acts as the communication bridge between external 
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **SPD (Serial Presence Detect, model 24LC01B) is an 8-pin, 256-byte EEPROM on a DIMM that stores speed, capacity, voltage, and manufacturer metadata read during startup.**
 - **DRAM uses capacitors and requires periodic refreshing (used for main memory); SRAM uses transistor latches, needs no refreshing, and is used for CPU L1/L2/L3 caches.**
 - **SIMM has a 32-bit data channel; DIMM has a 64-bit (8-byte) data channel.**
 - **TaiShan 200 (2280) has 32 DIMM slots (2 CPUs × 8 channels × 2 DIMMs/channel). All DIMMs must share the same P/N code, at least 1 DIMM must be on CPU 1, and configuring 3, 5, 7, 9, 10, 11, 12, 13, 14, or 15 DIMMs per CPU causes an unbalanced channel configuration.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse DRAM and SRAM! DRAM uses capacitors (needs periodic refresh -> main memory), while SRAM uses transistor latches (no refresh needed -> CPU cache).
 
@@ -62,5 +62,5 @@ Memory (internal/main memory) acts as the communication bridge between external 
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab.html`](./04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab.html)** (or [`04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab.md`](./04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Kunpeng HPC Solution, Workload Types & HPCKit Components
+# Kunpeng HPC Solution, Workload Types & HPCKit Components
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand the 3 paradigms of scientific research and classify HPC workloads into Memory-constrained, Computing-intensive, I/O-intensive, and Network-intensive
 - Master the components of HPCKit: Hyper MPI (Open MPI 4.1.1 + Open UCX 1.10.1, MPI-3.1), KML (FFT, matrix/vector), and BiSheng Compiler (LLVM + Fortran + Autotuner)
 - Analyze the Kunpeng Cloud HPC solution (PFS, 100G InfiniBand 1.5 us latency) and the petascale university supercomputing case study
@@ -53,12 +53,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Four HPC workload types (p. 273): Memory-constrained (numerical calculation/molecular dynamics), Computing-intensive (meteorology/earthquake/aerospace), I/O-intensive (animation rendering/gene analysis), and Network-intensive (CAE simulation).**
 - **HPCKit consists of Hyper MPI (Open MPI 4.1.1 + Open UCX 1.10.1, MPI-3.1), KML (Kunpeng Math Library: FFT, matrix, vector), and BiSheng Compiler (LLVM-based with Fortran front-end and Autotuner).**
 - **Kunpeng Cloud HPC uses Parallel File System (PFS) supporting both Object Storage and POSIX interfaces (-20% TCO) and 100G InfiniBand with 1.5 us latency.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not mix up the 4 HPC workload categories on p. 273: Gene analysis & animation rendering are I/O-INTENSIVE; CAE simulation is NETWORK-INTENSIVE; Meteorology/earthquake/aerospace are COMPUTING-INTENSIVE; Numerical calculation is MEMORY-CONSTRAINED!
 
@@ -67,5 +67,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-HPC-Application-Classification-and-HPCKit-Lab.html`](./08-Exercise-HPC-Application-Classification-and-HPCKit-Lab.html)** (or [`08-Exercise-HPC-Application-Classification-and-HPCKit-Lab.md`](./08-Exercise-HPC-Application-Classification-and-HPCKit-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Instance Architecture — Memory, Multi-Threading & Directory Layout
+# Instance Architecture — Memory, Multi-Threading & Directory Layout
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 03 — openGauss Architecture, Resource Pooling & High Performance (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish Shared Memory (`shared_buffers`, `cstore_buffers`, `wal_buffers`, `MOT`) from Session/Local Memory (`work_mem`, `maintenance_work_mem`, `temp_buffers`)
 - Describe the roles of core openGauss threads (`GaussMaster`, `pagewriter`, `bgwriter`, `walwriter`, `checkpointer`, `WalSender`, `WalReceiver`)
 - Navigate the logical storage hierarchy (Tablespace -> Database -> Datafile Segment -> 8 KB Block) and physical data directory (`base`, `global`, `pg_xlog`, `pg_clog`, `pg_audit`)
@@ -53,12 +53,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **In openGauss logical storage, a table exceeding 1 GB is split into multiple 1 GB datafile segments, and the default block size is 8 KB.**
 - **`pagewriter` writes dirty pages to the double-writer space first to prevent torn-page corruption, while `walwriter` flushes WAL buffers to `pg_xlog`.**
 - **`base/` holds per-database subdirectories, `global/` holds cluster-wide tables, `pg_xlog/` holds WAL files, and directory permissions are `0750` (program), `0700` (data dir), and `0600` (data/audit files).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Column-store tables rarely use `shared_buffers`; they use `cstore_buffers`! For column-store workloads, decrease `shared_buffers` and increase `cstore_buffers` (Ch.03 p. 136).
 
@@ -67,5 +67,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Memory-Threads-and-Data-Directory-Lab.html`](./02-Exercise-Memory-Threads-and-Data-Directory-Lab.html)** (or [`02-Exercise-Memory-Threads-and-Data-Directory-Lab.md`](./02-Exercise-Memory-Threads-and-Data-Directory-Lab.md)) to apply this concept in an interactive lab workbench!

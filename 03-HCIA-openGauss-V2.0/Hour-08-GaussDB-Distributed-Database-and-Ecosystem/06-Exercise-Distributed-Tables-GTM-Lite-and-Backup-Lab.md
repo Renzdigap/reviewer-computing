@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Designing Hash vs. Replication Distributed Tables in GaussDB
+# Hands-On Lab: Designing Hash vs. Replication Distributed Tables in GaussDB
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 3 of 4)  
@@ -7,14 +7,14 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 In a GaussDB distributed cluster, create a large fact table `orders_fact` distributed across shards by `HASH(order_id)` and a small lookup table `currency_dim` replicated on every shard using `DISTRIBUTE BY REPLICATION` so joins do not require network redistribution.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Create `orders_fact(order_id INT, cust_id INT, amount NUMERIC(10,2))` distributed by hash on `order_id` (`DISTRIBUTE BY HASH(order_id)`).
 2. Step 2: Create `currency_dim(curr_code CHAR(3), curr_name VARCHAR(20))` replicated across all shards (`DISTRIBUTE BY REPLICATION`).
 
-### 📝 Starter Workspace (`GaussDB=#`)
+### Starter Workspace (`GaussDB=#`)
 ```bash
 -- Step 1: Create large table orders_fact distributed by HASH on order_id
 CREATE TABLE orders_fact (
@@ -31,7 +31,7 @@ CREATE TABLE currency_dim (
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Large tables use `DISTRIBUTE BY HASH(order_id)`.
 - Small tables frequently joined with large tables use `DISTRIBUTE BY REPLICATION`.
@@ -39,7 +39,7 @@ CREATE TABLE currency_dim (
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -64,7 +64,7 @@ CREATE TABLE
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In GaussDB distributed storage between shards, which distribution mode stores a complete copy of a small table on every shard to improve distributed multi-table join performance?**
@@ -75,7 +75,7 @@ CREATE TABLE
 - D. List partitioning
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Chapter 06 (p. 497), Replication distribution is used for user tables with a small amount of data and stores all of the table's data in each shard, improving distributed multi-table join performance.
@@ -90,7 +90,7 @@ CREATE TABLE
 - D. `GTM-Free` mode requires every read query to lock all DNs in the cluster via the GTM
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 06 (p. 500), A, B, and C are true. Option D is false: `GTM-Free` does not connect to the GTM at all.
@@ -103,7 +103,7 @@ CREATE TABLE
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.06 p. 502). Although an incremental backup takes a shorter timeframe, a complete database can be restored ONLY after both the full backup and incremental backup are performed.

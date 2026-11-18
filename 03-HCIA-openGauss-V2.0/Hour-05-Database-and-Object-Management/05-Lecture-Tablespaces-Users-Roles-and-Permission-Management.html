@@ -404,13 +404,13 @@ p { margin-bottom: 10px; }
 <body>
   <div class="topbar">
     <div class="topbar-left">
-      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
-      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <a href="../../index.html" class="nav-btn">All Pillars</a>
+      <a href="../index.html" class="nav-btn">03-HCIA-openGauss-V2.0 Course Player</a>
       <span style="color:var(--text-muted);">|</span>
       <span>Hour 05 • Sprint 3/4</span>
     </div>
     <div class="topbar-right">
-      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">07:00</span>
       <a href="./04-Exercise-Memory-Optimized-Table-MOT-Lab.html" class="nav-btn">← Prev</a>
       <a href="./06-Exercise-Tablespaces-Users-Roles-and-Account-Lock-Lab.html" class="nav-btn">Next →</a>
     </div>
@@ -419,15 +419,15 @@ p { margin-bottom: 10px; }
   
         <div class="lecture-container">
           <div class="unit-badges">
-            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
-            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.04, pp. 306–321, 346</span>
-            <span class="badge badge-hour">⏱️ Hour 05 • Sprint 3/4</span>
-            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+            <span class="badge badge-lecture">BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">HCIA-openGauss V2.0 Training Material.pdf • Ch.04, pp. 306–321, 346</span>
+            <span class="badge badge-hour">Hour 05 • Sprint 3/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">Completed</span>
           </div>
           <h1 class="unit-title">Tablespaces, Users, Roles &amp; Permission Management</h1>
 
           <div class="objectives-card">
-            <h3>🎯 Learning Objectives</h3>
+            <h3>Learning Objectives</h3>
             <ul class="md-list"><li>Create, inspect, size, rename, and drop Tablespaces (<code class="inline-code">CREATE TABLESPACE ... RELATIVE LOCATION</code>, <code class="inline-code">PG_TABLESPACE_SIZE</code>, <code class="inline-code">\db</code>, 90% read-only threshold)</li><li>Explain why Users and Roles are NOT fully equivalent (Ch.04 Quiz Q1: False! Users have <code class="inline-code">LOGIN</code> by default, Roles do not)</li><li>Manage Users/Roles (<code class="inline-code">CREATE/ALTER/DROP USER/ROLE</code>), Account Validity (<code class="inline-code">VALID BEGIN ... VALID UNTIL</code>), Locking (<code class="inline-code">ACCOUNT LOCK/UNLOCK</code>), and Private Users (<code class="inline-code">WITH INDEPENDENT</code>)</li></ul>
           </div>
 
@@ -491,13 +491,13 @@ p { margin-bottom: 10px; }
           </div>
 
           <div class="takeaways-card">
-            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <h3>High-Yield Summary & Takeaways</h3>
             <ul class="md-list"><li>Users and roles have the same syntax in openGauss, but they are NOT fully equivalent (Ch.04 Quiz Q1: False) because <code class="inline-code">CREATE USER</code> includes <code class="inline-code">LOGIN</code> by default whereas <code class="inline-code">CREATE ROLE</code> does not.</li><li>If the disk hosting a tablespace reaches 90% usage, openGauss automatically switches to read-only mode.</li><li>For a Private User (<code class="inline-code">CREATE USER ... WITH INDEPENDENT</code>), DBAs can manage (<code class="inline-code">DROP</code>, <code class="inline-code">ALTER</code>, <code class="inline-code">TRUNCATE</code>) their objects but cannot access (<code class="inline-code">SELECT</code>, <code class="inline-code">INSERT</code>, <code class="inline-code">UPDATE</code>, <code class="inline-code">DELETE</code>, <code class="inline-code">COPY</code>) their data without authorization.</li></ul>
           </div>
 
           <div class="traps-card">
-            <h3>🚨 Huawei National Stage Exam Traps</h3>
-            <div class="trap-item">⚠️ EXAM TRAP (Ch.04 Quiz Q1): '(True or False) Users and roles have the same syntax in the openGauss database. Therefore, they are fully equivalent.' -&gt; B. False!</div><div class="trap-item">⚠️ EXAM TRAP: If a user owns database objects, <code class="inline-code">DROP USER username;</code> fails because <code class="inline-code">RESTRICT</code> is the default; you must use <code class="inline-code">DROP USER username CASCADE;</code> (Ch.04 p. 318).</div>
+            <h3>Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">EXAM TRAP (Ch.04 Quiz Q1): '(True or False) Users and roles have the same syntax in the openGauss database. Therefore, they are fully equivalent.' -&gt; B. False!</div><div class="trap-item">EXAM TRAP: If a user owns database objects, <code class="inline-code">DROP USER username;</code> fails because <code class="inline-code">RESTRICT</code> is the default; you must use <code class="inline-code">DROP USER username CASCADE;</code> (Ch.04 p. 318).</div>
           </div>
 
           <div class="unit-footer-cta">
@@ -506,7 +506,7 @@ p { margin-bottom: 10px; }
               <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
             </div>
             <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
-              ✓ Mark Lecture Completed & Start Exercise →
+              Mark Lecture Completed & Start Exercise →
             </button>
           </div>
         </div>
@@ -545,7 +545,7 @@ p { margin-bottom: 10px; }
       timerSecs--;
       const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
       const s = String(timerSecs % 60).padStart(2, '0');
-      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+      document.getElementById('timer-display').textContent = `${m}:${s}`;
     }, 1000);
     function toggleTimer() { timerRunning = !timerRunning; }
 
@@ -629,18 +629,18 @@ p { margin-bottom: 10px; }
         const stepEl = document.getElementById(`inst-step-${idx}`);
         if (passed) {
           if (stepEl) stepEl.classList.add('passed');
-          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+          logLines.push(`[PASS] Step ${chk.step || (idx+1)} : ${chk.description}`);
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
         }
       });
 
       const badge = document.getElementById('lab-status-badge');
       if (allPassed) {
         badge.className = 'status-pass';
-        badge.textContent = '✓ All Lab Steps Verified!';
+        badge.textContent = 'All Lab Steps Verified!';
         logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
         logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
         markUnitCompleted();
@@ -683,17 +683,17 @@ p { margin-bottom: 10px; }
           correctCount++;
           expEl.style.background = 'rgba(16, 185, 129, 0.14)';
           expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
-          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[CORRECT] (${target})!</strong> ${fmtText(q.explanation || '')}`;
         } else {
           expEl.style.background = 'rgba(225, 29, 72, 0.14)';
           expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
-          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[INCORRECT] Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
         }
       });
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

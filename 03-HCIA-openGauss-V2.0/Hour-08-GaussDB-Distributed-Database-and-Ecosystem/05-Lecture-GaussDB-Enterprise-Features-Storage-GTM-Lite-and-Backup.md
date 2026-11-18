@@ -1,4 +1,4 @@
-# 📖 GaussDB Enterprise Features — Distributed Storage, `GTM-Lite` & Physical/Logical Backup
+# GaussDB Enterprise Features — Distributed Storage, `GTM-Lite` & Physical/Logical Backup
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Contrast GaussDB two-layer distributed storage: inter-shard (`Hash distribution` vs `Replication distribution`) and intra-shard (`Quorum multi-copy`)
 - Compare `GTM-Lite` (strongly consistent, lock-free CSN) vs. `GTM-Free` (eventually consistent, no central node)
 - Distinguish GaussDB Physical Backup (full + incremental to OBS) from Logical Backup (streaming table extract to local disk/OBS in TEXT/CSV)
@@ -48,12 +48,12 @@ Traditional distributed databases maintain a global active transaction list on t
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Between shards, GaussDB uses Hash distribution for large tables and Replication distribution (a full copy on every shard) for small lookup tables to accelerate multi-table joins.**
 - **`GTM-Lite` provides strong global consistency using lock-free CSNs (replacing active transaction lists), whereas `GTM-Free` provides eventual consistency without connecting to GTM for perfectly sharded OLTP.**
 - **Physical backup writes internal-format cluster files to OBS for homogeneous restore (Full + Incremental), whereas Logical backup streams user tables in TEXT/CSV to local disk or OBS for homogeneous or heterogeneous restore.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Can you restore a complete database using ONLY an incremental physical backup? No! A complete database can be restored only when BOTH the full backup and incremental backups are used together (Ch.06 p. 502).
 
@@ -62,5 +62,5 @@ Traditional distributed databases maintain a global active transaction list on t
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Distributed-Tables-GTM-Lite-and-Backup-Lab.html`](./06-Exercise-Distributed-Tables-GTM-Lite-and-Backup-Lab.html)** (or [`06-Exercise-Distributed-Tables-GTM-Lite-and-Backup-Lab.md`](./06-Exercise-Distributed-Tables-GTM-Lite-and-Backup-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Cloud Computing Architecture, Evolution & Service Models
+# Cloud Computing Architecture, Evolution & Service Models
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master the NIST definition of cloud computing and its 5 core benefits
 - Compare the First, Second, and Third IT Platforms and Cloud 1.0, 2.0, and 3.0 phases
 - Distinguish IaaS, PaaS, and SaaS responsibility boundaries and Private, Public, and Hybrid cloud deployment models
@@ -56,12 +56,12 @@ Enterprise data centers are transforming in 5 ways: from **resource silos to res
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The Third Platform (from 2012: Cloud, Big Data, Mobile Internet, IoT) overtook the Second Platform in 2015.**
 - **Cloud 1.0 is virtualization-centric (ESXi, KVM, Xen, Hyper-V); Cloud 2.0 is resource-centric (OpenStack); Cloud 3.0 is application-centric (Docker, Cloud Foundry, Cloud Native).**
 - **In IaaS, users manage OS, Middleware, Runtime, Data, and Applications; in PaaS, users only manage Applications and Data; in SaaS, the cloud platform manages all layers.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In IaaS, the Operating System (OS) is managed by the USER, whereas Virtualization is managed by the Cloud Platform. In PaaS, the OS and Middleware are managed by the Cloud Platform.
 
@@ -70,5 +70,5 @@ Enterprise data centers are transforming in 5 ways: from **resource silos to res
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Cloud-Service-and-Deployment-Classification.html`](./04-Exercise-Cloud-Service-and-Deployment-Classification.html)** (or [`04-Exercise-Cloud-Service-and-Deployment-Classification.md`](./04-Exercise-Cloud-Service-and-Deployment-Classification.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 DML Statements — `INSERT`, `UPDATE` & `DELETE`
+# DML Statements — `INSERT`, `UPDATE` & `DELETE`
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 06 — SQL Basics — Classification, Data Types, DQL, Joins & DML (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master the 3 forms of `INSERT` (`INSERT ... VALUES`, `INSERT ... SELECT`, and `INSERT ... ON DUPLICATE KEY UPDATE` / `INSERT IGNORE`)
 - Write `UPDATE table SET col = expr [WHERE condition]` statements (`UPDATE STAFFS SET AGE = AGE + 5` — Ch.05 Quiz Q1!)
 - Write `DELETE FROM table [WHERE condition]` statements (`DELETE FROM student WHERE cid = 6;` — Ch.05 Quiz Q3!) and know column-store DML limitations
@@ -69,12 +69,12 @@ DELETE FROM [schema_name.]table_name [ WHERE condition ];
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **To increment `AGE` by 5 in `STAFFS`, use `UPDATE STAFFS SET AGE = AGE + 5;` (Ch.05 p. 405 Quiz Q1: C).**
 - **To delete rows where `cid = 6` from `student`, use `DELETE FROM student WHERE cid = 6;` — there is NO `*` between `DELETE` and `FROM`, and the filter uses `WHERE`, not `ON` (Ch.05 p. 406 Quiz Q3: A).**
 - **`INSERT ... ON DUPLICATE KEY UPDATE` updates specified columns when a primary/unique key conflict occurs, and cannot be combined with `INSERT IGNORE`.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 p. 406 Quiz Q3): `DELETE * FROM student WHERE cid = 6;` (B) is INVALID SQL! `DELETE` deletes entire rows, so `*` is never used after `DELETE`. The correct statement is `DELETE FROM student WHERE cid = 6;` (A).
 
@@ -83,5 +83,5 @@ DELETE FROM [schema_name.]table_name [ WHERE condition ];
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-DML-INSERT-ON-DUPLICATE-UPDATE-and-DELETE-Lab.html`](./08-Exercise-DML-INSERT-ON-DUPLICATE-UPDATE-and-DELETE-Lab.html)** (or [`08-Exercise-DML-INSERT-ON-DUPLICATE-UPDATE-and-DELETE-Lab.md`](./08-Exercise-DML-INSERT-ON-DUPLICATE-UPDATE-and-DELETE-Lab.md)) to apply this concept in an interactive lab workbench!

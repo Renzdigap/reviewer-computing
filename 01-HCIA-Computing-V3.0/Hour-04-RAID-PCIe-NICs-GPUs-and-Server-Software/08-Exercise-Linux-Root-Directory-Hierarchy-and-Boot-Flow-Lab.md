@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Linux Root Directory Inspection & OS Call Chain
+# Hands-On Lab: Linux Root Directory Inspection & OS Call Chain
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 04 — RAID Arrays, PCIe Bus, NICs/iNICs, GPU/NPU, Power/Cooling & Server Software (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Inspect the openEuler root filesystem (`/`) and verify the exact standard directories for configuration files, peripheral devices, temporary mounts, and third-party software packages.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Run `ls /` to list the top-level directories under the root filesystem.
 2. Set `CONFIG_DIR` to `'/etc'`, `DEVICE_DIR` to `'/dev'`, `TEMP_MOUNT_DIR` to `'/mnt'`, and `THIRD_PARTY_APP_DIR` to `'/opt'`.
 3. Set `POSIX_IEEE_STANDARD` to `'IEEE 1003'`.
 
-### 📝 Starter Workspace (`root@openeuler:~#`)
+### Starter Workspace (`root@openeuler:~#`)
 ```bash
 # 1. List all directories under the root filesystem:
 ___
@@ -29,7 +29,7 @@ POSIX_IEEE_STANDARD="___"
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `ls /` to list the root directory.
 - `/etc` holds configuration files, `/dev` holds device files, `/mnt` is the temporary manual mount directory, `/opt` holds additional application software, and POSIX is IEEE 1003.
@@ -37,7 +37,7 @@ POSIX_IEEE_STANDARD="___"
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -62,7 +62,7 @@ boot  etc  lib   lost+found  mnt    proc  run   srv   tmp  var
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In the Linux file directory structure, which directory stores all system management configuration files, and which directory is used to store additional third-party application software (such as an Oracle installation package)?**
@@ -73,7 +73,7 @@ boot  etc  lib   lost+found  mnt    proc  run   srv   tmp  var
 - D. /boot (configuration files) and /media (additional software)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 p.219, `/etc` stores all configuration files and subdirectories required for system management, and `/opt` stores additional application software installed on the host (empty by default).
@@ -88,7 +88,7 @@ boot  etc  lib   lost+found  mnt    proc  run   srv   tmp  var
 - D. Secure startup (Secure Boot)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four options list the official features of UEFI on Ch.03 p.205: Large drive capacity, High efficiency, 64-bit system, Easy batch installation, Fast boot and recovery from hibernation, and Secure startup.
@@ -103,7 +103,7 @@ boot  etc  lib   lost+found  mnt    proc  run   srv   tmp  var
 - D. EulerOS was open-sourced by Huawei in 1994 and renamed MINIX.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `D`
 - **Explanation:** D is false because EulerOS was open-sourced by Huawei in 2019 and named openEuler, whereas MINIX was released in 1987 as an educational Unix-like OS (Ch.03, pp. 214, 217).

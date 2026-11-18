@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Numbering Non-Blank Lines (`cat -b`), `head` Offsets & `tail -f` Log Tracing
+# Hands-On Lab: Numbering Non-Blank Lines (`cat -b`), `head` Offsets & `tail -f` Log Tracing
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are inspecting system configuration and log files on openEuler. Number all non-blank lines of `/etc/profile`, extract the first 3 lines of `/etc/passwd`, extract `/etc/passwd` excluding the last 40 lines, and view the last 3 lines of `/etc/passwd`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: View `/etc/profile` and number only non-blank lines starting from 1 using `cat -b /etc/profile`.
 2. Step 2: Display the first 3 lines of `/etc/passwd` using `head -n 3 /etc/passwd`, and display `/etc/passwd` excluding the last 40 lines using `head -n -40 /etc/passwd`.
 3. Step 3: Display the last 3 lines of `/etc/passwd` using `tail -n 3 /etc/passwd`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Display /etc/profile with non-blank line numbers
 <cat_nonblank_command>
@@ -29,7 +29,7 @@ You are inspecting system configuration and log files on openEuler. Number all n
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `cat -b /etc/profile` to number only non-blank lines.
 - Use `head -n 3 /etc/passwd` and `head -n -40 /etc/passwd`.
@@ -38,7 +38,7 @@ You are inspecting system configuration and log files on openEuler. Number all n
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ openeuler:x:1000:1000:openEuler:/home/openeuler:/bin/bash
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **[Official Ch.03 Quiz Q1] How many lines of a file are displayed by default when using the `head` command?**
@@ -81,7 +81,7 @@ openeuler:x:1000:1000:openEuler:/home/openeuler:/bin/bash
 - D. 20
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Official Ch.03 Quiz Q1 (p.151): B (10). By default, both `head` and `tail` display 10 lines of a file.
@@ -96,7 +96,7 @@ openeuler:x:1000:1000:openEuler:/home/openeuler:/bin/bash
 - D. `more +3 file` and `less -3 file`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Per Ch.03 (p.97 & p.101), `tail -n +3 file` reads data from the 3rd line to the end of the file, while `head -n -3 file` reads all lines except the last three.
@@ -111,7 +111,7 @@ openeuler:x:1000:1000:openEuler:/home/openeuler:/bin/bash
 - D. `tail -f` reads log files cyclically for real-time log monitoring.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.03 (pp.101–104, 135–142), all four statements are accurate.

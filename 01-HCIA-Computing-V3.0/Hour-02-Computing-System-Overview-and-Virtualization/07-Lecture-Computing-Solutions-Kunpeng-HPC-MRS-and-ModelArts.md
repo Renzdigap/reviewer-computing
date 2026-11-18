@@ -1,4 +1,4 @@
-# 📖 Computing System Solutions: Kunpeng HPC, Huawei Cloud MRS & ModelArts
+# Computing System Solutions: Kunpeng HPC, Huawei Cloud MRS & ModelArts
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master the full-stack Kunpeng HPC architecture (Hardware platform, DonauKit, HPCKit, DevKit)
 - Distinguish open-source vs. commercial software ecosystems across HPC industries (Ch.02 Quiz Q3 trap!)
 - Understand Huawei Cloud Big Data Solution (MRS, DWS, DLI, DataArts Studio, GES, CSS) and ModelArts AI platform
@@ -47,17 +47,17 @@ Most software in the HPC ecosystem is **open source**, while **commercial closed
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Kunpeng HPC hardware platform uses OceanStor Pacific / OceanDisk with OceanFS for storage, and RoCE v2 / Lingqu for networking.**
 - **DonauKit provides Donau Portal (cluster management) and Donau Scheduler (job scheduling); HPCKit provides Hyper MPI, KML, and BiSheng Compiler.**
 - **Education/scientific research, meteorology, and life sciences mainly use OPEN-SOURCE software (>80%), whereas Manufacturing, EDA, and Oil & Gas mainly use COMMERCIAL software!**
 - **Huawei Cloud MRS runs open-source big data components (HBase, Kafka, Spark, Hive, Flink), and ModelArts is a one-stop AI development platform.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.02 Quiz Q3): Option B states 'Most applications in the education and scientific research fields are closed-source.' -> FALSE! Over 80% of applications in education/scientific research, meteorology, and life sciences are OPEN-SOURCE. Only manufacturing/EDA/oil & gas are mainly commercial/closed-source!
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Kunpeng-HPC-and-Cloud-BigData-Solution-Lab.html`](./08-Exercise-Kunpeng-HPC-and-Cloud-BigData-Solution-Lab.html)** (or [`08-Exercise-Kunpeng-HPC-and-Cloud-BigData-Solution-Lab.md`](./08-Exercise-Kunpeng-HPC-and-Cloud-BigData-Solution-Lab.md)) to apply this concept in an interactive lab workbench!

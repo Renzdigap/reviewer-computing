@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Kickstart & Partitioning Specification for openEuler 24.03 LTS
+# Hands-On Lab: Kickstart & Partitioning Specification for openEuler 24.03 LTS
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are preparing an automated Kickstart configuration (`anaconda-ks.cfg`) for a batch of openEuler 24.03 LTS UEFI servers with 4 GB RAM. Complete the partition and environment rules.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Specify the automated batch installation tool name (`Kickstart`) in the header comment.
 2. Step 2: Define the four recommended partitions: `/boot`, `/boot/efi`, `swap` (sized at 2x RAM = `8192` MB), and `/`.
 3. Step 3: Select one of the three official software base environments (`Minimum installation`, `Server`, or `Hypervisor`).
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Batch Automation Tool: <tool_name>
 part /boot --fstype="ext4" --size=1024
@@ -26,7 +26,7 @@ ENVIRONMENT="<Minimum installation | Server | Hypervisor>"
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - The automated installation tool in openEuler/RedHat Anaconda is `Kickstart`.
 - UEFI boot partitions mount at `/boot/efi`, virtual memory is `swap`, and the root partition is `/`.
@@ -35,7 +35,7 @@ ENVIRONMENT="<Minimum installation | Server | Hypervisor>"
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -62,7 +62,7 @@ ENVIRONMENT="Server"
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [True / False]
 **[Official Ch.02 Quiz Q1] You do not need to specify the password of the root user during the openEuler OS installation. However, you must specify the password of the root user when logging in to the OS after the installation.**
@@ -71,7 +71,7 @@ ENVIRONMENT="Server"
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Official Ch.02 Quiz Q1 (p.52): Marked as A (True) in the official Huawei training material answer key.
@@ -86,7 +86,7 @@ ENVIRONMENT="Server"
 - D. Windows Subsystem
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.02 (p.44), openEuler 24.03 LTS supports three software installation base options: Minimum installation, Server, and Hypervisor.
@@ -101,7 +101,7 @@ ENVIRONMENT="Server"
 - D. PuTTY
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.02 (p.39), you can use the Kickstart tool to automatically install openEuler in semi-automatic or full automation mode for batch installations.

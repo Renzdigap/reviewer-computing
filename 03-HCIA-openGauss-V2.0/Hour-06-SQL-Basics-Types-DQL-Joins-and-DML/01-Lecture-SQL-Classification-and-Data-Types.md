@@ -1,4 +1,4 @@
-# 📖 SQL Classification (DDL, DML, DCL, DQL) & Data Types
+# SQL Classification (DDL, DML, DCL, DQL) & Data Types
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 06 — SQL Basics — Classification, Data Types, DQL, Joins & DML (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Classify SQL commands into DDL (`CREATE`, `ALTER`, `DROP`, `TRUNCATE`), DML (`INSERT`, `UPDATE`, `DELETE`), DCL (`COMMIT`, `ROLLBACK`, `GRANT`, `REVOKE`, `LOCK TABLE`), and DQL (`SELECT`)
 - Memorize exact storage byte sizes for Integer, Serial, Floating-Point, Arbitrary-Precision, Character, Date/Time, Binary, and Boolean types
 - Avoid the classic exam traps on `BIGINT` (8 bytes, NOT 4 bytes — Ch.05 Quiz!) and `CLOB` (large `TEXT` object — Ch.05 Quiz!)
@@ -47,12 +47,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **`TINYINT` = 1 byte, `SMALLINT` = 2 bytes, `INTEGER` (`BINARY_INTEGER`) = 4 bytes, and `BIGINT` = 8 bytes (Ch.05 p. 372 Quiz Q1: `BIGINT occupies four bytes` is FALSE!).**
 - **`CLOB` is an alias of `TEXT` (up to 1 GB minus 1 byte) used to store large character/text objects (Ch.05 p. 372 Quiz Q2: TRUE!).**
 - **`INSERT, UPDATE, DELETE` are DML commands (p. 405 Quiz Q2), whereas `CREATE, DROP, ALTER` are DDL commands (p. 446 Quiz Q2).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 p. 372 Quiz Q1): '(True or false) BIGINT occupies four bytes.' -> B. False! `BIGINT` (`INT8`) occupies EIGHT (8) bytes (`INTEGER`/`INT4` occupies 4 bytes).
 
@@ -61,5 +61,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-SQL-Data-Types-and-Storage-Sizes-Lab.html`](./02-Exercise-SQL-Data-Types-and-Storage-Sizes-Lab.html)** (or [`02-Exercise-SQL-Data-Types-and-Storage-Sizes-Lab.md`](./02-Exercise-SQL-Data-Types-and-Storage-Sizes-Lab.md)) to apply this concept in an interactive lab workbench!

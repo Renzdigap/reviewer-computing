@@ -404,13 +404,13 @@ p { margin-bottom: 10px; }
 <body>
   <div class="topbar">
     <div class="topbar-left">
-      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
-      <a href="../index.html" class="nav-btn">📚 02-HCIA-openEuler-V2.0 Course Player</a>
+      <a href="../../index.html" class="nav-btn">All Pillars</a>
+      <a href="../index.html" class="nav-btn">02-HCIA-openEuler-V2.0 Course Player</a>
       <span style="color:var(--text-muted);">|</span>
       <span>Hour 01 • Sprint 3/4</span>
     </div>
     <div class="topbar-right">
-      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">07:00</span>
       <a href="./04-Exercise-openEuler-Releases-and-Licenses-Lab.html" class="nav-btn">← Prev</a>
       <a href="./06-Exercise-openEuler-Installation-and-Partition-Plan-Lab.html" class="nav-btn">Next →</a>
     </div>
@@ -419,15 +419,15 @@ p { margin-bottom: 10px; }
   
         <div class="lecture-container">
           <div class="unit-badges">
-            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
-            <span class="badge badge-ref">📄 HCIA-openEuler V2.0 Training Material.pdf • Ch.02, pp. 38–45, 52</span>
-            <span class="badge badge-hour">⏱️ Hour 01 • Sprint 3/4</span>
-            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+            <span class="badge badge-lecture">BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">HCIA-openEuler V2.0 Training Material.pdf • Ch.02, pp. 38–45, 52</span>
+            <span class="badge badge-hour">Hour 01 • Sprint 3/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">Completed</span>
           </div>
           <h1 class="unit-title">Installing openEuler OS, Hardware Architectures &amp; Partition Planning</h1>
 
           <div class="objectives-card">
-            <h3>🎯 Learning Objectives</h3>
+            <h3>Learning Objectives</h3>
             <ul class="md-list"><li>Identify the 6 processor architectures and 4 application scenarios supported by openEuler</li><li>Distinguish manual installation (USB, CD-ROM, Virtual CD-ROM/ISO) vs. batch automated installation using Kickstart</li><li>Configure recommended boot/system partitions (/, /boot, /boot/efi, swap) and Software Selection profiles (Minimum, Server, Hypervisor)</li></ul>
           </div>
 
@@ -482,13 +482,13 @@ p { margin-bottom: 10px; }
           </div>
 
           <div class="takeaways-card">
-            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <h3>High-Yield Summary & Takeaways</h3>
             <ul class="md-list"><li>openEuler supports 6 processor architectures: x86, Arm, SW64, RISC-V, LoongArch, and PowerPC, across 4 scenarios: Server, Cloud, Edge, and Embedded.</li><li>For batch automated installations, openEuler uses the Kickstart tool (semi-automatic or full automation).</li><li>Recommended partitions are /, /boot, /boot/efi, and swap (set swap to 2x RAM when memory is small); software selection offers Minimum installation, Server, and Hypervisor.</li></ul>
           </div>
 
           <div class="traps-card">
-            <h3>🚨 Huawei National Stage Exam Traps</h3>
-            <div class="trap-item">⚠️ EXAM TRAP (Official Ch.02 Quiz Q1 Verbatim Key): In the official Ch.02 Quiz (p.52), the statement 'You do not need to specify the password of the root user during the openEuler OS installation. However, you must specify the password of the root user when logging in to the OS after the installation' is keyed as A (True). Memorize this exact official answer key!</div><div class="trap-item">⚠️ EXAM TRAP: At the GRUB installation menu, pressing 'e' edits the selected boot item, while pressing 'c' opens a command prompt.</div>
+            <h3>Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">EXAM TRAP (Official Ch.02 Quiz Q1 Verbatim Key): In the official Ch.02 Quiz (p.52), the statement 'You do not need to specify the password of the root user during the openEuler OS installation. However, you must specify the password of the root user when logging in to the OS after the installation' is keyed as A (True). Memorize this exact official answer key!</div><div class="trap-item">EXAM TRAP: At the GRUB installation menu, pressing 'e' edits the selected boot item, while pressing 'c' opens a command prompt.</div>
           </div>
 
           <div class="unit-footer-cta">
@@ -497,7 +497,7 @@ p { margin-bottom: 10px; }
               <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
             </div>
             <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
-              ✓ Mark Lecture Completed & Start Exercise →
+              Mark Lecture Completed & Start Exercise →
             </button>
           </div>
         </div>
@@ -536,7 +536,7 @@ p { margin-bottom: 10px; }
       timerSecs--;
       const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
       const s = String(timerSecs % 60).padStart(2, '0');
-      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+      document.getElementById('timer-display').textContent = `${m}:${s}`;
     }, 1000);
     function toggleTimer() { timerRunning = !timerRunning; }
 
@@ -620,18 +620,18 @@ p { margin-bottom: 10px; }
         const stepEl = document.getElementById(`inst-step-${idx}`);
         if (passed) {
           if (stepEl) stepEl.classList.add('passed');
-          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+          logLines.push(`[PASS] Step ${chk.step || (idx+1)} : ${chk.description}`);
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
         }
       });
 
       const badge = document.getElementById('lab-status-badge');
       if (allPassed) {
         badge.className = 'status-pass';
-        badge.textContent = '✓ All Lab Steps Verified!';
+        badge.textContent = 'All Lab Steps Verified!';
         logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
         logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
         markUnitCompleted();
@@ -674,17 +674,17 @@ p { margin-bottom: 10px; }
           correctCount++;
           expEl.style.background = 'rgba(16, 185, 129, 0.14)';
           expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
-          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[CORRECT] (${target})!</strong> ${fmtText(q.explanation || '')}`;
         } else {
           expEl.style.background = 'rgba(225, 29, 72, 0.14)';
           expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
-          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[INCORRECT] Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
         }
       });
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

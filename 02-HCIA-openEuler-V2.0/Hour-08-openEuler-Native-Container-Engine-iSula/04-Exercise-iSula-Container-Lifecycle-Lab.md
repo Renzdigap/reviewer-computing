@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Running, Exec-ing, Inspecting & Forcibly Removing `iSula` Containers
+# Hands-On Lab: Running, Exec-ing, Inspecting & Forcibly Removing `iSula` Containers
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are deploying an `nginx` web container using `iSula` on openEuler (following Ch.07 pp. 408–417). Start a background container named `test` mapping host port `8081` to container port `80` with environment variable `A=100`, execute `/bin/bash` inside `test` using `isula exec -it`, list the latest 2 containers, and forcibly delete container `test`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Run `nginx` in the background (`-d`) named `test` (`--name test`) with port mapping `-p 8081:80` and environment variable `-e A=100` (`isula run -d --name test -p 8081:80 -e A=100 nginx`).
 2. Step 2: Execute an interactive shell in container `test` using `isula exec -it test /bin/bash` and list the latest 2 containers using `isula ps -n 2`.
 3. Step 3: Forcibly remove the running container `test` using `isula rm -f test`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Run nginx in background named 'test' with -p 8081:80 and -e A=100
 <isula_run_command>
@@ -29,7 +29,7 @@ You are deploying an `nginx` web container using `iSula` on openEuler (following
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `isula run -d --name test -p 8081:80 -e A=100 nginx`.
 - Use `isula exec -it test /bin/bash` and `isula ps -n 2` (Ch.07 pp.412–413).
@@ -38,7 +38,7 @@ You are deploying an `nginx` web container using `iSula` on openEuler (following
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -66,7 +66,7 @@ test
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **[Official Ch.07 Quiz Q1] Which of the following are container states?**
@@ -77,7 +77,7 @@ test
 - D. Paused
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Official Ch.07 Quiz Q1 (p.439): ABCD. All four—`Created`, `Exited`, `Up`, and `Paused`—are valid container states in iSula.
@@ -92,7 +92,7 @@ test
 - D. `/etc/fstab` > `/etc/bashrc` > CLI
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Ch.07 (p.401), `iSulad` configuration priority from highest to lowest is: CLI > configuration file (`/etc/isulad/daemon.json`) > default configurations in code.
@@ -107,7 +107,7 @@ test
 - D. Default: `unless-stopped`; Exception policy: `always`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.07 (p.416), `no` (do not restart when exited) is used by default, and `unless-stopped` always restarts the container when it exits except for containers that were already stopped when the `iSulad` daemon started.

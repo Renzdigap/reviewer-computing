@@ -1,4 +1,4 @@
-# 📖 Logical Structure & Core Objects (Databases, Schemas, Tables, Views, Indexes, Transactions)
+# Logical Structure & Core Objects (Databases, Schemas, Tables, Views, Indexes, Transactions)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 05 — Database & Object Management (MOT, Tablespaces, Users/Roles, Backup/Export) (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Navigate the logical hierarchy (Tablespace -> Database -> Schema -> Table -> Datafile Segment -> 8 KB Block)
 - Use `gsql` meta-commands (`\h`, `\c`, `\l`, `\dt`, `\d`, `\db`) and manage Schemas (`public`, `pg_temp`), Views, and Indexes
 - Contrast `READ COMMITTED` (statement-level snapshot, default) and `REPEATABLE READ` (transaction-level snapshot) isolation levels
@@ -52,12 +52,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **When `CREATE USER` is executed, openGauss automatically creates a schema with the same name as the user in the current database.**
 - **Schemas cannot be nested, and internal schemas starting with `pg_temp` or `pg_toast_temp` must never be dropped.**
 - **At `READ COMMITTED` (default), each statement takes a fresh snapshot; at `REPEATABLE READ`, the transaction uses the snapshot taken at the start of the transaction.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: A view is a virtual table — the database stores ONLY the view definition, NOT the view data (except materialized views).
 
@@ -66,5 +66,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Schemas-Views-Indexes-and-Isolation-Lab.html`](./02-Exercise-Schemas-Views-Indexes-and-Isolation-Lab.html)** (or [`02-Exercise-Schemas-Views-Indexes-and-Isolation-Lab.md`](./02-Exercise-Schemas-Views-Indexes-and-Isolation-Lab.md)) to apply this concept in an interactive lab workbench!

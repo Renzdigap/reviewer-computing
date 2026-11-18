@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Virtual DVD-ROM Mounting & openEuler 22.03 LTS Partitioning
+# Hands-On Lab: Virtual DVD-ROM Mounting & openEuler 22.03 LTS Partitioning
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure the Kickstart/Anaconda installation parameters for deploying `openEuler-22.03-LTS-aarch64-dvd.iso` on a TaiShan 200 (2280) server via the iBMC Remote Virtual Console.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `iso_boot_option` to `'DVD-ROM drive'` and `iso_filename` to `'openEuler-22.03-LTS-aarch64-dvd.iso'`.
 2. Set `manual_partition_mode` to `'Custom'`.
 3. Specify the EFI partition mount point as `'/boot/efi'` and root partition mount point as `'/'`.
 
-### 📝 Starter Workspace (`anaconda@openeuler-installer:~#`)
+### Starter Workspace (`anaconda@openeuler-installer:~#`)
 ```bash
 # openEuler 22.03 LTS AArch64 Installation Spec
 virtual_media_boot:
@@ -34,7 +34,7 @@ storage_partitioning:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Mounting `openEuler-22.03-LTS-aarch64-dvd.iso` uses the 'DVD-ROM drive' boot option (Ch.05 Quiz Q1).
 - Manual partitioning is enabled by choosing 'Custom' under Storage Configuration, with `/boot/efi`, `/boot`, `swap`, and `/`.
@@ -42,7 +42,7 @@ storage_partitioning:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -73,7 +73,7 @@ storage_partitioning:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **(Official Ch.05 Quiz Q1) To install the OS using the openEuler-22.03-LTS-aarch64-dvd.iso file, which of the following boot options needs to be used?**
@@ -84,7 +84,7 @@ storage_partitioning:
 - D. PXE
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 p.329 and p.346 Quiz Q1, when mounting an ISO image (`openEuler-22.03-LTS-aarch64-dvd.iso`) via the virtual console, you must select the DVD-ROM drive boot option.
@@ -99,7 +99,7 @@ storage_partitioning:
 - D. Only PS/2 keyboard compatibility
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 pp. 327–328, before installing an OS on a server, you must check the OS compatibility and component compatibility of the server using the Kunpeng Computing Compatibility Checker.
@@ -112,7 +112,7 @@ storage_partitioning:
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True. According to Ch.05 p.331, partitions are configured automatically by default, and you can choose 'Custom' under Storage Configuration for manual partitioning.

@@ -1,4 +1,4 @@
-# 📖 System Software: Operating Systems, Middleware & Databases
+# System Software: Operating Systems, Middleware & Databases
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand OS architecture (System Call Layer + Kernel) and compare Linux vs. Windows Server 2022 Standard and Datacenter editions
 - Differentiate JBoss, Tomcat, WebLogic, and WebSphere middleware
 - Master DBS components, Hierarchical vs. Network vs. Relational models, OLTP vs. OLAP, and 4-socket Kunpeng openGauss server sizing
@@ -52,13 +52,13 @@ Middleware connects system software (OS) and application software across differe
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Windows Server 2022 Datacenter supports unlimited VMs, SDN, Storage Spaces Direct, and Network Controller; Standard supports only 2 VMs per license.**
 - **Tomcat supports Servlet/JSP but does NOT support EJB (use JBoss under LGPL or commercial WebLogic/WebSphere for EJB).**
 - **Hierarchical model allows only 1 parent per node; Network model allows a node to have >1 parent and >1 root node.**
 - **When selecting a database server CPU, peak CPU load must not exceed 85%.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.02 Quiz Q2): Page 98 explicitly states under 'Network model': 'Allows more than one node to have no parent. A node can have more than one parent.' (Note that p.124 slide notes had a typo listing C; in standard Huawei exams, Network model is the multi-parent graph model).
 
@@ -67,5 +67,5 @@ Middleware connects system software (OS) and application software across differe
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Database-Models-OLTP-OLAP-and-Sizing-Lab.html`](./04-Exercise-Database-Models-OLTP-OLAP-and-Sizing-Lab.html)** (or [`04-Exercise-Database-Models-OLTP-OLAP-and-Sizing-Lab.md`](./04-Exercise-Database-Models-OLTP-OLAP-and-Sizing-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Table Partitioning, Kunpeng NUMA Optimization, SMP & High Availability / Ultimate RTO
+# Table Partitioning, Kunpeng NUMA Optimization, SMP & High Availability / Ultimate RTO
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 03 — openGauss Architecture, Resource Pooling & High Performance (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Create and manage Range, List, and Hash partitioned tables and `LOCAL`/`GLOBAL` partitioned indexes
 - Explain Kunpeng 920 NUMA optimizations (`numactl -H`, ARMv8.1 `casal` atomic instruction, core binding) and SMP (`query_dop`)
 - Execute Primary/Standby `switchover` vs `failover` (`gs_ctl`, `gs_om -t refreshconf`), configure Ultimate RTO (`recovery_parse_workers`, `recovery_parallelism`), and describe Logical Replication
@@ -69,12 +69,12 @@ openGauss horizontally splits a table into non-overlapping physical partitions t
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **On Kunpeng 920 (ARMv8.1 LSE), replacing `ldxr`/`stlxr` (4 instructions) with the single atomic `casal` instruction boosts TPC-C throughput from 1.34M to 1.51M tpmC (+10%).**
 - **RPO (Recovery Point Objective) is data-oriented (tolerable data loss), whereas RTO (Recovery Time Objective) is application-oriented (tolerable service downtime).**
 - **After running `gs_ctl switchover -D <datadir>` or `gs_ctl failover -D <datadir>` on the standby node, you MUST run `gs_om -t refreshconf` to update the dynamic configuration file.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Parallel recovery (Ultimate RTO) is active ONLY when BOTH `recovery_parse_workers > 1` and `recovery_parallelism > 1`, and cascaded standby nodes are NOT supported when Ultimate RTO is enabled (Ch.03 p. 192 & p. 196).
 
@@ -83,5 +83,5 @@ openGauss horizontally splits a table into non-overlapping physical partitions t
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Partitioning-SMP-Switchover-and-RTO-Lab.html`](./08-Exercise-Partitioning-SMP-Switchover-and-RTO-Lab.html)** (or [`08-Exercise-Partitioning-SMP-Switchover-and-RTO-Lab.md`](./08-Exercise-Partitioning-SMP-Switchover-and-RTO-Lab.md)) to apply this concept in an interactive lab workbench!

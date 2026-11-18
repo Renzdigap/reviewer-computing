@@ -1,4 +1,4 @@
-# 📖 Sticky Bit, Access Control Lists (`getfacl`, `setfacl`, `chacl`) & Privilege Escalation (`su`, `sudo`)
+# Sticky Bit, Access Control Lists (`getfacl`, `setfacl`, `chacl`) & Privilege Escalation (`su`, `sudo`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 04 — User, Group & File Permission Management (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain how the Sticky Bit (`drwxrwxrwt`) protects shared directories like `/tmp` and `/share` from unauthorized file deletion
 - Configure fine-grained Access Control Lists using `getfacl`, `setfacl` (`-m`, `-x`, `-b`, `-k`, `-R`, `-d`), and `chacl` (`-b`, `-d`, `-R`, `-D`, `-B`, `-l`, `-r`)
 - Compare `su`, `su -`, and `sudo`, and author `/etc/sudoers` and `/etc/sudoers.d/username` rules using `visudo`
@@ -56,12 +56,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **When the Sticky Bit ('drwxrwxrwt') is set on a directory, only the file owner, directory owner, or root can delete or rename files inside it.**
 - **A '+' at the end of 'ls -l' permissions (-rw-rw-r--+) indicates an ACL is active; manage ACLs with getfacl, setfacl (-m modify, -x delete entry, -b remove all), and chacl.**
 - **su requires the target user's password and does not log commands; sudo requires the current user's password, checks /etc/sudoers (or /etc/sudoers.d/<user>), and logs all executed commands.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: 'su username' switches the user identity WITHOUT changing the current shell environment variables, whereas 'su - username' starts a full login shell with the target user's environment!
 
@@ -70,5 +70,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-ACL-and-Sudo-Configuration-Lab.html`](./08-Exercise-ACL-and-Sudo-Configuration-Lab.html)** (or [`08-Exercise-ACL-and-Sudo-Configuration-Lab.md`](./08-Exercise-ACL-and-Sudo-Configuration-Lab.md)) to apply this concept in an interactive lab workbench!

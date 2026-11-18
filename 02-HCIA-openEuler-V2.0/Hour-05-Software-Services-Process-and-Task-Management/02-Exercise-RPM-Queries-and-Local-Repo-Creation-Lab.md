@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Auditing Installed RPMs and Building a Local Repository with `createrepo`
+# Hands-On Lab: Auditing Installed RPMs and Building a Local Repository with `createrepo`
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You need to audit which RPM package owns `/etc/passwd`, list all configuration files belonging to the `bash` RPM package, and initialize a local software repository in `/mnt/local_repo` using `createrepo`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Query which RPM package owns `/etc/passwd` using `rpm -qf /etc/passwd`.
 2. Step 2: Query all configuration files installed by the `bash` package using `rpm -qc bash`.
 3. Step 3: Initialize the local repository database in `/mnt/local_repo` using `createrepo --database /mnt/local_repo`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Query which RPM package owns /etc/passwd
 <rpm_qf_command>
@@ -28,7 +28,7 @@ You need to audit which RPM package owns `/etc/passwd`, list all configuration f
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `rpm -qf /etc/passwd` to find the owning RPM package.
 - Use `rpm -qc bash` to list configuration files.
@@ -37,7 +37,7 @@ You need to audit which RPM package owns `/etc/passwd`, list all configuration f
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ Pool finished
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which `rpm` command option queries which installed RPM package a specific server file (such as `/etc/passwd`) belongs to, and which option lists only the configuration files in an installed RPM package?**
@@ -81,7 +81,7 @@ Pool finished
 - D. `rpm -qp` and `rpm -Va`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (pp.195, 200), `rpm -qf` searches for the RPM package to which a specified file belongs, and `rpm -qc` queries the configuration files in an installed software package.
@@ -96,7 +96,7 @@ Pool finished
 - D. `installonly_limit=10`; clears the RPM database cache every hour
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.204), `installonly_limit` defaults to 3, and `clean_requirements_on_remove` (default True) deletes dependencies that were installed automatically and are no longer needed during `dnf remove`.
@@ -111,7 +111,7 @@ Pool finished
 - D. The `createrepo --database <dir>` command initializes metadata for a local RPM software repository.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.04 (pp.202–206), all four statements are explicitly stated in the official training material.

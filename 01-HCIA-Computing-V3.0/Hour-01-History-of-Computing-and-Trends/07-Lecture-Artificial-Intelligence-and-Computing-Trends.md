@@ -1,4 +1,4 @@
-# 📖 Artificial Intelligence History, Basic Elements & Industry Trends
+# Artificial Intelligence History, Basic Elements & Industry Trends
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master the relationship between AI, Machine Learning, and Deep Learning and the 4 basic elements of AI applications
 - Trace the peaks, troughs, recovery, and booming phases of AI development from 1956 to present
 - Analyze AI computing power challenges, integer vs. floating-point workloads, x86-to-Arm transition, and cloud-edge collaboration
@@ -52,13 +52,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The 4 basic elements of AI applications are Data, Algorithms, Computing power, and Scenarios — Talent is NOT one of them (Ch.01 Quiz Q1)!**
 - **AI History phases: 1st Peak (1956–1976), 1st Trough (1976–1982), 2nd Peak (1982–1987, Expert Systems), 2nd Trough (1987–1997, Lisp machine collapse), Recovery (1997–2010, Deep Blue & Hinton DL), Booming (2010–present).**
 - **Integer computing excels at text processing, storage, and big data analysis; floating-point computing excels at scientific computing and video processing.**
 - **AI computing power accounts for 80% of DC computing power, and Cloud-Edge collaboration combines Central Training + Edge Inference.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.01 Quiz Q1): 'Which of the following is NOT a basic element of AI applications?' -> D. Talent! (Data, Algorithms, Computing power, and Scenario ARE the four basic elements).
 
@@ -67,5 +67,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-AI-Elements-and-Heterogeneous-Trends-Lab.html`](./08-Exercise-AI-Elements-and-Heterogeneous-Trends-Lab.html)** (or [`08-Exercise-AI-Elements-and-Heterogeneous-Trends-Lab.md`](./08-Exercise-AI-Elements-and-Heterogeneous-Trends-Lab.md)) to apply this concept in an interactive lab workbench!

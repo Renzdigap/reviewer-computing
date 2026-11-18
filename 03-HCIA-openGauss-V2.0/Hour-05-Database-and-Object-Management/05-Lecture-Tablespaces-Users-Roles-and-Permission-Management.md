@@ -1,4 +1,4 @@
-# 📖 Tablespaces, Users, Roles & Permission Management
+# Tablespaces, Users, Roles & Permission Management
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 05 — Database & Object Management (MOT, Tablespaces, Users/Roles, Backup/Export) (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Create, inspect, size, rename, and drop Tablespaces (`CREATE TABLESPACE ... RELATIVE LOCATION`, `PG_TABLESPACE_SIZE`, `\db`, 90% read-only threshold)
 - Explain why Users and Roles are NOT fully equivalent (Ch.04 Quiz Q1: False! Users have `LOGIN` by default, Roles do not)
 - Manage Users/Roles (`CREATE/ALTER/DROP USER/ROLE`), Account Validity (`VALID BEGIN ... VALID UNTIL`), Locking (`ACCOUNT LOCK/UNLOCK`), and Private Users (`WITH INDEPENDENT`)
@@ -69,12 +69,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Users and roles have the same syntax in openGauss, but they are NOT fully equivalent (Ch.04 Quiz Q1: False) because `CREATE USER` includes `LOGIN` by default whereas `CREATE ROLE` does not.**
 - **If the disk hosting a tablespace reaches 90% usage, openGauss automatically switches to read-only mode.**
 - **For a Private User (`CREATE USER ... WITH INDEPENDENT`), DBAs can manage (`DROP`, `ALTER`, `TRUNCATE`) their objects but cannot access (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `COPY`) their data without authorization.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.04 Quiz Q1): '(True or False) Users and roles have the same syntax in the openGauss database. Therefore, they are fully equivalent.' -> B. False!
 
@@ -83,5 +83,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Tablespaces-Users-Roles-and-Account-Lock-Lab.html`](./06-Exercise-Tablespaces-Users-Roles-and-Account-Lock-Lab.html)** (or [`06-Exercise-Tablespaces-Users-Roles-and-Account-Lock-Lab.md`](./06-Exercise-Tablespaces-Users-Roles-and-Account-Lock-Lab.md)) to apply this concept in an interactive lab workbench!

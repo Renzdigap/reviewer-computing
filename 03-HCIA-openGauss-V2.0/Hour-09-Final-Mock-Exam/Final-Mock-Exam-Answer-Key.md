@@ -1,4 +1,4 @@
-# 🔑 Official Answer Key & Explanations — HCIA-openGauss V2.0 — National Stage Final Mock Exam
+# Official Answer Key & Explanations — HCIA-openGauss V2.0 — National Stage Final Mock Exam
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Total Questions:** 60 (1000 Points)

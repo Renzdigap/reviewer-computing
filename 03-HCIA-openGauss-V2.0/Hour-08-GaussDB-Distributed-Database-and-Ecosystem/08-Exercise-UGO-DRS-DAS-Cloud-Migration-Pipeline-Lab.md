@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Auditing the 6 Core Functions of UGO & Huawei Cloud Ecosystem Tools
+# Hands-On Lab: Auditing the 6 Core Functions of UGO & Huawei Cloud Ecosystem Tools
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 4 of 4)  
@@ -7,14 +7,14 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are planning an Oracle-to-GaussDB migration on Huawei Cloud. Complete the SQL verification query listing the 6 official core functions of UGO (Ch.06 Quiz Q2) and matching `DAS`, `DRS`, `CTS`, `CES`, and `DBSS` to their roles.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Fill in the missing keywords in the 6 official UGO core functions (`profiling`, `recommendation`, `compatibility`, `workload`, `structure`, `Application SQL`).
 2. Step 2: Match `'DRS'` (real-time data migration/sync), `'DAS'` (web console management), and `'DBSS'` (bypass-mode database security audit).
 
-### 📝 Starter Workspace (`GaussDB=#`)
+### Starter Workspace (`GaussDB=#`)
 ```bash
 -- Step 1 (Ch.06 Quiz Q2): Verify the 6 core functions of UGO
 SELECT
@@ -32,7 +32,7 @@ SELECT '____' AS data_replication_service,
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - The 6 UGO functions are: Source database `profiling`, Destination DB selection and specification `recommendation`, Destination DB `compatibility` analysis, Migration `workload` evaluation, Database `structure` migration, and `Application SQL` migration.
 - Data Replication Service = `DRS`, Data Admin Service = `DAS`, Database Security Service = `DBSS`.
@@ -40,7 +40,7 @@ SELECT '____' AS data_replication_service,
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -73,7 +73,7 @@ ugo_fn_1          |                            ugo_fn_2                         
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.06 Quiz Q2) Which of the following belong to the 6 core functions of UGO (Database and Application Migration UGO)?**
@@ -84,7 +84,7 @@ ugo_fn_1          |                            ugo_fn_2                         
 - D. Bypass-mode SQL injection firewall & 7-day ECS trace recording
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 06 (p. 512 & p. 527), the 6 core functions of UGO are: Source database profiling, Destination database selection and specification recommendation, Destination database compatibility analysis, Migration workload evaluation, Database structure migration, and Application SQL migration. Option D describes DBSS and CTS.
@@ -99,7 +99,7 @@ ugo_fn_1          |                            ugo_fn_2                         
 - D. DBSS (Database Security Service)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `D`
 - **Explanation:** Per Chapter 06 (pp. 517–520), Database Security Service (DBSS) provides database security audit in bypass mode, detecting SQL injection, blacklist/whitelist hits, and generating compliance reports.
@@ -112,7 +112,7 @@ ugo_fn_1          |                            ugo_fn_2                         
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True (Ch.06 p. 508). DRS Backup Migration stages backup files via OBS so data migration is completed without exposing or directly connecting to the source database.

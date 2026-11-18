@@ -1,4 +1,4 @@
-# 📖 Text Extraction, Filtering, Statistics & Sorting (`cut`, `grep`, `wc`, `sort`, `diff`, `tr`)
+# Text Extraction, Filtering, Statistics & Sorting (`cut`, `grep`, `wc`, `sort`, `diff`, `tr`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Slice columns and character ranges using `cut` (`-b`, `-c`, `-d`, `-f` with ranges `N-`, `N-M`, `-M`)
 - Filter lines with `grep` (`-c`, `-i`, `-w`, `-x`) and compute line/word/byte counts with `wc` (`-l`, `-w`, `-c`)
 - Sort, deduplicate, compare, and translate text streams using `sort` (`-n`, `-r`, `-u`, `-o`), `diff` (`-B`, `-c`, `-i`, `-r`, `-w`), and `tr` (`-c`, `-d`, `-s`, `-t`)
@@ -57,12 +57,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **In 'cut', the default delimiter is TAB; use '-d:' and '-f1' to extract the first colon-separated column of /etc/passwd.**
 - **grep -c counts matching lines, -i ignores case, -w matches whole words, and -x matches whole lines; wc -l, -w, -c count lines, words, and bytes.**
 - **sort -n sorts numerically, -r reverses order, -u removes duplicate lines; tr reads from stdin (e.g., cat file | tr a-z A-Z) and uses -d to delete characters.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: The default field separator of 'cut' is TAB, whereas the default field separator of 'awk' is spaces/whitespace!
 
@@ -71,5 +71,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Cut-Grep-Wc-Sort-Diff-Tr-Lab.html`](./06-Exercise-Cut-Grep-Wc-Sort-Diff-Tr-Lab.html)** (or [`06-Exercise-Cut-Grep-Wc-Sort-Diff-Tr-Lab.md`](./06-Exercise-Cut-Grep-Wc-Sort-Diff-Tr-Lab.md)) to apply this concept in an interactive lab workbench!

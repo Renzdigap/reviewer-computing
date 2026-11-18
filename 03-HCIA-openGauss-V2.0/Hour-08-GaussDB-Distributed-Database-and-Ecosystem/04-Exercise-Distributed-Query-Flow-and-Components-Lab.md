@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Mapping GaussDB Distributed Components (`CN`, `DN`, `GTM`, `CM`, `OM`, `ETCD`)
+# Hands-On Lab: Mapping GaussDB Distributed Components (`CN`, `DN`, `GTM`, `CM`, `OM`, `ETCD`)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Complete the GaussDB distributed component responsibility lookup query so that every component from Chapter 06 Slide 20 (p. 495) is accurately matched to its official role.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Match `'CN'` to receiving application SQL requests and distributing task fragments, and `'DN'` to storing service data and executing query tasks.
 2. Step 2: Match `'GTM'` to generating global transaction IDs, snapshots, timestamps, and sequences.
 3. Step 3: Match `'ETCD'` to sharing configurations and service discovery (service registration and search — Ch.06 Quiz Q1).
 
-### 📝 Starter Workspace (`GaussDB=#`)
+### Starter Workspace (`GaussDB=#`)
 ```bash
 -- Map each GaussDB distributed component to its official function:
 SELECT
@@ -26,14 +26,14 @@ SELECT
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Coordinator Node is `CN`, Data Node is `DN`, Global Transaction Manager is `GTM`, and Editable Text Configuration Daemon is `ETCD`.
 
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -55,7 +55,7 @@ sql_coordinator | data_executor | global_txn_mgr | config_and_discovery
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **(Official Ch.06 Quiz Q1) In the GaussDB distributed architecture, which of the following components is used for sharing configuration and service discovery (service registration and search)?**
@@ -66,7 +66,7 @@ sql_coordinator | data_executor | global_txn_mgr | config_and_discovery
 - D. ETCD
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `D`
 - **Explanation:** Per Chapter 06 (p. 482, p. 495 & p. 527), ETCD is used for sharing configurations and discovering services (service registration and search).
@@ -81,7 +81,7 @@ sql_coordinator | data_executor | global_txn_mgr | config_and_discovery
 - D. CM (Cluster Manager)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Chapter 06 (p. 487 & p. 495), the GTM (Global Transaction Manager) generates and maintains globally unique information, including the global transaction ID, transaction snapshot, timestamp, and sequence.
@@ -96,7 +96,7 @@ sql_coordinator | data_executor | global_txn_mgr | config_and_discovery
 - D. ShuffleSplit
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 06 (p. 487), GaussDB provides three types of streams — `Broadcast`, `Gather`, and `Redistribution` — to handle data transfer between DNs.

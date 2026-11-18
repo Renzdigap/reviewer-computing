@@ -1,4 +1,4 @@
-# 📖 Shell Conditional Statements (`if-then-elif-else-fi` and `case-in-esac`)
+# Shell Conditional Statements (`if-then-elif-else-fi` and `case-in-esac`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 07 — Shell Scripting, Variables, Control Flow & Automation (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain how Bash `if` evaluates command exit status codes (`0` = True/Success, non-zero = False)
 - Write `if-then-fi`, `if-then-else-fi`, and `elif` conditional blocks using numeric, string, and file tests
 - Construct multi-branch `case ... in ... esac` statements using `|` pattern alternation, `;;` terminators, and `*` default wildcards
@@ -59,12 +59,12 @@ esac
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **In a Bash 'if command; then ... fi' statement, the 'then' block executes ONLY when the command following 'if' returns an exit status code of 0!**
 - **A multi-branch 'case' statement starts with 'case $var in' and ends with 'esac'.**
 - **In 'case', multiple patterns are separated by '|', each branch ends with ';;', and '*)' serves as the default catch-all branch.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In C/Python, 0 is False and 1 is True; in Bash 'if command', exit status code 0 means SUCCESS (True, executes 'then'), while any non-zero exit code (1–255) means FAILURE (False)!
 
@@ -73,5 +73,5 @@ esac
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-If-Then-and-Case-Branching-Lab.html`](./06-Exercise-If-Then-and-Case-Branching-Lab.html)** (or [`06-Exercise-If-Then-and-Case-Branching-Lab.md`](./06-Exercise-If-Then-and-Case-Branching-Lab.md)) to apply this concept in an interactive lab workbench!

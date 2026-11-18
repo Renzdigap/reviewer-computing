@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Configuring Fine-Grained ACLs (`setfacl`/`getfacl`) and Passwordless `sudo`
+# Hands-On Lab: Configuring Fine-Grained ACLs (`setfacl`/`getfacl`) and Passwordless `sudo`
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 04 — User, Group & File Permission Management (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You need to grant user `test` read-write (`rw`) access to `/root/report.txt` without changing its owner or group by using `setfacl`, verify the ACL with `getfacl`, and configure a drop-in `/etc/sudoers.d/test` rule allowing user `test` to run `/usr/bin/touch` as `root` without a password.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Grant user `test` `rw-` permissions on `/root/report.txt` using `setfacl -m u:test:rw /root/report.txt`.
 2. Step 2: Display the ACL entries of `/root/report.txt` using `getfacl /root/report.txt`.
 3. Step 3: Write the sudoers rule `test ALL=(root) NOPASSWD:/usr/bin/touch` into `/etc/sudoers.d/test`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Set ACL granting user 'test' rw permissions on /root/report.txt
 <setfacl_command>
@@ -28,7 +28,7 @@ echo "<sudoers_rule>" > /etc/sudoers.d/test
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `setfacl -m u:test:rw /root/report.txt`.
 - Use `getfacl /root/report.txt`.
@@ -37,7 +37,7 @@ echo "<sudoers_rule>" > /etc/sudoers.d/test
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ test ALL=(root) NOPASSWD:/usr/bin/touch
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **When the Sticky Bit (`drwxrwxrwt`) is enabled on a shared directory such as `/share`, who is permitted to rename or remove a file inside `/share`?**
@@ -82,7 +82,7 @@ test ALL=(root) NOPASSWD:/usr/bin/touch
 - D. Nobody, not even `root`, until the Sticky Bit is removed
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.184), a sticky bit is a special permission set on a directory. When enabled, only the file owner, the directory owner, or the `root` user can rename or remove files within that directory.
@@ -97,7 +97,7 @@ test ALL=(root) NOPASSWD:/usr/bin/touch
 - D. `@` (at sign); `setfacl -R`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.185 & p.187), if a plus sign (`+`) is displayed next to the file permission in `ls -l`, the file has an ACL. `setfacl -b` deletes all ACL parameters.
@@ -112,7 +112,7 @@ test ALL=(root) NOPASSWD:/usr/bin/touch
 - D. `sudo -k` forces the user to enter a password upon the next execution of `sudo`, even within the default 5-minute timeout window.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.04 (pp.190–193), all four statements match the official Huawei training material.

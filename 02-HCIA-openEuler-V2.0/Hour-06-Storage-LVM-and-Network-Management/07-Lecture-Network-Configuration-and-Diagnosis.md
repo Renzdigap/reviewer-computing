@@ -1,4 +1,4 @@
-# 📖 openEuler Network Configuration (`ip`, `nmcli`, `nmtui`, `ifcfg`) & Diagnosis (`ping`, `tracepath`, `ss`)
+# openEuler Network Configuration (`ip`, `nmcli`, `nmtui`, `ifcfg`) & Diagnosis (`ping`, `tracepath`, `ss`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Query IP addresses, routes, DNS, and hostnames (`ip addr`, `ifconfig`, `ip route show`, `route -n` [temporary — Ch.05 Quiz Q1!], `/etc/resolv.conf`, `hostnamectl`)
 - Decode Predictable Network Interface Names (`en`, `wl`, `ww` + `p`, `o`, `s`, `x`, `u`) and legacy `/etc/sysconfig/network-scripts/ifcfg-*` files
 - Configure connections and static routes with `nmcli` and `nmtui`, and diagnose networks with `ping`, `tracepath`, and `ss`
@@ -57,12 +57,12 @@ openEuler uses `systemd/udev` **Predictable Network Interface Names** (e.g., **`
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Routes configured with the 'route' command are temporary and NOT permanent (Ch.05 Quiz Q1); use 'nmcli connection modify <con> +ipv4.routes "<subnet> <gw>"' for persistent static routes.**
 - **In NetworkManager, a device (NIC) can have multiple connections (profiles), but only ONE connection can be active at a time; run 'nmcli con up <name>' after modifying a connection.**
 - **tracepath measures hop count, per-hop RTT, and Path MTU (pmtu); ss (-talnp) is faster than netstat because it queries socket data directly from the kernel.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Official Ch.05 Quiz Q1): '(True or false) The route command can view or configure host route information. Configured route information will remain valid permanently.' -> False (F)!
 
@@ -71,5 +71,5 @@ openEuler uses `systemd/udev` **Predictable Network Interface Names** (e.g., **`
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Nmcli-Hostname-and-Network-Diagnosis-Lab.html`](./08-Exercise-Nmcli-Hostname-and-Network-Diagnosis-Lab.html)** (or [`08-Exercise-Nmcli-Hostname-and-Network-Diagnosis-Lab.md`](./08-Exercise-Nmcli-Hostname-and-Network-Diagnosis-Lab.md)) to apply this concept in an interactive lab workbench!

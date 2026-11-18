@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Computing Evolution & Architecture Milestones Verification
+# Hands-On Lab: Computing Evolution & Architecture Milestones Verification
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are preparing a verification script for the Huawei ICT Competition Computing Track study group that validates historical computing milestones, vacuum tube physics, and electronic computer generation specs.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `quipu_largest_place` to `'tens_of_thousands'` (the knot closest to the horizontal string in Inca Quipu).
 2. Set `first_general_electronic_computer` to `'ENIAC'` and `first_microcomputer` to `'Altair 8800'` (powered by `'Intel 8080'`).
 3. Set `software_hardware_separation_system` to `'IBM System/370'` and `sunway_peak_pflops` to `120`.
 
-### 📝 Starter Workspace (`python3@kunpeng-lab:~$`)
+### Starter Workspace (`python3@kunpeng-lab:~$`)
 ```bash
 # Complete the historical milestone dictionary for HCIA-Computing Ch.01:
 milestones = {
@@ -31,7 +31,7 @@ print(milestones)
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Inca Quipu knots closest to the horizontal cord represent the tens of thousands place.
 - ENIAC (1946) was the first general-purpose programmable electronic computer; MITS Altair 8800 was the first microcomputer.
@@ -40,7 +40,7 @@ print(milestones)
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -66,7 +66,7 @@ print(milestones)
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.01 Quiz Q2) Which of the following places can be represented in the knot counting method of the Inca people?**
@@ -77,7 +77,7 @@ print(milestones)
 - D. Thousands
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ABD`
 - **Explanation:** In the Inca Quipu knot counting method (Ch.01 p.10 & p.62 Quiz Q2), knots represent Ones (farthest), Tens, Hundreds, Thousands, and Tens of thousands (written as 'Tens of hundreds' in option B of the official quiz). 'Hundreds of thousands' (C) exceeds the Quipu place limit.
@@ -92,7 +92,7 @@ print(milestones)
 - D. Monolithic silicon IC
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** John Ambrose Fleming invented the vacuum diode in 1904 based on the Edison effect. In 1906, Lee de Forest added a third fence-shaped electrode to create the vacuum triode, which amplifies electrical signals and functions as a fast electronic switch (Ch.01, p.22).
@@ -105,7 +105,7 @@ print(milestones)
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False. According to Ch.01 p.23, the Atanasoff–Berry Computer (ABC, 1937) is the world's first electronic computer (designed to solve linear equations), while ENIAC (1946) is the second electronic computer and the first general-purpose programmable electronic computer.

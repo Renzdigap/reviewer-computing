@@ -1,4 +1,4 @@
-# 📖 iSula Container Networking (CNI) & Persistent Storage (`-v`)
+# iSula Container Networking (CNI) & Persistent Storage (`-v`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain how `iSulad` integrates with Container Network Interface (CNI) plugins and configure CNI in `/etc/isulad/daemon.json`
 - Distinguish the 3 iSula CNI plugins (`bridge`, `portmap`, `firewall`) and manage networks via `isula network create/ls/inspect` and `--net`
 - Implement container persistent storage by mounting host files/directories with `isula run -v /host:/container[:rw|:ro]`
@@ -57,12 +57,12 @@ By default, modifications inside a container are written only to its **temporary
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **iSulad uses LCR as its default runtime and CNI for networking; currently, iSula only supports the 'bridge' network mode.**
 - **In /etc/isulad/daemon.json, CNI is configured with 'network-plugin': 'cni', 'cni-bin-dir': '/opt/cni/bin' (default), and 'cni-conf-dir': '/etc/cni/net.d' (default), utilizing the bridge, portmap, and firewall plugins.**
 - **Use 'isula run -v /host/path:/container/path[:rw|:ro]' for persistent storage; 'rw' (read-write) is the default mount permission.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse cni-bin-dir and cni-conf-dir defaults in /etc/isulad/daemon.json! cni-bin-dir defaults to '/opt/cni/bin', whereas cni-conf-dir defaults to '/etc/cni/net.d'.
 
@@ -71,5 +71,5 @@ By default, modifications inside a container are written only to its **temporary
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-iSula-Network-and-Volume-Mount-Lab.html`](./06-Exercise-iSula-Network-and-Volume-Mount-Lab.html)** (or [`06-Exercise-iSula-Network-and-Volume-Mount-Lab.md`](./06-Exercise-iSula-Network-and-Volume-Mount-Lab.md)) to apply this concept in an interactive lab workbench!

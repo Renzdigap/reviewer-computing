@@ -1,4 +1,4 @@
-# 📖 User & Group Architecture (UID/GID) and Configuration Files
+# User & Group Architecture (UID/GID) and Configuration Files
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 04 — User, Group & File Permission Management (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish the three Linux user types by UID range: Superuser (0), Virtual/System user (1–999), and Common/Regular user (1000–60000)
 - Compare Private (primary/owner) groups vs. Public (additional/supplementary) groups
 - Parse every colon-delimited field of `/etc/passwd` (7 fields) and `/etc/group` (4 fields) along with `/etc/shadow` and `/etc/gshadow`
@@ -52,12 +52,12 @@ When a user logs in to Linux, the system identifies the user type by **UID (User
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Linux identifies users by UID: 0 = Superuser (root), 1–999 = Virtual (system) users, and 1000–60000 = Common (regular) users.**
 - **/etc/passwd has 7 colon-separated fields: username : password_placeholder(x) : UID : GID : description : home_dir : login_shell.**
 - **/etc/group has 4 colon-separated fields: group_name : password_placeholder(x) : GID : supplementary_users (private group owners do not appear in column 4).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: The second column 'x' in /etc/passwd is ONLY a password placeholder—the actual encrypted password hash is stored in /etc/shadow!
 
@@ -66,5 +66,5 @@ When a user logs in to Linux, the system identifies the user type by **UID (User
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Inspecting-Passwd-and-Group-Files-Lab.html`](./02-Exercise-Inspecting-Passwd-and-Group-Files-Lab.html)** (or [`02-Exercise-Inspecting-Passwd-and-Group-Files-Lab.md`](./02-Exercise-Inspecting-Passwd-and-Group-Files-Lab.md)) to apply this concept in an interactive lab workbench!

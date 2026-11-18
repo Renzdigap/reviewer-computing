@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Avago MegaRAID & iBMC Storage Configuration
+# Hands-On Lab: Avago MegaRAID & iBMC Storage Configuration
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure a RAID 5 logical volume named 'Data' across four 8 TB SATA HDDs on a TaiShan 200 (2280) server via iBMC WebUI and verify JBOD and BIOS RAID settings.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `ibmc_raid_query_path` to `'System > System Info > Others'` and `ibmc_raid_config_path` to `'System > Storage Management'`.
 2. Set `passthrough_mode_name` to `'JBOD'` and `unsupported_raid_level` to `'RAID 00'`.
 3. For four 8 TB HDDs (`7.2` TB actual capacity each) in RAID 5, set `single_8tb_actual_tb` to `7.2` and `raid5_usable_tb` to `21.6`.
 
-### 📝 Starter Workspace (`storage-admin@ibmc-webui:~#`)
+### Starter Workspace (`storage-admin@ibmc-webui:~#`)
 ```bash
 # TaiShan 2280 Hardware RAID & JBOD Configuration
 ibmc_navigation:
@@ -37,7 +37,7 @@ logical_drive_data:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Query RAID card model at System > System Info > Others; configure RAID at System > Storage Management.
 - Drive passthrough is JBOD; RAID 00 is not supported; an 8 TB HDD has ~7.2 TB actual capacity (3 × 7.2 = 21.6 TB in 4-disk RAID 5).
@@ -45,7 +45,7 @@ logical_drive_data:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -79,7 +79,7 @@ logical_drive_data:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which feature of a RAID controller card, also known as drive passthrough or transparent transmission, allows commands to be directly transmitted to connected physical drives without creating a RAID virtual drive?**
@@ -90,7 +90,7 @@ logical_drive_data:
 - D. Preboot Execution Environment (PXE)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 pp. 321 and 349, JBOD (Just a Bunch of Drives), also known as drive passthrough or transparent transmission, allows user commands to be directly transmitted to connected drives.
@@ -105,7 +105,7 @@ logical_drive_data:
 - D. View model at Home > Virtual Console; configure RAID at Power > Power Control
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** According to Ch.05 pp. 319 and 324, you view the RAID controller card model at System > System Info (Others tab) and configure RAID logical drives at System > Storage Management.
@@ -120,7 +120,7 @@ logical_drive_data:
 - D. Avago MegaRAID SAS 9460-8i natively supports RAID 00 across up to 16 spans.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are true (Ch.05, pp. 320, 322). D is false because Ch.05 p.320 explicitly notes that RAID 00 is NOT supported and spanned arrays support 2 to 8 spans.

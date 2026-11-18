@@ -1,4 +1,4 @@
-# 📖 GaussDB Positioning, Full-Stack Architecture & High-Availability Topologies
+# GaussDB Positioning, Full-Stack Architecture & High-Availability Topologies
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Contrast openGauss (open-source standalone & primary/standby) with GaussDB (commercial cloud-native distributed & centralized HTAP database)
 - Memorize GaussDB scale specifications (> 1,000 nodes scale-out, 4 PB storage, up to 256 shards/DNs, > 100,000 cluster concurrent connections)
 - Compare GaussDB deployment topologies: Centralized 1+1 vs 1+2, Intra-City Active-Active, Intra-City 3-AZ Multi-Active, 3DC Geo-Redundant, and Dual-Cluster Remote DR
@@ -46,12 +46,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openGauss is open-source (standalone and primary/standby), whereas GaussDB is Huawei's commercial enterprise cloud database supporting both centralized and distributed (Shared-Nothing) deployment up to >1,000 nodes (256 shards), 4 PB data, and >100,000 concurrent connections.**
 - **In Primary/Standby deployment, `1+1` is Maximum Availability (falls back to async on network fault) and `1+2` is Maximum Protection (strict sync confirmation).**
 - **In Dual-Cluster Remote DR via OBS log synchronization, the specifications are RPO = 10 seconds and RTO = 10 minutes (whereas intra-city active-active / 3DC achieves RPO = 0, RTO < 60s).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In GaussDB, what is the difference between `1+1` and `1+2` primary/standby modes? `1+1` is 'Maximum Availability' (switches to async replication on network fault), while `1+2` is 'Maximum Protection' (requires standby confirmation before returning to client, Ch.06 p. 481).
 
@@ -60,5 +60,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-GaussDB-vs-openGauss-and-DR-Topologies-Lab.html`](./02-Exercise-GaussDB-vs-openGauss-and-DR-Topologies-Lab.html)** (or [`02-Exercise-GaussDB-vs-openGauss-and-DR-Topologies-Lab.md`](./02-Exercise-GaussDB-vs-openGauss-and-DR-Topologies-Lab.md)) to apply this concept in an interactive lab workbench!

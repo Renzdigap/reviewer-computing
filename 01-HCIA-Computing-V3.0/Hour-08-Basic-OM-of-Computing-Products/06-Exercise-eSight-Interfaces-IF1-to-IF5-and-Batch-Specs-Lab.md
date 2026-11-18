@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: eSight IF1–IF5 Interface & Batch Specification Verification
+# Hands-On Lab: eSight IF1–IF5 Interface & Batch Specification Verification
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure the eSight integration architecture mapping (`IF1`–`IF5`) and batch operation capacity limits for a large carrier data center.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Map `southbound_interface` to `'IF1'`, `northbound_oss_interface` to `'IF2'`, and `auth_ldap_radius_sso_interface` to `'IF3'`.
 2. Set `excel_batch_import_max` to `500`, `os_deploy_task_max` to `200`, and `os_deploy_concurrent_max` to `40`.
 3. Set `fw_upgrade_schedule_max` to `1000`, `profile_bind_max` to `2000`, and `cleared_alarm_bg_color` to `'light green'`.
 
-### 📝 Starter Workspace (`esight-admin@ict-nms:~#`)
+### Starter Workspace (`esight-admin@ict-nms:~#`)
 ```bash
 # eSight Architecture & Batch Specification Config
 esight_interfaces:
@@ -36,7 +36,7 @@ esight_batch_limits:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - IF1 is southbound, IF2 is northbound, and IF3 is external authentication (LDAP/RADIUS/SSO).
 - Batch limits: Excel import = 500, OS deploy = 200/task (40 concurrent), FW upgrade = 1000/schedule (100 concurrent), Profile bind = 2000; cleared alarms have a light green background.
@@ -44,7 +44,7 @@ esight_batch_limits:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -77,7 +77,7 @@ esight_batch_limits:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Among the five external interfaces of Huawei eSight (Ch.06, p. 404), which interface is the northbound interface used by upper-layer OSS or third-party systems to obtain resources, alarms, and performance data via RESTful, SNMP, FTP, or Kafka?**
@@ -88,7 +88,7 @@ esight_batch_limits:
 - D. IF4
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.06 p.404: IF1 is the southbound interface to managed devices; IF2 is the northbound interface (RESTful, SNMP, FTP, Kafka, Syslog) to upper-layer OSS; IF3 is for external authentication servers (LDAP, RADIUS, SSO); IF4 is for notifications (Mail/SMS); IF5 is the UI.
@@ -103,7 +103,7 @@ esight_batch_limits:
 - D. Maximum 50 devices per task and 50 devices concurrently
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.06 p.412, each eSight OS deployment task supports a maximum of 200 devices and a maximum of 40 devices can be deployed concurrently (requiring servers with Smart Provisioning).
@@ -118,7 +118,7 @@ esight_batch_limits:
 - D. A single eSight Server Profile can be bound to a maximum of 2,000 devices, and up to 1,000 devices can be selected at a time for applying a profile.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four statements match the exact specifications in Ch.06 pp. 406, 410, 413, and 414.

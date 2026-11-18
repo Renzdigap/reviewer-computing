@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: FusionCompute Cluster Readiness Check
+# Hands-On Lab: FusionCompute Cluster Readiness Check
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are validating a server bill-of-materials (BOM) before deploying Huawei FusionCompute VRM and CNA compute nodes.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `vrm_min_system_disk_gb` to `270` and `compute_node_min_system_disk_gb` to `150`.
 2. Set `recommended_system_raid` to `'RAID 1'`, `min_memory_gb` to `8`, and `recommended_memory_gb` to `48`.
 3. Set `backup_component` to `'eBackup'` and `dr_component` to `'UltraVR'`.
 
-### 📝 Starter Workspace (`admin@fusioncompute-vrm:~#`)
+### Starter Workspace (`admin@fusioncompute-vrm:~#`)
 ```bash
 # FusionCompute Pre-Deployment Check
 cluster_requirements:
@@ -32,7 +32,7 @@ suite_components:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - On page 115, VRM system drive >= 270 GB, compute node system drive >= 150 GB, minimum memory is 8 GB (48 GB recommended), and two SAS drives in RAID 1 are recommended.
 - eBackup provides CBT-based VM backup; UltraVR provides DR management.
@@ -40,7 +40,7 @@ suite_components:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -69,7 +69,7 @@ suite_components:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **When deploying Huawei FusionCompute on physical servers, what are the minimum system drive capacities required for the Virtual Resource Manager (VRM) node and each compute node?**
@@ -80,7 +80,7 @@ suite_components:
 - D. VRM >= 100 GB; Compute node >= 100 GB
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.02 p.115, the system drive on the VRM node must be >= 270 GB, and the system drive on each compute node must be >= 150 GB.
@@ -95,7 +95,7 @@ suite_components:
 - D. DVS (backup) and VRM (DR)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** eBackup works with FusionCompute snapshots and CBT to back up VM data, whereas UltraVR is disaster recovery (DR) management software using SAN asynchronous remote replication (Ch.02, pp. 107–108).
@@ -110,7 +110,7 @@ suite_components:
 - D. Servers in the same FusionCompute cluster can freely mix Intel x86 and Kunpeng Arm CPUs in a single live-migration pool.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are true (Ch.02, pp. 110–113). D is false because CPUs on servers in the same cluster must be of the same model and support hardware virtualization (Ch.02, p.115).

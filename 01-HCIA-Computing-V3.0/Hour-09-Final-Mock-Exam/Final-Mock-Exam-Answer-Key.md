@@ -1,4 +1,4 @@
-# 🔑 Official Answer Key & Explanations — HCIA-Computing V3.0 — National Stage Final Mock Exam
+# Official Answer Key & Explanations — HCIA-Computing V3.0 — National Stage Final Mock Exam
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Total Questions:** 60 (1000 Points)

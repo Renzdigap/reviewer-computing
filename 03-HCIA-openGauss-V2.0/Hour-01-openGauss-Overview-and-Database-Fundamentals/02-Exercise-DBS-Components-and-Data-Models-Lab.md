@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Auditing DBS Components, Data Management Stages & Models
+# Hands-On Lab: Auditing DBS Components, Data Management Stages & Models
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 01 — openGauss Overview & Database Fundamentals (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are onboarding junior DBAs onto an openGauss environment. Create a reference relational table `dbs_audit` that models a normalized relational structure (with indivisible attributes) and records the three historical data management stages and their characteristics.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Write a `CREATE TABLE dbs_audit` statement with columns `stage_id INT PRIMARY KEY`, `stage_name VARCHAR(30)`, `manager VARCHAR(20)`, and `independence VARCHAR(40)`.
 2. Step 2: Insert the three official stages (`'Manual management'`, `'File system'`, and `'DBS'`) using `INSERT INTO dbs_audit VALUES ...`.
 3. Step 3: Query all records ordered by `stage_id ASC` using `SELECT * FROM dbs_audit ORDER BY stage_id;`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Create the normalized relational table dbs_audit
 CREATE TABLE dbs_audit (
@@ -36,7 +36,7 @@ ____ * FROM dbs_audit ORDER BY stage_id;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Recall Ch.01 Quiz Q3: The three stages of data management are 'Manual management', 'File system', and 'DBS'.
 - Use SELECT * FROM dbs_audit ORDER BY stage_id; to retrieve the rows.
@@ -44,7 +44,7 @@ ____ * FROM dbs_audit ORDER BY stage_id;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -78,7 +78,7 @@ INSERT 0 3
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **(Official Ch.01 Quiz Q1) Which of the following is NOT a component of a database system (DBS)?**
@@ -89,7 +89,7 @@ INSERT 0 3
 - D. Database storage medium
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `D`
 - **Explanation:** Per Chapter 01 (p. 9 & p. 67), a DBS consists of three parts: Database, DBMS, and Database application. The database storage medium is hardware and not one of the three logical DBS components.
@@ -104,7 +104,7 @@ INSERT 0 3
 - D. AI management
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 01 (p. 10 & p. 68), data management technologies went through three stages: Manual management, File system, and DBS.
@@ -117,7 +117,7 @@ INSERT 0 3
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False. In the hierarchical model, all nodes except the root node have ONLY ONE parent node. It is the network model that allows a node to have more than one parent.

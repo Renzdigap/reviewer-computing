@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Modifying Permissions (`chmod`), Dual Ownership (`chown`) & `umask`
+# Hands-On Lab: Modifying Permissions (`chmod`), Dual Ownership (`chown`) & `umask`
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 04 — User, Group & File Permission Management (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are securing the directory `usertxt` on openEuler (following the exact official lab on pp. 177–183). Set its permissions to `644`, change both its owner and group to `user:usergroup` using `chown`, change its group to `usergroup01` using `chgrp`, and set the system `umask` to `022`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Modify the permissions of `usertxt` to `644` using `chmod 644 usertxt`.
 2. Step 2: Change both the owner and group of `usertxt` to `user:usergroup` using `chown user:usergroup usertxt`, then change its group to `usergroup01` using `chgrp usergroup01 usertxt`.
 3. Step 3: Set the preset permission mask to `022` using `umask 022`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Set permissions of usertxt to 644
 <chmod_command>
@@ -29,7 +29,7 @@ You are securing the directory `usertxt` on openEuler (following the exact offic
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `chmod 644 usertxt`.
 - Use `chown user:usergroup usertxt` and `chgrp usergroup01 usertxt` (exact commands from Ch.04 pp.179, 181).
@@ -38,7 +38,7 @@ You are securing the directory `usertxt` on openEuler (following the exact offic
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -64,7 +64,7 @@ drw-r--r--. 2 user usergroup01 4096 Jun  8 11:10 usertxt
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In the output of `ls -l`, what does the first character `c` vs. `b` represent in the file type and permission string?**
@@ -75,7 +75,7 @@ drw-r--r--. 2 user usergroup01 4096 Jun  8 11:10 usertxt
 - D. `c` = socket file; `b` = named pipe file
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.172), `b` indicates a block device file (random access device) and `c` indicates a character device file (one-time read device such as keyboard and mouse).
@@ -90,7 +90,7 @@ drw-r--r--. 2 user usergroup01 4096 Jun  8 11:10 usertxt
 - D. File: 660; Directory: 770
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.182), when `umask` is `027`, the default file permission is `640` and the default directory permission is `750`.
@@ -105,7 +105,7 @@ drw-r--r--. 2 user usergroup01 4096 Jun  8 11:10 usertxt
 - D. Any common user can run `chown` to transfer ownership of their files to `root`.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.04 (pp.174–179), A, B, and C are true. Option D is false because the usage permission for `chown` is restricted to the administrator (`root`).

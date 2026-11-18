@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Pipeline Slicing with `awk` and In-Place Editing with `sed -i`
+# Hands-On Lab: Pipeline Slicing with `awk` and In-Place Editing with `sed -i`
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are automating log and configuration maintenance on openEuler. Use `last` piped to `awk` to extract the usernames of the last 5 logins, use `sed -n` to print only lines 1 to 3 of `/etc/passwd`, and use `sed -i` to directly replace `enabled=0` with `enabled=1` in `local.repo`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Display the first column (account names) of the last 5 login records using `last -n 5 | awk '{print $1}'`.
 2. Step 2: Quietly print only lines 1 to 3 of `/etc/passwd` by canceling default output with `sed -n '1,3p' /etc/passwd`.
 3. Step 3: Directly edit `local.repo` in place to replace `enabled=0` with `enabled=1` using `sed -i 's/enabled=0/enabled=1/g' local.repo`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Display the last 5 login account names using last and awk
 <last_awk_command>
@@ -28,7 +28,7 @@ You are automating log and configuration maintenance on openEuler. Use `last` pi
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `last -n 5 | awk '{print $1}'` (exact example from Ch.03 p.144).
 - Use `sed -n '1,3p' /etc/passwd` so `-n` cancels default output.
@@ -37,7 +37,7 @@ You are automating log and configuration maintenance on openEuler. Use `last` pi
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ enabled=1
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **By default, what separator does `awk` use to slice each input line into fields, and which variable represents the entire current line?**
@@ -81,7 +81,7 @@ enabled=1
 - D. Semicolon (;); `$#`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (p.144), `awk` reads files or standard input by line, uses spaces as the default separator to slice each line, and uses `0` to represent the entire line (`awk '{print 0}' test.txt`).
@@ -96,7 +96,7 @@ enabled=1
 - D. -r
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Ch.03 (p.150), `sed` only changes the copied text stored in buffers by default. To edit the original file directly, use the `-i` option.
@@ -111,7 +111,7 @@ enabled=1
 - D. `-r` uses extended regular expressions in a script.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.03 (p.150), `-n`, `-e`, `-f`, `-i`, `-l`, and `-r` are the six core options of `sed`.

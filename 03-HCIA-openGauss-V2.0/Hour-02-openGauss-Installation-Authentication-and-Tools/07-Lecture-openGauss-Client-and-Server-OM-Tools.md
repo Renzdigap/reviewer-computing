@@ -1,4 +1,4 @@
-# 📖 openGauss Client & Server O&M Tools (`gsql`, `gs_check*`, `gs_dump*`, `gs_om`, `gs_ssh`)
+# openGauss Client & Server O&M Tools (`gsql`, `gs_check*`, `gs_dump*`, `gs_om`, `gs_ssh`)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish openGauss Client Tools (`gsql`) from Server Tools (`gs_check`, `gs_checkos`, `gs_checkperf`, `gs_clean`, `gs_collector`, `gs_dump`, `gs_dumpall`, `gs_guc`, `gs_om`, `gs_restore`, `gs_ssh`)
 - Identify which tool and check item require `root` privileges (`gs_checkos`, `gs_checkperf -i SSD`)
 - Master the key options of `gs_check`, `gs_checkos`, `gs_checkperf`, `gs_clean`, `gs_collector`, `gs_dump`, `gs_dumpall`, `gs_restore`, `gs_om`, and `gs_ssh`
@@ -42,12 +42,12 @@ All tools are located in `GPHOME/script` and `GAUSSHOME/bin`.
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **`gsql` is a Client tool, NOT a Server tool (Ch.02 Quiz Q1).**
 - **When using `gs_checkperf`, SSD performance (`-i SSD`) can be viewed ONLY by user `root` (Ch.02 Quiz Q2). Similarly, `gs_checkos` can only be run by `root`.**
 - **`gs_dump` supports 4 formats (`p` plain-text restored via `gsql`; `c` custom, `d` directory, and `t` tar restored via `gs_restore`), whereas `gs_dumpall` exports only plain-text SQL scripts of all databases and global objects.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.02 Quiz Q1): 'Which of the following is not an openGauss server tool?' -> C. `gsql` (`gsql` is a client tool!).
 
@@ -56,5 +56,5 @@ All tools are located in `GPHOME/script` and `GAUSSHOME/bin`.
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Server-Inspection-and-Backup-Tools-Lab.html`](./08-Exercise-Server-Inspection-and-Backup-Tools-Lab.html)** (or [`08-Exercise-Server-Inspection-and-Backup-Tools-Lab.md`](./08-Exercise-Server-Inspection-and-Backup-Tools-Lab.md)) to apply this concept in an interactive lab workbench!

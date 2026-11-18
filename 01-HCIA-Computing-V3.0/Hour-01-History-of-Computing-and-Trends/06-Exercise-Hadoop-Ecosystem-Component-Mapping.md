@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Hadoop Big Data Ecosystem & Computing Modes Mapping
+# Hands-On Lab: Hadoop Big Data Ecosystem & Computing Modes Mapping
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are designing a Huawei Cloud MRS big data architecture blueprint. Map the official Hadoop components to their exact roles and assign the graph/query frameworks.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `deployment_tool` to `'Ambari'`, `workflow_scheduler` to `'Oozie'`, `coordination_service` to `'ZooKeeper'`, and `etl_tool` to `'Sqoop'`.
 2. Set `spark_graph_library` to `'GraphX'` and `flink_graph_library` to `'Gelly'`.
 3. Set `big_data_mode_relation` to `'after'` (modes are set after data is generated).
 
-### 📝 Starter Workspace (`bigdata@mrs-cluster:~#`)
+### Starter Workspace (`bigdata@mrs-cluster:~#`)
 ```bash
 # Hadoop & Big Data Architecture Mapping
 hadoop_ecosystem:
@@ -33,7 +33,7 @@ graph_and_schema:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Ambari handles installation and deployment; Oozie handles workflow scheduling; ZooKeeper provides distributed coordination; Sqoop is the ETL tool.
 - GraphX is built into Spark; Gelly is built into Flink.
@@ -41,7 +41,7 @@ graph_and_schema:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -72,7 +72,7 @@ graph_and_schema:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In the Hadoop big data ecosystem, which component serves as the workflow scheduling system, and which serves as the installation and deployment tool?**
@@ -83,7 +83,7 @@ graph_and_schema:
 - D. Pig (workflow scheduling) and YARN (installation/deployment)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.01 p.44, Oozie is the workflow scheduling system, Ambari is the installation and deployment tool, ZooKeeper is the distributed coordination service, and Sqoop is the ETL tool.
@@ -98,7 +98,7 @@ graph_and_schema:
 - D. Big data 1.0 is analyst-oriented, whereas Big data 2.0 is programmer-oriented.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are true (Ch.01, pp. 39, 42). D is false because Big Data 1.0 is programmer-oriented, Big Data 2.0 is analyst-oriented, and Big Data 3.0 is engineer-oriented (Ch.01, p.55).
@@ -113,7 +113,7 @@ graph_and_schema:
 - D. Dremel
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** GraphX is the built-in graph computing library of Spark, while Gelly is the built-in graph computing algorithm library of Flink (Ch.01, p.45).

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: HPC Workload Classifier & HPCKit Toolchain Config
+# Hands-On Lab: HPC Workload Classifier & HPCKit Toolchain Config
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Classify scientific workloads into the four official HPC categories and configure the HPCKit toolchain manifest.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Map the workloads: `numerical_calculation` -> `'Memory-constrained'`, `meteorology_and_aerospace` -> `'Computing-intensive'`, `animation_and_gene_analysis` -> `'I/O-intensive'`, and `cae_simulation` -> `'Network-intensive'`.
 2. Set `bisheng_compiler_base` to `'LLVM'` and `hyper_mpi_standard` to `'MPI-3.1'`.
 3. Set `infiniband_100g_latency_us` to `1.5`.
 
-### 📝 Starter Workspace (`hpc-user@kunpeng-cluster:~#`)
+### Starter Workspace (`hpc-user@kunpeng-cluster:~#`)
 ```bash
 # HPC Workload & HPCKit Toolchain Configuration
 hpc_workload_classes:
@@ -33,7 +33,7 @@ hpckit_toolchain:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Numerical calculation is Memory-constrained, Meteorology/Aerospace is Computing-intensive, Animation/Gene analysis is I/O-intensive, and CAE simulation is Network-intensive.
 - BiSheng Compiler is based on LLVM; Hyper MPI supports MPI-3.1; 100G InfiniBand latency is 1.5 microseconds.
@@ -41,7 +41,7 @@ hpckit_toolchain:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ hpckit_toolchain:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **According to Chapter 04 (p. 273), how are 'animation rendering and gene analysis' and 'CAE simulation' classified among HPC application types?**
@@ -82,7 +82,7 @@ hpckit_toolchain:
 - D. Both are classified exclusively as Memory-constrained
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** According to Ch.04 p.273: Numerical calculation is Memory-constrained; Meteorology, earthquake, and aerospace are Computing-intensive; Animation rendering and gene analysis are I/O-intensive; and CAE simulation is Network-intensive.
@@ -97,7 +97,7 @@ hpckit_toolchain:
 - D. HPCKit only runs on x86 CISC processors and does not support Arm processors.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are true (Ch.04, p.276). D is false because HPCKit is specifically optimized for Huawei Kunpeng (Arm) processors.
@@ -112,7 +112,7 @@ hpckit_toolchain:
 - D. Local SATA RAID 0
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** According to Ch.04 p.277, Huawei's unique Parallel File System (PFS) supports both object storage and POSIX interfaces without data copy operations, reducing TCO by 20%.

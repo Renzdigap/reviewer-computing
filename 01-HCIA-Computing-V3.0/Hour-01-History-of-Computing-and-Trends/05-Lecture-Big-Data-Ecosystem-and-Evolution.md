@@ -1,4 +1,4 @@
-# 📖 Big Data Ecosystem, Data Types & Computing Modes
+# Big Data Ecosystem, Data Types & Computing Modes
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish structured, semi-structured, and unstructured data and contrast traditional vs. big data processing ('Fishing in the pond' vs. 'Fishing in the ocean')
 - Trace Big Data Architecture 1.0, 2.0, and 3.0 and target personas (programmer, analyst, engineer)
 - Map every component of the Hadoop Big Data Ecosystem and the 4 main big data computing modes
@@ -62,12 +62,12 @@ Big data is a combination of structured, semi-structured, and unstructured data 
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Traditional data processing sets the schema/mode BEFORE data is generated ('fishing in the pond', One size fits all); Big Data sets the mode AFTER data is generated ('fishing in the ocean', No size fits all).**
 - **Big Data 1.0 is programmer-oriented, Big Data 2.0 is analyst-oriented, and Big Data 3.0 is engineer-oriented.**
 - **Know the exact Hadoop component roles: Ambari (installation/deployment), Oozie (workflow scheduling), ZooKeeper (distributed coordination), Sqoop (ETL), Flume (log collection), GraphX (Spark graph library), Gelly (Flink graph library).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse GraphX (built-in graph library of Spark) with Gelly (built-in graph library of Flink) or Giraph (open-source counterpart to Google's Pregel).
 
@@ -76,5 +76,5 @@ Big data is a combination of structured, semi-structured, and unstructured data 
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Hadoop-Ecosystem-Component-Mapping.html`](./06-Exercise-Hadoop-Ecosystem-Component-Mapping.html)** (or [`06-Exercise-Hadoop-Ecosystem-Component-Mapping.md`](./06-Exercise-Hadoop-Ecosystem-Component-Mapping.md)) to apply this concept in an interactive lab workbench!

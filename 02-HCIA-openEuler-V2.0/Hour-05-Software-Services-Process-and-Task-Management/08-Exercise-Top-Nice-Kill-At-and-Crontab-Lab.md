@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Adjusting Process Priority (`renice`), Sending Signals (`kill`) & Scheduling (`at`/`crontab`)
+# Hands-On Lab: Adjusting Process Priority (`renice`), Sending Signals (`kill`) & Scheduling (`at`/`crontab`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are tuning process priorities and configuring scheduled maintenance on openEuler. Adjust the `nice` value of PID `9700` to `12` using `renice`, send the `HUP` signal to PID `3389` using `kill`, schedule `example.sh` to run once at `15:00` using `at`, and write a crontab entry that runs `/usr/local/bin/backup.sh` every Monday at `08:00` AM.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Change the nice value of running process PID `9700` to `12` using `renice -n 12 -p 9700` and send the `HUP` signal to PID `3389` using `kill -s HUP 3389`.
 2. Step 2: Schedule the script `example.sh` to run once at `15:00` using `at -f example.sh 15:00` and list the queue with `atq`.
 3. Step 3: Write the 5-field crontab schedule for every Monday at 08:00 AM: `00 08 * * 1 /usr/local/bin/backup.sh`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Set nice value of PID 9700 to 12 and send HUP signal to PID 3389
 <renice_command>
@@ -31,7 +31,7 @@ atq
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `renice -n 12 -p 9700` (Ch.04 p.230) and `kill -s HUP 3389` (Ch.04 p.235).
 - Use `at -f example.sh 15:00` (Ch.04 p.242).
@@ -40,7 +40,7 @@ atq
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -72,7 +72,7 @@ job 1 at Tue Nov 17 15:00:00 2026
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **[Official Ch.04 Quiz Q1] Which of the following commands can be used to dynamically check the host resource usage?**
@@ -83,7 +83,7 @@ job 1 at Tue Nov 17 15:00:00 2026
 - D. lscpu
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Official Ch.04 Quiz Q1 (p.249): B (`top`). While `ps` statically displays process information at a point in time, `top` dynamically displays host resource usage and processes in real time.
@@ -98,7 +98,7 @@ job 1 at Tue Nov 17 15:00:00 2026
 - D. Default: 18 (TSTP); Unconditional termination: 19 (CONT)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (pp.234–235), `kill PID` sends the `TERM` (15) signal by default, while signal `9` (`KILL`) performs unconditional termination.
@@ -113,7 +113,7 @@ job 1 at Tue Nov 17 15:00:00 2026
 - D. You do NOT need to restart the `cron` service after modifying a crontab file because `cron` checks the files every minute.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.04 (pp.241–248), all four statements are explicitly verified in the official training material.

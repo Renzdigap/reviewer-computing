@@ -404,13 +404,13 @@ p { margin-bottom: 10px; }
 <body>
   <div class="topbar">
     <div class="topbar-left">
-      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
-      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <a href="../../index.html" class="nav-btn">All Pillars</a>
+      <a href="../index.html" class="nav-btn">01-HCIA-Computing-V3.0 Course Player</a>
       <span style="color:var(--text-muted);">|</span>
       <span>Hour 02 • Sprint 1/4</span>
     </div>
     <div class="topbar-right">
-      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">07:00</span>
       <a href="../Hour-01-History-of-Computing-and-Trends/08-Exercise-AI-Elements-and-Heterogeneous-Trends-Lab.html" class="nav-btn">← Prev</a>
       <a href="./02-Exercise-Server-Classification-and-Instruction-Set-Lab.html" class="nav-btn">Next →</a>
     </div>
@@ -419,15 +419,15 @@ p { margin-bottom: 10px; }
   
         <div class="lecture-container">
           <div class="unit-badges">
-            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
-            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.02, pp. 72–83</span>
-            <span class="badge badge-hour">⏱️ Hour 02 • Sprint 1/4</span>
-            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+            <span class="badge badge-lecture">BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">HCIA-Computing V3.0 Training Material.pdf • Ch.02, pp. 72–83</span>
+            <span class="badge badge-hour">Hour 02 • Sprint 1/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">Completed</span>
           </div>
           <h1 class="unit-title">Computing System Architecture &amp; Server Classification</h1>
 
           <div class="objectives-card">
-            <h3>🎯 Learning Objectives</h3>
+            <h3>Learning Objectives</h3>
             <ul class="md-list"><li>Understand the Computing System formula (Computing System = Computer + Data) and its 3 layers (Hardware, Software, Solutions)</li><li>Master the 5 RASUM server features and the chronological evolution of servers</li><li>Compare Tower, Blade, and Rack servers, C/S vs. B/S deployment architectures, and CISC vs. RISC instruction sets</li></ul>
           </div>
 
@@ -470,13 +470,13 @@ p { margin-bottom: 10px; }
           </div>
 
           <div class="takeaways-card">
-            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <h3>High-Yield Summary & Takeaways</h3>
             <ul class="md-list"><li>Server evolution order: Mainframes (1940s–50s) -&gt; Midrange computers (1960s–70s) -&gt; Microcomputers (1970s–80s) -&gt; General-purpose servers (1980s–90s, Compaq SystemPro &amp; Intel Pentium Pro).</li><li>1U equals 4.45 cm (1.75 inches), and standard rack cabinets are 19 inches (48.26 cm) wide.</li><li>CISC (x86) has complex CPU hardware but simplifies compiler design; RISC (Arm, RISC-V, MIPS) simplifies CPU hardware with fixed-length instructions but places higher requirements on compiler design.</li></ul>
           </div>
 
           <div class="traps-card">
-            <h3>🚨 Huawei National Stage Exam Traps</h3>
-            <div class="trap-item">⚠️ EXAM TRAP (Ch.02 Quiz Q1): 'Servers are developed from midrange computers to general-purpose servers and then to mainframe servers.' -&gt; FALSE! Mainframes came FIRST (1940s–50s), then Midrange (1960s–70s), Microcomputers (1970s–80s), and General-purpose servers (1980s–90s).</div><div class="trap-item">⚠️ EXAM TRAP: Loongson 2 uses MIPS (RISC), Qualcomm Snapdragon Wear uses RISC-V, and Huawei Kunpeng uses Arm (RISC).</div>
+            <h3>Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">EXAM TRAP (Ch.02 Quiz Q1): 'Servers are developed from midrange computers to general-purpose servers and then to mainframe servers.' -&gt; FALSE! Mainframes came FIRST (1940s–50s), then Midrange (1960s–70s), Microcomputers (1970s–80s), and General-purpose servers (1980s–90s).</div><div class="trap-item">EXAM TRAP: Loongson 2 uses MIPS (RISC), Qualcomm Snapdragon Wear uses RISC-V, and Huawei Kunpeng uses Arm (RISC).</div>
           </div>
 
           <div class="unit-footer-cta">
@@ -485,7 +485,7 @@ p { margin-bottom: 10px; }
               <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
             </div>
             <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
-              ✓ Mark Lecture Completed & Start Exercise →
+              Mark Lecture Completed & Start Exercise →
             </button>
           </div>
         </div>
@@ -524,7 +524,7 @@ p { margin-bottom: 10px; }
       timerSecs--;
       const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
       const s = String(timerSecs % 60).padStart(2, '0');
-      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+      document.getElementById('timer-display').textContent = `${m}:${s}`;
     }, 1000);
     function toggleTimer() { timerRunning = !timerRunning; }
 
@@ -608,18 +608,18 @@ p { margin-bottom: 10px; }
         const stepEl = document.getElementById(`inst-step-${idx}`);
         if (passed) {
           if (stepEl) stepEl.classList.add('passed');
-          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+          logLines.push(`[PASS] Step ${chk.step || (idx+1)} : ${chk.description}`);
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
         }
       });
 
       const badge = document.getElementById('lab-status-badge');
       if (allPassed) {
         badge.className = 'status-pass';
-        badge.textContent = '✓ All Lab Steps Verified!';
+        badge.textContent = 'All Lab Steps Verified!';
         logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
         logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
         markUnitCompleted();
@@ -662,17 +662,17 @@ p { margin-bottom: 10px; }
           correctCount++;
           expEl.style.background = 'rgba(16, 185, 129, 0.14)';
           expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
-          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[CORRECT] (${target})!</strong> ${fmtText(q.explanation || '')}`;
         } else {
           expEl.style.background = 'rgba(225, 29, 72, 0.14)';
           expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
-          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[INCORRECT] Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
         }
       });
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

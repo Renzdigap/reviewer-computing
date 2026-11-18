@@ -1,4 +1,4 @@
-# 📖 Linux File Directory Structure (FHS) & Path Navigation (`pwd`, `cd`, `ls`)
+# Linux File Directory Structure (FHS) & Path Navigation (`pwd`, `cd`, `ls`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Apply the Linux philosophy 'Everything is a file' and identify the purpose of every standard root subdirectory (`/bin`, `/sbin`, `/etc`, `/proc`, `/var`, `/dev`, `/usr`, `/opt`, etc.)
 - Differentiate absolute paths vs. relative paths and logical (`pwd -L`) vs. physical (`pwd -P`) working directories
 - Use `cd` (`~`, `-`, `..`, `.`) and `ls` (`-a`, `-A`, `-l`, `-h`, `-t`, `-S`, `-r`, `-d`, `-R`) with precision
@@ -58,12 +58,12 @@ In Linux, **everything is a file**—regular files, directories, character/block
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **/proc is a virtual directory that maps system memory (RAM); /var stores constantly growing files like logs; /etc stores configuration files.**
 - **pwd -L (default) prints the logical symlink path, whereas pwd -P resolves symlinks and prints the true physical directory path.**
 - **ls -a includes '.' and '..', whereas ls -A excludes them; ls -ld <dir> inspects the directory itself rather than listing its contents.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse /root (the home directory of the superuser) with / (the root directory of the entire Linux filesystem tree)!
 
@@ -72,5 +72,5 @@ In Linux, **everything is a file**—regular files, directories, character/block
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-FHS-and-Directory-Navigation-Lab.html`](./04-Exercise-FHS-and-Directory-Navigation-Lab.html)** (or [`04-Exercise-FHS-and-Directory-Navigation-Lab.md`](./04-Exercise-FHS-and-Directory-Navigation-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Client Authentication (`pg_hba.conf`), `postgresql.conf` & `gsql` Connections
+# Client Authentication (`pg_hba.conf`), `postgresql.conf` & `gsql` Connections
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Configure client authentication policies in `pg_hba.conf` using `gs_guc set` and `gs_guc reload`
 - Distinguish `HOSTTYPE` (`local`, `host`, `hostssl`, `hostnossl`) and `AUTHMETHOD` (`sha256`, `md5`, `trust`, `reject`, `cert`, `gss`)
 - Inspect node IP and port (`gs_om -t status --detail`, `postgresql.conf`) and connect via `gsql`
@@ -59,12 +59,12 @@ gs_guc [ set | reload ] [-N NODE-NAME] [-I INSTANCE-NAME | -D DATADIR] \
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **`gs_guc set` only writes to the config file, whereas `gs_guc reload` writes to the config file AND signals the database process to reload immediately.**
 - **In `pg_hba.conf`, `sha256` is the recommended authentication method; `trust` is only allowed for local connections (remote hosts cannot use `trust`).**
 - **In `gsql`, `DBNAME=#` indicates an administrator (`omm`) prompt, whereas `DBNAME=>` indicates a common user prompt.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Remote hosts are NOT allowed to access openGauss using `trust` mode in `pg_hba.conf`! Remote connections must use `sha256` (recommended), `cert`, or `gss`.
 
@@ -73,5 +73,5 @@ gs_guc [ set | reload ] [-N NODE-NAME] [-I INSTANCE-NAME | -D DATADIR] \
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-pg-hba-Auth-and-gsql-Connection-Lab.html`](./06-Exercise-pg-hba-Auth-and-gsql-Connection-Lab.html)** (or [`06-Exercise-pg-hba-Auth-and-gsql-Connection-Lab.md`](./06-Exercise-pg-hba-Auth-and-gsql-Connection-Lab.md)) to apply this concept in an interactive lab workbench!

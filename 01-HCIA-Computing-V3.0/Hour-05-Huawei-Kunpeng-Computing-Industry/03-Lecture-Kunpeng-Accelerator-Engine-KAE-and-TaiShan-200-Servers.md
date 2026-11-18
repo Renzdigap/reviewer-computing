@@ -1,4 +1,4 @@
-# 📖 Kunpeng Accelerator Engine (KAE) & TaiShan 100/200 Server Series
+# Kunpeng Accelerator Engine (KAE) & TaiShan 100/200 Server Series
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand KAE security advantages (on-chip bus vs. PCIe bus, SM3/SM4 support) and the 4 layers of the KAE logical architecture
 - Compare TaiShan 100 (Kunpeng 916) and TaiShan 200 (Kunpeng 920) server portfolios (1280, 2280, 2280E, 2480, 5280, 5290)
 - Master the exact hardware differences between TaiShan 2280 (2U balanced) and TaiShan 5280 (4U storage) and x86 servers
@@ -57,13 +57,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **KAE encrypts/decrypts inside the CPU over the on-chip bus (preventing PCIe bus data leakage), supports SM3/SM4, and exposes standard OpenSSL and zlib interfaces.**
 - **In KAE, BMC manages accelerator licenses, while BIOS initializes modules and reports the ACPI table to the kernel.**
 - **Unlike x86 servers, TaiShan server CPUs are integrated on the motherboard and CANNOT be replaced separately!**
 - **TaiShan 2280 (2U 2P balanced, 5°C–40°C) and TaiShan 5280 (4U 2P storage, up to 40 × 3.5" drives = 560 TB, 5°C–35°C) share the same motherboard but use different drive backplanes.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: If a question asks whether a faulty CPU on a TaiShan 200 (2280) server can be replaced independently of the motherboard, the answer is FALSE — Kunpeng CPUs on TaiShan servers are integrated on the motherboard and cannot be replaced separately (p. 250)!
 
@@ -72,5 +72,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-TaiShan-Server-Portfolio-and-KAE-Architecture-Lab.html`](./04-Exercise-TaiShan-Server-Portfolio-and-KAE-Architecture-Lab.html)** (or [`04-Exercise-TaiShan-Server-Portfolio-and-KAE-Architecture-Lab.md`](./04-Exercise-TaiShan-Server-Portfolio-and-KAE-Architecture-Lab.md)) to apply this concept in an interactive lab workbench!

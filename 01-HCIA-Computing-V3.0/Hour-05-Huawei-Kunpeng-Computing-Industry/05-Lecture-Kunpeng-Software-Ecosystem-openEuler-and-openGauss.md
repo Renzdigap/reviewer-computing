@@ -1,4 +1,4 @@
-# 📖 Kunpeng Software Ecosystem: openEuler & openGauss
+# Kunpeng Software Ecosystem: openEuler & openGauss
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand Huawei's 16-word Kunpeng ecosystem strategy ('open hardware, open source software, partner enablement, and talent cultivation')
 - Master openEuler history (2010 EulerOS -> Sept 2019 openEuler -> Nov 9, 2021 OpenAtom Foundation) and technical features (A-Tune, iSulad, Linux kernel 5.10, BiSheng Compiler)
 - Master openGauss history (June 30, 2020 open source, Mulan PSL v2) and features (1.5M tpmC, NUMA-aware, SQL bypass, <10s failover, CRC page repair, fully-encrypted DB)
@@ -46,13 +46,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openEuler timeline: 2010 EulerOS -> Sept 2019 open-sourced as openEuler -> Nov 9, 2021 donated to OpenAtom Foundation. openEuler 22.03 LTS uses Linux kernel 5.10.**
 - **A-Tune optimizes system resources through Sensing, Decision making, and Execution. iSulad supports Application containers (Moby), Secure containers (Kata Containers), and System containers.**
 - **openGauss went open source on June 30, 2020 under the Mulan Permissive Software License v2 (Mulan PSL v2).**
 - **openGauss achieves 1.5M tpmC on a 2-socket Kunpeng server, uses NUMA-aware data structures and SQL bypass, repairs damaged pages via CRC + standby node, and fails over to standby within 10 seconds.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse the open-source dates: openEuler was open-sourced in September 2019 (donated to OpenAtom Foundation in Nov 2021), while openGauss was open-sourced on June 30, 2020 (under Mulan PSL v2)!
 
@@ -61,5 +61,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-openEuler-ATune-iSulad-and-openGauss-Lab.html`](./06-Exercise-openEuler-ATune-iSulad-and-openGauss-Lab.html)** (or [`06-Exercise-openEuler-ATune-iSulad-and-openGauss-Lab.md`](./06-Exercise-openEuler-ATune-iSulad-and-openGauss-Lab.md)) to apply this concept in an interactive lab workbench!

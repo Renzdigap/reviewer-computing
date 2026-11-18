@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Inspecting the Multi-Threaded `gaussdb` Process & Kernel Version
+# Hands-On Lab: Inspecting the Multi-Threaded `gaussdb` Process & Kernel Version
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 01 — openGauss Overview & Database Fundamentals (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Verify that openGauss runs as a single `gaussdb` process with multiple worker and background threads (unlike PostgreSQL's multi-process model) and check the openGauss version and incremental checkpoint setting.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Use `ps ux | grep gaussdb` to view the running `gaussdb` master process.
 2. Step 2: Use `ps -T -p 24209` to list the threads (`SPID`) inside the `gaussdb` process.
 3. Step 3: Query the `enable_incremental_checkpoint` parameter using `gsql -d postgres -p 5432 -c "SHOW enable_incremental_checkpoint;"`.
 
-### 📝 Starter Workspace (`omm@opengauss:~$`)
+### Starter Workspace (`omm@opengauss:~$`)
 ```bash
 # Step 1: Check the gaussdb process
 ps ux | grep ____
@@ -28,7 +28,7 @@ gsql -d postgres -p 5432 -c "SHOW ____;"
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - The openGauss server binary name is `gaussdb`.
 - The `ps -T -p <PID>` flag displays all threads running inside a single process.
@@ -37,7 +37,7 @@ gsql -d postgres -p 5432 -c "SHOW ____;"
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -65,7 +65,7 @@ omm      24209 11.9  1.0 1852000 355816 pts/0  Sl   01:54   0:33 /opt/software/o
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Under which open-source license is the openGauss database released?**
@@ -76,7 +76,7 @@ omm      24209 11.9  1.0 1852000 355816 pts/0  Sl   01:54   0:33 /opt/software/o
 - D. BSD 3-Clause License
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Chapter 01 (pp. 43, 46, 50), openGauss is released under the Mulan Permissive Software License v2 (Mulan PSL v2).
@@ -91,7 +91,7 @@ omm      24209 11.9  1.0 1852000 355816 pts/0  Sl   01:54   0:33 /opt/software/o
 - D. openGauss supports only row-store tables whereas PostgreSQL supports row-store, column-store, and MOT
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Options A, B, and C are exact advantages of openGauss (Ch.01 pp. 48–49). Option D is reversed: openGauss supports row-store, column-store, and MOT, whereas PostgreSQL supports row-store only.
@@ -104,7 +104,7 @@ omm      24209 11.9  1.0 1852000 355816 pts/0  Sl   01:54   0:33 /opt/software/o
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True (Ch.01 p. 50). The TC makes decisions on the technical direction, Maintainers attend to project code, Committers monitor code quality and integrate modifications, and Contributors submit requirements/bugs/code.

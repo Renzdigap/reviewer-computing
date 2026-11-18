@@ -1,4 +1,4 @@
-# 📖 DNF Repository, Package & Package Group Management (`dnf`, `dnf config-manager`)
+# DNF Repository, Package & Package Group Management (`dnf`, `dnf config-manager`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Add, list, enable, and disable repositories using `dnf config-manager` (`--add-repo`, `--set-enable`, `--set-disable`) and `dnf repolist`
 - Search, list, inspect, download (with dependencies), install, and remove RPM packages using `dnf`
 - Query, install, and remove software package groups (`dnf groups summary`, `dnf group list`, `dnf group install`, `dnf group remove`)
@@ -63,12 +63,12 @@ A **package group** is a curated collection of related software packages (such a
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Use 'dnf config-manager --add-repo <url>' to add a repository in /etc/yum.repos.d/, 'dnf repolist' to check repo IDs, and '--set-enable' / '--set-disable' to toggle them.**
 - **Use 'dnf download --resolve <pkg>' to download an RPM package along with all its uninstalled dependency packages.**
 - **Use 'dnf groups summary' and 'dnf group list' to inspect software package groups, and 'dnf group install <name/id>' or 'dnf group remove <name/id>' to manage them.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Only the root user can add a .repo file or run 'dnf config-manager --add-repo' / '--set-enable' / '--set-disable'.
 
@@ -77,5 +77,5 @@ A **package group** is a curated collection of related software packages (such a
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-DNF-Config-Manager-and-Package-Ops-Lab.html`](./04-Exercise-DNF-Config-Manager-and-Package-Ops-Lab.html)** (or [`04-Exercise-DNF-Config-Manager-and-Package-Ops-Lab.md`](./04-Exercise-DNF-Config-Manager-and-Package-Ops-Lab.md)) to apply this concept in an interactive lab workbench!

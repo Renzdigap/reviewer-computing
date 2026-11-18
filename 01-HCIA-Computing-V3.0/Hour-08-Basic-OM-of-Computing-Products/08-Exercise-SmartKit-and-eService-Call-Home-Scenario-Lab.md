@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: SmartKit Delivery Pipeline & eService Call Home Verification
+# Hands-On Lab: SmartKit Delivery Pipeline & eService Call Home Verification
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are delivering a batch of bare-metal TaiShan 200 (2280) servers on site using SmartKit and configuring eService Call Home for post-delivery maintenance.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `raid_capable_tools` to `['Smart Provisioning', 'SmartKit', 'iBMC']` and `excluded_remote_om_tool` to `'eService'`.
 2. Set `smartkit_max_parallel_tasks` to `50` and `ts200_burn_in_engine` to `'Smart Provisioning'` (while V3 uses `'FTK.iso'`).
 3. Set `eservice_auto_ticket_feature` to `'Call Home'`.
 
-### 📝 Starter Workspace (`fe-engineer@smartkit-laptop:~#`)
+### Starter Workspace (`fe-engineer@smartkit-laptop:~#`)
 ```bash
 # SmartKit Delivery & eService Remote O&M Configuration
 raid_configuration_quiz:
@@ -37,7 +37,7 @@ eservice_remote_om:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Smart Provisioning, SmartKit, and iBMC can configure RAID on bare-metal TaiShan 2280 servers; eService cannot (Ch.06 Quiz Q1).
 - SmartKit runs up to 50 parallel tasks, uses Smart Provisioning for TS200 burn-in tests, and eService uses Call Home for automatic alarm reporting and ticket creation.
@@ -45,7 +45,7 @@ eservice_remote_om:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -79,7 +79,7 @@ eservice_remote_om:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.06 Quiz Q1) A batch of TaiShan 200 2280 balanced servers are purchased, but they do not have pre-integrated software. During project delivery, engineers need to configure RAIDs for these servers and install OSs. Which of the following computing management software can be used to configure RAIDs for these servers?**
@@ -90,7 +90,7 @@ eservice_remote_om:
 - D. eService
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** According to Ch.06 p.438 Official Quiz Q1, Smart Provisioning (A), SmartKit (B), and iBMC (C) can all be used to configure RAIDs on bare-metal TaiShan 200 (2280) servers. eService (D) is a remote O&M platform for monitoring, log collection, health evaluation, and Call Home, and cannot configure RAID.
@@ -105,7 +105,7 @@ eservice_remote_om:
 - D. Electronic label modification
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.06 p.437, Call Home is an automatic fault reporting method in eService that sends hardware alarms from Huawei devices to the Huawei technical support center and automatically creates trouble tickets.
@@ -120,7 +120,7 @@ eservice_remote_om:
 - D. For Burn-in Tests on TaiShan 200 and V5 servers, SmartKit uses iBMC to deliver commands to Smart Provisioning to stress-test the CPU, memory, and disks.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four statements come directly from Ch.06 pp. 421, 424, 429, and 430.

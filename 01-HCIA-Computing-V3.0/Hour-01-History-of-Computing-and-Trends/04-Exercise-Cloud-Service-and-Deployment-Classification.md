@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Cloud Service Model & Architecture Classifier
+# Hands-On Lab: Cloud Service Model & Architecture Classifier
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 An enterprise is migrating from Traditional IT to Huawei Cloud. Complete the architecture mapping configuration defining Cloud 1.0/2.0/3.0 focus areas and IaaS/PaaS/SaaS management boundaries.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `cloud_1_focus` to `'virtualization-centric'`, `cloud_2_focus` to `'resource-centric'`, and `cloud_3_focus` to `'application-centric'`.
 2. Set `iaas_user_manages_os` to `True` and `paas_user_manages_os` to `False`.
 3. Specify the two layers managed by the user in PaaS as `'applications'` and `'data'`.
 
-### 📝 Starter Workspace (`architect@huawei-cloud:~#`)
+### Starter Workspace (`architect@huawei-cloud:~#`)
 ```bash
 # Huawei Cloud Migration Matrix Configuration
 cloud_evolution:
@@ -32,7 +32,7 @@ service_models:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Cloud 1.0 is virtualization-centric, Cloud 2.0 is resource-centric, and Cloud 3.0 is application-centric.
 - In PaaS, the cloud provider manages the OS, middleware, and runtime environment; users only focus on applications and data.
@@ -40,7 +40,7 @@ service_models:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ service_models:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In the Platform as a Service (PaaS) cloud computing model, which layers do users need to focus on and manage?**
@@ -81,7 +81,7 @@ service_models:
 - D. Users only use applications and manage no layers
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** In PaaS (Ch.01, p.36), the cloud platform provides and maintains the infrastructure (servers, storage, networks, virtualization) and application deployment environment (OS, middleware, operating environment). Users only need to focus on applications and data.
@@ -96,7 +96,7 @@ service_models:
 - D. First Platform
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Cloud 1.0 is virtualization-centric; Cloud 2.0 is resource-centric (OpenStack); Cloud 3.0 is application-centric (Docker, Cloud Foundry, Cloud Native) (Ch.01, p.34).
@@ -112,7 +112,7 @@ service_models:
 - E. Metered services
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCDE`
 - **Explanation:** All five (On-demand self-service, Widespread network access, Resource pooling, Quick deployment and auto scaling, and Metered services) are the five core benefits of cloud computing (Ch.01, p.33).

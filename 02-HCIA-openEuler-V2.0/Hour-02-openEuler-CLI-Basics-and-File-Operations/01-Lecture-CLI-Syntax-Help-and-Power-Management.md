@@ -1,4 +1,4 @@
-# 📖 Linux Command Syntax, Help Utilities & Session/Power Management
+# Linux Command Syntax, Help Utilities & Session/Power Management
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Parse standard Linux command syntax (`command [-option] [parameter]`) and distinguish short (`-a`) vs. long (`--all`) options
 - Query documentation using `man` (9 manual sections and `coreutils-help` on openEuler), `whatis`, and `help`
 - Execute login/session commands (`login`, `last`, `exit`) and safe power management (`shutdown`, `halt`, `reboot`)
@@ -59,12 +59,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **man pages are divided into 9 sections: 1 = User commands, 2 = System calls, 3 = C library functions, 4 = /dev devices, 5 = Config file formats, 8 = Root admin commands.**
 - **On openEuler, command packages and documentation packages are separated; install 'coreutils-help' to access core command manual pages.**
 - **shutdown -k only broadcasts a warning without shutting down; halt -w / reboot -w only writes a record to /var/log/wtmp without halting/rebooting.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: 'man 1 passwd' views the passwd command manual, whereas 'man 5 passwd' views the /etc/passwd configuration file format manual!
 
@@ -73,5 +73,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Help-Session-and-Power-Commands-Lab.html`](./02-Exercise-Help-Session-and-Power-Commands-Lab.html)** (or [`02-Exercise-Help-Session-and-Power-Commands-Lab.md`](./02-Exercise-Help-Session-and-Power-Commands-Lab.md)) to apply this concept in an interactive lab workbench!

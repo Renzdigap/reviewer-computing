@@ -1,4 +1,4 @@
-# 📖 User, Group & Password Lifecycle Commands (`useradd`, `usermod`, `userdel`, `passwd`, `chage`, `gpasswd`)
+# User, Group & Password Lifecycle Commands (`useradd`, `usermod`, `userdel`, `passwd`, `chage`, `gpasswd`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 04 — User, Group & File Permission Management (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Create, modify, and delete users and groups with `useradd`, `usermod`, `userdel`, `groupadd`, `groupmod`, and `groupdel`
 - Manage user passwords and account locks with `passwd` (`-n`, `-x`, `-w`, `-i`, `-d`, `-S`, `-l`, `-u`, `-e`) and password aging with `chage` (`-l`, `-M`, `-m`, `-w`, `-d`, `-I`)
 - Manage group memberships safely without overwriting existing supplementary groups using `gpasswd` (`-a`, `-d`, `-M`, `-A`) vs. `usermod -G`
@@ -52,12 +52,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **userdel without options keeps the home directory; 'userdel -r username' deletes both the user account and their home/mail directories.**
 - **chage -l lists password aging policy, chage -M sets maximum validity days, and passwd -l / -u locks or unlocks an account.**
 - **gpasswd -a user group adds a user to a group while keeping existing supplementary groups, whereas 'usermod -G group user' overwrites previous supplementary groups.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse chage options with passwd options! For maximum password validity days, chage uses uppercase '-M' (chage -M 90 user), whereas passwd uses lowercase '-x' (passwd -x 90 user).
 
@@ -66,5 +66,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-User-Group-and-Password-Aging-Lab.html`](./04-Exercise-User-Group-and-Password-Aging-Lab.html)** (or [`04-Exercise-User-Group-and-Password-Aging-Lab.md`](./04-Exercise-User-Group-and-Password-Aging-Lab.md)) to apply this concept in an interactive lab workbench!

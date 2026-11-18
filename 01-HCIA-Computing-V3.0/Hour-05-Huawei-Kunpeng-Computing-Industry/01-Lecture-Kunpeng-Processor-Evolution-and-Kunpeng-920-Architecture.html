@@ -404,13 +404,13 @@ p { margin-bottom: 10px; }
 <body>
   <div class="topbar">
     <div class="topbar-left">
-      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
-      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <a href="../../index.html" class="nav-btn">All Pillars</a>
+      <a href="../index.html" class="nav-btn">01-HCIA-Computing-V3.0 Course Player</a>
       <span style="color:var(--text-muted);">|</span>
       <span>Hour 05 • Sprint 1/4</span>
     </div>
     <div class="topbar-right">
-      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">08:00</span>
       <a href="../Hour-04-RAID-PCIe-NICs-GPUs-and-Server-Software/08-Exercise-Linux-Root-Directory-Hierarchy-and-Boot-Flow-Lab.html" class="nav-btn">← Prev</a>
       <a href="./02-Exercise-Kunpeng-920-Die-Cluster-Core-and-HCCS-Lab.html" class="nav-btn">Next →</a>
     </div>
@@ -419,15 +419,15 @@ p { margin-bottom: 10px; }
   
         <div class="lecture-container">
           <div class="unit-badges">
-            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
-            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.04, pp. 231–239, 279</span>
-            <span class="badge badge-hour">⏱️ Hour 05 • Sprint 1/4</span>
-            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+            <span class="badge badge-lecture">BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">HCIA-Computing V3.0 Training Material.pdf • Ch.04, pp. 231–239, 279</span>
+            <span class="badge badge-hour">Hour 05 • Sprint 1/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">Completed</span>
           </div>
           <h1 class="unit-title">Kunpeng Processor Evolution &amp; Kunpeng 920 Physical Architecture</h1>
 
           <div class="objectives-card">
-            <h3>🎯 Learning Objectives</h3>
+            <h3>Learning Objectives</h3>
             <ul class="md-list"><li>Trace Huawei's chip evolution from 1991 ASIC to K3, Kunpeng 912 (Hi1612), Kunpeng 916, and Kunpeng 920</li><li>Master the physical hierarchy of Kunpeng 920: SoC, Chip, Die (2 CPU dies + 1 I/O die via CoWoS), Cluster (8 per die), and Core (4 per cluster)</li><li>Know all Kunpeng 920 performance metrics, HCCS bus (480 Gbit/s, up to 256 cores across 4 sockets), RAS-45, and DEMT</li></ul>
           </div>
 
@@ -479,13 +479,13 @@ p { margin-bottom: 10px; }
           </div>
 
           <div class="takeaways-card">
-            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <h3>High-Yield Summary & Takeaways</h3>
             <ul class="md-list"><li>Kunpeng processor evolution: 2014 Kunpeng 912 (Hi1612, first 64-bit Arm) -&gt; 2016 Kunpeng 916 (first multi-socket Arm) -&gt; Jan 2019 Kunpeng 920 (first 7nm data center Arm).</li><li>Kunpeng 920 encapsulates 3 dies via CoWoS: 2 CPU dies (each with 8 clusters × 4 cores = 32 cores and 4 DDR4 controllers) + 1 I/O die (PCIe 4.0, 100GE RoCE, SAS controller, KAE accelerators).</li><li>Huawei Cache Coherence System (HCCS) delivers up to 480 Gbit/s inter-chip bandwidth, connecting up to 4 Kunpeng 920 sockets (256 physical cores).</li><li>Kunpeng 920 (Ch.04 Quiz Q1): 7nm process, 8-channel DDR4 (+60% BW), PCIe 4.0 compatible with 3.0/2.0/1.0 (+66% I/O BW), 100GE RoCE (+4x network BW), and multiple built-in accelerators.</li></ul>
           </div>
 
           <div class="traps-card">
-            <h3>🚨 Huawei National Stage Exam Traps</h3>
-            <div class="trap-item">⚠️ EXAM TRAP: Kunpeng 920 has THREE dies in total: TWO CPU dies (32 cores + 4 DDR4 channels each) and ONE I/O die — NOT 4 dies or 1 monolithic die!</div><div class="trap-item">⚠️ EXAM TRAP: Do not confuse Kunpeng 912/Hi1612 (2014, first 64-bit Arm) with Kunpeng 916 (2016, first multi-socket Arm, used in TaiShan 100) or Kunpeng 920 (2019, first 7nm data center Arm, used in TaiShan 200).</div>
+            <h3>Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">EXAM TRAP: Kunpeng 920 has THREE dies in total: TWO CPU dies (32 cores + 4 DDR4 channels each) and ONE I/O die — NOT 4 dies or 1 monolithic die!</div><div class="trap-item">EXAM TRAP: Do not confuse Kunpeng 912/Hi1612 (2014, first 64-bit Arm) with Kunpeng 916 (2016, first multi-socket Arm, used in TaiShan 100) or Kunpeng 920 (2019, first 7nm data center Arm, used in TaiShan 200).</div>
           </div>
 
           <div class="unit-footer-cta">
@@ -494,7 +494,7 @@ p { margin-bottom: 10px; }
               <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
             </div>
             <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
-              ✓ Mark Lecture Completed & Start Exercise →
+              Mark Lecture Completed & Start Exercise →
             </button>
           </div>
         </div>
@@ -533,7 +533,7 @@ p { margin-bottom: 10px; }
       timerSecs--;
       const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
       const s = String(timerSecs % 60).padStart(2, '0');
-      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+      document.getElementById('timer-display').textContent = `${m}:${s}`;
     }, 1000);
     function toggleTimer() { timerRunning = !timerRunning; }
 
@@ -617,18 +617,18 @@ p { margin-bottom: 10px; }
         const stepEl = document.getElementById(`inst-step-${idx}`);
         if (passed) {
           if (stepEl) stepEl.classList.add('passed');
-          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+          logLines.push(`[PASS] Step ${chk.step || (idx+1)} : ${chk.description}`);
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
         }
       });
 
       const badge = document.getElementById('lab-status-badge');
       if (allPassed) {
         badge.className = 'status-pass';
-        badge.textContent = '✓ All Lab Steps Verified!';
+        badge.textContent = 'All Lab Steps Verified!';
         logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
         logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
         markUnitCompleted();
@@ -671,17 +671,17 @@ p { margin-bottom: 10px; }
           correctCount++;
           expEl.style.background = 'rgba(16, 185, 129, 0.14)';
           expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
-          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[CORRECT] (${target})!</strong> ${fmtText(q.explanation || '')}`;
         } else {
           expEl.style.background = 'rgba(225, 29, 72, 0.14)';
           expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
-          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[INCORRECT] Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
         }
       });
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: openEuler A-Tune/iSulad & openGauss Feature Verification
+# Hands-On Lab: openEuler A-Tune/iSulad & openGauss Feature Verification
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure the Kunpeng base software manifest verifying openEuler 22.03 LTS and openGauss technical specifications.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `openeuler_2203_kernel` to `'5.10'`, `ai_tuning_engine` to `'A-Tune'`, and `container_engine` to `'iSulad'`.
 2. Set `opengauss_license` to `'Mulan PSL v2'` and `opengauss_2p_tpmc` to `1500000`.
 3. Set `opengauss_failover_seconds` to `10`.
 
-### 📝 Starter Workspace (`root@openeuler-2203:~#`)
+### Starter Workspace (`root@openeuler-2203:~#`)
 ```bash
 # openEuler & openGauss Technical Manifest
 openeuler_specs:
@@ -34,7 +34,7 @@ opengauss_specs:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - openEuler 22.03 LTS uses Linux kernel 5.10, A-Tune for AI tuning, and iSulad for lightweight containers.
 - openGauss uses Mulan PSL v2, reaches 1,500,000 tpmC on 2-socket Kunpeng, and promotes standby to primary within 10 seconds.
@@ -42,7 +42,7 @@ opengauss_specs:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -72,7 +72,7 @@ opengauss_specs:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which AI-driven automatic optimization system in openEuler uses non-intrusive system profiling (Sensing, Decision making, and Execution) to match optimal resource models to service workloads in real time?**
@@ -83,7 +83,7 @@ opengauss_specs:
 - D. Kickstart
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.04 p.261, A-Tune is openEuler's AI-driven automatic optimization system that operates through Sensing, Decision making, and Execution.
@@ -98,7 +98,7 @@ opengauss_specs:
 - D. It supports fully-encrypted computing, dynamic data masking, and AI-based parameter tuning and slow SQL diagnosis.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four statements accurately describe openGauss features in Ch.04 pp. 266–269.
@@ -113,7 +113,7 @@ opengauss_specs:
 - D. OpenStack Nova
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.04 p.262, openEuler integrates Moby 18.09 for application containers and Kata Containers 1.7 for secure containers (which are essentially VMs with container interfaces).

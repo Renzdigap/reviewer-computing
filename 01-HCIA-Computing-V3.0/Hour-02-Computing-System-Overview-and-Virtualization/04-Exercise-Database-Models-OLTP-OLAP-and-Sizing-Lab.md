@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Database Server Sizing & Middleware Selection
+# Hands-On Lab: Database Server Sizing & Middleware Selection
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure the hardware and software specification sheet for deploying openGauss 5.0.0 on a 4-socket Kunpeng server and validate middleware/OS rules.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `server_model` to `'TaiShan 200 2480'`, `max_cpu_peak_load_percent` to `85`, and `nic_chip` to `'Hi1822'`.
 2. Set `open_source_ejb_middleware` to `'JBoss'` and `lightweight_no_ejb_middleware` to `'Tomcat'`.
 3. Set `win2022_standard_max_vms` to `2`.
 
-### 📝 Starter Workspace (`dba@opengauss-2480:~#`)
+### Starter Workspace (`dba@opengauss-2480:~#`)
 ```bash
 # Database Server & Middleware Specification
 opengauss_4p_spec:
@@ -33,7 +33,7 @@ software_stack:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - TaiShan 200 (model 2480) is the 2U 4-socket Kunpeng server; database CPU peak load should not exceed 85%.
 - JBoss supports EJB under LGPL, while Tomcat only supports Servlet/JSP. Windows Server 2022 Standard allows 2 VMs.
@@ -41,7 +41,7 @@ software_stack:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ software_stack:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **According to the database model definitions in Chapter 02 (p. 98), which database model allows more than one node to have no parent and allows a node to have more than one parent?**
@@ -82,7 +82,7 @@ software_stack:
 - D. Transaction model
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** On Ch.02 p.98, the Network model is explicitly defined as: 'Allows more than one node to have no parent. A node can have more than one parent.' (Note: p.124 slide notes have a known typo 'C', whereas p.98 defines Network model).
@@ -97,7 +97,7 @@ software_stack:
 - D. WebSphere
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** JBoss is open-source under LGPL and supports JEE and EJB 1.1, 2.0, and 3. Tomcat is open-source but only supports Servlet/JSP (not EJB). WebLogic and WebSphere are closed-source commercial software (Ch.02, p.91).
@@ -112,7 +112,7 @@ software_stack:
 - D. When selecting a database server CPU, the peak CPU load should be allowed to reach 99% continuously.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are accurate comparisons from Ch.02 pp. 99–100. D is false because p. 101 states that peak CPU load must not exceed 85% so that the database can respond quickly.

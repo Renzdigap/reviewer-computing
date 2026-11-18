@@ -1,4 +1,4 @@
-# 📖 Transactions (ACID), NoSQL vs NewSQL & Database Deployment Architectures
+# Transactions (ACID), NoSQL vs NewSQL & Database Deployment Architectures
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 01 — openGauss Overview & Database Fundamentals (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Trace the 5 transaction execution states and explain the 4 ACID properties
 - Compare Relational Databases, NoSQL (CAP Theorem), and NewSQL
 - Contrast Single-Node, Master/Backup, Master/Slave, Multi-Master, Shared-Disk, Sharding, Shared-Nothing MPP, and OLTP vs OLAP
@@ -58,12 +58,12 @@ A **transaction** is an indivisible logical unit of work used for database recov
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **In ACID, 'I' stands for Isolation (concurrent transactions do not interfere), NOT Availability!**
 - **CAP Theorem states a distributed system can guarantee at most two of Consistency (C), Availability (A), and Partition Tolerance (P).**
 - **Shared-Nothing (MPP) gives each node independent CPU, memory, and disk, enabling near-linear horizontal scale-out.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.01 Quiz Q2): Option C claims 'I refers to availability, whereby the database system must provide the highest availability possible'. That is INCORRECT! 'I' stands for Isolation.
 
@@ -72,5 +72,5 @@ A **transaction** is an indivisible logical unit of work used for database recov
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Transaction-ACID-and-Architecture-Lab.html`](./04-Exercise-Transaction-ACID-and-Architecture-Lab.html)** (or [`04-Exercise-Transaction-ACID-and-Architecture-Lab.md`](./04-Exercise-Transaction-ACID-and-Architecture-Lab.md)) to apply this concept in an interactive lab workbench!

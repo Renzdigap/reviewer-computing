@@ -1,4 +1,4 @@
-# 📖 CPU Architecture, Parameters & Multi-Socket Topologies
+# CPU Architecture, Parameters & Multi-Socket Topologies
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Identify front/rear exploded hardware components of a TaiShan 200 (model 2280) server
 - Master CPU internal components (Control Unit [PC, IR, ID, OC], ALU, Storage Unit [Registers + Cache]) and the 4 basic CPU functions
 - Understand key CPU parameters (dominant frequency, cache L1/L2/L3, cores/threads) and TaiShan 200 (2280) Kunpeng 920 processor models
@@ -54,12 +54,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The Control Unit consists of the Program Counter (PC, next instruction address), Instruction Register (IR, current instruction), Instruction Decoder (ID, opcode + address code), and Operation Controller (OC).**
 - **The 4 basic CPU functions are Instruction control, Operation control, Time control, and Data processing.**
 - **TaiShan 200 (2280) supports 2-socket Kunpeng 920 models at 2.6 GHz: 7260 (64-core), 5250 (48-core), 5220 (32-core), and 3210 (24-core).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse the Program Counter (PC — stores the memory address of the NEXT instruction) with the Instruction Register (IR — stores the instruction CURRENTLY being executed)!
 
@@ -68,5 +68,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-CPU-Instruction-Cycle-and-Kunpeng-920-SKU-Lab.html`](./02-Exercise-CPU-Instruction-Cycle-and-Kunpeng-920-SKU-Lab.html)** (or [`02-Exercise-CPU-Instruction-Cycle-and-Kunpeng-920-SKU-Lab.md`](./02-Exercise-CPU-Instruction-Cycle-and-Kunpeng-920-SKU-Lab.md)) to apply this concept in an interactive lab workbench!

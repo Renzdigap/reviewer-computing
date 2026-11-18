@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Creating PV, VG, LV and Performing Online Capacity Expansion
+# Hands-On Lab: Creating PV, VG, LV and Performing Online Capacity Expansion
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are building an LVM storage pool on openEuler using `/dev/sdb1` and `/dev/sdb2` (following Ch.05 pp. 290–300). Initialize both partitions as PVs, combine them into volume group `vg1000`, create a `200M` logical volume on `vg1000`, and expand `/dev/vg1000/lvol0` online by `+200M` followed by `resize2fs`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Initialize `/dev/sdb1` and `/dev/sdb2` as PVs (`pvcreate /dev/sdb1 /dev/sdb2`) and create volume group `vg1000` (`vgcreate vg1000 /dev/sdb1 /dev/sdb2`).
 2. Step 2: Create a `200M` logical volume on `vg1000` using `lvcreate -L 200M vg1000`.
 3. Step 3: Expand `/dev/vg1000/lvol0` by `+200M` using `lvextend -L +200M /dev/vg1000/lvol0` (or `lvresize`) and resize the file system using `resize2fs /dev/vg1000/lvol0`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Create PVs and combine them into VG vg1000
 <pvcreate_command>
@@ -30,7 +30,7 @@ You are building an LVM storage pool on openEuler using `/dev/sdb1` and `/dev/sd
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `pvcreate /dev/sdb1 /dev/sdb2` and `vgcreate vg1000 /dev/sdb1 /dev/sdb2` (Ch.05 p.293).
 - Use `lvcreate -L 200M vg1000` (Ch.05 p.296).
@@ -39,7 +39,7 @@ You are building an LVM storage pool on openEuler using `/dev/sdb1` and `/dev/sd
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ The filesystem on /dev/vg1000/lvol0 is now 409600 (1k) blocks long.
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In openEuler Logical Volume Management (LVM), what is the smallest unit that can be addressed by LVM, and what is its default size?**
@@ -81,7 +81,7 @@ The filesystem on /dev/vg1000/lvol0 is now 409600 (1k) blocks long.
 - D. Inode Block; default 512 Bytes
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.05 (p.284), a Physical Extent (PE) with a unique number is the smallest unit that can be addressed by LVM, with 4 MB being the default size.
@@ -96,7 +96,7 @@ The filesystem on /dev/vg1000/lvol0 is now 409600 (1k) blocks long.
 - D. `vgreduce` -> `pvremove` -> `lvreduce` (online without unmounting)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.05 (p.299), the 5 steps to reduce LV capacity are: (1) Determine target size, (2) Run `umount` and `e2fsck -f`, (3) Run `resize2fs` to shrink the file system, (4) Run `lvreduce` to shrink the LV, and (5) Mount the file system again.
@@ -111,7 +111,7 @@ The filesystem on /dev/vg1000/lvol0 is now 409600 (1k) blocks long.
 - D. `lvcreate -s` creates an LV snapshot.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.05 (pp.294–298), all four statements accurately reflect LVM management in openEuler.

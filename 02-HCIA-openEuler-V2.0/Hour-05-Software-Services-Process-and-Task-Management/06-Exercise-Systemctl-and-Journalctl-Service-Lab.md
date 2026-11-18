@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Managing Services (`systemctl`) and Querying Complete Logs (`journalctl -u`)
+# Hands-On Lab: Managing Services (`systemctl`) and Querying Complete Logs (`journalctl -u`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are administering the `sshd` and `k3s` services on openEuler. Restart and enable `sshd.service`, list all running service units using `systemctl list-units --type service`, and query the complete service logs of `k3s` using `journalctl -u k3s`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Restart `sshd.service` (`systemctl restart sshd.service`) and enable it to start at boot (`systemctl enable sshd.service`).
 2. Step 2: Display all running service units using `systemctl list-units --type service`.
 3. Step 3: View the complete logs of the `k3s` service using `journalctl -u k3s`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Restart and enable sshd.service
 <systemctl_restart_command>
@@ -29,7 +29,7 @@ You are administering the `sshd` and `k3s` services on openEuler. Restart and en
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `systemctl restart sshd.service` and `systemctl enable sshd.service`.
 - Use `systemctl list-units --type service` (Ch.04 p.221).
@@ -38,7 +38,7 @@ You are administering the `sshd` and `k3s` services on openEuler. Restart and en
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -67,7 +67,7 @@ Jul 28 17:05:19 vbox k3s[76]: time="2026-07-28T17:05:19+08:00" level=info msg="S
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In a `systemd` `.service` unit file, which directive in the `[Service]` section is mandatory, and which directive in `[Unit]` declares a soft dependency that allows the service to start even if the dependency is missing?**
@@ -78,7 +78,7 @@ Jul 28 17:05:19 vbox k3s[76]: time="2026-07-28T17:05:19+08:00" level=info msg="S
 - D. `Description=` (mandatory); `User=` (soft dependency)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Per Ch.04 (p.219), `ExecStart=` is mandatory in `[Service]`, while in `[Unit]`, `Requires=` is a hard dependency and `Wants=` declares a soft dependency (the service can still start if the dependency is missing).
@@ -93,7 +93,7 @@ Jul 28 17:05:19 vbox k3s[76]: time="2026-07-28T17:05:19+08:00" level=info msg="S
 - D. `last -f k3s`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p.223), `systemctl status <Service name>` displays only service log fragments, whereas `journalctl -u <Service name>` displays complete service logs.
@@ -108,7 +108,7 @@ Jul 28 17:05:19 vbox k3s[76]: time="2026-07-28T17:05:19+08:00" level=info msg="S
 - D. `ext2fs` (for floppy formatting)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.04 (p.217), three key modules in the kernel are directly invoked by `systemd`: `cgroups` for resource control and restriction, `autofs` for automatic mounting, and `kdbus` for kernel message passing.

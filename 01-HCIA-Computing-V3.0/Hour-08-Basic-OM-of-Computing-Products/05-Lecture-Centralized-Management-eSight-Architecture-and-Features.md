@@ -1,4 +1,4 @@
-# 📖 Centralized Management: eSight Architecture, Interfaces (IF1–IF5) & Batch Specs
+# Centralized Management: eSight Architecture, Interfaces (IF1–IF5) & Batch Specs
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand eSight's cross-domain ICT scope (Huawei + third-party HP/Cisco/H3C devices), B/S architecture, and HA deployment modes
 - Master eSight's five external interfaces (IF1 Southbound, IF2 Northbound, IF3 External Auth, IF4 Notification, IF5 UI)
 - Memorize eSight's exact numerical specifications for Batch Import (500), Power-on/off priorities (1–10), OS Deployment (200/task, 40 concurrent), Firmware Upgrade (1000/schedule, 100 concurrent), and Profile Binding (2000 bound, 1000 applied)
@@ -52,12 +52,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **eSight external interfaces: IF1 = Southbound (SNMP, Redfish, IPMI, Netconf, TR069, etc.), IF2 = Northbound (RESTful, SNMP, FTP, Kafka, Syslog), IF3 = External Auth (LDAP, RADIUS, SSO), IF4 = Notification (Mail/SMS), IF5 = UI.**
 - **On the eSight alarm panel, a white background indicates an uncleared alarm, while a light green background indicates a cleared alarm.**
 - **eSight batch limits: Excel batch import = 500 devices; OS deployment = 200 devices/task (40 concurrent); Firmware upgrade = 1,000 devices/schedule (100 concurrent); Server Profile = 2,000 bound (1,000 applied at a time).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Compare Concurrent OS Deployment limits between FusionDirector and eSight: FusionDirector supports 30 concurrent OS deployments (p. 384), whereas eSight supports up to 200 devices per task and 40 concurrent OS deployments (p. 412)!
 
@@ -66,5 +66,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-eSight-Interfaces-IF1-to-IF5-and-Batch-Specs-Lab.html`](./06-Exercise-eSight-Interfaces-IF1-to-IF5-and-Batch-Specs-Lab.html)** (or [`06-Exercise-eSight-Interfaces-IF1-to-IF5-and-Batch-Specs-Lab.md`](./06-Exercise-eSight-Interfaces-IF1-to-IF5-and-Batch-Specs-Lab.md)) to apply this concept in an interactive lab workbench!

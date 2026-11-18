@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: openGauss HA Cluster Pre-Install & Installation Commands
+# Hands-On Lab: openGauss HA Cluster Pre-Install & Installation Commands
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are deploying an openGauss HA cluster on TaiShan 200 servers running openEuler 22.03 LTS using an XML configuration file (`/opt/software/openGauss/cluster_config.xml`). Complete the deployment commands and HA limits.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Use `gs_preinstall` to initialize the installation environment with `-U omm -G dbgrp -X /opt/software/openGauss/cluster_config.xml`.
 2. Use `gs_install` (as user `omm`) to install openGauss with `-X /opt/software/openGauss/cluster_config.xml`.
 3. Set `MAX_HA_STANDBY_SERVERS` to `8`.
 
-### 📝 Starter Workspace (`root@taishan-db:~#`)
+### Starter Workspace (`root@taishan-db:~#`)
 ```bash
 # 1. Initialize the openGauss installation environment (as root):
 /opt/software/openGauss/script/___ -U omm -G dbgrp -X /opt/software/openGauss/cluster_config.xml
@@ -28,7 +28,7 @@ MAX_HA_STANDBY_SERVERS=___
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - `gs_preinstall` prepares and initializes the installation environment; `gs_install` performs the installation.
 - In HA deployment (Ch.05, p.344), one primary server and at least 1 (up to 8) standby servers are deployed.
@@ -36,7 +36,7 @@ MAX_HA_STANDBY_SERVERS=___
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -64,7 +64,7 @@ Successfully installed application.
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **During openGauss installation on openEuler (Ch.05, p. 345), which command is used to initialize and prepare the installation environment after decompressing the software package, and which command performs the actual installation?**
@@ -75,7 +75,7 @@ Successfully installed application.
 - D. gsql (initialize environment) and gs_om (install)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 p.345, you use the `gs_preinstall` command to prepare/initialize the installation environment, and then use the `gs_install` command to install openGauss.
@@ -90,7 +90,7 @@ Successfully installed application.
 - D. Up to 64 primary servers in a peer-to-peer ring
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 p.344, in HA deployment, one primary server and at least one (up to eight) standby servers are deployed.
@@ -105,7 +105,7 @@ Successfully installed application.
 - D. Setting the standby node to readable is an optional post-installation step to meet data consistency and read requirements.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four statements come directly from Ch.05 pp. 344–345.

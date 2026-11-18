@@ -1,4 +1,4 @@
-# 📖 Deploying openGauss Database on TaiShan / openEuler
+# Deploying openGauss Database on TaiShan / openEuler
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Compare openGauss Standalone deployment vs. HA deployment (1 primary + 1 to 8 standby servers)
 - Understand when to use the installation script vs. CLI commands for single vs. multiple instances
 - Master the exact 8-step openGauss installation workflow (`XML` config, `gs_preinstall`, `gs_install`, standby readable)
@@ -38,12 +38,12 @@ Look closely at the official flowchart and step descriptions on **Ch.05 Page 345
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openGauss supports Standalone deployment (not recommended due to data loss risk; use script for 1 instance, CLI commands for multiple instances on 1 server) and HA deployment (1 primary + 1 to 8 standby servers).**
 - **The openGauss XML configuration file defines the server hostname/IP address, installation path, and database port.**
 - **Use `gs_preinstall` to initialize the installation environment, and then use `gs_install` to perform the actual database installation.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In openGauss HA deployment, a single primary server supports at least 1 and UP TO 8 standby servers (p. 344)!
 
@@ -52,5 +52,5 @@ Look closely at the official flowchart and step descriptions on **Ch.05 Page 345
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-openGauss-XML-gs-preinstall-and-gs-install-Lab.html`](./08-Exercise-openGauss-XML-gs-preinstall-and-gs-install-Lab.html)** (or [`08-Exercise-openGauss-XML-gs-preinstall-and-gs-install-Lab.md`](./08-Exercise-openGauss-XML-gs-preinstall-and-gs-install-Lab.md)) to apply this concept in an interactive lab workbench!

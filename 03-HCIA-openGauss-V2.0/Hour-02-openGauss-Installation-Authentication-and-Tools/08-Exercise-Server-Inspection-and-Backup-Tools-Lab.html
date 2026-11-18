@@ -404,13 +404,13 @@ p { margin-bottom: 10px; }
 <body>
   <div class="topbar">
     <div class="topbar-left">
-      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
-      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <a href="../../index.html" class="nav-btn">All Pillars</a>
+      <a href="../index.html" class="nav-btn">03-HCIA-openGauss-V2.0 Course Player</a>
       <span style="color:var(--text-muted);">|</span>
       <span>Hour 02 • Sprint 4/4</span>
     </div>
     <div class="topbar-right">
-      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">08:00</span>
       <a href="./07-Lecture-openGauss-Client-and-Server-OM-Tools.html" class="nav-btn">← Prev</a>
       <a href="../Hour-03-openGauss-Architecture-Resource-Pooling-and-Performance/01-Lecture-Instance-Memory-Threads-and-Directory-Layout.html" class="nav-btn">Next →</a>
     </div>
@@ -420,35 +420,35 @@ p { margin-bottom: 10px; }
         <div class="dc-split">
           <div class="dc-left">
             <div class="unit-badges">
-              <span class="badge badge-exercise">💻 HANDS-ON EXERCISE (8 MINS)</span>
+              <span class="badge badge-exercise">HANDS-ON EXERCISE (8 MINS)</span>
               <span class="badge badge-hour">Hour 02 • Sprint 4/4</span>
               <a href="./07-Lecture-openGauss-Client-and-Server-OM-Tools.html" class="badge badge-ref">↩ Review Paired Lecture</a>
-              <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+              <span id="done-badge" class="badge badge-exercise" style="display:none;">Completed</span>
             </div>
             <h1 style="font-size:1.35rem;margin-top:8px;">Hands-On Lab: Running <code class="inline-code">gs_checkos</code>, <code class="inline-code">gs_checkperf</code>, <code class="inline-code">gs_check</code>, and <code class="inline-code">gs_ssh</code></h1>
 
             <div class="scenario-box">
-              <div class="scenario-label">🛠️ PRACTICAL LAB SCENARIO</div>
+              <div class="scenario-label">PRACTICAL LAB SCENARIO</div>
               <p style="margin:0;">Perform a routine pre-upgrade and performance inspection of an openGauss server: check OS parameters as <code class="inline-code">root</code> using <code class="inline-code">gs_checkos</code>, check SSD read/write performance as <code class="inline-code">root</code> using <code class="inline-code">gs_checkperf</code>, and run a health scenario check as <code class="inline-code">omm</code> using <code class="inline-code">gs_check</code>.</p>
             </div>
 
             <div class="instructions-box">
-              <h3>📋 Instructions</h3>
+              <h3>Instructions</h3>
               <ul class="inst-list"><li id="inst-step-0" class="inst-item"><span class="step-num">1</span><span>Step 1: As <code class="inline-code">root</code>, run <code class="inline-code">gs_checkos -i A</code> to check all 14 OS parameters (A1–A14) without modifying them.</span></li><li id="inst-step-1" class="inst-item"><span class="step-num">2</span><span>Step 2: As <code class="inline-code">root</code>, run <code class="inline-code">gs_checkperf -U omm -i SSD</code> to measure SSD read/write performance.</span></li><li id="inst-step-2" class="inst-item"><span class="step-num">3</span><span>Step 3: As <code class="inline-code">omm</code>, run <code class="inline-code">gs_check -e health</code> to execute the health inspection scenario.</span></li></ul>
               <div class="hint-bar">
-                <button class="btn-secondary" onclick="toggleHint()">💡 Show Hint</button>
-                <button class="btn-secondary" onclick="revealSolution()">🔑 Show Solution</button>
+                <button class="btn-secondary" onclick="toggleHint()">Show Hint</button>
+                <button class="btn-secondary" onclick="revealSolution()">Show Solution</button>
               </div>
               <div id="hint-box" class="hint-content" style="display:none;"></div>
             </div>
 
             <div class="quiz-section">
-              <h3>🎯 National Stage Exam Verification Drill (3 Questions)</h3>
+              <h3>National Stage Exam Verification Drill (3 Questions)</h3>
               <p style="font-size:12.5px;color:var(--text-muted);margin-bottom:10px;">
                 Answer all 3 exam-grade questions below. Note: <strong>Multiple-Choice</strong> questions follow strict Huawei grading (you must select ALL correct options and zero incorrect options).
               </p>
               <div id="quiz-container"></div>
-              <button class="btn-check-quiz" onclick="gradeQuiz()">✔ Check Exam Drill Answers</button>
+              <button class="btn-check-quiz" onclick="gradeQuiz()">Check Exam Drill Answers</button>
               <div id="quiz-summary" style="margin-top:10px;"></div>
             </div>
           </div>
@@ -504,7 +504,7 @@ p { margin-bottom: 10px; }
       timerSecs--;
       const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
       const s = String(timerSecs % 60).padStart(2, '0');
-      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+      document.getElementById('timer-display').textContent = `${m}:${s}`;
     }, 1000);
     function toggleTimer() { timerRunning = !timerRunning; }
 
@@ -588,18 +588,18 @@ p { margin-bottom: 10px; }
         const stepEl = document.getElementById(`inst-step-${idx}`);
         if (passed) {
           if (stepEl) stepEl.classList.add('passed');
-          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+          logLines.push(`[PASS] Step ${chk.step || (idx+1)} : ${chk.description}`);
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
         }
       });
 
       const badge = document.getElementById('lab-status-badge');
       if (allPassed) {
         badge.className = 'status-pass';
-        badge.textContent = '✓ All Lab Steps Verified!';
+        badge.textContent = 'All Lab Steps Verified!';
         logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
         logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
         markUnitCompleted();
@@ -642,17 +642,17 @@ p { margin-bottom: 10px; }
           correctCount++;
           expEl.style.background = 'rgba(16, 185, 129, 0.14)';
           expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
-          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[CORRECT] (${target})!</strong> ${fmtText(q.explanation || '')}`;
         } else {
           expEl.style.background = 'rgba(225, 29, 72, 0.14)';
           expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
-          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[INCORRECT] Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
         }
       });
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: TaiShan 2280 iBMC Initial Provisioning & Security Hardening
+# Hands-On Lab: TaiShan 2280 iBMC Initial Provisioning & Security Hardening
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You have just powered on a brand-new TaiShan 200 (model 2280) server. Complete the initialization parameters including default IP, credentials, BIOS lookup path, and SNMP hardening.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `default_ibmc_ip` to `'192.168.2.100'` and `default_subnet_mask` to `'255.255.255.0'`.
 2. Set `webui_cli_user` to `'Administrator'`, `webui_cli_password` to `'Admin@9000'`, and `default_root_password` to `'Huawei12#$'`.
 3. Set `recommended_snmp_version` to `'SNMPv3'`.
 
-### 📝 Starter Workspace (`iBMC:/->`)
+### Starter Workspace (`iBMC:/->`)
 ```bash
 # TaiShan 200 (2280) iBMC Initialization Parameters
 ibmc_defaults:
@@ -32,7 +32,7 @@ security_and_menus:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Default iBMC IP is 192.168.2.100 with mask 255.255.255.0.
 - WebUI/CLI user is Administrator (Admin@9000), root password is Huawei12#$, and SNMPv3 is recommended.
@@ -40,7 +40,7 @@ security_and_menus:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -69,7 +69,7 @@ security_and_menus:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What are the default IP address, subnet mask, and WebUI/CLI login user name and password of the iBMC management network port on a TaiShan 200 (model 2280) server?**
@@ -80,7 +80,7 @@ security_and_menus:
 - D. 172.16.0.1 / 255.255.0.0; operator / Taishan@2280
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 p.297, the default iBMC management port IP is 192.168.2.100, subnet mask is 255.255.255.0, and the default iBMC WebUI or CLI login user/password is Administrator / Admin@9000.
@@ -95,7 +95,7 @@ security_and_menus:
 - D. Security > Administrator Password > iBMC IP
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 pp. 299 and 313, you check or configure the iBMC management port IP address in the BIOS by choosing Advanced > IPMI iBMC Configuration > iBMC Configuration.
@@ -110,7 +110,7 @@ security_and_menus:
 - D. The front and rear panels of a TaiShan 200 (model 2280) server provide dedicated purple/green PS/2 keyboard and mouse ports.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are true (Ch.05, pp. 303–308). D is false because Ch.05 p.298 explicitly states that the front and rear panels feature a VGA port and USB 3.0 ports, but lack PS/2 ports for keyboard and mouse input.

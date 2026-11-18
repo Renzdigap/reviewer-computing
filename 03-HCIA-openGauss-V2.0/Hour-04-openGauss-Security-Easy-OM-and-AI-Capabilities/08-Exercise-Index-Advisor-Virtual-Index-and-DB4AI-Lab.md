@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Recommending & Testing Indexes with `gs_index_advise` and Virtual Indexes
+# Hands-On Lab: Recommending & Testing Indexes with `gs_index_advise` and Virtual Indexes
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 A query `SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10` is running a slow `Seq Scan`. Use `gs_index_advise` to get an index recommendation, create a virtual index using `hypopg_create_index`, enable `enable_hypo_index`, and verify the optimizer switches to an `Index Scan`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Call `SELECT * FROM gs_index_advise('SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10');`.
 2. Step 2: Create a virtual index using `SELECT * FROM hypopg_create_index('CREATE INDEX ON bmsql_customer(c_w_id)');`.
 3. Step 3: Enable virtual indexes with `SET enable_hypo_index = on;` and run `EXPLAIN SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10;`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Get single-query index recommendation
 SELECT * FROM ____('SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10');
@@ -29,7 +29,7 @@ EXPLAIN SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `gs_index_advise('<SQL>')` for single-query index recommendation.
 - Use `hypopg_create_index('<CREATE INDEX SQL>')` to create a virtual index.
@@ -38,7 +38,7 @@ EXPLAIN SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -74,7 +74,7 @@ SET
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which running mode of the openGauss `X-Tuner` parameter tuning tool generates a parameter recommendation report in seconds based on the running workload WITHOUT restarting the database?**
@@ -85,7 +85,7 @@ SET
 - D. predict
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Chapter 03 (p. 247), X-Tuner runs in three modes: `recommend`, `train`, and `tune`. In `recommend` mode, operations complete in seconds and the database does not need to be restarted.
@@ -100,7 +100,7 @@ SET
 - D. `hypopg_estimate_size` can estimate the disk space required to create a specified virtual index
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABD`
 - **Explanation:** Per Chapter 03 (pp. 254–261), A, B, and D are true. Option C is false: virtual indexes exist in memory at the instance level and are cleared when the database is restarted.
@@ -113,7 +113,7 @@ SET
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.03 pp. 250–251). `SQLdiag` predicts SQL execution time based on statement logic similarity and historical execution logs WITHOUT obtaining the SQL execution plan, so it has no impact on database performance.

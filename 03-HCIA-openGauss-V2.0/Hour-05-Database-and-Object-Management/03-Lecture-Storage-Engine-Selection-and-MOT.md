@@ -1,4 +1,4 @@
-# 📖 Storage Engine Selection & Memory-Optimized Table (MOT)
+# Storage Engine Selection & Memory-Optimized Table (MOT)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 05 — Database & Object Management (MOT, Tablespaces, Users/Roles, Backup/Export) (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Select the optimal storage engine (Row-store, Column-store, or MOT) based on workload characteristics
 - Explain MOT architecture, performance benchmarks (2.5x–4x throughput, 4.8M tpmC on 4-socket 256-core ARM, 3x–5.5x lower latency, 99% CPU utilization), and memory formula
 - Authorize `mot_server` (`GRANT USAGE ON FOREIGN SERVER`), create/drop MOTs (`CREATE/DROP FOREIGN TABLE`), and index MOTs (`CREATE INDEX` without `FOREIGN`)
@@ -57,12 +57,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **MOT stores all data and indexes in memory using lock-free algorithms and NUMA-aware design, achieving 2.5x–4x higher throughput (4.8M tpmC on 4-socket 256-core ARM) and 3x–5.5x lower latency.**
 - **MOT memory configuration must satisfy `(max_mot_global_memory + max_mot_local_memory) + 2 GB < max_process_memory`.**
 - **MOT is integrated via FDW (`GRANT USAGE ON FOREIGN SERVER mot_server TO <user>;`): use `CREATE FOREIGN TABLE` and `DROP FOREIGN TABLE`, but do NOT use the `FOREIGN` keyword in `CREATE INDEX` or `DROP INDEX`!**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: When creating or dropping an index on an MOT, do NOT include the `FOREIGN` keyword (`CREATE INDEX idx ON test(x);`, NOT `CREATE FOREIGN INDEX`)! `FOREIGN` is used only in `CREATE FOREIGN TABLE` and `DROP FOREIGN TABLE` (Ch.04 p. 305).
 
@@ -71,5 +71,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Memory-Optimized-Table-MOT-Lab.html`](./04-Exercise-Memory-Optimized-Table-MOT-Lab.html)** (or [`04-Exercise-Memory-Optimized-Table-MOT-Lab.md`](./04-Exercise-Memory-Optimized-Table-MOT-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Mainboard S920X00, Front/Rear Panels & Drive Classifications
+# Mainboard S920X00, Front/Rear Panels & Drive Classifications
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master the specifications of the Kunpeng server mainboard S920X00
 - Identify every port, button, indicator, and I/O module on the TaiShan 200 (2280) front and rear panels
 - Compare SATA, SAS, NL-SAS, and SSD drives by rotational speed, MTBF, annual failure rate, and SSD DWPD classes
@@ -56,13 +56,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Kunpeng S920X00 mainboard features 2 × Kunpeng 920 CPUs, Hi1710 management chip, 32 DDR4-2933 slots, and 8 PCIe 4.0 slots for 2U/4U rack servers.**
 - **NL-SAS drives are 7,200 RPM enterprise SATA platters equipped with a SAS interface (MTBF 1,200,000 h, AFR ~2%).**
 - **MTBF rankings: SATA/NL-SAS = 1,200,000 h; SAS = 1,600,000 h (<2% AFR); SSD = 2,000,000 h.**
 - **SSD DWPD categories: Read-intensive (< 3), Mixed read/write (3 to 10), Write-intensive (> 10).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: On the TaiShan 200 (2280) rear panel, FlexIO card 1 is connected to CPU 1, and FlexIO card 2 is connected to CPU 2!
 
@@ -71,5 +71,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Mainboard-S920X00-and-Drive-MTBF-DWPD-Lab.html`](./06-Exercise-Mainboard-S920X00-and-Drive-MTBF-DWPD-Lab.html)** (or [`06-Exercise-Mainboard-S920X00-and-Drive-MTBF-DWPD-Lab.md`](./06-Exercise-Mainboard-S920X00-and-Drive-MTBF-DWPD-Lab.md)) to apply this concept in an interactive lab workbench!

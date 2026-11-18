@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Inspecting Memory Parameters & Physical Data Directories
+# Hands-On Lab: Inspecting Memory Parameters & Physical Data Directories
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 03 — openGauss Architecture, Resource Pooling & High Performance (Sprint 1 of 4)  
@@ -7,14 +7,14 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are auditing an openGauss instance's memory settings (`shared_buffers`, `cstore_buffers`, `work_mem`, `maintenance_work_mem`) and checking the database OID mapping inside the `base/` directory.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Query `SHOW shared_buffers;`, `SHOW cstore_buffers;`, and `SHOW work_mem;`.
 2. Step 2: Query `SELECT oid, datname FROM pg_database WHERE datname = 'postgres';` to find the subdirectory OID under `base/`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Check shared, column-store, and operator work memory buffers
 SHOW ____;
@@ -26,7 +26,7 @@ SELECT oid, datname FROM ____ WHERE datname = 'postgres';
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `SHOW shared_buffers;` and `SHOW cstore_buffers;`.
 - The system catalog storing available databases and their OIDs is `pg_database`.
@@ -34,7 +34,7 @@ SELECT oid, datname FROM ____ WHERE datname = 'postgres';
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ shared_buffers
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In the openGauss instance directory structure, which directory stores Write-Ahead Logs (WALs)?**
@@ -82,7 +82,7 @@ shared_buffers
 - D. global
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 03 (p. 143), `pg_xlog` stores Write-Ahead Logs (WALs), whereas `pg_log` stores runtime logs, `pg_audit` stores audit logs, and `global` stores cluster-wide system catalogs.
@@ -97,7 +97,7 @@ shared_buffers
 - D. 32 KB block; 4 GB datafile segment
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 03 (p. 141), the basic unit of database management is a Block with a default size of 8 KB, and a table containing more than 1 GB of data is stored in multiple 1 GB datafile segments.
@@ -110,7 +110,7 @@ shared_buffers
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.03 p. 136). Column-store tables rarely use `shared_buffers`; they use `cstore_buffers`. Users should reduce `shared_buffers` and increase `cstore_buffers` for column-store workloads.

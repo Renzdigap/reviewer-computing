@@ -1,4 +1,4 @@
-# 📖 Centralized Management: FusionDirector & Five Intelligent Features
+# Centralized Management: FusionDirector & Five Intelligent Features
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Compare the 4 server adding modes in FusionDirector (Manual adding, Batch import, DHCP auto IP allocation, SSDP auto discovery) and log export limits (100 servers)
 - Master the Five Intelligent Features of FusionDirector: Intelligent Deployment, Asset, Version, Fault, and Energy Efficiency Management
 - Know exact FusionDirector rules and specifications (Server Profile edit/delete restrictions, 30 concurrent OS deployments, 2-hour timeout, Location vs. SN/MAC Auto Go-Online)
@@ -41,13 +41,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **FusionDirector SSDP discovery requires FusionDirector and managed servers to be on the same L2 network; one-click log export supports up to 100 servers at a time.**
 - **FusionDirector Five Intelligent Features: Intelligent Deployment, Intelligent Asset, Intelligent Version (HOUP/OTA), Intelligent Fault (Disk & Memory prediction), and Intelligent Energy Efficiency Management.**
 - **Server Profile rules: Delete is allowed ONLY when not bound to any server; Modify is allowed ONLY when not applied to any server.**
 - **FusionDirector OS deployment is out-of-band (requires Smart Provisioning + license, no PXE/DHCP/TFTP needed), has a 2-hour timeout, and deploys up to 30 devices concurrently.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse the Server Profile edit vs. delete restrictions (p. 383/414): You can DELETE a profile only when it is NOT BOUND to any server; you can MODIFY a profile only when it is NOT APPLIED to any server!
 
@@ -56,5 +56,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-FusionDirector-Device-Adding-and-Intelligent-Features-Lab.html`](./04-Exercise-FusionDirector-Device-Adding-and-Intelligent-Features-Lab.html)** (or [`04-Exercise-FusionDirector-Device-Adding-and-Intelligent-Features-Lab.md`](./04-Exercise-FusionDirector-Device-Adding-and-Intelligent-Features-Lab.md)) to apply this concept in an interactive lab workbench!

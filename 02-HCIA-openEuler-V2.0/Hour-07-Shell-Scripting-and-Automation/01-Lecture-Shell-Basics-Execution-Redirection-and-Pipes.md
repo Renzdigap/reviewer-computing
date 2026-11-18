@@ -1,4 +1,4 @@
-# 📖 Shell Basics, Script Execution (`nohup`), Text Streams, Redirection & Pipes
+# Shell Basics, Script Execution (`nohup`), Text Streams, Redirection & Pipes
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 07 — Shell Scripting, Variables, Control Flow & Automation (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Trace the history of Unix/Linux shells (V6 shell, sh, csh, tcsh, ksh, bash) and inspect shells via `/etc/shells`, `SHELL`, and `0`
 - Execute scripts via `sh script.sh`, `./script.sh` (`chmod +x`), `$PATH`, and persistent background mode (`nohup ./my_script.sh &`)
 - Redirect standard input/output/error streams (`>`, `>>`, `<`, `<< EOF`) and chain processes with IPC pipes (`|`)
@@ -52,12 +52,12 @@ Every Linux process opens **three text stream interfaces**: **Standard Input (st
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Check installed shells with 'cat /etc/shells', default login shell with 'echo SHELL', and current shell with 'echo 0'.**
 - **Running './my_script.sh &' stops when the shell exits, whereas 'nohup ./my_script.sh &' keeps running after logout and redirects stdout/stderr to nohup.out.**
 - **'>' overwrites a file, '>>' appends to a file, '<' redirects file input, '<< EOF' provides inline input redirection (Here-Document), and '|' is an IPC pipe.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Running './script.sh' on a newly created file fails with 'Permission denied' unless you first grant execute permission with 'chmod +x script.sh' (or run it via 'sh script.sh').
 
@@ -66,5 +66,5 @@ Every Linux process opens **three text stream interfaces**: **Standard Input (st
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Script-Execution-Nohup-and-Redirection-Lab.html`](./02-Exercise-Script-Execution-Nohup-and-Redirection-Lab.html)** (or [`02-Exercise-Script-Execution-Nohup-and-Redirection-Lab.md`](./02-Exercise-Script-Execution-Nohup-and-Redirection-Lab.md)) to apply this concept in an interactive lab workbench!

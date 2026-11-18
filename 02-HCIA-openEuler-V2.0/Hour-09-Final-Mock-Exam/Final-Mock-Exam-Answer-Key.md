@@ -1,4 +1,4 @@
-# 🔑 Official Answer Key & Explanations — HCIA-openEuler V2.0 — National Stage Final Mock Exam
+# Official Answer Key & Explanations — HCIA-openEuler V2.0 — National Stage Final Mock Exam
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Total Questions:** 60 (1000 Points)

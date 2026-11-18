@@ -1,4 +1,4 @@
-# 📖 Resource Pooling Architecture (DMS, DSS & Shared Storage)
+# Resource Pooling Architecture (DMS, DSS & Shared Storage)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 03 — openGauss Architecture, Resource Pooling & High Performance (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain how openGauss Resource Pooling decouples Compute, Memory (DMS), and Storage (DSS)
 - List the hardware/protocol requirements (OceanStor Dorado SAN, SCSI3 PR & CAW, CX5 NIC, OCK RDMA) and feature limitations
 - Describe the 6 advanced Resource Pooling enhancements (Standby visibility/Xmin/snapshot caching, Transparent write forwarding, DSS thread pool/blackbox/NoF+, Operator offloading/NDP, Dual-cluster DR, On-demand replay, and SPQ multi-node parallel query)
@@ -47,12 +47,12 @@ Resource pooling innovates HA deployment by allowing **1 Read/Write Primary node
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Resource Pooling relies on DSS (Distributed Storage Service — DSS Server process + DSS API dynamic library) for shared disk array storage and DMS (Distributed Memory Service) for real-time TCP/RDMA page exchange.**
 - **Resource Pooling supports up to 1 Primary + 7 Standby nodes, requires SCSI3 PR (for I/O Fence) and SCSI3 CAW (for shared disk locks) on disk arrays like OceanStor Dorado, and supports ONLY segment-page tables.**
 - **Global temporary tables, hash indexes, and cascaded standby nodes are NOT supported in resource pooling mode.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse DMS (Distributed Memory Service, a dynamic library inside the database for cross-node page exchange) with DSS (Distributed Storage Service, which includes an independent DSS Server process managing raw LUNs).
 
@@ -61,5 +61,5 @@ Resource pooling innovates HA deployment by allowing **1 Read/Write Primary node
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Resource-Pooling-DMS-DSS-Architecture-Lab.html`](./04-Exercise-Resource-Pooling-DMS-DSS-Architecture-Lab.html)** (or [`04-Exercise-Resource-Pooling-DMS-DSS-Architecture-Lab.md`](./04-Exercise-Resource-Pooling-DMS-DSS-Architecture-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Filtering, Positional `ORDER BY`, and `LIMIT / OFFSET` Pagination
+# Hands-On Lab: Filtering, Positional `ORDER BY`, and `LIMIT / OFFSET` Pagination
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 06 — SQL Basics — Classification, Data Types, DQL, Joins & DML (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Write three DQL queries against the `employees` and `student` tables to verify exact Huawei exam syntax for `WHERE` filtering, positional `ORDER BY`, and `LIMIT / OFFSET` pagination.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Query all columns from `employees` where `Position = 'Engineer' AND Salary > 6000` and `age BETWEEN 20 AND 30`.
 2. Step 2: Query `name, age, score` from `student` sorted by `age` descending and `score` ascending using positional numbers (`ORDER BY 2 DESC, 3 ASC`).
 3. Step 3: Add `LIMIT 20 OFFSET 5` to skip 5 rows and return 20 rows.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Filter Engineers with Salary > 6000 and age between 20 and 30
 SELECT * FROM employees
@@ -28,7 +28,7 @@ LIMIT ____ OFFSET ____;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Enclose `'Engineer'` in single quotes and use the `BETWEEN 20 AND 30` operator.
 - In `SELECT name, age, score`, `age` is column `2` and `score` is column `3`.
@@ -37,7 +37,7 @@ LIMIT ____ OFFSET ____;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -67,7 +67,7 @@ emp_id |  name   | position | salary | age
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **(Official Ch.05 Quiz p. 394 Q1) Which of the following logical expressions is used to search for records whose position is an engineer and salary is greater than 6000?**
@@ -78,7 +78,7 @@ emp_id |  name   | position | salary | age
 - D. Position = 'Engineer' AND Salary > 6000
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `D`
 - **Explanation:** Per Chapter 05 (p. 381 & p. 394), character string literals must be enclosed in single quotation marks (`'Engineer'`), and both conditions must hold simultaneously (`AND`).
@@ -93,7 +93,7 @@ emp_id |  name   | position | salary | age
 - D. age > 20 or age < 30
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Per Chapter 05 (p. 394), `BETWEEN 20 AND 30` is inclusive of both endpoints and is equivalent to `age >= 20 and age <= 30`.
@@ -108,7 +108,7 @@ emp_id |  name   | position | salary | age
 - D. SELECT name, age, score FROM student order by 1 desc, 2;
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `AC`
 - **Explanation:** Per Chapter 05 (p. 390 & p. 395), Option A sorts by `age desc` and `score` (which defaults to `ASC`), and Option C uses 1-based column positions (`2` = `age`, `3` = `score`) with `2 desc, 3 asc`.

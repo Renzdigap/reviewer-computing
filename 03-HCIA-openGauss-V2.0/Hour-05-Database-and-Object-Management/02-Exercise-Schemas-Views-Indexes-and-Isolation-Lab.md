@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Managing Schemas, Views, Partial Indexes & `gsql` Meta-Commands
+# Hands-On Lab: Managing Schemas, Views, Partial Indexes & `gsql` Meta-Commands
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 05 — Database & Object Management (MOT, Tablespaces, Users/Roles, Backup/Export) (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Create a dedicated schema `hr_schema`, rename it to `hr_prod`, create a partial index on `customer_t1(Amount)` for high-value orders (`WHERE Amount > 1000`), and create a view `vip_customers`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Create schema `hr_schema` and rename it to `hr_prod` using `ALTER SCHEMA hr_schema RENAME TO hr_prod;`.
 2. Step 2: Create a partial index `idx_high_amount` on `customer_t1 (Amount) WHERE Amount > 1000;`.
 3. Step 3: Create view `vip_customers` using `CREATE VIEW vip_customers AS SELECT c_customer_id, Amount FROM customer_t1 WHERE Amount > 1000;`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Create schema hr_schema and rename it to hr_prod
 CREATE SCHEMA hr_schema;
@@ -30,7 +30,7 @@ SELECT c_customer_id, Amount FROM customer_t1 WHERE Amount > 1000;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `ALTER SCHEMA hr_schema RENAME TO hr_prod;` to rename a schema.
 - A partial index uses a `WHERE` predicate at the end of `CREATE INDEX`.
@@ -39,7 +39,7 @@ SELECT c_customer_id, Amount FROM customer_t1 WHERE Amount > 1000;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -63,7 +63,7 @@ CREATE VIEW
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In `gsql`, which meta-command is used to view the column structure and index definitions of a specific table `customer_t1`?**
@@ -74,7 +74,7 @@ CREATE VIEW
 - D. \h customer_t1
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Chapter 04 (p. 285), `\d tablename` displays the table structure, whereas `\l` lists all databases, `\c dbname` switches databases, `\dt` lists all tables, and `\h` shows SQL command syntax help.
@@ -89,7 +89,7 @@ CREATE VIEW
 - D. Schemas can be nested inside other schemas just like OS directories
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 04 (p. 291), A, B, and C are true. Option D is false: 'A schema is similar to an OS directory but cannot be nested.'
@@ -102,7 +102,7 @@ CREATE VIEW
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.04 p. 293). At `READ COMMITTED`, each statement starts with a new snapshot, so two consecutive `SELECT` statements in the same transaction may see different snapshots if another transaction commits in between. `REPEATABLE READ` keeps the initial transaction snapshot.

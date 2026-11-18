@@ -103,9 +103,9 @@ def start_local_server():
     t = threading.Thread(target=httpd.serve_forever, daemon=True)
     t.start()
     url = f"http://127.0.0.1:{port}/index.html"
-    print(f"\n🌐 Serving Reviewer at: {url}")
-    print(f"💾 Local PC Storage: {progress_manager.PROGRESS_FILE}")
-    print("🔒 Private: Progress stays strictly on this machine (ignored by Git)")
+    print(f"\n[Server] Reviewer running at: {url}")
+    print(f"[Storage] Local PC path: {progress_manager.PROGRESS_FILE}")
+    print("[Private] Progress stays strictly on this machine (ignored by Git)")
     webbrowser.open(url)
     return httpd, port
 
@@ -124,11 +124,11 @@ def main():
             print(f"  Status: Web Server [{server_status}] | Local Progress Units Saved: [{total_saved}]")
             print("  Storage: Strictly Local PC (progress.json is gitignored for teammate privacy)")
             print("-" * 78)
-            print("  [0] 🌐 Launch / Open Web Platform in Browser (Saves locally to progress.json)")
-            print("  [f] 📂 Open index.html directly via file://")
+            print("  [0] Launch Web Platform in Browser (Saves locally to progress.json)")
+            print("  [f] Open index.html directly via file://")
             for idx, (folder, label) in enumerate(PILLARS, 1):
-                print(f"  [{idx}] 📚 Launch {label} (Terminal CLI Mode)")
-            print("  [r] 🗑️  Reset Local Progress (Clear study history on this PC)")
+                print(f"  [{idx}] Launch {label} (Terminal CLI Mode)")
+            print("  [r] Reset Local Progress (Clear study history on this PC)")
             print("  [q] Quit")
             c = input("\nSelect an option: ").strip().lower()
             if c == "q":
@@ -148,7 +148,7 @@ def main():
                 confirm = input("Are you sure you want to reset all your local progress? (y/N): ").strip().lower()
                 if confirm == "y":
                     progress_manager.reset_local_progress()
-                    print("✅ Local progress has been reset to zero.")
+                    print("[OK] Local progress has been reset to zero.")
             elif c in ["1", "2", "3"]:
                 folder = PILLARS[int(c) - 1][0]
                 script = os.path.join(ROOT, folder, "practice_cli.py")

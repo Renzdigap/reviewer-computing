@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Nested Directory Creation, Archive Copy, Rename & Cleanup
+# Hands-On Lab: Nested Directory Creation, Archive Copy, Rename & Cleanup
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are preparing a backup workspace in `/root`. Create a nested directory `/root/backup/logs`, create two log files (`test01.log` and `test02.log`), recursively copy `/var/log/audit` while preserving attributes into `/root/backup/`, rename `test02.log` to `test03.log`, and forcibly remove `test01.log`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Create the nested directory `/root/backup/logs` using `mkdir -p /root/backup/logs` and create empty files `test01.log` and `test02.log` using `touch test01.log test02.log`.
 2. Step 2: Copy `/var/log/audit` recursively into `/root/backup/` using `cp -r /var/log/audit /root/backup/` (or `cp -a`).
 3. Step 3: Rename `test02.log` to `test03.log` using `mv test02.log test03.log`, and forcibly delete `test01.log` using `rm -f test01.log`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Create nested directory and empty log files
 <mkdir_command>
@@ -30,7 +30,7 @@ You are preparing a backup workspace in `/root`. Create a nested directory `/roo
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `mkdir -p /root/backup/logs` and `touch test01.log test02.log`.
 - Use `cp -r /var/log/audit /root/backup/` to copy the directory recursively.
@@ -39,7 +39,7 @@ You are preparing a backup workspace in `/root`. Create a nested directory `/roo
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ drwxr-xr-x. 2 root root 4096 Nov 17 09:30 logs
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which option of the `mkdir` command enables automatic creation of non-existent parent directories without reporting an error if the directory already exists?**
@@ -81,7 +81,7 @@ drwxr-xr-x. 2 root root 4096 Nov 17 09:30 logs
 - D. -a
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (p.88), the `-p` option enables `mkdir` to report no error if a directory already exists and automatically creates any parent directories that do not exist.
@@ -96,7 +96,7 @@ drwxr-xr-x. 2 root root 4096 Nov 17 09:30 logs
 - D. The command fails with a syntax error
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Ch.03 (pp.92, 94), if both `-i` and `-f` are provided on `mv` or `rm`, the option on the right takes effect.
@@ -111,7 +111,7 @@ drwxr-xr-x. 2 root root 4096 Nov 17 09:30 logs
 - D. `cp -s /etc/passwd passwd_link` creates a symbolic (soft) link to `/etc/passwd`.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.03 (pp.89–91), all four statements are explicitly documented in the official training material.

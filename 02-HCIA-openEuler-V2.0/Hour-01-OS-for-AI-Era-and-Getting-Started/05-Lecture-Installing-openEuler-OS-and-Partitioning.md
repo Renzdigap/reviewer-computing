@@ -1,4 +1,4 @@
-# 📖 Installing openEuler OS, Hardware Architectures & Partition Planning
+# Installing openEuler OS, Hardware Architectures & Partition Planning
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Identify the 6 processor architectures and 4 application scenarios supported by openEuler
 - Distinguish manual installation (USB, CD-ROM, Virtual CD-ROM/ISO) vs. batch automated installation using Kickstart
 - Configure recommended boot/system partitions (/, /boot, /boot/efi, swap) and Software Selection profiles (Minimum, Server, Hypervisor)
@@ -56,12 +56,12 @@ When booting from the openEuler 24.03/20.03 LTS ISO:
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openEuler supports 6 processor architectures: x86, Arm, SW64, RISC-V, LoongArch, and PowerPC, across 4 scenarios: Server, Cloud, Edge, and Embedded.**
 - **For batch automated installations, openEuler uses the Kickstart tool (semi-automatic or full automation).**
 - **Recommended partitions are /, /boot, /boot/efi, and swap (set swap to 2x RAM when memory is small); software selection offers Minimum installation, Server, and Hypervisor.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Official Ch.02 Quiz Q1 Verbatim Key): In the official Ch.02 Quiz (p.52), the statement 'You do not need to specify the password of the root user during the openEuler OS installation. However, you must specify the password of the root user when logging in to the OS after the installation' is keyed as A (True). Memorize this exact official answer key!
 
@@ -70,5 +70,5 @@ When booting from the openEuler 24.03/20.03 LTS ISO:
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-openEuler-Installation-and-Partition-Plan-Lab.html`](./06-Exercise-openEuler-Installation-and-Partition-Plan-Lab.html)** (or [`06-Exercise-openEuler-Installation-and-Partition-Plan-Lab.md`](./06-Exercise-openEuler-Installation-and-Partition-Plan-Lab.md)) to apply this concept in an interactive lab workbench!

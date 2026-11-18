@@ -1,4 +1,4 @@
-# 📖 Kunpeng Processor Evolution & Kunpeng 920 Physical Architecture
+# Kunpeng Processor Evolution & Kunpeng 920 Physical Architecture
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Trace Huawei's chip evolution from 1991 ASIC to K3, Kunpeng 912 (Hi1612), Kunpeng 916, and Kunpeng 920
 - Master the physical hierarchy of Kunpeng 920: SoC, Chip, Die (2 CPU dies + 1 I/O die via CoWoS), Cluster (8 per die), and Core (4 per cluster)
 - Know all Kunpeng 920 performance metrics, HCCS bus (480 Gbit/s, up to 256 cores across 4 sockets), RAS-45, and DEMT
@@ -53,13 +53,13 @@ Huawei's Kunpeng open hardware platform spans **Processor \rightarrow Single Nod
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Kunpeng processor evolution: 2014 Kunpeng 912 (Hi1612, first 64-bit Arm) -> 2016 Kunpeng 916 (first multi-socket Arm) -> Jan 2019 Kunpeng 920 (first 7nm data center Arm).**
 - **Kunpeng 920 encapsulates 3 dies via CoWoS: 2 CPU dies (each with 8 clusters × 4 cores = 32 cores and 4 DDR4 controllers) + 1 I/O die (PCIe 4.0, 100GE RoCE, SAS controller, KAE accelerators).**
 - **Huawei Cache Coherence System (HCCS) delivers up to 480 Gbit/s inter-chip bandwidth, connecting up to 4 Kunpeng 920 sockets (256 physical cores).**
 - **Kunpeng 920 (Ch.04 Quiz Q1): 7nm process, 8-channel DDR4 (+60% BW), PCIe 4.0 compatible with 3.0/2.0/1.0 (+66% I/O BW), 100GE RoCE (+4x network BW), and multiple built-in accelerators.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Kunpeng 920 has THREE dies in total: TWO CPU dies (32 cores + 4 DDR4 channels each) and ONE I/O die — NOT 4 dies or 1 monolithic die!
 
@@ -68,5 +68,5 @@ Huawei's Kunpeng open hardware platform spans **Processor \rightarrow Single Nod
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Kunpeng-920-Die-Cluster-Core-and-HCCS-Lab.html`](./02-Exercise-Kunpeng-920-Die-Cluster-Core-and-HCCS-Lab.html)** (or [`02-Exercise-Kunpeng-920-Die-Cluster-Core-and-HCCS-Lab.md`](./02-Exercise-Kunpeng-920-Die-Cluster-Core-and-HCCS-Lab.md)) to apply this concept in an interactive lab workbench!

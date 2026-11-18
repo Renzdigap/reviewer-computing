@@ -1,4 +1,4 @@
-# 📖 Join Queries — Cartesian Product, Inner Join & Outer Joins
+# Join Queries — Cartesian Product, Inner Join & Outer Joins
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 06 — SQL Basics — Classification, Data Types, DQL, Joins & DML (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Calculate the row count (I × J) and column count (N + M) of a Cartesian Product (`SELECT * FROM A, B;`)
 - Write `INNER JOIN ... ON` queries and understand the legacy `(+)` operator caveat
 - Contrast `LEFT [OUTER] JOIN`, `RIGHT [OUTER] JOIN`, and `FULL [OUTER] JOIN` on Huawei's `education` and `training` tables
@@ -45,12 +45,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **A Cartesian product between table X (I rows, N columns) and table Y (J rows, M columns) produces I * J rows and N + M columns.**
 - **`LEFT JOIN` preserves all rows from the left table (padding right columns with `NULL`), `RIGHT JOIN` preserves all rows from the right table, and `FULL JOIN` preserves unmatched rows from both sides.**
 - **In `LEFT JOIN`, `ON` clause conditions determine row matching (driving `NULL` extension), whereas outer `WHERE` conditions filter the resulting joined rows afterwards.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In `SELECT e.staff_id, e.higest_degree, t.score FROM education e RIGHT JOIN training t ON (e.staff_id = t.staff_id);`, why is `e.staff_id` displayed as empty/NULL for `t.staff_id = 10`? Because the `SELECT` list projected `e.staff_id` (from the left table), which has no match for `10`!
 
@@ -59,5 +59,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Inner-Left-Right-Full-Outer-Join-Lab.html`](./06-Exercise-Inner-Left-Right-Full-Outer-Join-Lab.html)** (or [`06-Exercise-Inner-Left-Right-Full-Outer-Join-Lab.md`](./06-Exercise-Inner-Left-Right-Full-Outer-Join-Lab.md)) to apply this concept in an interactive lab workbench!

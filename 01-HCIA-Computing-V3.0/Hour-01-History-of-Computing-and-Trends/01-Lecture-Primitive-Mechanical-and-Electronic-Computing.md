@@ -1,4 +1,4 @@
-# 📖 Primitive, Mechanical, and Electronic Computing Eras
+# Primitive, Mechanical, and Electronic Computing Eras
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Trace computing tools from digits, stones, Inca Quipu knotted strings, counting rods, abacus, and Napier's Bones to logarithmic slide rules
 - Understand mechanical calculators including Blaise Pascal's Pascaline (sautoir carry mechanism) and Dorr Eugene Felt's Comptometer
 - Differentiate the four generations of electronic computers, Edison effect, Fleming's vacuum diode, Lee de Forest's vacuum triode, ABC, ENIAC, TRADIC, Altair 8800, Apple II/Lisa, and supercomputers
@@ -50,13 +50,13 @@ Computing is the process of symbol transformation based on mathematical rules. A
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Inca Quipu knots represent Ones (farthest from main horizontal string) up to Tens of thousands (closest to horizontal string); Chinese counting rods alternate vertical (ones, hundreds) and horizontal (tens, thousands).**
 - **Edison discovered the Edison effect (1883); Fleming invented the vacuum diode (1904); Lee de Forest invented the vacuum triode (1906) by adding a grid/fence electrode for amplification and switching.**
 - **ABC (1937) is the first electronic computer; ENIAC (1946) is the second electronic computer and first general-purpose programmable electronic computer (17,000+ tubes, 5,000 additions/s).**
 - **TRADIC (1954) is Bell Labs' first transistorized computer; IBM System/370 (1970) separated hardware and software; MITS Altair 8800 (Intel 8080) is the first microcomputer.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.01 Quiz Q2): In the Inca knot counting method (Quipu), the places represented are Ones, Tens, Hundreds, Thousands, and Tens of thousands ('Tens of hundreds' in the official option list) — NEVER 'Hundreds of thousands'!
 
@@ -65,5 +65,5 @@ Computing is the process of symbol transformation based on mathematical rules. A
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Computing-Eras-and-Generations-Lab.html`](./02-Exercise-Computing-Eras-and-Generations-Lab.html)** (or [`02-Exercise-Computing-Eras-and-Generations-Lab.md`](./02-Exercise-Computing-Eras-and-Generations-Lab.md)) to apply this concept in an interactive lab workbench!

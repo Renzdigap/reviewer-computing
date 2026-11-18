@@ -1,4 +1,4 @@
-# 📖 Installing (`install.sh` / `gs_preinstall` / `gs_install`), Starting/Stopping & Uninstalling openGauss
+# Installing (`install.sh` / `gs_preinstall` / `gs_install`), Starting/Stopping & Uninstalling openGauss
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Verify all 4 official prerequisites for single-node openGauss installation (Ch.02 Quiz Q3)
 - Execute both Simplified Single-Node Installation (`sh install.sh -w`) and Standard Enterprise XML Installation (`gs_preinstall` + `gs_install`)
 - Start and stop openGauss (`gs_om -t start/stop`) and cleanly uninstall (`gs_uninstall --delete-data` + `gs_postuninstall`)
@@ -58,12 +58,12 @@ Uninstallation is a two-phase process:
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **All 4 items in Ch.02 Quiz Q3 (user/group & OS/network, rwx on decompression & empty install dir, execute permission on package, and checking if the port is occupied) are mandatory prerequisites for single-node installation.**
 - **In simplified single-node installation (`sh install.sh -w <password>`), `-w` is mandatory, `-p` defaults to 5432, the database name is `sgnode`, and the data directory is `data/single_node`.**
 - **Uninstallation requires `gs_uninstall --delete-data` run as `omm`, followed by `gs_postuninstall` run as `root`.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.02 Quiz Q3): All four options (A, B, C, D) are correct prerequisites for installing openGauss on a single node!
 
@@ -72,5 +72,5 @@ Uninstallation is a two-phase process:
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Installation-Lifecycle-and-Uninstallation-Lab.html`](./04-Exercise-Installation-Lifecycle-and-Uninstallation-Lab.html)** (or [`04-Exercise-Installation-Lifecycle-and-Uninstallation-Lab.md`](./04-Exercise-Installation-Lifecycle-and-Uninstallation-Lab.md)) to apply this concept in an interactive lab workbench!

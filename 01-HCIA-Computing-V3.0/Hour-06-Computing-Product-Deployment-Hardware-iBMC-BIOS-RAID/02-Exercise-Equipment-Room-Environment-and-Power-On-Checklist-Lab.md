@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Data Center Site Survey & Power-On Specification Check
+# Hands-On Lab: Data Center Site Survey & Power-On Specification Check
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Complete the pre-installation site survey checklist for deploying TaiShan 200 (model 2280) servers in a customer equipment room.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `optimal_cooling_layout` to `'In-row air conditioners with contained aisles'` and `cabinet_standard` to `'IEC 297'`.
 2. Set `min_cabinet_depth_mm` to `1000` and `front_rear_clearance_mm` to `800`.
 3. Set `ac_breaker_amps` to `32`, `dc_breaker_amps` to `63`, and `default_state_upon_power` to `'Power on'`.
 
-### 📝 Starter Workspace (`site-eng@dc-survey:~#`)
+### Starter Workspace (`site-eng@dc-survey:~#`)
 ```bash
 # Data Center Site Survey Checklist (TaiShan 200 2280)
 facility_requirements:
@@ -33,7 +33,7 @@ electrical_and_power:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - In-row air conditioners with contained aisles is the best layout; cabinets conform to IEC 297 (>1000 mm depth) with 800 mm clearance.
 - Circuit breakers are 32 A AC or 63 A DC, and the default state upon power supply is 'Power on'.
@@ -41,7 +41,7 @@ electrical_and_power:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ electrical_and_power:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Among the three common equipment room air-conditioning and aisle layouts, which option is the BEST for optimizing resource utilization, power density per rack, PUE, and safety?**
@@ -82,7 +82,7 @@ electrical_and_power:
 - D. Natural convection without air conditioners or aisles
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** According to Ch.05 p.289, in-row air conditioners with contained aisles are the best option, followed by in-room air conditioners with contained aisles, while in-room air conditioners with open aisles are the least optimal.
@@ -97,7 +97,7 @@ electrical_and_power:
 - D. Depth > 800 mm; clearance 500 mm; breaker 16 A AC or 32 A DC
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 pp. 291 and 295, cabinets must conform to IEC 297 and exceed 1,000 mm in depth, with 800 mm clearance at front and rear, and external circuit breakers rated at 32 A AC or 63 A DC.
@@ -110,7 +110,7 @@ electrical_and_power:
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True. According to Ch.05 p.295, the server is powered on together with the PSUs by default ('System State Upon Power Supply' = 'Power on', configurable under iBMC WebUI Power > Power Control).

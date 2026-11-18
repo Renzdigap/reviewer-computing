@@ -1,4 +1,4 @@
-# 📖 DDL for Databases, Schemas, Tables & Constraints
+# DDL for Databases, Schemas, Tables & Constraints
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Create, modify, and drop Databases (`CREATE/ALTER/DROP DATABASE`), understanding `template0` vs `template1`, `DBCOMPATIBILITY`, and transaction block restrictions
 - Create Schemas with embedded sub-commands (`CREATE SCHEMA AUTHORIZATION role1 CREATE TABLE ...`) and inspect `SHOW SEARCH_PATH`
 - Create and alter Tables and Constraints (`PRIMARY KEY`, `UNIQUE`, `CHECK`, `FOREIGN KEY`, and Column-Store constraint rules)
@@ -64,12 +64,12 @@ DROP DATABASE IF EXISTS music01;
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **To change the character encoding when creating a database, you must specify `TEMPLATE template0` (`template1`'s encoding cannot be changed). `CREATE DATABASE` and `DROP DATABASE` cannot run inside a transaction block.**
 - **Column-store tables support ONLY `PARTIAL CLUSTER KEY` table constraints (no `PRIMARY KEY` or `FOREIGN KEY`) and ONLY `NULL`, `NOT NULL`, and `DEFAULT` column constraints.**
 - **`UNIQUE` constraints disallow duplicate non-null values but allow `NULL`, whereas `FOREIGN KEY` columns can contain duplicate or `NULL` values.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 p. 446 Quiz Q2): 'Which function is implemented by the `CREATE`, `DROP`, and `ALTER` statements?' -> C. Data definition (DDL)!
 
@@ -78,5 +78,5 @@ DROP DATABASE IF EXISTS music01;
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-DDL-Database-Schema-and-Table-Constraints-Lab.html`](./02-Exercise-DDL-Database-Schema-and-Table-Constraints-Lab.html)** (or [`02-Exercise-DDL-Database-Schema-and-Table-Constraints-Lab.md`](./02-Exercise-DDL-Database-Schema-and-Table-Constraints-Lab.md)) to apply this concept in an interactive lab workbench!

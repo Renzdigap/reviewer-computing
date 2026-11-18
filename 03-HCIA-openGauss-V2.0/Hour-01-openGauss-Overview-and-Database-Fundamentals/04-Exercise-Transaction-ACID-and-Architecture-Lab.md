@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Simulating Bank Transfer ACID Transactions in openGauss
+# Hands-On Lab: Simulating Bank Transfer ACID Transactions in openGauss
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 01 — openGauss Overview & Database Fundamentals (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Implement the Chapter 01 (p. 62) bank transfer scenario where Zhang (Account 1, balance 500) starts transferring 200 to Wang (Account 2, balance 100) but cancels (`ROLLBACK`), while Li (Account 3, balance 600) transfers 300 to Wang and commits (`COMMIT`).
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Start a transaction with `START TRANSACTION;`, deduct 200 from Zhang (`id = 1`), add 200 to Wang (`id = 2`), and then cancel the transaction with `ROLLBACK;`.
 2. Step 2: Start a second transaction with `START TRANSACTION;`, deduct 300 from Li (`id = 3`), add 300 to Wang (`id = 2`), and permanently save it with `COMMIT;`.
 3. Step 3: Query `SELECT id, holder, balance FROM accounts ORDER BY id;` to verify Wang's final balance is 400.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Zhang's canceled transfer (Atomicity rollback)
 START TRANSACTION;
@@ -33,7 +33,7 @@ SELECT id, holder, balance FROM accounts ORDER BY id;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use ROLLBACK; to abort Zhang's transfer and restore Wang's balance to 100.
 - Use COMMIT; to permanently persist Li's transfer of 300 so Wang's balance becomes 400.
@@ -41,7 +41,7 @@ SELECT id, holder, balance FROM accounts ORDER BY id;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -79,7 +79,7 @@ COMMIT
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **(Official Ch.01 Quiz Q2) Which of the following statements about the ACID feature of database transactions is INCORRECT?**
@@ -90,7 +90,7 @@ COMMIT
 - D. D refers to durability, whereby the status of a successful transaction can be maintained, even if the machine is powered off.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** In ACID, 'I' stands for Isolation (transactions are isolated from each other and do not interfere when executed concurrently), NOT Availability.
@@ -105,7 +105,7 @@ COMMIT
 - D. Single-Host Standalone
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** In Shared-Nothing (and MPP) architecture, each node has its own private CPU, memory, and disk, communicating via network protocols for horizontal scale-out.
@@ -118,7 +118,7 @@ COMMIT
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False. CAP theory states that a distributed system can satisfy at most TWO of Consistency (C), Availability (A), and Partition Tolerance (P) at the same time.

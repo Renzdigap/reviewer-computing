@@ -1,4 +1,4 @@
-# 📖 Server Protocols (IPMI, Redfish, SNMP), iBMA & Huawei iBMC
+# Server Protocols (IPMI, Redfish, SNMP), iBMA & Huawei iBMC
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 04 — RAID Arrays, PCIe Bus, NICs/iNICs, GPU/NPU, Power/Cooling & Server Software (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Trace the evolution of IPMI (1.0 -> 1.5 -> 2.0) and understand how BMC uses IPMI independently of the OS (Ch.03 Quiz Q2!)
 - Master Redfish HTTPS/RESTful interfaces (GET, POST, PATCH, DELETE) and iBMA 2.0 in-band/out-of-band BOB mapping
 - Explain SNMP architecture (NMS, Agent, MO, MIB over UDP) and Huawei iBMC (Hi1710, Kbox/HWKbox)
@@ -50,13 +50,13 @@ SNMP is an application-layer TCP/IP network management protocol carried over **U
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **IPMI evolution: 1998 (v1.0), 2001 (v1.5, PCI Management Bus), 2004 (v2.0, Console Redirection, VLAN, Blade server support).**
 - **BMC complies with the IPMI specification to collect, process, and store sensor signals and monitor component status independently of the OS (Ch.03 Quiz Q2).**
 - **Redfish (DMTF) uses HTTPS RESTful APIs supporting GET (getAllInfo), POST (postRequest), PATCH (patchRequest), and DELETE (deleteRequest).**
 - **SNMP runs over UDP and consists of 4 basic components: NMS, Agent, Managed Object (MO), and MIB.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: SNMP packets are carried over UDP (User Datagram Protocol), whereas Redfish is based on HTTPS/SSL (TCP)!
 
@@ -65,5 +65,5 @@ SNMP is an application-layer TCP/IP network management protocol carried over **U
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Redfish-RESTful-API-and-SNMP-Architecture-Lab.html`](./06-Exercise-Redfish-RESTful-API-and-SNMP-Architecture-Lab.html)** (or [`06-Exercise-Redfish-RESTful-API-and-SNMP-Architecture-Lab.md`](./06-Exercise-Redfish-RESTful-API-and-SNMP-Architecture-Lab.md)) to apply this concept in an interactive lab workbench!

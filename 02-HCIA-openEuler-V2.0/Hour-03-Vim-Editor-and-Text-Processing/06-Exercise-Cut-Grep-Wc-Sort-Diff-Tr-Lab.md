@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Extracting Usernames (`cut`), Counting Accounts (`wc`), Sorting & `tr` Case Conversion
+# Hands-On Lab: Extracting Usernames (`cut`), Counting Accounts (`wc`), Sorting & `tr` Case Conversion
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are auditing user accounts in `/etc/passwd`. Extract the first column (usernames) delimited by `:`, count how many lines in `/etc/passwd` match `nologin` using `grep -c`, count total lines in `/etc/passwd` using `wc -l`, and convert lowercase letters in `text.txt` to uppercase using `tr`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Display the first column of `/etc/passwd` separated by colons (`:`) using `cut -d: -f1 /etc/passwd`.
 2. Step 2: Count matching `nologin` lines with `grep -c nologin /etc/passwd` and count total lines with `wc -l /etc/passwd`.
 3. Step 3: Pipe `cat text.txt` into `tr a-z A-Z` to convert lowercase letters to uppercase.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Extract the 1st colon-separated column of /etc/passwd
 <cut_command>
@@ -29,7 +29,7 @@ You are auditing user accounts in `/etc/passwd`. Extract the first column (usern
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `cut -d: -f1 /etc/passwd`.
 - Use `grep -c nologin /etc/passwd` and `wc -l /etc/passwd`.
@@ -38,7 +38,7 @@ You are auditing user accounts in `/etc/passwd`. Extract the first column (usern
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ HELLO OPENEULER V2.0
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What is the default field separator of the `cut` command if the `-d` option is not specified?**
@@ -81,7 +81,7 @@ HELLO OPENEULER V2.0
 - D. Semicolon (;)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Ch.03 (p.143), `-d` specifies a field separator, and the default field separator of `cut` is TAB.
@@ -96,7 +96,7 @@ HELLO OPENEULER V2.0
 - D. `-b` and `-o`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Per Ch.03 (p.147), `sort -n` sorts by numeric value and `sort -u` ignores repeated (duplicate) lines.
@@ -111,7 +111,7 @@ HELLO OPENEULER V2.0
 - D. `tr -s` reduces consecutive repeated characters to a single character.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.03 (pp.145–149), all four options match the official Huawei HCIA-openEuler V2.0 documentation.

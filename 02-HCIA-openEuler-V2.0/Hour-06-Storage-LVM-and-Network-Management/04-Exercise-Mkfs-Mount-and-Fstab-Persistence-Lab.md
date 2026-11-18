@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Formatting `/dev/hdb6` (`mkfs -t ext4`), Temporary Mount & `/etc/fstab` Entry
+# Hands-On Lab: Formatting `/dev/hdb6` (`mkfs -t ext4`), Temporary Mount & `/etc/fstab` Entry
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You have created logical partition `/dev/hdb6` on an openEuler server. Format `/dev/hdb6` with the `ext4` file system using `mkfs -t ext4`, mount it temporarily to `/test`, and append a persistent mount entry to `/etc/fstab`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Format `/dev/hdb6` as `ext4` using `mkfs -t ext4 /dev/hdb6` (exact Ch.05 Quiz Q2 syntax).
 2. Step 2: Create mount point `/test` and mount `/dev/hdb6` to `/test` using `mount /dev/hdb6 /test`.
 3. Step 3: Append the 6-field persistent entry `/dev/hdb6 /test ext4 defaults 0 2` to `/etc/fstab`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Format /dev/hdb6 with ext4 using mkfs -t
 <mkfs_command>
@@ -29,7 +29,7 @@ echo "<fstab_6_fields>" >> /etc/fstab
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `mkfs -t ext4 /dev/hdb6` (Ch.05 Quiz Q2).
 - Use `mount /dev/hdb6 /test`.
@@ -38,7 +38,7 @@ echo "<fstab_6_fields>" >> /etc/fstab
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -70,7 +70,7 @@ Filesystem     Type  Size  Used Avail Use% Mounted on
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **[Official Ch.05 Quiz Q2] Which of the following commands can be used to format the `/dev/hdb6` partition?**
@@ -81,7 +81,7 @@ Filesystem     Type  Size  Used Avail Use% Mounted on
 - D. makefile -t ext4 /dev/hdb6
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Official Ch.05 Quiz Q2 (p.318): A (`mkfs -t ext4 /dev/hdb6`). `mkfs` ('make file system') creates a Linux file system on a partition; `format` and `makefile` are invalid.
@@ -96,7 +96,7 @@ Filesystem     Type  Size  Used Avail Use% Mounted on
 - D. The partition type: `0` = primary, `1` = extended, `2` = logical
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.05 (p.282), the `pass` field sets the `fsck` check priority: `1` for the root partition, `2` for other devices that need to be checked, and `0` for devices that will not be checked by `fsck`.
@@ -111,7 +111,7 @@ Filesystem     Type  Size  Used Avail Use% Mounted on
 - D. In `/etc/fstab`, the `noatime` option improves performance by not updating inode access records.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.05 (pp.279–282), all four statements are explicitly documented in the official training material.

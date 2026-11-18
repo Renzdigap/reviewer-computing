@@ -1,4 +1,4 @@
-# 📖 Data Management Evolution, DBS Components & Classical Data Models
+# Data Management Evolution, DBS Components & Classical Data Models
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 01 — openGauss Overview & Database Fundamentals (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish Data, Database (DB), Database Management System (DBMS), and Database System (DBS)
 - Compare the 3 stages of data management technology development: Manual Management, File System, and DBS
 - Contrast Hierarchical, Network, and Relational database models and trace SQL standardization history
@@ -56,12 +56,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **A Database System (DBS) consists of three parts: Database (DB), DBMS, and Database Application (storage medium is hardware, NOT one of the three logical DBS components in Ch.01 Quiz Q1).**
 - **Data management evolved through exactly three stages: Manual Management, File System, and Database System (DBS).**
 - **In the relational model, each cell must be an indivisible data item; in the hierarchical model, every non-root node has only one parent; in the network model, a node can have multiple parents.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.01 Quiz Q1): 'Which of the following is NOT a component of a database system?' -> D. Database storage medium! The three components are Database, DBMS, and Database application.
 
@@ -70,5 +70,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-DBS-Components-and-Data-Models-Lab.html`](./02-Exercise-DBS-Components-and-Data-Models-Lab.html)** (or [`02-Exercise-DBS-Components-and-Data-Models-Lab.md`](./02-Exercise-DBS-Components-and-Data-Models-Lab.md)) to apply this concept in an interactive lab workbench!

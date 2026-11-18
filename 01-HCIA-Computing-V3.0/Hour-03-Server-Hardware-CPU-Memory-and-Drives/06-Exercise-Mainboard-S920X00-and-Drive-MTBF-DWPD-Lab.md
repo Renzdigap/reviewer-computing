@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: S920X00 Mainboard & Enterprise Drive Spec Classifier
+# Hands-On Lab: S920X00 Mainboard & Enterprise Drive Spec Classifier
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Complete the hardware specification file for the Kunpeng S920X00 mainboard and classify enterprise HDD/SSD drive parameters.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `mainboard_model` to `'S920X00'`, `bmc_management_chip` to `'Hi1710'`, and `pcie_4_slots` to `8`.
 2. Set `sas_mtbf_hours` to `1600000` and `ssd_mtbf_hours` to `2000000`.
 3. Set `read_intensive_dwpd_max` to `3` and `write_intensive_dwpd_min` to `10`.
 
-### 📝 Starter Workspace (`hw-eng@taishan-2280:~#`)
+### Starter Workspace (`hw-eng@taishan-2280:~#`)
 ```bash
 # S920X00 Mainboard & Drive Classification Spec
 mainboard:
@@ -33,7 +33,7 @@ drive_specs:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - The Kunpeng server mainboard model on page 149 is S920X00 with the Hi1710 chip and 8 PCIe 4.0 slots.
 - SAS MTBF is 1,600,000 hours; SSD MTBF is 2,000,000 hours; DWPD thresholds are < 3, 3–10, and > 10.
@@ -41,7 +41,7 @@ drive_specs:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ drive_specs:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What are the rotational speed, interface type, and MTBF of an NL-SAS hard disk drive?**
@@ -82,7 +82,7 @@ drive_specs:
 - D. 5,400 RPM, parallel ATA interface, 800,000 hours MTBF
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 p.153, NL-SAS drives are 7,200 RPM enterprise-class SATA drives with SAS ports, an MTBF of 1,200,000 hours, and an annual failure rate of about 2%.
@@ -97,7 +97,7 @@ drive_specs:
 - D. Read-intensive: DWPD < 10; Mixed: DWPD 10–50; Write-intensive: DWPD > 50
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 p.154, Read-intensive SSDs have DWPD < 3, Mixed read/write SSDs have DWPD between 3 and 10, and Write-intensive SSDs have DWPD > 10.
@@ -112,7 +112,7 @@ drive_specs:
 - D. It is compatible with 2U or 4U rack servers.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four statements are explicitly stated on Ch.03 p.149 for the Kunpeng server mainboard (model S920X00).

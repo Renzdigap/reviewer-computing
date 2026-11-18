@@ -1,4 +1,4 @@
-# 📖 Shell Variables, Quoting, `read` & Arithmetic Operations (`$[...]`, `++i` vs. `i++`)
+# Shell Variables, Quoting, `read` & Arithmetic Operations (`$[...]`, `++i` vs. `i++`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 07 — Shell Scripting, Variables, Control Flow & Automation (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish special characters (`#`, `'`, `\`, `/`, `!`), environment vs. user-defined variables, and `printenv` vs. `set`
 - Apply strict variable assignment rules (`variable=value` — NO spaces, `name==Tom` is FALSE [Ch.06 Quiz Q2!]), single vs. double quotes, `${VAR}` brace expansion, and `read`
 - Evaluate integer arithmetic using `$[expression]` (`*` = Multiplication [Ch.06 Quiz Q1!], operator precedence, and `++i` vs. `i++`)
@@ -58,12 +58,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Variable assignment is 'variable=value' with NO spaces around '='; 'name==Tom' is NOT a valid assignment (Ch.06 Quiz Q2 = False).**
 - **Single quotes ('') preserve literal characters without variable expansion, whereas double quotes ("") expand variables and commands; use ${FIRST}_$LAST to disambiguate variable boundaries.**
 - **In a shell arithmetic expression ($[...]), '*' means Multiplication (Ch.06 Quiz Q1); printenv displays global variables, whereas 'set' displays all local, global, and user-defined variables.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Official Ch.06 Quiz Q1): 'Which of the following is the meaning of * in a shell script expression?' -> B. Multiplication!
 
@@ -72,5 +72,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Variables-Braces-and-Arithmetic-Lab.html`](./04-Exercise-Variables-Braces-and-Arithmetic-Lab.html)** (or [`04-Exercise-Variables-Braces-and-Arithmetic-Lab.md`](./04-Exercise-Variables-Braces-and-Arithmetic-Lab.md)) to apply this concept in an interactive lab workbench!

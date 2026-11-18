@@ -1,4 +1,4 @@
-# 📖 File Types, Permission Bits (`rwx`), Ownership (`chmod`, `chown`, `chgrp`) & `umask`
+# File Types, Permission Bits (`rwx`), Ownership (`chmod`, `chown`, `chgrp`) & `umask`
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 04 — User, Group & File Permission Management (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Identify all 7 Linux file types (`-`, `d`, `b`, `c`, `l`, `p`, `s`) and decode the 10-character `ls -l` permission string (Bits 0 to 9)
 - Modify permissions and ownership using `chmod` (symbolic & octal), `chown user:group`, and `chgrp`
 - Calculate default file and directory permissions from any `umask` value (`022`, `027`, `002`, `006`, `007`)
@@ -62,12 +62,12 @@ In `drwxr-xr-x. 2 root root 4096 Jun 1 14:00 shili`, the 10-character mode strin
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The 7 Linux file types are '-' (regular), 'd' (directory), 'b' (block device), 'c' (character device), 'l' (symlink), 'p' (named pipe), and 's' (socket).**
 - **chmod can be run by the file owner or root, whereas chown can only be run by the administrator (root).**
 - **With umask 022, new files get 644 and new directories get 755; with umask 027, new files get 640 and new directories get 750.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Write permission ('w') on a file allows editing its content, NOT deleting the file! Deleting or renaming a file is controlled by write ('w') + execute ('x') permissions on the PARENT DIRECTORY.
 
@@ -76,5 +76,5 @@ In `drwxr-xr-x. 2 root root 4096 Jun 1 14:00 shili`, the 10-character mode strin
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Chmod-Chown-Chgrp-and-Umask-Lab.html`](./06-Exercise-Chmod-Chown-Chgrp-and-Umask-Lab.html)** (or [`06-Exercise-Chmod-Chown-Chgrp-and-Umask-Lab.md`](./06-Exercise-Chmod-Chown-Chgrp-and-Umask-Lab.md)) to apply this concept in an interactive lab workbench!

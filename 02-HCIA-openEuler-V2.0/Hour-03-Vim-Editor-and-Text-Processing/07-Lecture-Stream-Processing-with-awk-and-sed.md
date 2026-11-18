@@ -1,4 +1,4 @@
-# 📖 Advanced Stream Processing with `awk` and `sed`
+# Advanced Stream Processing with `awk` and `sed`
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Analyze and slice text streams line-by-line using `awk` (`0`, `1..$n`, default space separator, `-F` custom field delimiter)
 - Understand how `sed` (stream editor) processes lines in a pattern buffer without altering the original file by default
 - Apply `sed` options (`-n`, `-e`, `-f`, `-i`, `-l`, `-r`) for non-interactive string replacement and in-place file editing
@@ -54,12 +54,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **awk reads input line by line using spaces as the default separator; 0 is the entire line, 1 is the first field, and -F changes the field separator.**
 - **sed is a non-interactive stream editor that modifies text in a memory buffer by default without changing the source file on disk.**
 - **In sed, -i edits the original file directly in place, -n suppresses default output, -e enables multipoint editing, and -r enables extended regular expressions.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Running 'sed "s/foo/bar/g" file.txt' does NOT modify file.txt on disk—it only prints the modified buffer to standard output! You must use 'sed -i' to edit the original file directly.
 
@@ -68,5 +68,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Awk-and-Sed-Text-Automation-Lab.html`](./08-Exercise-Awk-and-Sed-Text-Automation-Lab.html)** (or [`08-Exercise-Awk-and-Sed-Text-Automation-Lab.md`](./08-Exercise-Awk-and-Sed-Text-Automation-Lab.md)) to apply this concept in an interactive lab workbench!

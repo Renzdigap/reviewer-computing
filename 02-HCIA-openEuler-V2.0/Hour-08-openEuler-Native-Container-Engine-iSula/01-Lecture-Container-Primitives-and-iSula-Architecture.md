@@ -1,4 +1,4 @@
-# 📖 Container Fundamentals (Namespaces, `cgroups`) & iSula Architecture
+# Container Fundamentals (Namespaces, `cgroups`) & iSula Architecture
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish the two core Linux kernel container features: Namespaces (resource isolation across 6 types) and `cgroups` (resource limitation in `/sys/fs/cgroup`)
 - Explain what `iSula` (`iSulad`) is, why it is written in C/C++ instead of Go, and its Northbound (CLI/CRI) and Southbound (OCI: LCR, runC, Kata) architecture
 - Quantify iSula's Lightweight (68%+ less memory), Fast (35% faster startup, 75% faster download, 15% faster `isula-build`), Easy-to-Use (`isula-transform`), and Flexible (REST vs. gRPC) advantages
@@ -54,12 +54,12 @@ Container technology evolved from `chroot` (1982), FreeBSD `Jail` (1998), `Linux
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Namespaces provide resource ISOLATION (6 types: PID, Mount, Network, User, UTS [host/domain names], IPC), whereas cgroups (/sys/fs/cgroup) provide resource LIMITATION (CPU, memory, block I/O).**
 - **iSula (iSulad) is written in C/C++ (unlike Go-based Docker), uses LCR as its default OCI runtime, and supports Lightweight mode (REST) and Performance mode (gRPC).**
 - **Compared with Docker, iSula reduces 100-container memory usage by >68%, speeds up concurrent startup by 35%, accelerates smart image downloads by 75%, and speeds up DAG-based image builds (isula-build) by 15%.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse Namespaces vs. cgroups! Namespaces = Resource Isolation (what a container can SEE); cgroups = Resource Limitation (how much CPU/RAM/I/O a container can USE).
 
@@ -68,5 +68,5 @@ Container technology evolved from `chroot` (1982), FreeBSD `Jail` (1998), `Linux
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Namespaces-Cgroups-and-iSula-Specs-Lab.html`](./02-Exercise-Namespaces-Cgroups-and-iSula-Specs-Lab.html)** (or [`02-Exercise-Namespaces-Cgroups-and-iSula-Specs-Lab.md`](./02-Exercise-Namespaces-Cgroups-and-iSula-Specs-Lab.md)) to apply this concept in an interactive lab workbench!

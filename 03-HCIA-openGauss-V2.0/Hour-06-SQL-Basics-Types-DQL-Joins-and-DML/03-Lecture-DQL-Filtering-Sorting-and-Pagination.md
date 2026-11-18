@@ -1,4 +1,4 @@
-# 📖 DQL Queries — Filtering (`WHERE`), Sorting (`ORDER BY`) & Pagination (`LIMIT`/`OFFSET`)
+# DQL Queries — Filtering (`WHERE`), Sorting (`ORDER BY`) & Pagination (`LIMIT`/`OFFSET`)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 06 — SQL Basics — Classification, Data Types, DQL, Joins & DML (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Write `SELECT` queries with column/table aliases (`AS` or space) and `WHERE` conditions (`Position = 'Engineer' AND Salary > 6000`, `BETWEEN ... AND ...`)
 - Sort results with `ORDER BY` using column names, 1-based column positions (`ORDER BY 2 DESC, 3 ASC` — Ch.05 Quiz!), or expressions, plus `NULLS FIRST | LAST`
 - Paginate queries using `LIMIT count OFFSET start`, `OFFSET start LIMIT count`, and `LIMIT offset, count`
@@ -57,12 +57,12 @@ ORDER BY { column_name | number | expression } [ ASC | DESC ] [ NULLS FIRST | NU
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **String literals in `WHERE` must be enclosed in single quotes (`Position = 'Engineer' AND Salary > 6000`), and `age BETWEEN 20 AND 30` is equivalent to `age >= 20 AND age <= 30` (Ch.05 p. 394 Q1 & Q2).**
 - **In `ORDER BY`, `ASC` is the default direction, and you can reference `SELECT` columns by their 1-based position (`ORDER BY 2 DESC, 3 ASC` is equivalent to `ORDER BY age DESC, score` for `SELECT name, age, score` — Ch.05 p. 395 Q3: AC).**
 - **`LIMIT 5, 20`, `LIMIT 20 OFFSET 5`, and `OFFSET 5 LIMIT 20` are all equivalent and output 20 rows after skipping 5 rows.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 p. 395 Quiz Q3): Both `SELECT name, age, score FROM student order by age desc, score;` (A) and `SELECT name, age, score FROM student order by 2 desc, 3 asc;` (C) are correct! Don't forget that omitting `ASC` after `score` defaults to ascending order.
 
@@ -71,5 +71,5 @@ ORDER BY { column_name | number | expression } [ ASC | DESC ] [ NULLS FIRST | NU
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab.html`](./04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab.html)** (or [`04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab.md`](./04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab.md)) to apply this concept in an interactive lab workbench!

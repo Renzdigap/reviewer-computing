@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Single-Node Installation, Status Verification & Uninstallation
+# Hands-On Lab: Single-Node Installation, Status Verification & Uninstallation
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Perform a simplified single-node installation of openGauss using `install.sh`, verify the instance state with `gs_ctl query`, start/stop the cluster with `gs_om`, and write the uninstallation command.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Run `sh install.sh -w Kunpeng@2026` inside `/opt/software/openGauss/simpleInstall`.
 2. Step 2: Query the instance status using `gs_ctl query -D /opt/software/openGauss/data/single_node`.
 3. Step 3: Start the cluster using `gs_om -t start` and write the command to uninstall openGauss and delete data (`gs_uninstall --delete-data`).
 
-### 📝 Starter Workspace (`omm@opengauss:~$`)
+### Starter Workspace (`omm@opengauss:~$`)
 ```bash
 # Step 1: Run simplified single-node installation with initial password
 cd /opt/software/openGauss/simpleInstall
@@ -31,7 +31,7 @@ gs_uninstall ____
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `-w` with `install.sh` to specify the mandatory initial database password.
 - Use `gs_ctl query -D <datadir>` to check the HA state of the node.
@@ -40,7 +40,7 @@ gs_uninstall ____
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -69,7 +69,7 @@ Successfully started.
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.02 Quiz Q3) Which of the following are the prerequisites for installing openGauss on a single node?**
@@ -80,7 +80,7 @@ Successfully started.
 - D. Before the installation, check whether the specified openGauss port is occupied. If the port is occupied, change the port number or stop the process that uses the port.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Chapter 02 (p. 92 & p. 127), all four options (A, B, C, and D) are mandatory prerequisites for installing openGauss on a single node.
@@ -95,7 +95,7 @@ Successfully started.
 - D. Port 26000, node name dn_6001
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 02 (p. 92), if `-p` is not specified in `install.sh`, the default port is 5432 and the database node name after installation is `sgnode`.
@@ -108,7 +108,7 @@ Successfully started.
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.02 p. 125). Only user `root` is authorized to run the `gs_postuninstall` command.

@@ -1,4 +1,4 @@
-# 📖 Drive Interfaces (SATA/SAS/NVMe), Form Factors & IOPS Benchmarks
+# Drive Interfaces (SATA/SAS/NVMe), Form Factors & IOPS Benchmarks
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Physically and logically distinguish SATA, SAS, and PCIe (NVMe) drive interfaces and their 1.0/2.0/3.0 transmission rates
 - Explain NVMe advantages and 3.5-inch LFF vs. 2.5-inch SFF physical dimensions
 - Compare 4 KB Random Write IOPS and 128 KB Sequential Read Bandwidth across all 6 drive types
@@ -59,13 +59,13 @@ The 5 key drive performance indicators are: **Drive capacity (volume)**, **Rotat
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **SATA 1.0/2.0/3.0 rates are 1.5 / 3 / 6 Gbit/s; SAS 1.0/2.0/3.0 rates are 3 / 6 / 12 Gbit/s.**
 - **A SATA connector has a gap between pin sections; a SAS connector has no gap and includes a back-side connector.**
 - **3.5-inch drives are LFF (147 mm × 101.85 mm × 26.1 mm); 2.5-inch drives are SFF (100.45 mm × 69.85 mm, depth <= 15 mm).**
 - **NVMe SSD connects directly to the CPU via PCIe, delivering ~300K IOPS (4 KB random write) and ~3500 MB/s (128 KB sequential read).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse SAS 3.0 (12 Gbit/s) with SATA 3.0 (6 Gbit/s / 600 MB/s)!
 
@@ -74,5 +74,5 @@ The 5 key drive performance indicators are: **Drive capacity (volume)**, **Rotat
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Drive-Interface-Rates-and-IOPS-Benchmark-Lab.html`](./08-Exercise-Drive-Interface-Rates-and-IOPS-Benchmark-Lab.html)** (or [`08-Exercise-Drive-Interface-Rates-and-IOPS-Benchmark-Lab.md`](./08-Exercise-Drive-Interface-Rates-and-IOPS-Benchmark-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: FusionDirector Batch Provisioning & Intelligent Policy Config
+# Hands-On Lab: FusionDirector Batch Provisioning & Intelligent Policy Config
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure FusionDirector batch management limits, Server Profile lifecycle constraints, and OS deployment parameters for a Kunpeng data center.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `max_log_export_servers` to `100` and `max_concurrent_os_deployments` to `30` (with `os_deploy_timeout_hours: 2`).
 2. Set `ssdp_discovery_network_requirement` to `'L2'`.
 3. Set `delete_profile_condition` to `'not bound'` and `modify_profile_condition` to `'not applied'`.
 
-### 📝 Starter Workspace (`admin@fusiondirector:~#`)
+### Starter Workspace (`admin@fusiondirector:~#`)
 ```bash
 # FusionDirector Batch & Intelligent Deployment Policy
 batch_limits:
@@ -32,7 +32,7 @@ server_profile_rules:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - FusionDirector exports logs for up to 100 servers at a time and deploys OSs to up to 30 devices concurrently; SSDP requires an L2 network.
 - A profile can be deleted only when 'not bound' to any server, and modified only when 'not applied' to any server.
@@ -40,7 +40,7 @@ server_profile_rules:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -69,7 +69,7 @@ server_profile_rules:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In Huawei FusionDirector, what are the restrictions on deleting and modifying a Server Profile (Ch.06, p. 383)?**
@@ -80,7 +80,7 @@ server_profile_rules:
 - D. Server Profiles cannot be edited or deleted once created.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.06 p.383 (and p.414 for eSight), you can delete a profile only when the profile is not bound to any server, and you can modify a profile only when the profile is not applied to any server.
@@ -95,7 +95,7 @@ server_profile_rules:
 - D. Intelligent energy efficiency management
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All five — Intelligent deployment, Intelligent asset, Intelligent version, Intelligent fault, and Intelligent energy efficiency management — constitute the Five Intelligent Features of FusionDirector (Ch.06, p.382).
@@ -110,7 +110,7 @@ server_profile_rules:
 - D. SSDP only works over serial RS-232 cables.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.06 p.379, if SSDP automatic discovery is used, FusionDirector and the devices must be on the same L2 network.

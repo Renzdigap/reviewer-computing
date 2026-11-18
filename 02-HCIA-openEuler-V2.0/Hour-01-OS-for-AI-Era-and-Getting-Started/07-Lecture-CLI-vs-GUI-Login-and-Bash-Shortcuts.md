@@ -1,4 +1,4 @@
-# 📖 Logging In, CLI vs. GUI Desktops, Virtual Consoles & Bash Shortcuts
+# Logging In, CLI vs. GUI Desktops, Virtual Consoles & Bash Shortcuts
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Compare CLI vs. GUI and identify the 5 optional desktop environments supported on openEuler (GNOME, UKUI, DDE, Kiran, XFCE)
 - Perform local virtual console switching (Ctrl+Alt+F1..F6 / Alt+F1..F6) and remote SSH login (PuTTY, Xshell)
 - Master shell prompts (# vs. $), user switching (su - username, id), and Bash keyboard shortcuts (Tab, history, Ctrl+A/E/C/L)
@@ -52,12 +52,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openEuler uses the CLI and the bash shell by default; if a GUI is needed, GNOME, UKUI, DDE, Kiran, or XFCE can be installed.**
 - **The root user prompt ends with '#', whereas a common user prompt ends with '$'. Switch users with 'su - username' and verify identity with 'id'.**
 - **Pressing 'Tab' quickly auto-completes commands and parameters (Ch.02 Quiz Q2); Ctrl+A jumps to the start of the line, Ctrl+E jumps to the end, Ctrl+C aborts the current program, and Ctrl+L (or clear) clears the screen.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.02 Quiz Q2): 'Tab' is used to quickly supplement commands and parameters—do NOT confuse it with Ctrl+L (clear screen) or Up/Down arrows (command history).
 
@@ -66,5 +66,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Session-Switching-and-Bash-Shortcuts-Lab.html`](./08-Exercise-Session-Switching-and-Bash-Shortcuts-Lab.html)** (or [`08-Exercise-Session-Switching-and-Bash-Shortcuts-Lab.md`](./08-Exercise-Session-Switching-and-Bash-Shortcuts-Lab.md)) to apply this concept in an interactive lab workbench!

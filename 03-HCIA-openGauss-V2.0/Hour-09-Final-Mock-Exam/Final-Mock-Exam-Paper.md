@@ -1,11 +1,11 @@
-# 🏆 HCIA-openGauss V2.0 — National Stage Final Mock Exam
+# HCIA-openGauss V2.0 — National Stage Final Mock Exam
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Time Limit:** 60 Minutes  
 **Total Score:** 1000 Points (Passing / National Finalist Target: 800 Points)  
 **Instructions:** 60 Questions in 60 Minutes: 20 Single-Choice (15 pts each), 20 Multiple-Choice (20 pts each, strict all-or-nothing grading), 10 True/False (10 pts each), and 10 Hands-On Command/SQL/Scenario Fill-in Labs (20 pts each).
 
-> 💡 **Interactive Timed Mode:** Open **[`Final-Mock-Exam.html`](./Final-Mock-Exam.html)** in your browser for a realistic 60-minute countdown timer, question navigator palette, strict Huawei multi-choice auto-grading, and chapter-by-chapter analytics!
+> **Interactive Timed Mode:** Open **[`Final-Mock-Exam.html`](./Final-Mock-Exam.html)** in your browser for a realistic 60-minute countdown timer, question navigator palette, strict Huawei multi-choice auto-grading, and chapter-by-chapter analytics!
 
 ---
 

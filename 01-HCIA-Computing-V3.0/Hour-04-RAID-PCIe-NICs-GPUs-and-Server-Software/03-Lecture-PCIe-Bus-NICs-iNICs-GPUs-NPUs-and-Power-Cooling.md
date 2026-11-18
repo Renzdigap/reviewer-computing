@@ -1,4 +1,4 @@
-# 📖 PCIe 1.0–5.0, Riser Cards, Huawei NICs/iNICs, GPU/NPU & Power/Cooling
+# PCIe 1.0–5.0, Riser Cards, Huawei NICs/iNICs, GPU/NPU & Power/Cooling
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 04 — RAID Arrays, PCIe Bus, NICs/iNICs, GPU/NPU, Power/Cooling & Server Software (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master bus evolution (PC/XT, ISA, EISA, PCI, AGP, PCIe), Riser slot mappings on TaiShan 200, and PCIe 1.0–5.0 transfer rates and bandwidths
 - Distinguish Huawei server NIC types (LOM, PCIe card, FlexIO card, Mezzanine card — Ch.03 Quiz Q1!) and Hi1822 iNIC features
 - Compare CPU vs. GPU vs. NPU architectures, FLOPS vs. TOPS, Air vs. Liquid Cooling (Cold-plate, Spray, Immersion), and ATX vs. SSI/CRPS PSUs
@@ -62,13 +62,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **PCIe transfer rates double each generation from Gen 1 to Gen 5: 2.5 -> 5.0 -> 8.0 -> 16.0 -> 32.0 GT/s (x16 bandwidth: 4 -> 8 -> 15.8 -> 31.5 -> 63.0 GB/s).**
 - **Huawei NIC types (Ch.03 Quiz Q1): LOM is integrated in the mainboard PCH chip and cannot be replaced; PCIe cards fit standard PCIe slots; FlexIO cards are rear-panel cards for Huawei rack servers; Mezzanine cards are ONLY for E9000 blade servers.**
 - **ALU accounts for 5% of CPU die area vs. 40% of GPU die area; NPUs pass neuron outputs directly between layers without writing back to main memory.**
 - **Cold-plate is indirect liquid cooling, while Immersion and Spray are direct (100%) liquid cooling. TaiShan 200 (2280) uses 68.0 mm Kunpeng PSUs (900W / 2000W).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.03 Quiz Q1): Mezzanine cards can ONLY be used on Huawei E9000 blade servers (NOT rack servers!), and FlexIO cards are installed in rear-panel FlexIO slots of rack servers (NOT integrated on the front panel for front-end service connection!). Only A and B are true in Ch.03 Quiz Q1.
 
@@ -77,5 +77,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-PCIe-Bandwidth-Huawei-NIC-Types-and-PSU-Lab.html`](./04-Exercise-PCIe-Bandwidth-Huawei-NIC-Types-and-PSU-Lab.html)** (or [`04-Exercise-PCIe-Bandwidth-Huawei-NIC-Types-and-PSU-Lab.md`](./04-Exercise-PCIe-Bandwidth-Huawei-NIC-Types-and-PSU-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 File & Directory Creation, Copying, Moving & Deletion (`mkdir`, `touch`, `cp`, `mv`, `rm`)
+# File & Directory Creation, Copying, Moving & Deletion (`mkdir`, `touch`, `cp`, `mv`, `rm`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Create single, multiple, and nested parent directories with `mkdir [-p] [-v]` and manage file timestamps with `touch [-a|-m|-t|-d]`
 - Copy files and directories while preserving attributes or creating links with `cp [-a|-p|-r|-l|-s|-i]`
 - Move/rename files with `mv [-b|-f|-i|-u]` and safely remove files/directories with `rm [-r|-f|-i|-v]`
@@ -56,12 +56,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **mkdir -p automatically creates missing parent directories and reports no error if the target directory already exists.**
 - **cp -a preserves all attributes, symlinks, and special device files; cp -p preserves mode, ownership, and timestamps; cp -s creates a symbolic link.**
 - **In mv and rm, the shell aliases include -i by default; if both -i and -f are passed on the command line, the rightmost option takes effect.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: To copy or delete a directory, you MUST include '-r' (or '-a' for cp). Running 'cp dir1 dir2' or 'rm dir1' without '-r' fails!
 
@@ -70,5 +70,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-File-Lifecycle-Operations-Lab.html`](./06-Exercise-File-Lifecycle-Operations-Lab.html)** (or [`06-Exercise-File-Lifecycle-Operations-Lab.md`](./06-Exercise-File-Lifecycle-Operations-Lab.md)) to apply this concept in an interactive lab workbench!

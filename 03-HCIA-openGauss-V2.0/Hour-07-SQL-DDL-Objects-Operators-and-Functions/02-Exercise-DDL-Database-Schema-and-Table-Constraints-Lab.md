@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Creating Databases with `template0`, Schemas with Sub-Commands & Table Constraints
+# Hands-On Lab: Creating Databases with `template0`, Schemas with Sub-Commands & Table Constraints
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 1 of 4)  
@@ -7,14 +7,14 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Create database `music` owned by `jim` using `template0`, create a schema for `role1` with an embedded `CREATE TABLE`, and add `CHECK` and `UNIQUE` constraints to `bank_card`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Create database `music` owned by `jim` using `CREATE DATABASE music OWNER jim TEMPLATE template0;` and set its connection limit to 30 (`ALTER DATABASE music WITH CONNECTION LIMIT 30;`).
 2. Step 2: Add a `CHECK(b_c_id > 0)` constraint `ck_bank_card` and a `UNIQUE(full_masks)` constraint `uk_bank_card` to `bank_card` using `ALTER TABLE`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Create database music using template0 and limit connections to 30
 CREATE DATABASE music OWNER jim TEMPLATE ____;
@@ -26,7 +26,7 @@ ALTER TABLE bank_card ADD CONSTRAINT uk_bank_card ____(full_masks);
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `TEMPLATE template0` when creating a database that may customize encoding/locale.
 - Use `WITH CONNECTION LIMIT 30` in `ALTER DATABASE`.
@@ -35,7 +35,7 @@ ALTER TABLE bank_card ADD CONSTRAINT uk_bank_card ____(full_masks);
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -57,7 +57,7 @@ ALTER TABLE
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **(Official Ch.05 Quiz p. 446 Q2) SQL integrates data query, data manipulation, data definition, and data control. Which of the following functions is implemented by the `CREATE`, `DROP`, and `ALTER` statements?**
@@ -68,7 +68,7 @@ ALTER TABLE
 - D. Data control
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Chapter 05 (p. 408 & p. 446), `CREATE`, `DROP`, and `ALTER` are Data Definition Language (DDL) statements used to define, modify, and remove database objects.
@@ -83,7 +83,7 @@ ALTER TABLE
 - D. sys_dummy
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 05 (p. 410), the encoding format of `template1` cannot be changed. If you need to change the encoding format when creating a database, you must use `template0`.
@@ -96,7 +96,7 @@ ALTER TABLE
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.05 p. 421). Column-store tables support only `PARTIAL CLUSTER KEY` table-level constraints and do NOT support primary key and foreign key table-level constraints.

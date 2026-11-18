@@ -41,7 +41,7 @@
   // Pull latest progress from local server on load
   function initLocalServerSync() {
     if (!window.location.protocol.startsWith('http')) {
-      updateSyncUI(false, '💾 Stored locally in Browser (file:// mode)');
+      updateSyncUI(false, 'Stored locally in Browser (file:// mode)');
       return;
     }
 

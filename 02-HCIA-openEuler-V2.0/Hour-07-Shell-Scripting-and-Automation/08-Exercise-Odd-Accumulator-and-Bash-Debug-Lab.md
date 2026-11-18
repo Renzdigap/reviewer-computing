@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Odd Accumulator Script (`{1..100..2}`), `bash -x` Debugging & `$?` Exit Code Check
+# Hands-On Lab: Odd Accumulator Script (`{1..100..2}`), `bash -x` Debugging & `$?` Exit Code Check
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 07 — Shell Scripting, Variables, Control Flow & Automation (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Implement the official Odd Accumulator script (`adder.sh`) from Ch.06 (p.361) using `for i in {1..100..2}` and `let "sum+=i"`, run it in debug trace mode using `bash -x adder.sh`, and print the exit status code using `echo $?`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Complete the `for i in {1..100..2}` loop and accumulate odd numbers using `let "sum+=i"`.
 2. Step 2: Execute `adder.sh` in Bash debugging mode using `bash -x adder.sh`.
 3. Step 3: Print the exit status code of the last executed command using `echo $?`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 #!/bin/bash
 # Step 1: Odd Accumulator from 1 to 100
@@ -34,7 +34,7 @@ echo "sum=$sum"
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `{1..100..2}` for odd numbers from 1 to 100 (Ch.06 p.361).
 - Use `bash -x adder.sh` to run in debug mode (Ch.06 p.371).
@@ -43,7 +43,7 @@ echo "sum=$sum"
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -77,7 +77,7 @@ sum=2500
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In a Bash loop, what is the difference between the `break` statement and the `continue` statement?**
@@ -88,7 +88,7 @@ sum=2500
 - D. Both `break` and `continue` terminate the shell process.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.06 (pp.363–364), `break` is used to interrupt and exit the entire loop when a condition is met, whereas `continue` is used to skip the current loop round and enter the next round.
@@ -103,7 +103,7 @@ sum=2500
 - D. `-e` and `$!`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.06 (pp.370–372), adding `-x` (`#!/bin/bash -x` or `bash -x script.sh`) activates debugging mode, and `echo $?` retrieves the exit status code of the previous command.
@@ -118,7 +118,7 @@ sum=2500
 - D. `until (( i > 100 )); do ... done` (until loop that exits when `i > 100`)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.06 (pp.360–366), all four loop syntaxes are official examples in the Huawei HCIA-openEuler V2.0 training material.

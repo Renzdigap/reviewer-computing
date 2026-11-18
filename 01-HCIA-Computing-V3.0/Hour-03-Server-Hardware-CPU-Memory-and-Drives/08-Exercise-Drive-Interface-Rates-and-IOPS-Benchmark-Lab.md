@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Storage Interface Rate & IOPS Performance Analyzer
+# Hands-On Lab: Storage Interface Rate & IOPS Performance Analyzer
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Complete the storage benchmark script comparing SATA 3.0, SAS 3.0, and NVMe SSD interface rates, form factors, and 4 KB random write IOPS.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `sata_3_rate_gbps` to `6` and `sas_3_rate_gbps` to `12`.
 2. Set `lff_inches` to `3.5` and `sff_inches` to `2.5`.
 3. Set `nvme_4k_write_iops` to `'300K'` and `nvme_seq_read_mbps` to `3500`.
 
-### 📝 Starter Workspace (`python3@taishan-storage:~$`)
+### Starter Workspace (`python3@taishan-storage:~$`)
 ```bash
 # Drive Interface & Benchmark Verification
 interface_rates = {
@@ -34,7 +34,7 @@ print(interface_rates, form_factors, nvme_4k_write_iops, nvme_seq_read_mbps)
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - SATA 3.0 is 6 Gbit/s; SAS 3.0 is 12 Gbit/s.
 - LFF is 3.5-inch, SFF is 2.5-inch; NVMe SSD reaches 300K 4KB random write IOPS and 3500 MB/s 128KB sequential read bandwidth.
@@ -42,7 +42,7 @@ print(interface_rates, form_factors, nvme_4k_write_iops, nvme_seq_read_mbps)
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ print(interface_rates, form_factors, nvme_4k_write_iops, nvme_seq_read_mbps)
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What are the maximum transmission rates of SAS 3.0 and SATA 3.0 interfaces, respectively?**
@@ -82,7 +82,7 @@ print(interface_rates, form_factors, nvme_4k_write_iops, nvme_seq_read_mbps)
 - D. SAS 3.0 = 6 Gbit/s; SATA 3.0 = 6 Gbit/s
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 p.155, SAS 1.0/2.0/3.0 rates are 3 / 6 / 12 Gbit/s, while SATA 1.0/2.0/3.0 rates are 1.5 / 3 / 6 Gbit/s.
@@ -97,7 +97,7 @@ print(interface_rates, form_factors, nvme_4k_write_iops, nvme_seq_read_mbps)
 - D. There is no physical difference between SATA and SAS drive connectors.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** According to Ch.03 p.155, a SATA interface has a physical gap between its two connector segments, while a SAS interface does not have a gap and features an edge connector on its back.
@@ -112,7 +112,7 @@ print(interface_rates, form_factors, nvme_4k_write_iops, nvme_seq_read_mbps)
 - D. Rotational speed (RPM) is a key performance indicator for both HDDs and NVMe SSDs.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are true (Ch.03, pp. 156–157). D is false because SSDs have no platters, so rotational speed applies to HDDs only (Ch.03, p.158).

@@ -1,4 +1,4 @@
-# 📖 High Security Part 1 — Fully-Encrypted Database & Dynamic Data Masking
+# High Security Part 1 — Fully-Encrypted Database & Dynamic Data Masking
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain the 3-layer key hierarchy (Root Key, CMK, CEK) and workflow of Fully-Encrypted Equality Queries
 - Create Resource Labels (`CREATE RESOURCE LABEL`) and Dynamic Data Masking Policies (`CREATE MASKING POLICY`)
 - Compare all 7 preset masking functions (`creditcardmasking`, `basicemailmasking`, `fullemailmasking`, `alldigitsmasking`, `shufflemasking`, `randommasking`, `maskall`) and their constraints
@@ -59,12 +59,12 @@ CREATE MASKING POLICY msk_name randommasking ON LABEL(label_for_name)
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **In a Fully-Encrypted Database, the Client Master Key (CMK) encrypts the Column Encryption Key (CEK), and the client driver encrypts/decrypts data so the server only ever sees ciphertext.**
 - **Dynamic Data Masking uses Resource Labels (`CREATE RESOURCE LABEL ... ADD COLUMN(...)`) and Masking Policies (`CREATE MASKING POLICY ... ON LABEL(...)`) and supports 7 preset functions.**
 - **`basicemailmasking` masks only before `@` (`xxxx@gmail.com`), whereas `fullemailmasking` masks everything before the last domain dot except `@` (`xxxx@xxxxx.com`).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Dynamic Data Masking can only be created by a user with `POLADMIN`, `SYSADMIN`, or initial user privileges, supports at most 98 policies, and only masks `SELECT` queries on base table columns.
 
@@ -73,5 +73,5 @@ CREATE MASKING POLICY msk_name randommasking ON LABEL(label_for_name)
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Resource-Labels-and-Dynamic-Masking-Lab.html`](./02-Exercise-Resource-Labels-and-Dynamic-Masking-Lab.html)** (or [`02-Exercise-Resource-Labels-and-Dynamic-Masking-Lab.md`](./02-Exercise-Resource-Labels-and-Dynamic-Masking-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 openGauss Technical Specifications, APIs (`ODBC`/`JDBC`) & SQL Hints
+# openGauss Technical Specifications, APIs (`ODBC`/`JDBC`) & SQL Hints
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 01 — openGauss Overview & Database Fundamentals (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Identify the 4 categories of execution engine plan nodes (Scan, Control, Materialize, Join)
 - Memorize official openGauss technical specifications (32 TB table size, 1 GB row/field, 10,000 connections, partition limits)
 - Configure standard SQL, ODBC 3.5, JDBC 4.0 (JDK 1.8), libpq/ECPG APIs, WAL/Checkpoint transaction durability, and SQL Plan Hints
@@ -54,12 +54,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openGauss supports up to 32 TB per table, 1 GB per row/field, 10,000 concurrent connections, 32,768 range partitions, and 64 hash/list partitions.**
 - **The default transaction isolation level in openGauss is READ COMMITTED, and durability is enforced via Write-Ahead Logging (WAL).**
 - **openGauss supports ODBC 3.5, JDBC 4.0 (requires JDK 1.8, no JDBC-ODBC bridge), libpq, and ECPG.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Range partitioning supports up to 32,768 partitions per table, whereas Hash and List partitioning support up to 64 partitions (Ch.01 p. 57).
 
@@ -68,5 +68,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Specs-JDBC-ODBC-and-Plan-Hints-Lab.html`](./08-Exercise-Specs-JDBC-ODBC-and-Plan-Hints-Lab.html)** (or [`08-Exercise-Specs-JDBC-ODBC-and-Plan-Hints-Lab.md`](./08-Exercise-Specs-JDBC-ODBC-and-Plan-Hints-Lab.md)) to apply this concept in an interactive lab workbench!

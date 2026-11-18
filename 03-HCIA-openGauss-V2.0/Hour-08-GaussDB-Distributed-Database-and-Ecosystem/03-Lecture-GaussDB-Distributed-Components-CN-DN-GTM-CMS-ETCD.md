@@ -1,4 +1,4 @@
-# 📖 GaussDB Distributed Components — CN, DN, GTM, CMS & ETCD
+# GaussDB Distributed Components — CN, DN, GTM, CMS & ETCD
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Memorize the exact role of every GaussDB distributed component: CN, DN, GTM, CM/CMS/CMA, OM/OMA, ETCD, WLM, GDS Loader, and Storage (Ch.06 Quiz Q1: D!)
 - Trace the 5-step distributed parallel SQL execution flow across CNs and DNs
 - Distinguish the 3 inter-DN data stream operators (`Broadcast`, `Gather`, `Redistribution`)
@@ -50,12 +50,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **In GaussDB's distributed architecture, `ETCD` is used for sharing configurations and service discovery (service registration and search) — exact Ch.06 Quiz Q1: D!**
 - **`CN` parses SQL, generates distributed plans, dispatches tasks to DNs, and aggregates final results; `DN` stores data and executes query fragments; `GTM` manages global transaction IDs, snapshots, timestamps, and sequences.**
 - **GaussDB provides three Stream operators to exchange data among DNs: `Broadcast`, `Gather`, and `Redistribution`.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.06 Quiz Q1): 'In the GaussDB distributed architecture, which component is used for sharing configuration and service discovery (service registration and search)?' -> D. `ETCD`! Do not confuse `ETCD` with `GTM` (global transaction info) or `CM` (cluster status monitoring).
 
@@ -64,5 +64,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Distributed-Query-Flow-and-Components-Lab.html`](./04-Exercise-Distributed-Query-Flow-and-Components-Lab.html)** (or [`04-Exercise-Distributed-Query-Flow-and-Components-Lab.md`](./04-Exercise-Distributed-Query-Flow-and-Components-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Process Management (`ps`, `top`, `nice`, `kill`) & Scheduled Tasks (`at`, `crontab`)
+# Process Management (`ps`, `top`, `nice`, `kill`) & Scheduled Tasks (`at`, `crontab`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain the 5 Linux process memory segments, Copy-on-Write (`fork`/`exec`/`exit`/`wait`) lifecycle, and 5 kernel process states
 - Monitor and control processes with `ps`, `top` (dynamically checks host resource usage — Ch.04 Quiz!), `nice`/`renice` (`PRI` vs. `NI`), `&`/`jobs`/`fg`/`bg`, and `kill`/`killall` signals
 - Schedule one-time tasks with `at` (`atq`, `atrm`) and recurring periodic tasks with `crontab` (5-field syntax `min hour dom month dow`)
@@ -52,12 +52,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **top dynamically checks host resource usage in real time (Ch.04 Quiz Q1), whereas ps lists a static snapshot.**
 - **PRI(new) = PRI(old) + nice, where nice ranges from -20 (highest priority, root only) to 19 (lowest priority); kill sends signal 15 (TERM) by default, while signal 9 (KILL) forces unconditional termination.**
 - **at schedules one-time tasks (atq lists, atrm deletes, Ctrl+D ends interactive input); crontab (-e/-l/-r/-u) schedules periodic tasks using 'minute hour day-of-month month-of-year day-of-week command'.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Official Ch.04 Quiz Q1): 'Which of the following commands can be used to dynamically check the host resource usage?' -> B. top (ps, free, and lscpu are static snapshots)!
 
@@ -66,5 +66,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Top-Nice-Kill-At-and-Crontab-Lab.html`](./08-Exercise-Top-Nice-Kill-At-and-Crontab-Lab.html)** (or [`08-Exercise-Top-Nice-Kill-At-and-Crontab-Lab.md`](./08-Exercise-Top-Nice-Kill-At-and-Crontab-Lab.md)) to apply this concept in an interactive lab workbench!

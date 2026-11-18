@@ -1,4 +1,4 @@
-# 📖 openGauss Positioning, Evolution & Differences from PostgreSQL
+# openGauss Positioning, Evolution & Differences from PostgreSQL
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 01 — openGauss Overview & Database Fundamentals (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Trace openGauss's evolution from internal incubation (2001) to open-source release (June 30, 2020) under Mulan PSL v2
 - Explain the 4 core value pillars of openGauss: High Performance, High Availability, High Security, and Easy O&M
 - Contrast openGauss and PostgreSQL across process/thread model, concurrency control, checkpoints, NUMA, and storage engines
@@ -46,12 +46,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openGauss uses a single-process multi-threaded architecture (`gaussdb`), whereas PostgreSQL uses a multi-process architecture.**
 - **openGauss uses 64-bit transaction IDs with Commit Sequence Numbers (CSNs) and incremental checkpoints (< 5% fluctuation), solving PostgreSQL's 32-bit XID wraparound and full checkpoint (> 15% fluctuation) bottlenecks.**
 - **openGauss officially went open source on June 30, 2020 under the Mulan PSL v2 license.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: PostgreSQL supports only row-store natively, whereas openGauss supports Row-store, Column-store, and Memory-Optimized Table (MOT) engines.
 
@@ -60,5 +60,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-openGauss-vs-PostgreSQL-Architecture-Lab.html`](./06-Exercise-openGauss-vs-PostgreSQL-Architecture-Lab.html)** (or [`06-Exercise-openGauss-vs-PostgreSQL-Architecture-Lab.md`](./06-Exercise-openGauss-vs-PostgreSQL-Architecture-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 DDL for Views & Sequences
+# DDL for Views & Sequences
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Create, replace, and drop Views (`CREATE OR REPLACE [TEMP] VIEW`, `DROP VIEW ... CASCADE | RESTRICT`)
 - Create, modify, and drop Sequences (`CREATE/ALTER/DROP SEQUENCE`, `nextval()`, `CACHE`, `CYCLE`, `OWNED BY`)
 - Master the default `MINVALUE`/`MAXVALUE`/`START WITH` rules for ascending vs. descending sequences (Ch.05 p. 447 Quiz Q3: BD!)
@@ -63,12 +63,12 @@ This table is **one of the highest-yield exam topics in HCIA-openGauss V2.0**:
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **For an ascending sequence (`INCREMENT > 0`), default `MINVALUE = 1`, default `MAXVALUE = 2^63 - 1`, and default `START WITH = minvalue`.**
 - **For a descending sequence (`INCREMENT < 0`), default `MINVALUE = -2^63 - 1`, default `MAXVALUE = -1`, and default `START WITH = maxvalue`.**
 - **Therefore, for a decremental sequence starting at 400 down to 100 with step -4, you MUST specify `MAXVALUE 400` (`START WITH 400` is optional because it defaults to `MAXVALUE 400`) — making both B and D correct in Ch.05 p. 447 Quiz Q3!**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 p. 447 Quiz Q3): Why does `CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 INCREMENT BY -4 CYCLE;` (Option C) FAIL with an error? Because for a negative increment, default `MAXVALUE` is `-1`, and `START (400)` cannot be greater than `MAXVALUE (-1)`! Both B and D are the official correct answers (`BD`).
 
@@ -77,5 +77,5 @@ This table is **one of the highest-yield exam topics in HCIA-openGauss V2.0**:
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-Views-and-Decremental-Sequences-Lab.html`](./06-Exercise-Views-and-Decremental-Sequences-Lab.html)** (or [`06-Exercise-Views-and-Decremental-Sequences-Lab.md`](./06-Exercise-Views-and-Decremental-Sequences-Lab.md)) to apply this concept in an interactive lab workbench!

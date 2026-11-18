@@ -1,4 +1,4 @@
-# 📖 Local O&M (SmartKit) & Remote O&M (eService / Call Home)
+# Local O&M (SmartKit) & Remote O&M (eService / Call Home)
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master SmartKit's features (50 parallel tasks, plugin-based, white-box customizable), 4-step local O&M process, and 6 O&M scenarios
 - Understand SmartKit IP/IES config (link-local L2 restriction), 2 OS deployment channels, Atlas CANN deployment, Burn-in test (V5/TS200 via SP vs. V3 via FTK.iso), and In-band vs. Out-of-band firmware upgrade
 - Master eService Remote O&M functions (Remote Inspection, Log Collection, Fault Diagnosis FMA, Health Evaluation, Call Home) and solve Ch.06 Quiz Q1!
@@ -61,14 +61,14 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **SmartKit runs on engineers' laptops, processes up to 50 parallel tasks, and covers 6 scenarios: Device Management, Site Deployment Delivery, Routine Maintenance, Troubleshooting, Upgrade/Patch Installation, and Parts Replacement (Electronic label modification).**
 - **SmartKit OS deployment uses the management network via two channels: (1) Onboard Smart Provisioning (deploys OS + driver simultaneously) or (2) Direct image mounting (faster, independent of SP, install driver after OS).**
 - **SmartKit Burn-in Test stress-tests CPU, memory, and disk: V5/TaiShan 200 uses Smart Provisioning, whereas V3 mounts FTK.iso.**
 - **Out-of-band firmware includes iBMC, BIOS, and Smart Provisioning; In-band firmware includes PCIe card firmware and drive firmware.**
 - **To configure RAID on bare-metal TaiShan 200 2280 servers, you can use Smart Provisioning, SmartKit, or iBMC (ABC) — NOT eService (Ch.06 Quiz Q1)!**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.06 Quiz Q1): eService is a remote O&M platform (Remote Inspection, Log Collection, Fault Diagnosis, Health Evaluation, Call Home automatic trouble ticket creation) — it CANNOT configure RAID or install OSs on bare-metal servers! Only Smart Provisioning (A), SmartKit (B), and iBMC (C) can configure RAID.
 
@@ -77,5 +77,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab.html`](./08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab.html)** (or [`08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab.md`](./08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab.md)) to apply this concept in an interactive lab workbench!

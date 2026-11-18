@@ -361,20 +361,20 @@ p { margin-bottom: 10px; }
 <body>
   <div class="app-topbar">
     <div style="display:flex;align-items:center;gap:10px;">
-      <a href="../index.html" class="nav-btn">🏠 Master Hub</a>
+      <a href="../index.html" class="nav-btn">Master Hub</a>
       <strong style="font-size:14.5px;color:#fff;">HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</strong>
       <span style="font-size:12px;color:var(--text-muted);">9-Hour Daily Lock-In Curriculum (8h Bite-Sized Units + 1h Final Mock Exam)</span>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
       <span id="overall-progress" class="progress-pill">0 / 64 Units Completed</span>
-      <button class="nav-btn" onclick="HuaweiSync.exportJSON()">📥 Export</button>
+      <button class="nav-btn" onclick="HuaweiSync.exportJSON()">Export</button>
       <label class="nav-btn" style="cursor:pointer;display:inline-block;">
-        📤 Import
-        <input type="file" accept=".json" style="display:none;" onchange="if(this.files[0]) HuaweiSync.importJSON(this.files[0], (ok, c) => alert(ok ? '✅ Imported ' + c + ' records!' : '❌ Error: ' + c))">
+        Import
+        <input type="file" accept=".json" style="display:none;" onchange="if(this.files[0]) HuaweiSync.importJSON(this.files[0], (ok, c) => alert(ok ? '[PASS] Imported ' + c + ' records!' : '[FAIL] Error: ' + c))">
       </label>
       <button class="nav-btn" onclick="stepNav(-1)">← Prev</button>
       <button class="nav-btn" onclick="stepNav(1)">Next →</button>
-      <a href="./Hour-09-Final-Mock-Exam/Final-Mock-Exam.html" style="background:var(--huawei-red);color:#fff;padding:6px 12px;border-radius:6px;font-size:12.5px;font-weight:700;text-decoration:none;">🏆 Hour 09 Mock Exam</a>
+      <a href="./Hour-09-Final-Mock-Exam/Final-Mock-Exam.html" style="background:var(--huawei-red);color:#fff;padding:6px 12px;border-radius:6px;font-size:12.5px;font-weight:700;text-decoration:none;">Hour 09 Mock Exam</a>
     </div>
   </div>
 
@@ -427,7 +427,7 @@ p { margin-bottom: 10px; }
           mode: 'lecture',
           hour: h,
           sprint: s,
-          label: `${numLec} 📖 ${s.lecture.title}`,
+          label: `${numLec} ${s.lecture.title}`,
           fileRel: `./${h.folder_name}/${s.lecture_slug}.html`
         });
         UNITS.push({
@@ -435,7 +435,7 @@ p { margin-bottom: 10px; }
           mode: 'exercise',
           hour: h,
           sprint: s,
-          label: `${numEx} 💻 ${s.exercise.title}`,
+          label: `${numEx} ${s.exercise.title}`,
           fileRel: `./${h.folder_name}/${s.exercise_slug}.html`
         });
       });
@@ -482,7 +482,7 @@ p { margin-bottom: 10px; }
       }).join('') + `
         <div class="hour-group" style="border-color:var(--huawei-red);">
           <div class="hour-header" style="background:rgba(225,29,72,0.22);" onclick="window.location.href='./${PILLAR.mock_exam.folder_name}/Final-Mock-Exam.html'">
-            <span>🏆 Hour 09: Final Mock Exam (60m)</span>
+            <span>Hour 09: Final Mock Exam (60m)</span>
             <span>→</span>
           </div>
         </div>
@@ -500,29 +500,29 @@ p { margin-bottom: 10px; }
         const lec = u.sprint.lecture;
         const objs = (lec.objectives || []).map(o => `<li>${fmtText(o)}</li>`).join('');
         const kts = (lec.key_takeaways || []).map(k => `<li><strong>${fmtText(k)}</strong></li>`).join('');
-        const traps = (lec.exam_traps || []).map(t => `<div class="trap-item">⚠️ ${fmtText(t)}</div>`).join('');
+        const traps = (lec.exam_traps || []).map(t => `<div class="trap-item">${fmtText(t)}</div>`).join('');
         stage.innerHTML = `
           <div class="lecture-stage">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
               <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (${lec.duration_mins} MINS)</span>
-                <span class="badge badge-ref">📄 ${escHtml(PILLAR.pdf_source)} • ${escHtml(lec.pdf_ref)}</span>
+                <span class="badge badge-lecture">BITE-SIZED LECTURE (${lec.duration_mins} MINS)</span>
+                <span class="badge badge-ref">${escHtml(PILLAR.pdf_source)} • ${escHtml(lec.pdf_ref)}</span>
                 <span class="badge badge-hour">Hour 0${u.hour.hour_number} • Sprint ${u.sprint.sprint_number}/4</span>
               </div>
               <a href="${u.fileRel}" style="font-size:12px;">Open Standalone File ↗</a>
             </div>
             <h1 style="font-size:1.6rem;margin-bottom:14px;">${fmtText(lec.title)}</h1>
             <div class="objectives-card">
-              <h3>🎯 Learning Objectives</h3>
+              <h3>Learning Objectives</h3>
               <ul class="md-list">${objs}</ul>
             </div>
             <div>${lec.content_html || ''}</div>
             <div class="takeaways-card">
-              <h3>🔑 Key Takeaways</h3>
+              <h3>Key Takeaways</h3>
               <ul class="md-list">${kts}</ul>
             </div>
             <div class="traps-card">
-              <h3>🚨 Huawei National Stage Exam Traps</h3>
+              <h3>Huawei National Stage Exam Traps</h3>
               ${traps}
             </div>
             <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.35);border-radius:10px;">
@@ -531,7 +531,7 @@ p { margin-bottom: 10px; }
                 <div style="font-weight:700;">Proceed immediately to the paired interactive lab exercise!</div>
               </div>
               <button class="btn-primary" onclick="markDone('${u.uid}'); stepNav(1);">
-                ✓ Complete Lecture & Start Hands-On Exercise →
+                Complete Lecture & Start Hands-On Exercise →
               </button>
             </div>
           </div>
@@ -562,29 +562,29 @@ p { margin-bottom: 10px; }
             <div class="dc-left">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                  <span class="badge badge-exercise">💻 HANDS-ON EXERCISE (${ex.duration_mins} MINS)</span>
+                  <span class="badge badge-exercise">HANDS-ON EXERCISE (${ex.duration_mins} MINS)</span>
                   <span class="badge badge-hour">Hour 0${u.hour.hour_number} • Sprint ${u.sprint.sprint_number}/4</span>
                 </div>
                 <a href="${u.fileRel}" style="font-size:12px;">Standalone View ↗</a>
               </div>
               <h1 style="font-size:1.35rem;">${fmtText(ex.title)}</h1>
               <div class="scenario-box">
-                <div style="font-size:11px;font-weight:700;color:#38bdf8;margin-bottom:4px;">🛠️ PRACTICAL SCENARIO</div>
+                <div style="font-size:11px;font-weight:700;color:#38bdf8;margin-bottom:4px;">PRACTICAL SCENARIO</div>
                 <div>${fmtText(ex.scenario || '')}</div>
               </div>
               <div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:16px;">
-                <h3>📋 Step-by-Step Instructions</h3>
+                <h3>Step-by-Step Instructions</h3>
                 <ul class="inst-list">${insts}</ul>
                 <div style="display:flex;gap:8px;margin-top:8px;">
-                  <button class="nav-btn" onclick="spaToggleHint()">💡 Show Hint</button>
-                  <button class="nav-btn" onclick="spaShowSolution()">🔑 Show Solution</button>
+                  <button class="nav-btn" onclick="spaToggleHint()">Show Hint</button>
+                  <button class="nav-btn" onclick="spaShowSolution()">Show Solution</button>
                 </div>
                 <div id="spa-hint-box" style="display:none;margin-top:10px;padding:10px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.4);border-radius:6px;font-size:12.5px;color:#fde68a;"></div>
               </div>
               <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
-                <h3>🎯 National Stage Exam Verification Drill</h3>
+                <h3>National Stage Exam Verification Drill</h3>
                 ${qsHtml}
-                <button class="btn-primary" style="width:100%;background:var(--blue);" onclick="spaGradeQuiz()">✔ Verify Exam Drill Answers</button>
+                <button class="btn-primary" style="width:100%;background:var(--blue);" onclick="spaGradeQuiz()">Verify Exam Drill Answers</button>
                 <div id="spa-quiz-result" style="margin-top:10px;"></div>
               </div>
             </div>
@@ -668,18 +668,18 @@ p { margin-bottom: 10px; }
         const li = document.getElementById(`spa-inst-${i}`);
         if (ok) {
           if (li) li.classList.add('passed');
-          logs.push(`✅ Step ${i+1} PASS: ${chk.description}`);
+          logs.push(`[PASS] Step ${i+1} : ${chk.description}`);
         } else {
           if (li) li.classList.remove('passed');
           allPass = false;
-          logs.push(`❌ Step ${i+1} FAIL: ${chk.description}\n   ↳ ${chk.feedback_fail}`);
+          logs.push(`[FAIL] Step ${i+1} : ${chk.description}\n   ↳ ${chk.feedback_fail}`);
         }
       });
 
       const st = document.getElementById('spa-status');
       if (allPass) {
         st.style.color = '#34d399';
-        st.textContent = '✓ All Steps Passed!';
+        st.textContent = 'All Steps Passed!';
         logs.push('\n--- SIMULATED OUTPUT ---');
         logs.push(ex.simulated_output || 'Execution succeeded.');
         markDone(u.uid);
@@ -704,11 +704,11 @@ p { margin-bottom: 10px; }
           corr++;
           exp.style.background = 'rgba(16,185,129,0.15)';
           exp.style.border = '1px solid rgba(16,185,129,0.4)';
-          exp.innerHTML = `✅ <strong>Correct (${ans})!</strong> ${fmtText(q.explanation || '')}`;
+          exp.innerHTML = `<strong>[CORRECT] (${ans})!</strong> ${fmtText(q.explanation || '')}`;
         } else {
           exp.style.background = 'rgba(225,29,72,0.15)';
           exp.style.border = '1px solid rgba(225,29,72,0.4)';
-          exp.innerHTML = `❌ <strong>Your answer: ${sel || 'None'} | Official: ${ans}</strong><br/>${fmtText(q.explanation || '')}`;
+          exp.innerHTML = `<strong>[INCORRECT] Your answer: ${sel || 'None'} | Official: ${ans}</strong><br/>${fmtText(q.explanation || '')}`;
         }
       });
       const res = document.getElementById('spa-quiz-result');

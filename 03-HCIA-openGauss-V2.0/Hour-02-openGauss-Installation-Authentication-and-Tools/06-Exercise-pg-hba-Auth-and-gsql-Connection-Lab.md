@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Configuring `pg_hba.conf` via `gs_guc` and Connecting with `gsql`
+# Hands-On Lab: Configuring `pg_hba.conf` via `gs_guc` and Connecting with `gsql`
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You need to allow remote client `10.252.95.191/32` to connect to all databases as user `testuser` using `sha256` authentication without restarting the database, then connect to the default `postgres` database on port `8000` using `gsql`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Check detailed cluster node status and data directory using `gs_om -t status --detail`.
 2. Step 2: Use `gs_guc reload -N all -I all -h "host all testuser 10.252.95.191/32 sha256"` to add and immediately reload the client authentication rule.
 3. Step 3: Connect to the `postgres` database on port `8000` using `gsql -d postgres -p 8000`.
 
-### 📝 Starter Workspace (`omm@opengauss:~$`)
+### Starter Workspace (`omm@opengauss:~$`)
 ```bash
 # Step 1: Query detailed cluster instance status
 gs_om -t status ____
@@ -28,7 +28,7 @@ ____ -d postgres -p 8000
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `--detail` with `gs_om -t status` to display the node IP and instance data directory.
 - Use `gs_guc reload` (instead of `set`) so semaphores are sent to reload `pg_hba.conf` immediately, and specify `sha256`.
@@ -37,7 +37,7 @@ ____ -d postgres -p 8000
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -65,7 +65,7 @@ postgres=#
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What is the difference between `gs_guc set` and `gs_guc reload` when modifying openGauss parameters?**
@@ -76,7 +76,7 @@ postgres=#
 - D. `set` restarts the database cluster automatically, while `reload` stops the cluster
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 02 (p. 96), `set` modifies only parameters in the configuration file, whereas `reload` modifies the parameters in the configuration file and sends semaphores to the database process for reloading the configuration file.
@@ -91,7 +91,7 @@ postgres=#
 - D. `=#` indicates interactive mode; `=>` indicates script batch mode
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 02 (p. 98), if you log in as administrator `omm`, `DBNAME=#` is displayed; if you log in as a common user, `DBNAME=>` is displayed.
@@ -104,7 +104,7 @@ postgres=#
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.02 p. 96 & p. 118). Remote hosts are NOT allowed to access openGauss in `trust` mode for security reasons.

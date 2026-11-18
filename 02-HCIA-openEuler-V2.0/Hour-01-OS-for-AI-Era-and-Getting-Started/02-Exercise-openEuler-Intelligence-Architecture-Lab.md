@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: openEuler Intelligence Entries, RAG & Diagnostic Agents Verification
+# Hands-On Lab: openEuler Intelligence Entries, RAG & Diagnostic Agents Verification
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are deploying openEuler Intelligence for an enterprise O&M team. Complete the architecture verification manifest below to specify the two interaction entries, the three Intelligent Diagnosis agents, and the three Intelligent Container Image tiers.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Set `INTERACTION_ENTRIES` to the two official access entries supported by the openEuler intelligent platform (`web` and `intelligent shell`).
 2. Step 2: Set `DIAGNOSIS_AGENTS` to the three diagnostic agents in execution order (`Inspection`, `Demarcation`, `Detection`) and specify `TOP_ROOT_CAUSE_METRICS=3`.
 3. Step 3: Set `CONTAINER_TIERS` to include the Huawei Ascend SDK (`CANN`), framework (`PyTorch`), and LLM (`chatglm2-13b` or `llama2-7b`).
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # openEuler Intelligence Architecture Verification Manifest
 INTERACTION_ENTRIES="<entry1>, <entry2>"
@@ -25,7 +25,7 @@ CONTAINER_TIERS="SDK(CUDA/<sdk>) -> Framework(TensorFlow/<framework>) -> LLM(<mo
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Recall Ch.01 Quiz Q1: The openEuler intelligent platform supports two entries: web entry and intelligent shell entry.
 - In Intelligent Diagnosis, the Inspection Agent checks IPs/containers, the Demarcation Agent outputs the top 3 root cause metrics, and the Detection Agent profiles stack hotspots.
@@ -34,7 +34,7 @@ CONTAINER_TIERS="SDK(CUDA/<sdk>) -> Framework(TensorFlow/<framework>) -> LLM(<mo
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -56,7 +56,7 @@ CONTAINER_TIERS="SDK(CUDA/CANN) -> Framework(TensorFlow/PyTorch) -> LLM(llama2-7
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [True / False]
 **[Official Ch.01 Quiz Q1] The openEuler intelligent platform currently supports two entries: web entry and intelligent shell entry.**
@@ -65,7 +65,7 @@ CONTAINER_TIERS="SDK(CUDA/CANN) -> Framework(TensorFlow/PyTorch) -> LLM(llama2-7
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Official Ch.01 Quiz Q1 (p.20): True. openEuler Intelligence is accessible via two entries: the Web entry and the Intelligent shell entry.
@@ -80,7 +80,7 @@ CONTAINER_TIERS="SDK(CUDA/CANN) -> Framework(TensorFlow/PyTorch) -> LLM(llama2-7
 - D. Orchestration Agent
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.01 (p.15), the Inspection Agent checks for abnormalities of designated IP addresses; the Demarcation Agent analyzes and demarcates an abnormality and outputs the top 3 root cause metrics; the Detection Agent performs profiling location on the root cause metrics.
@@ -95,7 +95,7 @@ CONTAINER_TIERS="SDK(CUDA/CANN) -> Framework(TensorFlow/PyTorch) -> LLM(llama2-7
 - D. Kernel space memory paging
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.01 (pp.10–11), Corpus Governance imports corpuses into the knowledge base through fragment relationship extraction, fragment derivative construction, and OCR.

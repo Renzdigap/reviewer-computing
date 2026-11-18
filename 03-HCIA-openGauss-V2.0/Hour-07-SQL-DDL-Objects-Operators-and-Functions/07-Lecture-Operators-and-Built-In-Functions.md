@@ -1,4 +1,4 @@
-# 📖 Operators & Built-in Functions (String, Numeric, Date/Time, Pattern Matching, Geometric)
+# Operators & Built-in Functions (String, Numeric, Date/Time, Pattern Matching, Geometric)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master Logical Operators (`and`, `or`, `not` — Ch.05 Quiz Q3: ABC!) and the 3 Pattern Matching approaches (`LIKE`, `SIMILAR TO`, `POSIX regular expressions` — Ch.05 Quiz Q4: ACD!)
 - Evaluate Character Functions (`instr`, `overlay`, `insert`, `substring`, `replace`, `lpad`/`rpad`), Arithmetic Operators (`!!`, `@`, `|/`, `||/`, `^`, `&`, `#`, `~`, `<<`, `>>`) & Functions (`sin`, `round`, `bitand`, `ceil`, `floor` — Ch.05 Quiz Q2: BC!)
 - Compute Date/Time Arithmetic (`SELECT date '2021-4-28' + integer '7'` — Ch.05 Quiz Q1!), Type Conversions (`cast`, `to_char`, `to_date`, `to_number`), and Geometric Operators/Functions
@@ -59,12 +59,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The arithmetic functions in Ch.05 Quiz Q2 are `B. sin(n)` and `C. round(v numeric, s int)` (`BC`); the logical operators in Quiz Q3 are `and`, `or`, `not` (`ABC`); the 3 pattern matching approaches in Quiz Q4 are `LIKE`, `SIMILAR TO`, and `POSIX regular expressions` (`ACD`).**
 - **`instr('abcdabcdabcd', 'bcd', 2, 2)` returns `6`; `overlay('hello' placing 'world' from 2 for 3)` returns `'hworldo'`; `round(1234.5678, -2)` returns `1200`; `bitand(29, 15)` returns `13`.**
 - **`SELECT date '2021-4-28' + integer '7' AS RESULT;` adds 7 days to April 28 (30-day month) to produce May 5 (`2021-05-05` in the Ch.05 slide answer key A, or `2021-05-05 00:00:00` in openGauss A-mode runtime C).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 p. 469 Quiz Q4): 'Which three separate approaches to pattern matching are provided by a database?' -> `A. LIKE`, `C. SIMILAR TO`, `D. POSIX regular expressions` (`ACD`). `B. Same` does not exist!
 
@@ -73,5 +73,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-String-Numeric-Date-and-Geometric-Functions-Lab.html`](./08-Exercise-String-Numeric-Date-and-Geometric-Functions-Lab.html)** (or [`08-Exercise-String-Numeric-Date-and-Geometric-Functions-Lab.md`](./08-Exercise-String-Numeric-Date-and-Geometric-Functions-Lab.md)) to apply this concept in an interactive lab workbench!

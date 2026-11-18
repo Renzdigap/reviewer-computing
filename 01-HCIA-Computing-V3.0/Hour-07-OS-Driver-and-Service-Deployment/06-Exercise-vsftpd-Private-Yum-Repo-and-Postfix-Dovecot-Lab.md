@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Deploying FTP-Based Private Yum Repo & Postfix/Dovecot Mail Stack
+# Hands-On Lab: Deploying FTP-Based Private Yum Repo & Postfix/Dovecot Mail Stack
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure an FTP-based private Yum repository using `vsftpd` on openEuler 22.03 LTS and verify the Postfix (SMTP) and Dovecot (POP3/IMAP) mail server protocol bindings.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Enable and start the `vsftpd` service using `systemctl enable --now vsftpd`.
 2. Set `FTP_JAIL_TECH` to `'chroot'`, `MTA_SMTP_SERVER` to `'Postfix'`, and `MDA_POP3_IMAP_SERVER` to `'Dovecot'`.
 3. Set `HEADER_ON_DEMAND_SYNC_PROTOCOL` to `'IMAP'`.
 
-### 📝 Starter Workspace (`root@openeuler-services:~#`)
+### Starter Workspace (`root@openeuler-services:~#`)
 ```bash
 # 1. Enable and start the vsftpd service:
 systemctl enable --now ___
@@ -29,7 +29,7 @@ HEADER_ON_DEMAND_SYNC_PROTOCOL="___"
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - The FTP daemon is `vsftpd` and its directory restriction mechanism is `chroot`.
 - Postfix provides SMTP, Dovecot provides POP3 and IMAP, and IMAP fetches subjects first and synchronizes status.
@@ -37,7 +37,7 @@ HEADER_ON_DEMAND_SYNC_PROTOCOL="___"
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -61,7 +61,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/vsftpd.service -> /u
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In an FTP server (`vsftpd`), what is the restricted environment called that confines a logged-in FTP user to their home directory and prevents access to sensitive system directories like `/etc` and `/usr/local`?**
@@ -72,7 +72,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/vsftpd.service -> /u
 - D. JBOD passthrough
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 pp. 337–338, restricting an FTP user to their home directory is called a changed root, or chroot for short.
@@ -87,7 +87,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/vsftpd.service -> /u
 - D. Postfix provides SNMP; Dovecot provides Redfish
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 pp. 340 and 342, Postfix provides SMTP (for sending/relaying), while Dovecot provides POP3 and IMAP. POP3 downloads entire emails and disconnects, whereas IMAP fetches subjects first, downloads on demand, and mirrors read/delete actions on the server.
@@ -102,7 +102,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/vsftpd.service -> /u
 - D. Set automatic mounting and test the FTP service.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four options match the exact 6-step procedure on Ch.05 p.339 for deploying an FTP-based private Yum repository.

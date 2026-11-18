@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Creating Views & Ascending/Decremental Sequences (`nextval`, `OWNED BY`)
+# Hands-On Lab: Creating Views & Ascending/Decremental Sequences (`nextval`, `OWNED BY`)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Create or replace view `privilege_view`, create the official Ch.05 Quiz Q3 decremental sequence `seq_1` (starting at 400, step -4, minvalue 100, cycling), fetch its first value using `nextval('seq_1')`, and associate it with `bank_card.b_c_id`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Create or replace view `privilege_view` as `SELECT b_number, b_type FROM bank_card;`.
 2. Step 2: Create decremental sequence `seq_1` using `CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 MAXVALUE 400 INCREMENT BY -4 CYCLE;`.
 3. Step 3: Call `SELECT nextval('seq_1');` and bind the sequence using `ALTER SEQUENCE seq_1 OWNED BY bank_card.b_c_id;`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Create or replace view privilege_view
 CREATE OR ____ VIEW privilege_view AS SELECT b_number, b_type FROM bank_card;
@@ -29,7 +29,7 @@ ALTER SEQUENCE seq_1 ____ BY bank_card.b_c_id;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `CREATE OR REPLACE VIEW` to create or update a view.
 - For a decremental sequence starting at 400, you must specify `MINVALUE 100 MAXVALUE 400 INCREMENT BY -4 CYCLE`.
@@ -38,7 +38,7 @@ ALTER SEQUENCE seq_1 ____ BY bank_card.b_c_id;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -65,7 +65,7 @@ ALTER SEQUENCE
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.05 Quiz p. 447 Q3) Create a decremental sequence named `seq_1`. The starting value is 400, the step is –4, and the minimum value is 100. When the sequence reaches the minimum value, it can be cyclically executed. Which of the following statements are correct?**
@@ -76,7 +76,7 @@ ALTER SEQUENCE
 - D. CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 MAXVALUE 400 INCREMENT BY -4 CYCLE;
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `BD`
 - **Explanation:** Per Chapter 05 (p. 442 & p. 447), for a descending sequence (`INCREMENT BY -4`), the default `MAXVALUE` is `-1` and the default `START WITH` is `maxvalue`. Thus `MAXVALUE 400` is mandatory (making C fail), while `START WITH 400` defaults to `MAXVALUE 400` when omitted (making both B and D valid).
@@ -91,7 +91,7 @@ ALTER SEQUENCE
 - D. 2^63 - 1
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** Per Chapter 05 (p. 442), if `MAXVALUE` is not specified (or `NO MAXVALUE` is specified), the default value for an ascending sequence is `2^63 - 1`, and for a descending sequence is `-1`.
@@ -104,7 +104,7 @@ ALTER SEQUENCE
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True (Ch.05 p. 442 & p. 444). `OWNED BY` associates a sequence with a specified table column so that the sequence is automatically deleted when the column or table is dropped.

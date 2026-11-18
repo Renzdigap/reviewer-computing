@@ -1,4 +1,4 @@
-# 🏆 Huawei ICT Competition (Computing Track) — National Stage Study Reviewer
+# Huawei ICT Competition (Computing Track) — National Stage Study Reviewer
 
 Welcome to your **DataCamp-Style Active Learning & Exam-Ready Study Reviewer** for the **Huawei ICT Competition National Stage (Computing Track)**, built directly from the 3 official Huawei training materials in `C:\Users\RoG\Desktop\huawei`:
 
@@ -8,7 +8,7 @@ Welcome to your **DataCamp-Style Active Learning & Exam-Ready Study Reviewer** f
 
 ---
 
-## 🚀 Quick Launch & Private Local Progress Tracking
+## Quick Launch & Private Local Progress Tracking
 
 - **Interactive Web Platform via Local Server (Recommended for permanent disk storage on your PC):**
   ```powershell
@@ -17,7 +17,7 @@ Welcome to your **DataCamp-Style Active Learning & Exam-Ready Study Reviewer** f
   ```
   - **Fixed Port**: Default `http://127.0.0.1:8080` (retains browser origin across computer restarts).
   - **File-Backed Local Persistence**: Automatically persists your progress in real time to your local `progress.json` file.
-  - **🔒 Strictly Private & Local (Team-Friendly)**: `progress.json` is completely ignored by Git (`.gitignore`). When teammates clone or pull this repository, they get a fresh, clean reviewer and their progress stays 100% private on their own machine without clashing with yours.
+  - **Strictly Private & Local (Team-Friendly)**: `progress.json` is completely ignored by Git (`.gitignore`). When teammates clone or pull this repository, they get a fresh, clean reviewer and their progress stays 100% private on their own machine without clashing with yours.
   - **Export / Import Backup (.json)**: One-click download and upload buttons on the dashboard for making personal backups or migrating your progress between your own personal computers (e.g. PC to laptop).
 
 - **Direct Offline Browser Launch:** Double-click **[`index.html`](./index.html)** (or open any Pillar's `index.html`). Works 100% offline with zero external dependencies, saving to `localStorage`.
@@ -25,20 +25,20 @@ Welcome to your **DataCamp-Style Active Learning & Exam-Ready Study Reviewer** f
 
 ---
 
-## ⏱️ 3-Day × 9-Hour Daily Lock-In Curriculum Architecture
+## 3-Day × 9-Hour Daily Lock-In Curriculum Architecture
 
 Each of the 3 Pillars is engineered for an intensive **9-Hour Daily Lock-In Schedule**:
 - **Hours 01 – 08 (8 Hours of Bite-Sized Active Lessons):**
   - Each Hour is divided into **4 × 15-Minute Sprints**.
   - Each Sprint strictly alternates between:
-    1. **📖 7-Minute Bite-Sized Lecture** (`01-Lecture`, `03-Lecture`, `05-Lecture`, `07-Lecture`): High-yield theory, comparison tables, exact command/SQL syntax, and **National Stage Exam Traps**.
-    2. **💻 8-Minute Immediate Hands-On Exercise** (`02-Exercise`, `04-Exercise`, `06-Exercise`, `08-Exercise`): Split-screen interactive terminal/SQL/config workbench with automated step verification (`Ctrl+Enter`) + 3 graded Exam Verification Drill questions.
+    1. **7-Minute Bite-Sized Lecture** (`01-Lecture`, `03-Lecture`, `05-Lecture`, `07-Lecture`): High-yield theory, comparison tables, exact command/SQL syntax, and **National Stage Exam Traps**.
+    2. **8-Minute Immediate Hands-On Exercise** (`02-Exercise`, `04-Exercise`, `06-Exercise`, `08-Exercise`): Split-screen interactive terminal/SQL/config workbench with automated step verification (`Ctrl+Enter`) + 3 graded Exam Verification Drill questions.
 - **Hour 09 (1 Hour Comprehensive Final Mock Exam):**
-  - **🏆 60-Minute Timed Final Mock Exam (`Final-Mock-Exam.html`)**: 60 exam-ready questions (1000 points total: 20 Single-Choice, 20 strict Multiple-Choice, 10 True/False, and 10 Practical Command/SQL Lab Scenarios).
+  - **60-Minute Timed Final Mock Exam (`Final-Mock-Exam.html`)**: 60 exam-ready questions (1000 points total: 20 Single-Choice, 20 strict Multiple-Choice, 10 True/False, and 10 Practical Command/SQL Lab Scenarios).
 
 ---
 
-## 📂 Directory Structure Overview
+## Directory Structure Overview
 ```text
 C:\Users\RoG\Desktop\huawei\
 ├── index.html                                  # Master Study Hub & Global Search Portal

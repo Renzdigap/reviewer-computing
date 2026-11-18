@@ -272,13 +272,13 @@ p { margin-bottom: 10px; }
 <body>
   <div class="exam-header">
     <div style="display:flex;align-items:center;gap:12px;">
-      <a href="../../index.html" style="background:#1e293b;padding:6px 12px;border-radius:6px;color:#fff;font-size:12.5px;">🏠 Hub</a>
+      <a href="../../index.html" style="background:#1e293b;padding:6px 12px;border-radius:6px;color:#fff;font-size:12.5px;">Hub</a>
       <a href="../index.html" style="background:#1e293b;padding:6px 12px;border-radius:6px;color:#fff;font-size:12.5px;">← Pillar Course</a>
-      <h2 style="margin:0;border:none;font-size:1.05rem;">🏆 HCIA-openGauss V2.0 — National Stage Final Mock Exam</h2>
+      <h2 style="margin:0;border:none;font-size:1.05rem;">HCIA-openGauss V2.0 — National Stage Final Mock Exam</h2>
     </div>
     <div style="display:flex;align-items:center;gap:14px;">
       <span id="answered-counter" style="font-size:13px;color:var(--text-muted);">0 / 60 Answered</span>
-      <div id="exam-timer" class="countdown-box">⏱️ 60:00</div>
+      <div id="exam-timer" class="countdown-box">60:00</div>
     </div>
   </div>
 
@@ -296,7 +296,7 @@ p { margin-bottom: 10px; }
         <div style="margin-top:4px;color:#38bdf8;font-weight:600;">Target Score: 800 / 1000 pts</div>
       </div>
 
-      <button class="btn-submit-exam" onclick="submitExam()">🎯 Submit & Grade Mock Exam</button>
+      <button class="btn-submit-exam" onclick="submitExam()">Submit & Grade Mock Exam</button>
       <button onclick="resetExam()" style="width:100%;margin-top:8px;padding:8px;background:#1f2937;color:#9ca3af;border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px;">↺ Reset Exam</button>
     </div>
 
@@ -309,7 +309,7 @@ p { margin-bottom: 10px; }
         <button class="filter-chip" onclick="filterQuestions('multiple', this)">Multiple-Choice</button>
         <button class="filter-chip" onclick="filterQuestions('tf', this)">True / False</button>
         <button class="filter-chip" onclick="filterQuestions('lab', this)">Practical Labs</button>
-        <button class="filter-chip" onclick="filterQuestions('flagged', this)">🚩 Flagged</button>
+        <button class="filter-chip" onclick="filterQuestions('flagged', this)">Flagged</button>
       </div>
 
       <div id="questions-list"></div>
@@ -349,7 +349,7 @@ p { margin-bottom: 10px; }
       remainingSecs--;
       const m = String(Math.floor(remainingSecs / 60)).padStart(2, '0');
       const s = String(remainingSecs % 60).padStart(2, '0');
-      document.getElementById('exam-timer').textContent = `⏱️ ${m}:${s}`;
+      document.getElementById('exam-timer').textContent = `${m}:${s}`;
       if (remainingSecs === 0) submitExam();
     }, 1000);
 
@@ -385,7 +385,7 @@ p { margin-bottom: 10px; }
               ${badgeMap[q.type] || ''}
               <span style="font-size:12px;color:var(--text-muted);">${escHtml(q.chapter || '')}</span>
             </div>
-            <button id="flag-btn-${i}" class="flag-btn" onclick="toggleFlag(${i})">🚩 Flag</button>
+            <button id="flag-btn-${i}" class="flag-btn" onclick="toggleFlag(${i})">Flag</button>
           </div>
           <div style="font-size:14.5px;font-weight:600;margin-bottom:10px;color:#f3f4f6;">${fmtText(q.question)}</div>
           <div>${bodyHtml}</div>
@@ -490,12 +490,12 @@ p { margin-bottom: 10px; }
           pal.classList.add('correct');
           expEl.style.background = 'rgba(16, 185, 129, 0.14)';
           expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
-          expEl.innerHTML = `✅ <strong>Correct (+${pts} pts)</strong> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[CORRECT] (+${pts} pts)</strong> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
         } else {
           pal.classList.add('wrong');
           expEl.style.background = 'rgba(225, 29, 72, 0.14)';
           expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
-          expEl.innerHTML = `❌ <strong>0 pts</strong> | Your Answer: <code>${escHtml(userAnsDisplay)}</code> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
+          expEl.innerHTML = `<strong>[INCORRECT] (0 pts)</strong> | Your Answer: <code>${escHtml(userAnsDisplay)}</code> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
         }
       });
 
@@ -515,7 +515,7 @@ p { margin-bottom: 10px; }
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
           <div>
             <div style="font-size:12px;font-weight:700;color:${passed ? '#34d399' : '#fbbf24'};">
-              ${passed ? '🏆 NATIONAL STAGE QUALIFIER LEVEL ACHIEVED!' : '⚡ KEEP LOCKING IN — REVIEW WEAK CHAPTERS BELOW'}
+              ${passed ? 'NATIONAL STAGE QUALIFIER LEVEL ACHIEVED!' : 'REVIEW WEAK CHAPTERS BELOW'}
             </div>
             <h1 style="margin:4px 0;font-size:2rem;">Score: ${earnedPoints} / ${totalPoints} pts (${Math.round(earnedPoints/totalPoints*100)}%)</h1>
             <div style="font-size:13.5px;color:var(--text-muted);">Correct Questions: ${correctCount} / ${QS.length} • Target Score: ${MOCK.passing_points} pts</div>

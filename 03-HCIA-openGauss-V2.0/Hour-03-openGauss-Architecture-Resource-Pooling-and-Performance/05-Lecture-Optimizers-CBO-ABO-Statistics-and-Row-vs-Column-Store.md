@@ -1,4 +1,4 @@
-# 📖 Optimizers (CBO vs ABO), Statistics (`ANALYZE`) & Row-Store vs Column-Store
+# Optimizers (CBO vs ABO), Statistics (`ANALYZE`) & Row-Store vs Column-Store
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 03 — openGauss Architecture, Resource Pooling & High Performance (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Compare the Cost-Based Optimizer (CBO, v1.0.0+) and AI-Based Optimizer (ABO, v3.1.0+)
 - Collect single-column and multi-column statistics using `ANALYZE` and inspect `PG_STATISTIC` / `PG_CLASS`
 - Contrast Row-Store and Column-Store tables (`WITH (ORIENTATION = COLUMN, COMPRESSION = ...)` — Ch.04 Quiz Q3)
@@ -58,12 +58,12 @@ WITH (ORIENTATION = COLUMN, COMPRESSION = HIGH);
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **A CBO consists of three components: Query converter, Cost estimator, and Execution plan generator.**
 - **ABO (v3.1.0+) introduces Bayesian Network (`BAYESNET`) intelligent multi-column cardinality estimation (`enable_ai_stats = on`) and Adaptive Plan Selection.**
 - **Row-store (default) excels at frequent INSERT/UPDATE and point queries; Column-store (`WITH (ORIENTATION = COLUMN)`) excels at compression, projection, and OLAP statistical aggregations (Ch.04 Quiz Q3: ABC).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.04 Quiz Q3): Statement D claims 'Row-store tables are used in scenarios where there are a large number of queries for statistical analysis.' FALSE! Statistical analysis queries over massive data use Column-store tables (Answer: ABC).
 
@@ -72,5 +72,5 @@ WITH (ORIENTATION = COLUMN, COMPRESSION = HIGH);
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-ANALYZE-Statistics-and-Column-Store-Lab.html`](./06-Exercise-ANALYZE-Statistics-and-Column-Store-Lab.html)** (or [`06-Exercise-ANALYZE-Statistics-and-Column-Store-Lab.md`](./06-Exercise-ANALYZE-Statistics-and-Column-Store-Lab.md)) to apply this concept in an interactive lab workbench!

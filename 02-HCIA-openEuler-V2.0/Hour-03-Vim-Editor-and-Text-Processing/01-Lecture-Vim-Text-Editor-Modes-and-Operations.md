@@ -1,4 +1,4 @@
-# 📖 Vim Text Editor Modes, Navigation, Editing & Search/Replace
+# Vim Text Editor Modes, Navigation, Editing & Search/Replace
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Distinguish Vi vs. Vim (Bram Moolenaar, 1991) and navigate its basic modes (Normal, Insert, Visual, Select, Command-line, Ex) and derivative modes
 - Execute Vim CLI launch options (`-c`, `-R`, `-M`, `-r`, `+num`, `-`, `-t`, `-q`) and Normal-mode cursor/data commands (`gg`, `G`, `yy`, `dd`, `p`, `u`, `U`, `Ctrl+R`)
 - Perform Command-line mode operations: line numbering (`:set nu`/`nonu`), search highlighting (`:set hlsearch`), regex substitution (`:%s/old/new/gi`), and saving/exiting (`:wq`, `:q!`)
@@ -50,12 +50,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Vim starts in Normal mode by default; press 'i' or 'a' to enter Insert mode, 'R' for Replace mode, 'Ctrl+O' in Insert mode for one-shot Insert Normal mode, and 'ESC' to return to Normal mode.**
 - **In Normal mode: 'gg' = first line, 'G' = last line, 'yy' = copy line, '[n]dd' = delete n lines, 'u' = undo last change, 'U' = undo all changes on current line, 'Ctrl+R' = redo.**
 - **In Command-line mode: ':set nu' shows line numbers, ':set hlsearch' highlights matches (persisted in /etc/vimrc), and ':%s/old/new/gi' replaces globally and case-insensitively.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Distinguishing 'vim -R' vs. 'vim -M': '-R' opens a file in read-only mode but allows forcible saving (:wq!), whereas '-M' opens in read-only mode and DOES NOT allow forcible saving!
 
@@ -64,5 +64,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Vim-Navigation-Search-and-Replace-Lab.html`](./02-Exercise-Vim-Navigation-Search-and-Replace-Lab.html)** (or [`02-Exercise-Vim-Navigation-Search-and-Replace-Lab.md`](./02-Exercise-Vim-Navigation-Search-and-Replace-Lab.md)) to apply this concept in an interactive lab workbench!

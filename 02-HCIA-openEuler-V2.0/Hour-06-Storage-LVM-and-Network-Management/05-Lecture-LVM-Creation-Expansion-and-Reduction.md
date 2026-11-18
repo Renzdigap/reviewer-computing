@@ -1,4 +1,4 @@
-# 📖 Logical Volume Management (LVM) — PV, VG, LV Creation, Online Expansion & Reduction
+# Logical Volume Management (LVM) — PV, VG, LV Creation, Online Expansion & Reduction
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Define the 5 core LVM components: Physical Volume (PV), Volume Group (VG), Physical Extent (PE — default 4 MB), Logical Extent (LE), and Logical Volume (LV)
 - Create and inspect PVs, VGs, and LVs using `pvcreate`/`pvs`, `vgcreate`/`vgs`, and `lvcreate`/`lvs`
 - Execute online LV capacity expansion (`lvextend` + `resize2fs`) and safe offline LV capacity reduction (`umount` -> `e2fsck -f` -> `resize2fs` -> `lvreduce` -> `mount`)
@@ -54,12 +54,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The default Physical Extent (PE) size in LVM is 4 MB; once set during vgcreate, a VG's PE size cannot be changed, and LE size equals PE size within the same VG.**
 - **In lvcreate/lvresize, uppercase '-L' specifies capacity in bytes (K/M/G/T), whereas lowercase '-l' specifies the number of Logical Extents (LEs).**
 - **LV expansion can be done ONLINE without unmounting (vgs -> lvextend -> resize2fs), whereas LV reduction MUST be done OFFLINE in strict order: umount -> e2fsck -f -> resize2fs -> lvreduce -> mount.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Never run 'lvreduce' BEFORE 'resize2fs'! When expanding, you expand the LV first (lvextend) and the file system second (resize2fs); when reducing, you MUST unmount, check (e2fsck -f), shrink the file system first (resize2fs), and shrink the LV second (lvreduce)!
 
@@ -68,5 +68,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-LVM-PV-VG-LV-and-Resize-Lab.html`](./06-Exercise-LVM-PV-VG-LV-and-Resize-Lab.html)** (or [`06-Exercise-LVM-PV-VG-LV-and-Resize-Lab.md`](./06-Exercise-LVM-PV-VG-LV-and-Resize-Lab.md)) to apply this concept in an interactive lab workbench!

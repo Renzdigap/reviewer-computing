@@ -1,4 +1,4 @@
-# 📖 GaussDB Ecosystem Tools — UGO, DRS, DAS, CTS, CES, DBSS & Industry Cases
+# GaussDB Ecosystem Tools — UGO, DRS, DAS, CTS, CES, DBSS & Industry Cases
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Memorize all 6 core functions of UGO (Database and Application Migration UGO — exact Ch.06 Quiz Q2!)
 - Contrast DAS (Standard, Cloud DBA, Enterprise DevOps), DRS (Real-time migration, Backup migration, Real-time synchronization, Data subscription, Real-time DR), and UGO (heterogeneous schema/SQL migration)
 - Identify Huawei Cloud security/monitoring services: CTS (7-day console trace query + OBS/KMS dump), CES (resource/log monitoring), and DBSS (bypass security audit + DB firewall)
@@ -50,12 +50,12 @@ Professional tool focused on **heterogeneous database object/schema migration an
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The 6 core functions of UGO (Ch.06 Quiz Q2) are: (1) Source database profiling, (2) Destination database selection and specification recommendation, (3) Destination database compatibility analysis, (4) Migration workload evaluation, (5) Database structure migration, and (6) Application SQL migration.**
 - **UGO migrates heterogeneous database structures (schemas/objects) and application SQL, whereas DRS migrates and synchronizes the actual data (via Real-Time Migration, Backup Migration via OBS, or Real-Time Synchronization).**
 - **DAS provides web-based database management; CTS audits cloud resource operations (7-day console query + KMS-encrypted OBS dump); CES monitors system metrics/alarms; DBSS provides bypass-mode database security auditing and firewall protection.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.06 Quiz Q2): Memorize all 6 core functions of UGO verbatim: Source database profiling, Destination database selection and specification recommendation, Destination database compatibility analysis, Migration workload evaluation, Database structure migration, and Application SQL migration!
 
@@ -64,5 +64,5 @@ Professional tool focused on **heterogeneous database object/schema migration an
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-UGO-DRS-DAS-Cloud-Migration-Pipeline-Lab.html`](./08-Exercise-UGO-DRS-DAS-Cloud-Migration-Pipeline-Lab.html)** (or [`08-Exercise-UGO-DRS-DAS-Cloud-Migration-Pipeline-Lab.md`](./08-Exercise-UGO-DRS-DAS-Cloud-Migration-Pipeline-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 Persistent Storage, File Systems & Disk Partitioning (`fdisk`, `parted`, MBR vs. GPT)
+# Persistent Storage, File Systems & Disk Partitioning (`fdisk`, `parted`, MBR vs. GPT)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Identify the 3 persistent storage layers, openEuler's default file system (`ext4`), and commands to view file system/disk info (`lsblk -f`, `blkid`, `df -T`, `fdisk -l`, `df -h`)
 - Decode Linux disk and partition device names (`/dev/xxyN`) across IDE (`hd`), SCSI/SATA/SAS/SSD (`sd`), and virtio (`vd`) drives
 - Compare MBR vs. GPT partitioning limits and partition drives using `fdisk` and `parted`
@@ -45,12 +45,12 @@ In `/dev/xxyN`:
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **The default file system on openEuler is ext4; check file system types using 'lsblk -f', 'blkid', or 'df -T'.**
 - **In /dev/xxyN, partitions 1–4 are primary or extended partitions, and logical partitions ALWAYS start at 5 (so /dev/sdb6 is the 2nd logical partition on the 2nd SCSI disk).**
 - **MBR (fdisk) is limited to 2 TB and 4 primary partitions (or 3 primary + 1 extended), whereas GPT (parted) supports up to 18 EB and 128 partitions.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Even if you create only 1 primary partition (/dev/sdb1) and 1 extended partition (/dev/sdb2), the very first logical partition inside that extended partition is ALWAYS numbered 5 (/dev/sdb5), and the second logical partition is /dev/sdb6!
 
@@ -59,5 +59,5 @@ In `/dev/xxyN`:
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Fdisk-and-Parted-Partitioning-Lab.html`](./02-Exercise-Fdisk-and-Parted-Partitioning-Lab.html)** (or [`02-Exercise-Fdisk-and-Parted-Partitioning-Lab.md`](./02-Exercise-Fdisk-and-Parted-Partitioning-Lab.md)) to apply this concept in an interactive lab workbench!

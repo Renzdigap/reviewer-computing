@@ -1,4 +1,4 @@
-# 📖 High Security Part 2 — RBAC, Row-Level Security (RLS), Unified Auditing & TDE
+# High Security Part 2 — RBAC, Row-Level Security (RLS), Unified Auditing & TDE
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Explain RBAC (Who, What, How) and Separation of Duties (System, Security, and Audit Administrators)
 - Configure Row-Level Security (`ALTER TABLE ... ENABLE ROW LEVEL SECURITY`, `CREATE ROW LEVEL SECURITY POLICY`) and understand its constraints
 - Create Unified Audit Policies (`CREATE AUDIT POLICY`) and Transparent Data Encryption (TDE) tables (`AES_128_CTR` / `SM4_CTR`)
@@ -61,12 +61,12 @@ CREATE ROW LEVEL SECURITY POLICY tablename_rls ON tablename USING(role = CURRENT
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Row-Level Security (RLS) affects ONLY `SELECT`, `UPDATE`, and `DELETE` (not `INSERT` or `MERGE`), supports up to 100 policies per table, and does not affect initial users or `SYSADMIN`.**
 - **A single Unified Audit Policy (`CREATE AUDIT POLICY`) can audit either DDL (`PRIVILEGES`) or DML (`ACCESS`), but CANNOT contain both DDL and DML operations in the same policy.**
 - **TDE uses a 3-layer key hierarchy (RK -> CMK -> DEK via KMS) with `AES_128_CTR` (default) or `SM4_CTR` on heap row-store tables only.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Can a single Unified Audit Policy contain both `PRIVILEGES CREATE` (DDL) and `ACCESS SELECT` (DML)? NO! A unified audit policy applies to either DDL or DML, never both (Ch.03 p. 224).
 
@@ -75,5 +75,5 @@ CREATE ROW LEVEL SECURITY POLICY tablename_rls ON tablename USING(role = CURRENT
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-RLS-and-Unified-Audit-Policy-Lab.html`](./04-Exercise-RLS-and-Unified-Audit-Policy-Lab.html)** (or [`04-Exercise-RLS-and-Unified-Audit-Policy-Lab.md`](./04-Exercise-RLS-and-Unified-Audit-Policy-Lab.md)) to apply this concept in an interactive lab workbench!

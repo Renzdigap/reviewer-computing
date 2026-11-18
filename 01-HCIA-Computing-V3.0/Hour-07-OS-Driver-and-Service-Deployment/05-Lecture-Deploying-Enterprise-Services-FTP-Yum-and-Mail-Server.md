@@ -1,4 +1,4 @@
-# 📖 Deploying Enterprise Services on openEuler: FTP (`vsftpd`), Private Yum & Mail Server
+# Deploying Enterprise Services on openEuler: FTP (`vsftpd`), Private Yum & Mail Server
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Understand FTP user classifications (real, guest, anonymous), syslogd logging (`/var/log/`), `chroot` access restriction, and `vsftpd` security mechanisms
 - Execute the 6-step deployment of an FTP-based private Yum repository
 - Master Linux Mail Server architecture (`Postfix` SMTP + `Dovecot` POP3/IMAP), real vs. virtual users, and POP3 vs. IMAP synchronization
@@ -49,13 +49,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **FTP classifies users into real, guest, and anonymous; logs via syslogd to /var/log/; and isolates users to their home directory using chroot.**
 - **Six steps for an FTP-based private Yum repo: (1) Create local Yum repo -> (2) Install & enable FTP -> (3) Modify vsftpd config (allow anonymous, disable write) -> (4) Disable firewall & SELinux -> (5) Set automatic mounting -> (6) Test FTP.**
 - **In a Linux mail server, Postfix provides SMTP (client-to-server and server-to-server sending/relaying), while Dovecot provides POP3/IMAP (server-to-recipient client retrieval).**
 - **POP3 downloads entire emails and disconnects; IMAP fetches headers/subjects first, downloads full content on demand, and synchronizes read/delete state on the server.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: POP3/IMAP (Dovecot) is ONLY responsible for retrieving mail from the recipient's mail server to the recipient's email client; sending mail from the client and relaying between mail servers (`smtp.huawei.com` -> `smtp.gmail.com`) both use SMTP (Postfix)!
 
@@ -64,5 +64,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-vsftpd-Private-Yum-Repo-and-Postfix-Dovecot-Lab.html`](./06-Exercise-vsftpd-Private-Yum-Repo-and-Postfix-Dovecot-Lab.html)** (or [`06-Exercise-vsftpd-Private-Yum-Repo-and-Postfix-Dovecot-Lab.md`](./06-Exercise-vsftpd-Private-Yum-Repo-and-Postfix-Dovecot-Lab.md)) to apply this concept in an interactive lab workbench!

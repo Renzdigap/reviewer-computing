@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Generating a WDR Performance Report & Diagnosing Blocked Sessions
+# Hands-On Lab: Generating a WDR Performance Report & Diagnosing Blocked Sessions
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 04 — openGauss High Security, Easy O&M & AI Capabilities (DBMind) (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 A DBA notices intermittent latency spikes. Manually take a WDR snapshot, generate a WDR report between snapshot IDs 1 and 2, and query `DBE_PERF.local_active_session` to identify any blocked sessions and their `final_block_sessionid`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Call `SELECT create_wdr_snapshot();` to create a manual WDR snapshot.
 2. Step 2: Call `SELECT generate_wdr_report(1, 2, 'all', 'cluster', null);` to generate a cluster-wide WDR report between snapshots 1 and 2.
 3. Step 3: Query `SELECT sessionid, block_sessionid, final_block_sessionid FROM DBE_PERF.local_active_session;`.
 
-### 📝 Starter Workspace (`postgres=#`)
+### Starter Workspace (`postgres=#`)
 ```bash
 -- Step 1: Manually create a WDR performance snapshot
 SELECT ____();
@@ -29,7 +29,7 @@ FROM DBE_PERF.____;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - The function to manually take a WDR snapshot is `create_wdr_snapshot()`.
 - The function to generate the report is `generate_wdr_report(...)`.
@@ -38,7 +38,7 @@ FROM DBE_PERF.____;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ create_wdr_snapshot
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What are the prerequisites for generating a Workload Diagnosis Report (WDR) in openGauss?**
@@ -82,7 +82,7 @@ create_wdr_snapshot
 - D. Only a common user without `sysadmin` privileges can run `create_wdr_snapshot()`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 03 (p. 230), the prerequisites for WDR generation are that `enable_wdr_snapshot` is set to `on` (it is `off` by default) and the number of snapshots is greater than or equal to 2. Only a `sysadmin` user can manually run `create_wdr_snapshot()`.
@@ -97,7 +97,7 @@ create_wdr_snapshot
 - D. `lock_wait_timeout`; queried in `template0`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 03 (pp. 236, 238), Slow SQL diagnosis records jobs exceeding `log_min_duration_statement`, and `statement_history` (or `dbe_perf.standby_statement_history` on standby) contains data only when queried in the `postgres` database.
@@ -110,7 +110,7 @@ create_wdr_snapshot
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True (Ch.03 p. 231). `\a` toggles unaligned mode, `\t` toggles tuples-only mode (hiding column headers and row count footer), and `\o <file>` redirects query results to the server file.

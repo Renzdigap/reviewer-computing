@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Kunpeng 8-Channel Memory Bandwidth & DIMM Balance Calculator
+# Hands-On Lab: Kunpeng 8-Channel Memory Bandwidth & DIMM Balance Calculator
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Write a Python script to validate the SPD EEPROM specs, compute the theoretical peak memory bandwidth of a dual-socket Kunpeng 920 server with DDR4-2933 across 16 total channels (2 × 8 channels), and check DIMM population rules.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `spd_pins` to `8`, `spd_capacity_bytes` to `256`, and `dimm_data_width_bits` to `64`.
 2. Set `channels_per_cpu` to `8` and `total_dimm_slots_2p` to `32`.
 3. Specify `dram_storage_element` as `'capacitor'` and `sram_storage_element` as `'transistor'`.
 
-### 📝 Starter Workspace (`python3@taishan-2280:~$`)
+### Starter Workspace (`python3@taishan-2280:~$`)
 ```bash
 # TaiShan 200 (2280) Memory & SPD Validator
 spd_pins = ___
@@ -32,7 +32,7 @@ print(f"SPD: {spd_pins}-pin {spd_capacity_bytes}B | Slots: {total_dimm_slots_2p}
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - SPD is an 8-pin, 256-byte EEPROM; each DIMM has a 64-bit data bus.
 - TaiShan 200 (2280) has 8 channels per CPU and 32 DIMM slots total; DRAM uses a capacitor while SRAM uses a transistor latch.
@@ -40,7 +40,7 @@ print(f"SPD: {spd_pins}-pin {spd_capacity_bytes}B | Slots: {total_dimm_slots_2p}
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -67,7 +67,7 @@ SPD: 8-pin 256B | Slots: 32 | BW/CPU: 187.7 GB/s
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What is the capacity and function of the Serial Presence Detect (SPD) chip on a server memory module (DIMM)?**
@@ -78,7 +78,7 @@ SPD: 8-pin 256B | Slots: 32 | BW/CPU: 187.7 GB/s
 - D. A timing calibration register that converts 32-bit SIMM channels into 64-bit DIMM channels
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 pp. 143 and 224, SPD (model 24LC01B) is an 8-pin electrically erasable programmable read-only memory (EEPROM) with a capacity of 256 bytes that stores memory metadata (capacity, manufacturer, speed, voltage) detected during startup.
@@ -93,7 +93,7 @@ SPD: 8-pin 256B | Slots: 32 | BW/CPU: 187.7 GB/s
 - D. Configuring 12 DIMMs on a single 8-channel Kunpeng 920 processor is a balanced channel configuration.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** A, B, and C are true (Ch.03, pp. 144, 148). D is false because on an 8-channel processor, configuring 3, 5, 7, 9, 10, 11, 12, 13, 14, or 15 DIMMs per CPU results in an unbalanced channel configuration (p. 148).
@@ -108,7 +108,7 @@ SPD: 8-pin 256B | Slots: 32 | BW/CPU: 187.7 GB/s
 - D. Both SIMM and DIMM provide 64-bit data channels
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 p.146, each SIMM provides 32-bit data channels, whereas each DIMM provides 64-bit data channels.

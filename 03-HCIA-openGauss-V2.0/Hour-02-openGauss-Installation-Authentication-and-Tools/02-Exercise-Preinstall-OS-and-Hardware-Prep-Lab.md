@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Preparing openEuler OS Configurations for openGauss
+# Hands-On Lab: Preparing openEuler OS Configurations for openGauss
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are preparing a Kunpeng 920 (ARM64) server running openEuler 20.03 LTS for openGauss installation. Disable firewalld, disable `RemoveIPC`, set the ARM64 recommended MTU (8192) on `eth0`, and create the `dbgrp` group and `omm` user.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Disable and stop `firewalld.service` using `systemctl`.
 2. Step 2: Configure `RemoveIPC=no` in `/etc/systemd/logind.conf` and restart `systemd-logind`.
 3. Step 3: Set the `eth0` MTU to `8192` (recommended for ARM64) and create group `dbgrp` and user `omm` (`groupadd dbgrp && useradd -g dbgrp omm`).
 
-### 📝 Starter Workspace (`root@opengauss:~#`)
+### Starter Workspace (`root@opengauss:~#`)
 ```bash
 # Step 1: Disable and stop firewalld
 systemctl disable ____
@@ -31,7 +31,7 @@ groupadd ____ && useradd -g dbgrp ____
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - On openEuler, `RemoveIPC=no` must be set so systemd does not clean up IPC semaphores/shared memory when `omm` logs out.
 - For ARM (Kunpeng), the recommended NIC MTU is 8192 (for x86 it is 1500).
@@ -40,7 +40,7 @@ groupadd ____ && useradd -g dbgrp ____
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -63,7 +63,7 @@ uid=1000(omm) gid=1000(dbgrp) groups=1000(dbgrp)
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.03 Quiz Q1) Which of the following are the openGauss deployment modes?**
@@ -74,7 +74,7 @@ uid=1000(omm) gid=1000(dbgrp) groups=1000(dbgrp)
 - D. Deployment with dual primary nodes
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Chapter 02 (p. 77) and Chapter 03 Quiz Q1 (p. 268), openGauss supports single-node deployment, one primary and one standby, and one primary and multiple standbys. Dual-primary deployment is NOT supported.
@@ -89,7 +89,7 @@ uid=1000(omm) gid=1000(dbgrp) groups=1000(dbgrp)
 - D. 9000 for x86; 4096 for ARM
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 02 (p. 89), for x86 the recommended MTU value is 1500, and for ARM (Kunpeng) the recommended MTU value is 8192.
@@ -102,7 +102,7 @@ uid=1000(omm) gid=1000(dbgrp) groups=1000(dbgrp)
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.02 p. 81). The primary and standby nodes cannot be deployed on the same physical machine because a single physical host failure would take down multiple copies.

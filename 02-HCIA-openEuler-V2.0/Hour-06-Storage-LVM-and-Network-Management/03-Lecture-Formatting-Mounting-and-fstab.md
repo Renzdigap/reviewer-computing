@@ -1,4 +1,4 @@
-# 📖 Drive Formatting (`mkfs`), Mounting (`mount`/`umount`) & `/etc/fstab` Persistence
+# Drive Formatting (`mkfs`), Mounting (`mount`/`umount`) & `/etc/fstab` Persistence
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Format partitions using `mkfs -t ext4 <device>` (Official Ch.05 Quiz Q2!) or `mkfs.ext4` and understand `mkfs` options (`-V`, `-t`, `-c`, `-l`)
 - Distinguish temporary mounting (`mount <device> <dir>`) vs. permanent boot-time mounting via `/etc/fstab`
 - Configure all 6 fields of `/etc/fstab` (`<file system> <dir> <type> <options> <dump> <pass>`) and fsck `pass` priorities (`0`, `1`, `2`)
@@ -64,12 +64,12 @@ tmpfs           /tmp    tmpfs    nodev,nosuid        0       0
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Format a partition into ext4 using 'mkfs -t ext4 /dev/hdb6' (Official Ch.05 Quiz Q2) or 'mkfs.ext4 /dev/hdb6'; there is NO 'format' or 'makefile' command in Linux!**
 - **Mounting with 'mount /dev/sda5 /test' is temporary and lost on reboot; configure permanent mounting in /etc/fstab.**
 - **The 6 fields of /etc/fstab are: <file system> <dir> <type> <options> <dump> <pass>, where <pass> is 1 for root (/), 2 for other checked partitions, and 0 for no fsck check.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Official Ch.05 Quiz Q2): 'Which of the following commands can be used to format the /dev/hdb6 partition?' -> A. mkfs -t ext4 /dev/hdb6. Distractors like 'format -t ext4' or 'makefile -t ext4' do not exist!
 
@@ -78,5 +78,5 @@ tmpfs           /tmp    tmpfs    nodev,nosuid        0       0
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Mkfs-Mount-and-Fstab-Persistence-Lab.html`](./04-Exercise-Mkfs-Mount-and-Fstab-Persistence-Lab.html)** (or [`04-Exercise-Mkfs-Mount-and-Fstab-Persistence-Lab.md`](./04-Exercise-Mkfs-Mount-and-Fstab-Persistence-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 📖 System Catalogs/Views & Data Import/Export (`COPY`, `gs_dump`, `gs_dumpall`, `gs_restore`, `ANALYZE`, `VACUUM`)
+# System Catalogs/Views & Data Import/Export (`COPY`, `gs_dump`, `gs_dumpall`, `gs_restore`, `ANALYZE`, `VACUUM`)
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 05 — Database & Object Management (MOT, Tablespaces, Users/Roles, Backup/Export) (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Identify key openGauss System Catalogs (`PG_CLASS`, `PG_ATTRIBUTE`, `PG_AUTHID`, `PG_DATABASE`, `PG_INDEX`, `PG_NAMESPACE`, `PG_PARTITION`) and Views (`PG_STAT_ACTIVITY`, `PG_SETTINGS`, `PG_LOCKS`)
 - Export partial table data using `COPY (SELECT ...) TO` or `\copy` (Ch.04 Quiz Q2: C!)
 - Execute `gs_dump`, `gs_dumpall`, `gs_restore` (`-c`, `-e`, `-s`), `VACUUM FULL`, and `ANALYZE`
@@ -60,12 +60,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **To export partial data from a table (e.g., rows matching a condition), use `COPY (SELECT ... WHERE ...) TO '/path/file'` (Ch.04 Quiz Q2: C). `gs_dump` and `gs_dumpall` export whole tables/databases, not conditional subsets.**
 - **SQL `COPY` reads/writes files on the database server, whereas the `gsql` meta-command `\copy` reads/writes files on the local client machine.**
 - **After bulk imports/updates/deletes, run `VACUUM FULL <table_name>;` (to reclaim disk page fragments to the OS) followed by `ANALYZE <table_name>;` (to update `PG_STATISTIC`).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.04 Quiz Q2): 'Which of the following commands can be used to export partial data from the student table?' -> C. `copy` Conditional statement (`COPY (SELECT ...) TO ...`)!
 
@@ -74,5 +74,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-COPY-gs-dump-gs-restore-and-VACUUM-Lab.html`](./08-Exercise-COPY-gs-dump-gs-restore-and-VACUUM-Lab.html)** (or [`08-Exercise-COPY-gs-dump-gs-restore-and-VACUUM-Lab.md`](./08-Exercise-COPY-gs-dump-gs-restore-and-VACUUM-Lab.md)) to apply this concept in an interactive lab workbench!

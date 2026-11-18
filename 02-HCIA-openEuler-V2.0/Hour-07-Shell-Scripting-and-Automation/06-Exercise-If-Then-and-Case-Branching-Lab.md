@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Writing `if-then-fi` and Multi-Branch `case ... in ... esac` Scripts
+# Hands-On Lab: Writing `if-then-fi` and Multi-Branch `case ... in ... esac` Scripts
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 07 — Shell Scripting, Variables, Control Flow & Automation (Sprint 3 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are writing a service controller script on openEuler. Use an `if` statement to check whether `/etc/hosts` exists (`ls /etc/hosts`), and use a `case` statement on `$ACTION` to handle `start|run`, `stop`, and default `*` branches.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Complete the `if` statement that checks `ls /etc/hosts` and closes with `fi`.
 2. Step 2: Complete the `case $ACTION in` statement using `start | run)` for the first branch and `;;` to terminate branches.
 3. Step 3: Use `*)` for the default branch and close the `case` block with `esac`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 #!/bin/bash
 # Step 1: Check if /etc/hosts exists using if-then-fi
@@ -40,7 +40,7 @@ stop)
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Close an `if` statement with `fi`.
 - Separate multiple patterns in `case` with a vertical bar: `start | run)`.
@@ -49,7 +49,7 @@ stop)
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -85,7 +85,7 @@ Starting service...
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In a Bash `if command; then commands; fi` structure, under what condition does the Bash shell execute the commands inside the `then` block?**
@@ -96,7 +96,7 @@ Starting service...
 - D. Only when `esac` is specified
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.06 (p.356), the Bash shell executes the command following `if` first. If the exit status code is `0`, the Bash shell continues to execute the commands in `then`.
@@ -111,7 +111,7 @@ Starting service...
 - D. `;` (semicolon) and `#)`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.06 (p.357), in a `case` statement, multiple patterns can be separated by vertical bars (`|`), and the asterisk (`*`) indicates all values that do not match the known patterns.
@@ -126,7 +126,7 @@ Starting service...
 - D. `endif` closes an `if` statement
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `AB`
 - **Explanation:** Per Ch.06 (pp.356–357), `if` closes with `fi` and `case` closes with `esac` (`do` loops close with `done`).

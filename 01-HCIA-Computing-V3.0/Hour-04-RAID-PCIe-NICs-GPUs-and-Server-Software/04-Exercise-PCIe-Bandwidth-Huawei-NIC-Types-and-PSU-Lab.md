@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: PCIe Gen 1–5 Bandwidth & Huawei Server NIC Audit
+# Hands-On Lab: PCIe Gen 1–5 Bandwidth & Huawei Server NIC Audit
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 04 — RAID Arrays, PCIe Bus, NICs/iNICs, GPU/NPU, Power/Cooling & Server Software (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Complete the hardware verification file for PCIe 4.0/5.0 bandwidths, Huawei server NIC form factors, CPU/GPU ALU ratios, and TaiShan PSU dimensions.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `pcie4_gt_s` to `16.0`, `pcie4_x16_gbs` to `31.5`, and `pcie5_x16_gbs` to `63.0`.
 2. Set `non_replaceable_pch_nic` to `'LOM'` and `blade_only_nic` to `'Mezzanine'`.
 3. Set `cpu_alu_area_percent` to `5`, `gpu_alu_area_percent` to `40`, and `taishan_2280_psu_width_mm` to `68.0`.
 
-### 📝 Starter Workspace (`hw-architect@taishan-2280:~#`)
+### Starter Workspace (`hw-architect@taishan-2280:~#`)
 ```bash
 # PCIe, NIC, GPU/NPU & PSU Hardware Audit
 pcie_specs:
@@ -37,7 +37,7 @@ compute_and_power:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - PCIe 4.0 runs at 16.0 GT/s (31.5 GB/s for x16); PCIe 5.0 runs at 32.0 GT/s (63.0 GB/s for x16).
 - LOM is embedded in the PCH chip; Mezzanine cards are for blade servers only. ALU occupies 5% of CPU vs. 40% of GPU; TaiShan 2280 PSUs are 68.0 mm wide.
@@ -45,7 +45,7 @@ compute_and_power:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -79,7 +79,7 @@ compute_and_power:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.03 Quiz Q1) Which of the following statements are true about NICs of Huawei servers?**
@@ -90,7 +90,7 @@ compute_and_power:
 - D. Mezzanine cards can be used for Huawei rack servers.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `AB`
 - **Explanation:** According to Ch.03 p.177 and p.220 Quiz Q1, A and B are true. C is false (FlexIO cards are pluggable non-standard PCIe cards installed on the rear panel of Huawei rack servers), and D is false (Mezzanine cards can ONLY be used on compute nodes of Huawei E9000 blade servers).
@@ -105,7 +105,7 @@ compute_and_power:
 - D. 5.0 GT/s and 8.0 GB/s
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.03 p.173, PCIe 4.0 (launched in 2017) has an original transmission rate of 16.0 GT/s and a ×16 bandwidth of 31.5 GB/s (×1 = 1969 MB/s, ×4 = 7.88 GB/s, ×8 = 15.75 GB/s).
@@ -120,7 +120,7 @@ compute_and_power:
 - D. Cold-plate liquid cooling
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `D`
 - **Explanation:** According to Ch.03 p.187, liquid cooling is divided into direct cooling (Immersion and Spray, 100% liquid cooling where coolant directly contacts heating components) and indirect cooling (Cold plate, where deionized water/glycol flows inside closed cold plates).

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Auditing GaussDB Distributed Cluster Capacity & HA/DR Specifications
+# Hands-On Lab: Auditing GaussDB Distributed Cluster Capacity & HA/DR Specifications
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 1 of 4)  
@@ -7,14 +7,14 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are architecting a financial-grade GaussDB deployment. Record the official GaussDB scale-out limits (4 PB max storage, 256 max shards, 100,000 concurrent connections) and Dual-Cluster Remote DR RPO/RTO metrics.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Specify `4` (PB) as the maximum storage capacity, `256` as the maximum number of shards/DNs in a single large cluster, and `100000` as the cluster concurrent connections.
 2. Step 2: Specify `'10 seconds'` as the RPO and `'10 minutes'` as the RTO for Dual-Cluster Remote DR.
 
-### 📝 Starter Workspace (`GaussDB=#`)
+### Starter Workspace (`GaussDB=#`)
 ```bash
 -- Complete the GaussDB enterprise specification verification query:
 SELECT
@@ -26,7 +26,7 @@ SELECT
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - GaussDB supports 4 PB of data, up to 256 shards/DNs per large cluster, and > 100,000 (`100000`) concurrent connections per cluster.
 - Dual-Cluster Remote DR (p. 486) achieves RPO of `'10 seconds'` and RTO of `'10 minutes'`.
@@ -34,7 +34,7 @@ SELECT
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -57,7 +57,7 @@ max_storage_pb | max_shards_per_cluster | max_cluster_connections | remote_dr_rp
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What is the key architectural difference between openGauss and GaussDB?**
@@ -68,7 +68,7 @@ max_storage_pb | max_shards_per_cluster | max_cluster_connections | remote_dr_rp
 - D. openGauss supports only x86 processors, whereas GaussDB supports only ARM processors
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 06 (p. 478), openGauss is open-source and uses standalone and primary/standby architectures, whereas GaussDB is a commercial cloud service supporting both distributed and centralized systems.
@@ -83,7 +83,7 @@ max_storage_pb | max_shards_per_cluster | max_cluster_connections | remote_dr_rp
 - D. Both `1+1` and `1+2` discard all uncommitted and committed transactions
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Per Chapter 06 (p. 481), in `1+1 (maximum availability)`, if synchronous replication cannot be completed due to network problems, asynchronous replication is used until recovery. In `1+2 (maximum protection)`, synchronous confirmation from the standby node is required before returning to the client.
@@ -96,7 +96,7 @@ max_storage_pb | max_shards_per_cluster | max_cluster_connections | remote_dr_rp
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** True (Ch.06 p. 482). ETCD uses the Raft algorithm for consistency, and a cluster must have 3 or more ETCDs in an odd number (Leader and Follower roles).

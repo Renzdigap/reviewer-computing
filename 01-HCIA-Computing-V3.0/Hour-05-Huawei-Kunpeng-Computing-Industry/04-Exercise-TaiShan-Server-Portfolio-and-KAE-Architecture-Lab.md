@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: TaiShan 200 Portfolio & KAE Subsystem Configuration
+# Hands-On Lab: TaiShan 200 Portfolio & KAE Subsystem Configuration
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Complete the TaiShan 200 hardware specification and KAE subsystem mapping for a Kunpeng data center deployment.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `kae_app_libraries` to `'OpenSSL/zlib'`, `kae_license_manager` to `'BMC'`, and `kae_acpi_reporter` to `'BIOS'`.
 2. Set `taishan_cpu_replaceable_separately` to `False`.
 3. Map the TaiShan 200 models: `balanced_2u2p` -> `'2280'`, `storage_4u2p` -> `'5280'`, and `high_perf_2u4p` -> `'2480'`.
 
-### 📝 Starter Workspace (`admin@taishan-cluster:~#`)
+### Starter Workspace (`admin@taishan-cluster:~#`)
 ```bash
 # KAE & TaiShan 200 Portfolio Configuration
 kae_architecture:
@@ -33,7 +33,7 @@ taishan_200_series:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - KAE application libraries are OpenSSL/zlib; BMC manages licenses and BIOS reports the ACPI table.
 - TaiShan CPUs are soldered on the mainboard (False); 2280 is 2U2P balanced, 5280 is 4U2P storage, and 2480 is 2U4P high-performance.
@@ -41,7 +41,7 @@ taishan_200_series:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -71,7 +71,7 @@ taishan_200_series:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **In the logical architecture of the Kunpeng Accelerator Engine (KAE), which subsystem manages accelerator licenses for servers, and which standard application library interfaces are provided to upper-layer applications?**
@@ -82,7 +82,7 @@ taishan_200_series:
 - D. RAID controller manages licenses; MPI and KML interfaces are provided
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.04 pp. 241–242, the BMC subsystem manages accelerator licenses, the BIOS subsystem reports the ACPI table to the kernel, and the application library subsystem provides standard OpenSSL and zlib interfaces.
@@ -95,7 +95,7 @@ taishan_200_series:
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False. According to Ch.04 p.250, unlike x86 servers, the CPUs of a TaiShan server are integrated on the motherboard and cannot be replaced separately (3 types of motherboards are available).
@@ -110,7 +110,7 @@ taishan_200_series:
 - D. TaiShan 2280E
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** According to Ch.04 pp. 247 and 252, the TaiShan 5280 is a 4U 2-socket storage server supporting up to 40 × 3.5-inch drives (560 TB) and 4 × 2.5-inch NVMe SSDs, sharing the same motherboard as the 2U TaiShan 2280.

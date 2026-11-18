@@ -1,4 +1,4 @@
-# 📖 TaiShan 200 (2280) Default Credentials & iBMC Initial Setup
+# TaiShan 200 (2280) Default Credentials & iBMC Initial Setup
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Memorize the exact default IP, subnet mask, and all 3 default user/password pairs of TaiShan 200 (model 2280)
 - Know how to query the iBMC IP in BIOS and configure Network, Firmware, Local Users, NTP, VNC, and SNMP in iBMC WebUI
 - Compare SNMPv1 (RFC 1157), SNMPv2 (RFC 1901), and SNMPv3 security recommendations
@@ -47,13 +47,13 @@ Connect a PC to the iBMC management port via crossover or twisted-pair cable, br
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **TaiShan 200 (2280) default iBMC IP is 192.168.2.100/24 (255.255.255.0); iBMC WebUI/CLI login is Administrator / Admin@9000 (Domain: Local iBMC); default iBMC user is root / Huawei12#$; U-Boot/BIOS password is Admin@9000.**
 - **TaiShan 2280 has VGA and USB 3.0 ports on front/rear panels, but NO PS/2 ports.**
 - **Query iBMC IP via BIOS at Advanced > IPMI iBMC Configuration > iBMC Configuration, or change it in iBMC WebUI at iBMC Settings > Network Settings > Network Protocols.**
 - **SNMPv1 (RFC 1157) and SNMPv2 (RFC 1901) have security risks; SNMPv3 is recommended for security.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Distinguish the two default accounts on p. 297: iBMC WebUI/CLI uses `Administrator` / `Admin@9000`, while the default iBMC login user is `root` / `Huawei12#$`!
 
@@ -62,5 +62,5 @@ Connect a PC to the iBMC management port via crossover or twisted-pair cable, br
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-iBMC-Default-IP-Credentials-and-WebUI-Navigation-Lab.html`](./04-Exercise-iBMC-Default-IP-Credentials-and-WebUI-Navigation-Lab.html)** (or [`04-Exercise-iBMC-Default-IP-Credentials-and-WebUI-Navigation-Lab.md`](./04-Exercise-iBMC-Default-IP-Credentials-and-WebUI-Navigation-Lab.md)) to apply this concept in an interactive lab workbench!

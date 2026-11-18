@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Querying Manual Sections, Session Logs & Safe Shutdown
+# Hands-On Lab: Querying Manual Sections, Session Logs & Safe Shutdown
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 As the system administrator on an openEuler node, you need to look up the manual page for the `/etc/passwd` file format (Section 5), check the brief description of `ls`, inspect the last 5 login records including system shutdowns, and send a simulated shutdown warning.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: View the manual page for the `passwd` configuration file format (Section 5) using `man 5 passwd` and query the brief description of `ls` using `whatis ls`.
 2. Step 2: Display the last 5 login/shutdown records using `last -n 5 -x`.
 3. Step 3: Send a simulated shutdown warning to all logged-in users without actually shutting down using `shutdown -k now`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: View Section 5 manual for passwd and one-line summary of ls
 <man_command>
@@ -29,7 +29,7 @@ As the system administrator on an openEuler node, you need to look up the manual
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Specify the section number before the topic: `man 5 passwd`, and use `whatis ls`.
 - Combine `-n 5` and `-x` with the `last` command: `last -n 5 -x`.
@@ -38,7 +38,7 @@ As the system administrator on an openEuler node, you need to look up the manual
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -72,7 +72,7 @@ The system is going down for maintenance NOW! (Warning only - shutdown cancelled
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **On openEuler, command packages and their documentation packages are separated to streamline the OS. Which package must be additionally installed to enable the `man` command to access detailed help documentation for core utilities?**
@@ -83,7 +83,7 @@ The system is going down for maintenance NOW! (Warning only - shutdown cancelled
 - D. info-db
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (p.66), on openEuler, to enable the man command to access detailed help documentation, you must additionally install the `coreutils-help` package.
@@ -98,7 +98,7 @@ The system is going down for maintenance NOW! (Warning only - shutdown cancelled
 - D. 1: File formats; 5: User commands; 8: Games
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.03 (p.65), Section 1 covers commands/programs operated by users in the shell; Section 5 covers file formats and conventions; Section 8 covers system management commands (applicable only to the root user).
@@ -113,7 +113,7 @@ The system is going down for maintenance NOW! (Warning only - shutdown cancelled
 - D. `halt -w` immediately cuts power to the motherboard without writing to `/var/log/wtmp`.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABC`
 - **Explanation:** Per Ch.03 (pp.73–77), A, B, and C are true. Option D is false because `halt -w` only writes a record to `/var/log/wtmp` without restarting or shutting down the system.

@@ -1,4 +1,4 @@
-# 📖 Cloud OS & Huawei FusionCompute Virtualization Suite
+# Cloud OS & Huawei FusionCompute Virtualization Suite
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 3 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Master virtualization terminology: Host Machine, Host OS, Hypervisor (VMM), Guest Machine (VM), and Guest OS
 - Understand the FusionCompute virtualization suite (FusionCompute, FusionStorage Block, eBackup, UltraVR)
 - Know the exact hardware requirements for deploying FusionCompute VRM and CNA compute nodes
@@ -50,12 +50,12 @@ Virtualization creates an abstraction layer over physical hardware to decouple O
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **eBackup uses snapshots + Changed Block Tracking (CBT) for backup; UltraVR uses SAN asynchronous remote replication for Disaster Recovery (DR).**
 - **Before virtualization, server utilization is 5%–10%; after virtualization with FusionCompute, integration ratio is 1:5 to 1:10 and server utilization reaches 60%+.**
 - **FusionCompute hardware requirements: VRM system drive >= 270 GB, Compute node system drive >= 150 GB, RAM >= 8 GB (>= 48 GB recommended), >= 1 NIC (6 GE+ NICs recommended), network load <= 60%.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not swap the system drive capacities for FusionCompute: VRM node requires >= 270 GB, while Compute node requires >= 150 GB!
 
@@ -64,5 +64,5 @@ Virtualization creates an abstraction layer over physical hardware to decouple O
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`06-Exercise-FusionCompute-Cluster-Hardware-Planning-Lab.html`](./06-Exercise-FusionCompute-Cluster-Hardware-Planning-Lab.html)** (or [`06-Exercise-FusionCompute-Cluster-Hardware-Planning-Lab.md`](./06-Exercise-FusionCompute-Cluster-Hardware-Planning-Lab.md)) to apply this concept in an interactive lab workbench!

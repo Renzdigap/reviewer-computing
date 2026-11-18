@@ -1,4 +1,4 @@
-# 📖 BIOS vs. UEFI Boot Flows, OS Kernel/Shell & Linux Directory Tree
+# BIOS vs. UEFI Boot Flows, OS Kernel/Shell & Linux Directory Tree
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 04 — RAID Arrays, PCIe Bus, NICs/iNICs, GPU/NPU, Power/Cooling & Server Software (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Compare conventional BIOS and UEFI features and step-by-step boot processes
 - Understand OS User Space vs. Kernel Space (Applications/Shell -> Function Libraries -> System Calls -> Kernel)
 - Master Unix/Linux history (Multics, Unix, BSD, GNU, MINIX, Linux 1991, openEuler 2019), POSIX.1, and every standard Linux root directory (`/bin` to `/opt`)
@@ -48,13 +48,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **UEFI supports large drive capacity (>2 TB via GPT), 64-bit systems, fast boot, and secure startup, streamlining the 6-step legacy BIOS boot flow into 4 steps.**
 - **OS call hierarchy from top to bottom: Applications & Shells -> Function Libraries -> System Calls -> Kernel -> Hardware.**
 - **POSIX is IEEE 1003 / ISO/IEC 9945; GNU stands for 'GNU's Not Unix' (Richard Stallman, 1983); Linus Torvalds released Linux in 1991; EulerOS was open-sourced as openEuler in 2019.**
 - **Know the exact Linux directories: /bin (binaries), /boot (boot loader/images), /dev (devices), /etc (config files), /lib & /lib64 (shared libraries), /media (auto-mounted removable media), /mnt (temporary manual mount point), /opt (additional application software).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse `/media` (where Linux AUTOMATICALLY identifies and mounts removable USB/CD-ROM devices) with `/mnt` (TEMPORARY mount point used by administrators for manual mounting)!
 
@@ -63,5 +63,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Linux-Root-Directory-Hierarchy-and-Boot-Flow-Lab.html`](./08-Exercise-Linux-Root-Directory-Hierarchy-and-Boot-Flow-Lab.html)** (or [`08-Exercise-Linux-Root-Directory-Hierarchy-and-Boot-Flow-Lab.md`](./08-Exercise-Linux-Root-Directory-Hierarchy-and-Boot-Flow-Lab.md)) to apply this concept in an interactive lab workbench!

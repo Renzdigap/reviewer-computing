@@ -1,4 +1,4 @@
-# 📖 OS for the AI Era & openEuler Intelligence Architecture
+# OS for the AI Era & openEuler Intelligence Architecture
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Define Artificial Intelligence (John McCarthy, 1956) and trace the 5-layer AI hierarchy from OS/Infrastructure to Industry Solutions
 - Explain the openEuler Intelligence ('AI for OS') architecture, including its two interaction entries (Web entry and Intelligent Shell entry)
 - Differentiate the 5 core functions of openEuler Intelligence: Intelligent Q&A, AI Application Development Framework, Intelligent Optimization, Intelligent Diagnosis, and Intelligent Container Image
@@ -55,12 +55,12 @@ The term **Artificial Intelligence (AI)** was coined by **John McCarthy in 1956*
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openEuler Intelligence supports exactly TWO interaction entries: Web entry and Intelligent shell entry (Ch.01 Quiz Q1).**
 - **Intelligent Diagnosis relies on three specialized agents in sequence: Inspection Agent (checks IP/container abnormalities) -> Demarcation Agent (outputs top 3 root cause metrics) -> Detection Agent (profiling location & stack hotspots).**
 - **Intelligent Container Images are organized into 3 tiers: (1) SDK layer (CUDA/CANN), (2) SDK + Frameworks (PyTorch/TensorFlow), and (3) SDK + Frameworks + LLMs (llama2-7b, chatglm2-13b).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse the three Intelligent Diagnosis agents! Inspection finds abnormal IPs/containers; Demarcation narrows down to the Top 3 root cause metrics; Detection/Location profiles the stack and hotspots.
 
@@ -69,5 +69,5 @@ The term **Artificial Intelligence (AI)** was coined by **John McCarthy in 1956*
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-openEuler-Intelligence-Architecture-Lab.html`](./02-Exercise-openEuler-Intelligence-Architecture-Lab.html)** (or [`02-Exercise-openEuler-Intelligence-Architecture-Lab.md`](./02-Exercise-openEuler-Intelligence-Architecture-Lab.md)) to apply this concept in an interactive lab workbench!

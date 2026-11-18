@@ -1,4 +1,4 @@
-# 📖 Computing O&M Architecture & Single-Node Management (iBMA, iBMC, Smart Provisioning)
+# Computing O&M Architecture & Single-Node Management (iBMA, iBMC, Smart Provisioning)
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Map each Huawei O&M tool to its exact target scenario and persona (iBMC, iBMA, Smart Provisioning, SmartKit, FusionDirector, eSight, CCManager, eService)
 - Distinguish In-Band Management (iBMA + BOB `bobCmd`) from Out-of-Band Management (iBMC on Hi1710/Hi1711 RTOS)
 - Master all 6 functions of Smart Provisioning (OS installation, RAID config, Upgrade, Hardware diagnosis, Log collection, Fast vs. Secure Drive erasure)
@@ -54,13 +54,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **In-band management shares a single logical channel with user service traffic (iBMA + BOB); out-of-band management uses a dedicated management channel (iBMC + Smart Provisioning).**
 - **iBMA provides two transmission paths (`iBMA->vNIC->iBMC->3rd` and `iBMA->vNIC->iBMC->vNIC->BOB->3rd`), uses `bobCmd` for BOB CLI, traces ethtool in `log/ethtool_log`, and supports soft isolation of faulty physical memory pages over Redfish.**
 - **Deploying an OS via Redfish requires the iBMC Advanced Edition license.**
 - **Smart Provisioning runs a small system in service memory from iBMC flash and provides 6 functions: OS installation (UEFI only), RAID configuration, Firmware upgrade (PCIe cards, drives, SP), Hardware diagnosis (CPU, memory, drive, NIC), Log collection, and Drive erasure (Fast = logical drive partitions; Secure = all data on physical drive).**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: In Smart Provisioning Drive Erasure (p. 376), 'Fast mode' erases partitions of a LOGICAL drive, whereas 'Secure mode' erases all data on a PHYSICAL drive!
 
@@ -69,5 +69,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Single-Node-OM-iBMA-BOB-and-Smart-Provisioning-Lab.html`](./02-Exercise-Single-Node-OM-iBMA-BOB-and-Smart-Provisioning-Lab.html)** (or [`02-Exercise-Single-Node-OM-iBMA-BOB-and-Smart-Provisioning-Lab.md`](./02-Exercise-Single-Node-OM-iBMA-BOB-and-Smart-Provisioning-Lab.md)) to apply this concept in an interactive lab workbench!

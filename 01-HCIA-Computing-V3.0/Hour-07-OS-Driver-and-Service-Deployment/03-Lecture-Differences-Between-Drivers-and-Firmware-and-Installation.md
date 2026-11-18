@@ -1,4 +1,4 @@
-# 📖 Differences Between Drivers and Firmware & Installation Workflows
+# Differences Between Drivers and Firmware & Installation Workflows
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Contrast Device Drivers (serves software, bridges hardware and OS) with Firmware (serves hardware, pre-installed in ROM, OS-independent)
 - Understand privilege requirements (root to install, non-root running user for isolation) and 3 driver installation methods
 - Master the exact order difference between Initial Installation (Driver -> Firmware) and Overwrite Installation (Firmware -> Driver)!
@@ -47,12 +47,12 @@ Look carefully at the official flowchart on **Ch.05 Page 335**:
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Drivers serve software and act as 'bridges between hardware and OSs' (OS-dependent); Firmware serves hardware, is stored in hardware ROM, and operates independently of the OS.**
 - **Driver/firmware installation requires root privileges, plus creating a non-root hardware running user for permission isolation.**
 - **CRITICAL FLOWCHART RULE (p. 335): In Initial Installation, install the DRIVER first, then the FIRMWARE. In Overwrite Installation (upgrade), install the FIRMWARE first, then the DRIVER!**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05, p. 335 Flowchart): Do not mix up Initial vs. Overwrite installation order! Initial installation = Driver FIRST -> Firmware SECOND. Overwrite installation = Firmware FIRST -> Driver SECOND!
 
@@ -61,5 +61,5 @@ Look carefully at the official flowchart on **Ch.05 Page 335**:
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Initial-vs-Overwrite-Driver-Firmware-Install-Lab.html`](./04-Exercise-Initial-vs-Overwrite-Driver-Firmware-Install-Lab.html)** (or [`04-Exercise-Initial-vs-Overwrite-Driver-Firmware-Install-Lab.md`](./04-Exercise-Initial-vs-Overwrite-Driver-Firmware-Install-Lab.md)) to apply this concept in an interactive lab workbench!

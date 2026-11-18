@@ -1,4 +1,4 @@
-# 📖 Querying & Configuring RAID and JBOD (BIOS & iBMC WebUI)
+# Querying & Configuring RAID and JBOD (BIOS & iBMC WebUI)
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 4 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Query RAID controller card models on iBMC (`System > System Info > Others`) and understand Avago MegaRAID SAS 9460-8i drive/span limits
 - Explain JBOD (Just a Bunch of Drives) drive passthrough
 - Configure hardware RAID via VNC/BIOS (`Advanced > Avago MegaRAID > Main Menu > Configuration Management > Create Virtual Drive`) and via iBMC WebUI (`System > Storage Management`)
@@ -52,13 +52,13 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **View the RAID controller card model in iBMC WebUI under System > System Info > Others; configure RAID in iBMC WebUI under System > Storage Management.**
 - **Avago MegaRAID SAS 9460-8i supports up to 32 drives for single arrays (RAID 0/1/5/6) and up to 240 drives across 2 to 8 spans for spanned arrays (RAID 10/50/60). RAID 00 is NOT supported.**
 - **JBOD (Just a Bunch of Drives) is drive passthrough. If a RAID card does NOT support passthrough, you can only install an OS on virtual drives (RAID volumes) configured on the card.**
 - **In the BIOS RAID utility (Advanced > Avago MegaRAID > Main Menu > Configuration Management > Create Virtual Drive), press the Space bar to select drives, and note that an 8 TB decimal HDD shows ~7.2 TB actual capacity.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: If a RAID controller card does not have JBOD (passthrough) enabled or supported, the OS installer will see ZERO disks until you create a Virtual Drive / Logical Drive!
 
@@ -67,5 +67,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`08-Exercise-Avago-MegaRAID-9460-and-iBMC-Storage-Lab.html`](./08-Exercise-Avago-MegaRAID-9460-and-iBMC-Storage-Lab.html)** (or [`08-Exercise-Avago-MegaRAID-9460-and-iBMC-Storage-Lab.md`](./08-Exercise-Avago-MegaRAID-9460-and-iBMC-Storage-Lab.md)) to apply this concept in an interactive lab workbench!

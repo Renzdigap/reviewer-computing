@@ -1,4 +1,4 @@
-# 📖 Deployment Modes, Hardware/OS Prerequisites & XML Configuration
+# Deployment Modes, Hardware/OS Prerequisites & XML Configuration
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Compare the 3 official openGauss deployment modes: Standalone, Primary/Standby, and One Primary + Multiple Standbys
 - Verify hardware (RAM, CPU, Disk, NIC MTU) and software/OS prerequisites (openEuler, Python 3.7, libaio-devel)
 - Configure OS settings prior to installation: SELinux, firewalld, RemoveIPC=no, locale/timezone, NIC MTU, root SSH, and `dbgrp`/`omm`
@@ -48,12 +48,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **openGauss deployment modes are Single-node, One primary + one standby, and One primary + multiple standbys (up to 8 standbys; typically 1 primary + 2 standbys for 99.99% availability). Dual-primary is NOT supported.**
 - **On openEuler (ARM64), set RemoveIPC=no in both logind.conf and systemd-logind.service, disable SELinux and firewalld, comment out SSH Banner, and set NIC MTU to 8192 (1500 on x86).**
 - **System disk should use RAID 1, data disks should use 4 groups of RAID 5 with Disk Cache Policy Disabled, and remaining inodes should exceed 1.5 billion.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.03 Quiz Q1): 'Which of the following are the openGauss deployment modes?' -> A. Single-node, B. One primary and one standby, C. One primary and multiple standbys (ABC). D. Dual primary nodes is FALSE!
 
@@ -62,5 +62,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-Preinstall-OS-and-Hardware-Prep-Lab.html`](./02-Exercise-Preinstall-OS-and-Hardware-Prep-Lab.html)** (or [`02-Exercise-Preinstall-OS-and-Hardware-Prep-Lab.md`](./02-Exercise-Preinstall-OS-and-Hardware-Prep-Lab.md)) to apply this concept in an interactive lab workbench!

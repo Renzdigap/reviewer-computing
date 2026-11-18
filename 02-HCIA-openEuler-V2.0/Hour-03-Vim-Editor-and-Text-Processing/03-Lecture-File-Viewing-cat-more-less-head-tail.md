@@ -1,4 +1,4 @@
-# 📖 File Viewing & Extraction (`cat`, `more`, `less`, `head`, `tail`)
+# File Viewing & Extraction (`cat`, `more`, `less`, `head`, `tail`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 03 — Vim Editor & Text Processing Utilities (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - View and concatenate files with `cat` (`-n`, `-b`, `-s`, `-E`, `-A`)
 - Compare paginated viewers `more` (loads entire file upfront) vs. `less` (loads on demand, bidirectional scrolling & search)
 - Extract file headers and tails using `head` (first 10 lines by default — Ch.03 Quiz!) and `tail` (last 10 lines by default, `-f` real-time log tracking)
@@ -47,12 +47,12 @@
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **By default, both 'head' and 'tail' display 10 lines (the first 10 lines and last 10 lines, respectively — Ch.03 Quiz Q1).**
 - **head -n -3 file reads all lines EXCEPT the last 3 lines; tail -n +3 file reads from line 3 to the end of the file; tail -f cyclically follows real-time log updates.**
 - **cat -n numbers all lines including blank lines, whereas cat -b numbers only non-blank lines; less does not load the entire file into memory upfront, unlike more.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Official Ch.03 Quiz Q1): 'How many lines of a file are displayed by default when using the head command?' -> 10 lines (Option B)!
 
@@ -61,5 +61,5 @@
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Viewing-and-Extracting-Files-Lab.html`](./04-Exercise-Viewing-and-Extracting-Files-Lab.html)** (or [`04-Exercise-Viewing-and-Extracting-Files-Lab.md`](./04-Exercise-Viewing-and-Extracting-Files-Lab.md)) to apply this concept in an interactive lab workbench!

@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Granting `mot_server` Access, Creating an MOT & Indexing It
+# Hands-On Lab: Granting `mot_server` Access, Creating an MOT & Indexing It
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 05 — Database & Object Management (MOT, Tablespaces, Users/Roles, Backup/Export) (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Configure a high-throughput Memory-Optimized Table (MOT) `trade_mot` for user `jack`: grant `USAGE` on `FOREIGN SERVER mot_server` to `jack`, create the MOT `trade_mot(trade_id INT, price NUMERIC(10,2))`, create an index `idx_trade_id` on it, and write the statement to drop the MOT.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Grant MOT usage permission using `GRANT USAGE ON FOREIGN SERVER mot_server TO jack;`.
 2. Step 2: Create the MOT using `CREATE FOREIGN TABLE trade_mot(trade_id INT, price NUMERIC(10,2)) SERVER mot_server;`.
 3. Step 3: Create index `idx_trade_id` on `trade_mot(trade_id)` using `CREATE INDEX idx_trade_id ON trade_mot(trade_id);` (without `FOREIGN`) and drop the table with `DROP FOREIGN TABLE trade_mot;`.
 
-### 📝 Starter Workspace (`openGauss=#`)
+### Starter Workspace (`openGauss=#`)
 ```bash
 -- Step 1: Authorize user jack to access mot_server
 GRANT USAGE ON ____ SERVER ____ TO jack;
@@ -29,7 +29,7 @@ DROP ____ TABLE trade_mot;
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - MOT uses the foreign server `mot_server` (`GRANT USAGE ON FOREIGN SERVER mot_server TO jack;`).
 - Use `CREATE FOREIGN TABLE` and `DROP FOREIGN TABLE` for MOT tables, but standard `CREATE INDEX` for MOT indexes.
@@ -37,7 +37,7 @@ DROP ____ TABLE trade_mot;
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -60,7 +60,7 @@ DROP FOREIGN TABLE
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **Which memory configuration formula must be satisfied when configuring openGauss Memory-Optimized Tables (MOT)?**
@@ -71,7 +71,7 @@ DROP FOREIGN TABLE
 - D. `cstore_buffers + wal_buffers < max_mot_local_memory`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `A`
 - **Explanation:** Per Chapter 04 (p. 305), the MOT memory configuration must satisfy `(max_mot_global_memory + max_mot_local_memory) + 2 GB < max_process_memory`.
@@ -86,7 +86,7 @@ DROP FOREIGN TABLE
 - D. `CREATE UNLOGGED TABLE test(x int);`
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Chapter 04 (p. 305), MOT is integrated via the FDW mechanism and created using `CREATE FOREIGN TABLE test(x int) [SERVER mot_server];`.
@@ -99,7 +99,7 @@ DROP FOREIGN TABLE
 - B. False
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** False (Ch.04 p. 305). When creating or deleting an index on an MOT, you do NOT specify the `FOREIGN` keyword (`CREATE INDEX text_index1 ON test(x);`); `FOREIGN` is used only when creating and dropping the table.

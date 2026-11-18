@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Kunpeng 920 Die/Cluster/Core Topology & HCCS Verification
+# Hands-On Lab: Kunpeng 920 Die/Cluster/Core Topology & HCCS Verification
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 1 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 Write a Python script that models the internal die, cluster, core, and memory controller topology of a Kunpeng 920 processor and verifies HCCS 4-socket scaling.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `process_nm` to `7`, `cpu_dies` to `2`, and `io_dies` to `1` (total 3 dies).
 2. Set `clusters_per_cpu_die` to `8`, `cores_per_cluster` to `4`, and `ddr4_controllers_per_cpu_die` to `4`.
 3. Set `hccs_bandwidth_gbps` to `480` and `max_4p_physical_cores` to `256`.
 
-### 📝 Starter Workspace (`python3@kunpeng-920:~$`)
+### Starter Workspace (`python3@kunpeng-920:~$`)
 ```bash
 # Kunpeng 920 SoC Topology Model
 process_nm = ___
@@ -33,7 +33,7 @@ print(f"Kunpeng 920 ({process_nm}nm): {cpu_dies}+{io_dies} dies, {total_cores_1p
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Kunpeng 920 uses a 7nm process with 2 CPU dies and 1 I/O die.
 - Each CPU die has 8 clusters × 4 cores = 32 cores and 4 DDR4 controllers; HCCS provides 480 Gbit/s bandwidth up to 256 cores across 4 sockets.
@@ -41,7 +41,7 @@ print(f"Kunpeng 920 ({process_nm}nm): {cpu_dies}+{io_dies} dies, {total_cores_1p
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -69,7 +69,7 @@ Kunpeng 920 (7nm): 2+1 dies, 64 cores, 8ch DDR4, HCCS 480Gbps, 4P=256 cores
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Multiple-Choice (Select ALL)]
 **(Official Ch.04 Quiz Q1) Which of the following statements are true about the Huawei Kunpeng 920 processor?**
@@ -80,7 +80,7 @@ Kunpeng 920 (7nm): 2+1 dies, 64 cores, 8ch DDR4, HCCS 480Gbps, 4P=256 cores
 - D. It supports multiple accelerators.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four statements (ABCD) are true and come directly from the official Chapter 04 Quiz on p. 279.
@@ -95,7 +95,7 @@ Kunpeng 920 (7nm): 2+1 dies, 64 cores, 8ch DDR4, HCCS 480Gbps, 4P=256 cores
 - D. 2 dies (1 CPU die + 1 GPU die) with 32 cores total
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.04 pp. 234 and 237, Kunpeng 920 encapsulates 3 dies (two CPU dies for computing and one I/O die). Each CPU die has 8 clusters of 4 cores (up to 32 cores and 4 DDR4 controllers per CPU die).
@@ -110,7 +110,7 @@ Kunpeng 920 (7nm): 2+1 dies, 64 cores, 8ch DDR4, HCCS 480Gbps, 4P=256 cores
 - D. Kunpeng 920
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `C`
 - **Explanation:** According to Ch.04 pp. 233, 236, and 245, Kunpeng 912 (Hi1612, 2014) was the first 64-bit Arm processor; Kunpeng 916 (2016) was the industry's first multi-socket Arm processor (powering TaiShan 100); Kunpeng 920 (2019) was the first 7nm data center Arm processor (powering TaiShan 200).

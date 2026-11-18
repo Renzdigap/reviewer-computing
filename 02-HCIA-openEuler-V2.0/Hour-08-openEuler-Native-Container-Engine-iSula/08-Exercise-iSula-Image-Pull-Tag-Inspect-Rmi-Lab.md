@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Pulling, Tagging, Inspecting & Removing Images with `isula`
+# Hands-On Lab: Pulling, Tagging, Inspecting & Removing Images with `isula`
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 4 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are managing container images on an openEuler host (following Ch.07 pp. 435–438). Pull `openeuler/busybox:latest`, re-tag it as `busybox:test`, list all local images to verify they share the same `IMAGE ID`, and then remove the `busybox:test` tag using `isula rmi`.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Step 1: Pull the `openeuler/busybox:latest` image using `isula pull openeuler/busybox:latest`.
 2. Step 2: Tag `openeuler/busybox:latest` as `busybox:test` using `isula tag openeuler/busybox:latest busybox:test` and list local images with `isula images`.
 3. Step 3: Delete the `busybox:test` image reference using `isula rmi busybox:test`.
 
-### 📝 Starter Workspace (`root@openEuler:~#`)
+### Starter Workspace (`root@openEuler:~#`)
 ```bash
 # Step 1: Pull openeuler/busybox:latest from registry
 <isula_pull_command>
@@ -29,7 +29,7 @@ You are managing container images on an openEuler host (following Ch.07 pp. 435�
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Use `isula pull openeuler/busybox:latest` (Ch.07 p.436).
 - Use `isula tag openeuler/busybox:latest busybox:test` and `isula images` (Ch.07 p.437).
@@ -38,7 +38,7 @@ You are managing container images on an openEuler host (following Ch.07 pp. 435�
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -67,7 +67,7 @@ Image "busybox:test" removed
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **What is the maximum number of layers a container image can have, and what Happens when a file inside a read-only image layer (`lowerdir`) is deleted inside a running container?**
@@ -78,7 +78,7 @@ Image "busybox:test" removed
 - D. Max 4 layers; the container immediately crashes
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.07 (p.428 & p.430–433), an image is immutable and cannot exceed 128 layers. When a file is deleted in a container, UnionFS creates a whiteout file at the R/W container layer (`upperdir`) to block/hide the file without altering the read-only image layer.
@@ -93,7 +93,7 @@ Image "busybox:test" removed
 - D. `bin`, `sbin`, `usr`, `var` (`var` is invisible)
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.07 (p.433), OverlayFS is constructed and implemented using the `lowerdir`, `upperdir`, `merged`, and `workdir` directories, where `workdir` is invisible to users.
@@ -108,7 +108,7 @@ Image "busybox:test" removed
 - D. `isula rmi <image>` deletes an image on the host.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** Per Ch.07 (pp.434–438), all four statements are explicitly documented in the official Huawei training material.

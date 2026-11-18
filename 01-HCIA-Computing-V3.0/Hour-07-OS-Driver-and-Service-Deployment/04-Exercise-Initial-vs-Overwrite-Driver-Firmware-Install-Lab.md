@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Driver & Firmware Installation Workflow Sequencer
+# Hands-On Lab: Driver & Firmware Installation Workflow Sequencer
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 2 of 4)  
@@ -7,15 +7,15 @@
 
 ---
 
-## 🛠️ Part A: Practical Lab Scenario
+## Part A: Practical Lab Scenario
 You are writing an automated Ansible playbook for TaiShan 200 accelerator/NIC cards that handles both Initial Installation and Overwrite Installation according to Huawei's official Ch.05 p.335 flowchart.
 
-### 📋 Step-by-Step Instructions
+### Step-by-Step Instructions
 1. Set `driver_serves` to `'software'` and `firmware_serves` to `'hardware'` (stored in `'ROM'`).
 2. For `initial_installation_order`, specify `['Install the driver', 'Install the firmware']`.
 3. For `overwrite_installation_order`, specify `['Install the firmware', 'Install the driver']`.
 
-### 📝 Starter Workspace (`root@openeuler-node:~#`)
+### Starter Workspace (`root@openeuler-node:~#`)
 ```bash
 # Driver vs. Firmware Installation Playbook Spec (Ch.05 p.335)
 concepts:
@@ -38,7 +38,7 @@ workflows:
 ```
 
 <details>
-<summary>💡 <strong>Click to View Hints</strong></summary>
+<summary><strong>Click to View Hints</strong></summary>
 
 - Drivers serve software; firmware serves hardware and is pre-installed in ROM.
 - Initial installation installs the driver first, then the firmware; Overwrite installation installs the firmware first, then the driver (p. 335).
@@ -46,7 +46,7 @@ workflows:
 </details>
 
 <details>
-<summary>🔑 <strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
+<summary><strong>Click to Reveal Full Working Solution & Expected Output</strong></summary>
 
 #### Solution Code / Commands:
 ```bash
@@ -81,7 +81,7 @@ workflows:
 
 ---
 
-## 📝 Part B: National Stage Exam Verification Drill
+## Part B: National Stage Exam Verification Drill
 
 ### Question 1 [Single-Choice]
 **According to the Driver and Firmware Installation flowchart in Chapter 05 (p. 335), what is the correct installation sequence for 'Initial installation' versus 'Overwrite installation' after creating a hardware running user?**
@@ -92,7 +92,7 @@ workflows:
 - D. Both Initial and Overwrite installations must always install the driver before firmware
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to the official flowchart on Ch.05 p.335, Initial installation installs the driver first and then the firmware; Overwrite installation installs the firmware first and then the driver.
@@ -107,7 +107,7 @@ workflows:
 - D. If driver customization is required, you must reconstruct the driver package and install it.
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 2)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 2)</strong></summary>
 
 - **Correct Answer:** `ABCD`
 - **Explanation:** All four statements come directly from Ch.05 pp. 334–335.
@@ -122,7 +122,7 @@ workflows:
 - D. Never; Linux does not support binary driver files
 
 <details>
-<summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>
+<summary>[PASS] <strong>Check Answer & Explanation (Question 3)</strong></summary>
 
 - **Correct Answer:** `B`
 - **Explanation:** According to Ch.05 p.335, if driver customization is not required and the kernel in the environment is in the version mapping table, you can use the binary driver file for installation.

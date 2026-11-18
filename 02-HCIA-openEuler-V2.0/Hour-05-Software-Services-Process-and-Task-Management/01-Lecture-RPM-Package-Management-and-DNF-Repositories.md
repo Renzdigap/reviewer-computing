@@ -1,4 +1,4 @@
-# 📖 RPM Package Management & DNF Repository Configuration (`rpm`, `createrepo`)
+# RPM Package Management & DNF Repository Configuration (`rpm`, `createrepo`)
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 1 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Parse the standard RPM package naming format (`name-version-release.arch.rpm`) and execute install, upgrade, uninstall, and query commands (`rpm`)
 - Explain why DNF ('next-generation YUM') outperforms YUM using `libsolv` and Python 3 plugins
 - Configure `/etc/dnf/dnf.conf`, `/etc/yum.repos.d/*.repo` files, and local software repositories using `createrepo`
@@ -61,12 +61,12 @@ gpgkey=http://repo.openeuler.org/openEuler-24.03-LTS-SP1/OS/$basearch/RPM-GPG-KE
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **rpm -ivh installs, rpm -Uvh upgrades (or installs), rpm -Fvh upgrades only existing packages, rpm -e uninstalls, rpm -qf <file> finds which package owns a file, and rpm -qc lists config files.**
 - **DNF ('next-generation YUM') uses the libsolv library and Python 3 plugins; its global config is /etc/dnf/dnf.conf (default installonly_limit=3) and repo files live in /etc/yum.repos.d/.**
 - **To build a local repository from a folder of RPMs, install createrepo and run 'createrepo --database /mnt/local_repo'.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP: Do not confuse /etc/dnf/dnf.conf (global DNF configuration) with /etc/yum.repos.d/ (default directory for .repo files)!
 
@@ -75,5 +75,5 @@ gpgkey=http://repo.openeuler.org/openEuler-24.03-LTS-SP1/OS/$basearch/RPM-GPG-KE
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`02-Exercise-RPM-Queries-and-Local-Repo-Creation-Lab.html`](./02-Exercise-RPM-Queries-and-Local-Repo-Creation-Lab.html)** (or [`02-Exercise-RPM-Queries-and-Local-Repo-Creation-Lab.md`](./02-Exercise-RPM-Queries-and-Local-Repo-Creation-Lab.md)) to apply this concept in an interactive lab workbench!

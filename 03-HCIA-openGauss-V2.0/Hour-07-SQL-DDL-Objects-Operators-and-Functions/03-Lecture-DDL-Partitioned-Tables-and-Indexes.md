@@ -1,4 +1,4 @@
-# 📖 DDL for Partitioned Tables & Indexes
+# DDL for Partitioned Tables & Indexes
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 2 of 4)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 - Create Range, Interval, List, and Hash Partitioned Tables with `ENABLE ROW MOVEMENT` and understand partition key constraint rules
 - Execute partition maintenance clauses (`MOVE`, `EXCHANGE`, `MERGE`, `SPLIT`, `ADD`, `DROP`, `RENAME`)
 - Create, rebuild, rename, mark `UNUSABLE`, and drop Indexes (`LOCAL` vs `GLOBAL`, `DROP INDEX CONCURRENTLY`), avoiding the Ch.05 Quiz Q1 index-drop trap
@@ -62,12 +62,12 @@ ALTER TABLE training RENAME PARTITION training3 TO training5;
 
 ---
 
-## 🔑 Key Takeaways
+## Key Takeaways
 - **Dropping an index (`DROP INDEX`) deletes ONLY the index structure — it NEVER deletes the corresponding base table (Ch.05 p. 446 Quiz Q1: False!). Conversely, `DROP TABLE` deletes the table and all its dependent indexes and partitions.**
 - **On a partitioned table, any `UNIQUE` or `PRIMARY KEY` constraint must include all partition key columns. Range partitioning supports multi-column keys, while List and Hash partitioning support only single-column keys.**
 - **`DROP INDEX CONCURRENTLY` drops an index without locking concurrent table access, but accepts only one index name, does not support `CASCADE`, and cannot run inside a transaction block.**
 
-## ⚠️ Huawei ICT Competition National Stage Exam Traps
+## Huawei ICT Competition National Stage Exam Traps
 > [!WARNING]
 > EXAM TRAP (Ch.05 p. 446 Quiz Q1): '(True or false) When an index is created for a table, the corresponding base table is deleted if the index is canceled.' -> B. False!
 
@@ -76,5 +76,5 @@ ALTER TABLE training RENAME PARTITION training3 TO training5;
 
 ---
 
-### 🚀 Next Step: Immediate Hands-On Exercise
+### Next Step: Immediate Hands-On Exercise
 Proceed immediately to **[`04-Exercise-Partition-Maintenance-and-Index-DDL-Lab.html`](./04-Exercise-Partition-Maintenance-and-Index-DDL-Lab.html)** (or [`04-Exercise-Partition-Maintenance-and-Index-DDL-Lab.md`](./04-Exercise-Partition-Maintenance-and-Index-DDL-Lab.md)) to apply this concept in an interactive lab workbench!
