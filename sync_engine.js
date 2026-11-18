@@ -71,20 +71,10 @@
           if (typeof window.renderSidebar === 'function') window.renderSidebar();
           if (typeof window.refreshDoneBadge === 'function') window.refreshDoneBadge();
         }
-        updateSyncUI(true, '🟢 Saved locally to progress.json on this PC');
       })
       .catch(err => {
         isConnectedToServer = false;
-        updateSyncUI(false, '💾 Stored in Browser LocalStorage');
       });
-  }
-
-  function updateSyncUI(connected, message) {
-    const el = document.getElementById('sync-status-indicator');
-    if (el) {
-      el.innerHTML = message;
-      el.style.color = connected ? '#34d399' : '#38bdf8';
-    }
   }
 
   // Global Sync & Backup Helpers
