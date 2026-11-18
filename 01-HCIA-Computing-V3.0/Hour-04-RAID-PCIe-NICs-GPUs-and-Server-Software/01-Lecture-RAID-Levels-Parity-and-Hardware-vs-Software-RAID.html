@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAID Levels, Parity, Hot Spare &amp; Hardware vs. Software RAID | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 04 • Sprint 1/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="../Hour-03-Server-Hardware-CPU-Memory-and-Drives/08-Exercise-Drive-Interface-Rates-and-IOPS-Benchmark-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./02-Exercise-RAID-Capacity-Fault-Tolerance-and-Parity-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.03, pp. 159–169</span>
+            <span class="badge badge-hour">⏱️ Hour 04 • Sprint 1/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">RAID Levels, Parity, Hot Spare &amp; Hardware vs. Software RAID</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Understand the 3 core RAID technologies (Data striping, Mirroring, Data parity) and calculate utilization and fault tolerance for RAID 0, 1, 1E, 5, 6, 10, 01, 50, and 60</li><li>Explain Global vs. Dedicated Hot Spare and why RAID is NOT a substitute for data backup</li><li>Contrast Software RAID (and its 6 unsupported features) with Built-in and External Hardware RAID</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. RAID Core Technologies &amp; Standard/Nested Levels (pp. 159–163)</h3>
+<p>Proposed by <strong>Prof. D.A. Patterson</strong> at UC Berkeley in <strong>1988</strong>, <strong>RAID (Redundant Array of Independent Disks)</strong> combines multiple physical disks into logical disks/volumes (<strong>LUNs</strong>) using <strong>Data striping</strong>, <strong>Mirroring</strong>, and <strong>Data parity</strong> (XOR or Galois field P+Q).</p>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>RAID Level</th><th>Min Disks</th><th>Drive Utilization ($N$ disks, $M$ spans)</th><th>Fault Tolerance &amp; Key Mechanism (pp. 160–163)</th></tr></thead><tbody>
+<tr><td><strong>RAID 0</strong></td><td>$\ge 1$ (or $\ge 2$)</td><td><strong>100%</strong> ($N$)</td><td><strong>0 failed disks</strong>. Striping only; highest read/write speed, <strong>low reliability</strong> (graphics workstations).</td></tr>
+<tr><td><strong>RAID 1</strong></td><td>$\ge 2$ ($2N$)</td><td><strong>50%</strong> ($N/2$)</td><td><strong>1 disk per mirror pair</strong>. Mirroring only; high reliability &amp; read speed, medium write speed.</td></tr>
+<tr><td><strong>RAID 1E</strong></td><td>$\ge 3$</td><td><strong>50%</strong> ($N/2$)</td><td>Each disk has two stripe groups where the next stripe group holds the <strong>right-shifted misplaced mirror</strong> of the previous stripe group. Tolerates <strong>1 disk offline</strong> (or <strong>2 non-adjacent disks</strong> if $\ge 4$ disks, provided first and last disks do not fail together).</td></tr>
+<tr><td><strong>RAID 5</strong></td><td>$\ge 3$</td><td><strong>$(N - 1)/N$</strong></td><td><strong>1 failed disk</strong>. Cyclically distributed XOR parity ($P_0 = D_0 \oplus D_1$). Single disk failure causes performance degradation during rebuild.</td></tr>
+<tr><td><strong>RAID 6</strong></td><td>$\ge 4$</td><td><strong>$(N - 2)/N$</strong></td><td><strong>2 failed disks simultaneously</strong>. Two independent distributed parity codes: <strong>P</strong> ($P_0 = D_0 \oplus D_1$) and <strong>Q</strong> ($Q_0 = (D_0 \cdot K_0) \oplus (D_1 \cdot K_1)$ in Galois field).</td></tr>
+<tr><td><strong>RAID 10 vs. 01</strong></td><td>$\ge 4$ (even)</td><td><strong>50%</strong></td><td><strong>RAID 10</strong> mirrors first (RAID 1) then stripes (RAID 0); tolerates 1 failed disk per RAID 1 span. <strong>RAID 01</strong> stripes first (RAID 0) then mirrors (RAID 1) — losing 1 disk loses an entire stripe and degrades the array into a non-redundant RAID 0!</td></tr>
+<tr><td><strong>RAID 50</strong></td><td>$\ge 6$</td><td><strong>$(N - M)/N$</strong></td><td><strong>RAID 5 first, then RAID 0</strong> across $M$ spans ($\ge 2$ spans $\times 3$ disks $= 6$ disks min). Tolerates 1 disk failure per RAID 5 span.</td></tr>
+<tr><td><strong>RAID 60</strong></td><td>$\ge 8$ (theory)</td><td><strong>$(N - 2M)/N$</strong></td><td><strong>RAID 6 first, then RAID 0</strong> across $M$ spans ($\ge 2$ spans $\times 4$ disks $= 8$ disks min on p.161–162). Tolerates 2 disk failures per RAID 6 span.</td></tr>
+</tbody></table></div>
+<p>---</p>
+<h3>2. Hot Spare, Reconstruction &amp; Why RAID != Backup (pp. 164–165)</h3>
+<ul class="md-list">
+<li><strong>Hot Spare</strong>: Automatically replaces a faulty disk in a redundant RAID group and triggers <strong>reconstruction</strong>:</li>
+<li><strong>Global Hot Spare</strong>: Shared by <strong>all</strong> redundant RAID groups in the system.</li>
+<li><strong>Dedicated Hot Spare</strong>: Dedicated to <strong>one specific</strong> redundant RAID group.</li>
+<li><strong>RAID Cannot Replace Data Backup (p. 165)</strong>: RAID only protects against physical disk failures; it <strong>cannot</strong> prevent data loss from <strong>viruses, human error, accidental deletion, or OS/file system corruption</strong>.</li>
+</ul>
+<p>---</p>
+<h3>3. Software RAID vs. Hardware RAID (Built-in &amp; External) (pp. 166–169)</h3>
+<ul class="md-list">
+<li><strong>Software RAID (p. 167)</strong>: Executed by OS kernel disk code using host <strong>CPU</strong> (high CPU overhead for RAID 5 XOR). <strong>Six functions NOT supported by Software RAID</strong>:</li>
+</ul>
+<ol class="md-list">
+<li>Hot swap of hard disks</li>
+<li>Hot spare of hard disks</li>
+<li>Remote array management</li>
+<li>Bootable arrays</li>
+<li>Array configuration on hard disks</li>
+<li>S.M.A.R.T. for disks</li>
+</ol>
+<ul class="md-list">
+<li><strong>Built-in Hardware RAID</strong>: Uses a PCIe RAID controller card (e.g., <strong>Avago MegaRAID SAS 9440-8i</strong> with Mini-SAS <strong>SFF-8643</strong> ports, heat sink, heartbeat LED, and chip overtemperature LED) with its own independent processor and cache memory; supports bootable arrays.</li>
+<li><strong>External Hardware RAID</strong>: Independent external disk array subsystem connected via standard controller; supports dual controllers, hot swap, and ultra-large capacity.</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>Drive utilization formulas: RAID 0 = 100%, RAID 1 / 10 / 1E = 50%, RAID 5 = (N-1)/N, RAID 6 = (N-2)/N, RAID 50 = (N-M)/N, RAID 60 = (N-2M)/N.</li><li>RAID 10 mirrors first (RAID 1) then stripes (RAID 0) and is more fault-tolerant than RAID 01 (which stripes first then mirrors).</li><li>RAID 50 requires at least 6 disks (2 × 3-disk RAID 5 spans); theoretical RAID 60 requires at least 8 disks (2 × 4-disk RAID 6 spans).</li><li>Software RAID consumes host CPU cycles and does NOT support hot swap, hot spare, remote array management, bootable arrays, or disk S.M.A.R.T.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: RAID CANNOT replace data backup because RAID cannot protect against viruses, accidental file deletion, or OS/filesystem corruption (p. 165)!</div><div class="trap-item">⚠️ EXAM TRAP: In RAID 1E with &gt;= 4 disks, two offline disks can be tolerated ONLY if they are NOT adjacent (and the first and last disks are not offline simultaneously).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h4_s1_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./02-Exercise-RAID-Capacity-Fault-Tolerance-and-Parity-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Enterprise RAID Capacity & Fault Tolerance Calculator", "duration_mins": 8, "exercise_type": "script", "prompt_label": "python3@taishan-raid:~$", "scenario": "Write a Python script to compute usable capacities for a server with 8 × 4 TB drives across RAID 5, RAID 6, RAID 10, and RAID 60 (with M=2 spans), and verify minimum disk counts.", "instructions": ["Set `raid5_min_disks` to `3`, `raid50_min_disks` to `6`, and `raid60_min_disks` to `8`.", "For `N = 8` disks of `4` TB each (total raw = 32 TB, `M = 2` spans): set `usable_tb_raid5` to `28` ($(8-1)\\times 4$), `usable_tb_raid6` to `24` ($(8-2)\\times 4$), and `usable_tb_raid60` to `16` ($(8 - 2\\times 2)\\times 4$).", "Set `software_raid_supports_bootable_array` to `False`."], "starter_code": "# RAID Capacity & Fault Tolerance Calculator (8 x 4 TB Drives, M = 2 Spans)\nraid5_min_disks = ___\nraid50_min_disks = ___\nraid60_min_disks = ___\n\nusable_tb_raid5 = ___\nusable_tb_raid6 = ___\nusable_tb_raid60 = ___\nsoftware_raid_supports_bootable_array = ___\n\nprint(f\"Min Disks (R5/R50/R60): {raid5_min_disks}/{raid50_min_disks}/{raid60_min_disks}\")\nprint(f\"Usable TB (R5/R6/R60): {usable_tb_raid5}T / {usable_tb_raid6}T / {usable_tb_raid60}T\")", "solution_code": "# RAID Capacity & Fault Tolerance Calculator (8 x 4 TB Drives, M = 2 Spans)\nraid5_min_disks = 3\nraid50_min_disks = 6\nraid60_min_disks = 8\n\nusable_tb_raid5 = 28\nusable_tb_raid6 = 24\nusable_tb_raid60 = 16\nsoftware_raid_supports_bootable_array = False\n\nprint(f\"Min Disks (R5/R50/R60): {raid5_min_disks}/{raid50_min_disks}/{raid60_min_disks}\")\nprint(f\"Usable TB (R5/R6/R60): {usable_tb_raid5}T / {usable_tb_raid6}T / {usable_tb_raid60}T\")", "hints": ["RAID 5 requires >= 3 disks, RAID 50 requires >= 6 disks, and RAID 60 requires >= 8 disks (Ch.03, pp. 161–162).", "With 8 × 4 TB drives: RAID 5 usable = 7 × 4 = 28 TB; RAID 6 usable = 6 × 4 = 24 TB; RAID 60 (2 spans) usable = (8 - 4) × 4 = 16 TB."], "validation_checks": [{"step": 1, "description": "Verify minimum disk counts for RAID 5 (3), RAID 50 (6), and RAID 60 (8)", "required_any": ["3", "6", "8"], "feedback_fail": "Set raid5_min_disks = 3, raid50_min_disks = 6, and raid60_min_disks = 8."}, {"step": 2, "description": "Verify usable capacities (28 TB, 24 TB, 16 TB)", "required_any": ["28", "24", "16"], "feedback_fail": "Check usable_tb_raid5 = 28, usable_tb_raid6 = 24, and usable_tb_raid60 = 16."}, {"step": 3, "description": "Verify that Software RAID does not support bootable arrays", "required_any": ["false"], "feedback_fail": "Set software_raid_supports_bootable_array = False."}], "simulated_output": "Min Disks (R5/R50/R60): 3/6/8\nUsable TB (R5/R6/R60): 28T / 24T / 16T\n[OK] RAID utilization formulas and Software RAID limitations verified.", "quiz_questions": [{"id": "h4_s1_q1", "type": "single", "question": "If a server is configured with N member drives arranged in M spans in a RAID 60 array, what is the drive utilization formula, and what is the theoretical minimum number of drives required to construct RAID 60?", "options": ["A. (N - M)/N; at least 6 drives", "B. (N - M * 2)/N; at least 8 drives", "C. (N - 2)/N; at least 4 drives", "D. 50%; at least 4 drives"], "answer": "B", "explanation": "According to Ch.03 pp. 161–163, RAID 60 sets up RAID 6 (at least 4 drives per span) first and then RAID 0 across M spans, requiring at least 8 drives with drive utilization (N - M × 2)/N."}, {"id": "h4_s1_q2", "type": "multiple", "question": "Which of the following functions are NOT provided by Software RAID according to Chapter 03 (p. 167)?", "options": ["A. Hot swap and hot spare of hard disks", "B. Remote array management", "C. Bootable arrays", "D. S.M.A.R.T. for disks"], "answer": "ABCD", "explanation": "According to Ch.03 p.167, Software RAID does not support hot swap of hard disks, hot spare of hard disks, remote array management, bootable arrays, array configuration on hard disks, or S.M.A.R.T. for disks."}, {"id": "h4_s1_q3", "type": "tf", "question": "Because RAID 6 uses two independent distributed parity codes (P and Q) and can tolerate two simultaneous drive failures, configuring RAID 6 eliminates the need for data backup and disaster recovery.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False. According to Ch.03 p.165, RAID cannot be used as an alternative to data backup because it cannot prevent data loss caused by non-disk faults such as viruses, man-made damage, or accidental deletion."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

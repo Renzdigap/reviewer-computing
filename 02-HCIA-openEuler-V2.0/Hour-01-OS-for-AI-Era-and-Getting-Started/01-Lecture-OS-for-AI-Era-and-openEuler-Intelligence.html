@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OS for the AI Era &amp; openEuler Intelligence Architecture | HCIA-openEuler V2.0 (Operating System &amp; Cloud-Native iSula)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 02-HCIA-openEuler-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 01 • Sprint 1/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="../index.html" class="nav-btn">← Prev</a>
+      <a href="./02-Exercise-openEuler-Intelligence-Architecture-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openEuler V2.0 Training Material.pdf • Ch.01, pp. 1–22</span>
+            <span class="badge badge-hour">⏱️ Hour 01 • Sprint 1/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">OS for the AI Era &amp; openEuler Intelligence Architecture</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Define Artificial Intelligence (John McCarthy, 1956) and trace the 5-layer AI hierarchy from OS/Infrastructure to Industry Solutions</li><li>Explain the openEuler Intelligence ('AI for OS') architecture, including its two interaction entries (Web entry and Intelligent Shell entry)</li><li>Differentiate the 5 core functions of openEuler Intelligence: Intelligent Q&amp;A, AI Application Development Framework, Intelligent Optimization, Intelligent Diagnosis, and Intelligent Container Image</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Evolution of AI and the 5-Layer AI Hierarchy</h3>
+<p>The term <strong>Artificial Intelligence (AI)</strong> was coined by <strong>John McCarthy in 1956</strong> as the <em>"science and engineering of making intelligent machines, especially intelligent computer programs."</em> In the modern computing stack, AI is structured into five hierarchical layers built upon the Operating System:</p>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Hierarchy Layer</th><th>Core Components &amp; Examples</th></tr></thead><tbody>
+<tr><td><strong>5. Industry Solution</strong></td><td>Finance, Healthcare, Security, Transportation, Gaming (autonomous driving, smart home, VR/AR, UAVs)</td></tr>
+<tr><td><strong>4. Technology</strong></td><td>Perception &amp; Analysis, Understanding &amp; Thinking, Decision-making &amp; Interaction (Speech/Image/Video recognition, NLP, Knowledge Graph)</td></tr>
+<tr><td><strong>3. Technical Direction</strong></td><td>Speech processing, Computer vision, Natural Language Processing (NLP), Decision-making systems, Big data/Statistical analysis</td></tr>
+<tr><td><strong>2. Algorithm</strong></td><td>Machine learning (ML) and Deep learning (DL)</td></tr>
+<tr><td><strong>1. Infrastructure &amp; OS</strong></td><td><strong>openEuler and other OSs</strong>, Hardware/Computing capability, and Big Data</td></tr>
+</tbody></table></div>
+<p>---</p>
+<h3>2. openEuler Intelligence Architecture ("AI for OS")</h3>
+<p><strong>openEuler Intelligence</strong> integrates Large Language Model (LLM) capabilities and a rich knowledge base of openEuler source code and O&amp;M data into the OS toolchain.</p>
+<ul class="md-list">
+<li><strong>Two Interaction Entries (Official Ch.01 Quiz Point):</strong></li>
+</ul>
+<ol class="md-list">
+<li><strong>Web Entry:</strong> Easy-to-use browser portal providing openEuler knowledge, community announcements, and O&amp;M solutions via intelligent agents.</li>
+<li><strong>Intelligent Shell Entry:</strong> Allows O&amp;M engineers and developers to interact with openEuler in the terminal using <strong>natural human language</strong> for heuristic tuning and fault diagnosis.</li>
+</ol>
+<ul class="md-list">
+<li><strong>Core Backend Components:</strong> Orchestration Engine, Historical Context Management, Agent Framework (Intelligent O&amp;M, Intelligent Optimization, CVE Hotfix services), Document Parsing Engine, and <strong>Retrieval-Augmented Generation (RAG)</strong> Knowledge Base.</li>
+</ul>
+<p>---</p>
+<h3>3. Five Core Functions of openEuler Intelligence</h3>
+<ol class="md-list">
+<li><strong>Intelligent Q&amp;A:</strong></li>
+</ol>
+<ul class="md-list">
+<li><strong>Workflow Scheduling:</strong> Combines multiple agent steps into an inseparable <strong>atomic operation</strong> with user-defined error recovery, real-time data transfer between steps, and proactive clarification of vague user prompts.</li>
+<li><strong>Task Recommendation:</strong> Semantic intent recognition and next-step guidance based on user habits.</li>
+<li><strong>Enhanced RAG:</strong> Pre-processing query rewriting/routing, fragment vectorization/keyword indexing, and <strong>multi-channel retrieval</strong> (vectorized, keyword, and <strong>Chat2DB</strong> with re-ranking/fusion).</li>
+<li><strong>Corpus Governance:</strong> Fragment relationship extraction, fragment derivative construction (digests), and <strong>OCR</strong> for hybrid image-text documents.</li>
+</ul>
+<ol class="md-list">
+<li><strong>AI Application Development Framework:</strong> Provides Multi-channel RAG, document governance (deduplication, sensitive data masking, standardization), and <strong>embedding model fine-tuning</strong> (e.g., <strong>BGE models</strong>).</li>
+<li><strong>Intelligent Optimization:</strong> Achieves <strong>heuristic system optimization</strong> by collecting and analyzing performance data via natural language interaction.</li>
+<li><strong>Intelligent Diagnosis (3 Agents):</strong></li>
+</ol>
+<ul class="md-list">
+<li><strong>Inspection Agent:</strong> Checks designated IP addresses and outputs an abnormality list (associated container IDs, abnormal CPU/memory metrics).</li>
+<li><strong>Demarcation Agent:</strong> Analyzes a selected abnormality and outputs the <strong>top 3 root cause metrics</strong>.</li>
+<li><strong>Detection (Location) Agent:</strong> Performs profiling location on root cause metrics and outputs hotspot stack, system time, and performance metrics.</li>
+</ul>
+<ol class="md-list">
+<li><strong>Intelligent Container Image:</strong> Uses natural language to pull images from Docker Hub across <strong>3 container layers</strong>:</li>
+</ol>
+<ul class="md-list">
+<li><strong>Tier 1 (SDK layer):</strong> Hardware enablement libraries only (e.g., <strong>CUDA</strong>, <strong>CANN</strong>).</li>
+<li><strong>Tier 2 (SDKs + training/inference frameworks):</strong> Adds TensorFlow/PyTorch (e.g., <code class="inline-code">tensorflow2.15.0-cuda12.2.0</code>, <code class="inline-code">pytorch2.1.0.a1-cann7.0.RC1</code>).</li>
+<li><strong>Tier 3 (SDKs + frameworks + LLMs):</strong> Encapsulates pre-integrated foundation models (e.g., <code class="inline-code">llama2-7b</code>, <code class="inline-code">chatglm2-13b</code>).</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>openEuler Intelligence supports exactly TWO interaction entries: Web entry and Intelligent shell entry (Ch.01 Quiz Q1).</li><li>Intelligent Diagnosis relies on three specialized agents in sequence: Inspection Agent (checks IP/container abnormalities) -&gt; Demarcation Agent (outputs top 3 root cause metrics) -&gt; Detection Agent (profiling location &amp; stack hotspots).</li><li>Intelligent Container Images are organized into 3 tiers: (1) SDK layer (CUDA/CANN), (2) SDK + Frameworks (PyTorch/TensorFlow), and (3) SDK + Frameworks + LLMs (llama2-7b, chatglm2-13b).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Do not confuse the three Intelligent Diagnosis agents! Inspection finds abnormal IPs/containers; Demarcation narrows down to the Top 3 root cause metrics; Detection/Location profiles the stack and hotspots.</div><div class="trap-item">⚠️ EXAM TRAP: In openEuler Intelligence RAG, Corpus Governance specifically includes three techniques: (1) Fragment relationship extraction, (2) Fragment derivative construction, and (3) Optical Character Recognition (OCR).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar2_h1_s1_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./02-Exercise-openEuler-Intelligence-Architecture-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: openEuler Intelligence Entries, RAG & Diagnostic Agents Verification", "duration_mins": 8, "exercise_type": "config", "prompt_label": "root@openEuler:~#", "scenario": "You are deploying openEuler Intelligence for an enterprise O&M team. Complete the architecture verification manifest below to specify the two interaction entries, the three Intelligent Diagnosis agents, and the three Intelligent Container Image tiers.", "instructions": ["Step 1: Set `INTERACTION_ENTRIES` to the two official access entries supported by the openEuler intelligent platform (`web` and `intelligent shell`).", "Step 2: Set `DIAGNOSIS_AGENTS` to the three diagnostic agents in execution order (`Inspection`, `Demarcation`, `Detection`) and specify `TOP_ROOT_CAUSE_METRICS=3`.", "Step 3: Set `CONTAINER_TIERS` to include the Huawei Ascend SDK (`CANN`), framework (`PyTorch`), and LLM (`chatglm2-13b` or `llama2-7b`)."], "starter_code": "# openEuler Intelligence Architecture Verification Manifest\nINTERACTION_ENTRIES=\"<entry1>, <entry2>\"\nDIAGNOSIS_AGENTS=\"<agent1> -> <agent2> -> <agent3>\"\nTOP_ROOT_CAUSE_METRICS=<number>\nCONTAINER_TIERS=\"SDK(CUDA/<sdk>) -> Framework(TensorFlow/<framework>) -> LLM(<model>)\"", "solution_code": "# openEuler Intelligence Architecture Verification Manifest\nINTERACTION_ENTRIES=\"web, intelligent shell\"\nDIAGNOSIS_AGENTS=\"Inspection -> Demarcation -> Detection\"\nTOP_ROOT_CAUSE_METRICS=3\nCONTAINER_TIERS=\"SDK(CUDA/CANN) -> Framework(TensorFlow/PyTorch) -> LLM(llama2-7b/chatglm2-13b)\"", "hints": ["Recall Ch.01 Quiz Q1: The openEuler intelligent platform supports two entries: web entry and intelligent shell entry.", "In Intelligent Diagnosis, the Inspection Agent checks IPs/containers, the Demarcation Agent outputs the top 3 root cause metrics, and the Detection Agent profiles stack hotspots.", "The SDK layer encapsulates CUDA and CANN; the LLM layer includes llama2-7b and chatglm2-13b."], "validation_checks": [{"step": 1, "description": "Specify both Web entry and Intelligent Shell entry", "required_any": ["shell"], "feedback_fail": "Make sure INTERACTION_ENTRIES includes both 'web' and 'intelligent shell'."}, {"step": 2, "description": "Specify Inspection, Demarcation, and Detection agents with top 3 root cause metrics", "required_any": ["demarcation"], "feedback_fail": "Include 'Inspection', 'Demarcation', and 'Detection' in DIAGNOSIS_AGENTS."}, {"step": 3, "description": "Specify CANN SDK and LLM container image tier", "required_any": ["cann"], "feedback_fail": "Include 'CANN' in the SDK layer of CONTAINER_TIERS."}], "simulated_output": "[OK] openEuler Intelligence Entries Verified: Web Entry + Intelligent Shell Entry\n[OK] RAG Multi-Channel Retrieval Active: Vector + Keyword + Chat2DB\n[OK] Intelligent Diagnosis Pipeline: Inspection Agent -> Demarcation Agent (Top 3 Root Causes) -> Detection Agent (Stack Profiling)\n[OK] Intelligent Container Image Tiers: SDK (CUDA/CANN) | Framework (TensorFlow/PyTorch) | LLM (llama2-7b/chatglm2-13b)", "quiz_questions": [{"id": "h1_s1_q1", "type": "tf", "question": "[Official Ch.01 Quiz Q1] The openEuler intelligent platform currently supports two entries: web entry and intelligent shell entry.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "Official Ch.01 Quiz Q1 (p.20): True. openEuler Intelligence is accessible via two entries: the Web entry and the Intelligent shell entry."}, {"id": "h1_s1_q2", "type": "single", "question": "In the Intelligent Diagnosis function of openEuler Intelligence, which agent analyzes an abnormality selected from the inspection result and outputs the top 3 root cause metrics?", "options": ["A. Inspection Agent", "B. Demarcation Agent", "C. Detection Agent", "D. Orchestration Agent"], "answer": "B", "explanation": "Per Ch.01 (p.15), the Inspection Agent checks for abnormalities of designated IP addresses; the Demarcation Agent analyzes and demarcates an abnormality and outputs the top 3 root cause metrics; the Detection Agent performs profiling location on the root cause metrics."}, {"id": "h1_s1_q3", "type": "multiple", "question": "Which of the following capabilities are part of Corpus Governance in openEuler Intelligence's RAG technology?", "options": ["A. Fragment relationship extraction", "B. Fragment derivative construction (digests)", "C. Optical Character Recognition (OCR) for hybrid image and text scenarios", "D. Kernel space memory paging"], "answer": "ABC", "explanation": "Per Ch.01 (pp.10–11), Corpus Governance imports corpuses into the knowledge base through fragment relationship extraction, fragment derivative construction, and OCR."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

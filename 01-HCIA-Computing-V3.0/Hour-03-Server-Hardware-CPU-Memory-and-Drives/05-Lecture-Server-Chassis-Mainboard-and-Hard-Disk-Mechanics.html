@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mainboard S920X00, Front/Rear Panels &amp; Drive Classifications | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 03 • Sprint 3/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./06-Exercise-Mainboard-S920X00-and-Drive-MTBF-DWPD-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.03, pp. 149–154</span>
+            <span class="badge badge-hour">⏱️ Hour 03 • Sprint 3/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Mainboard S920X00, Front/Rear Panels &amp; Drive Classifications</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Master the specifications of the Kunpeng server mainboard S920X00</li><li>Identify every port, button, indicator, and I/O module on the TaiShan 200 (2280) front and rear panels</li><li>Compare SATA, SAS, NL-SAS, and SSD drives by rotational speed, MTBF, annual failure rate, and SSD DWPD classes</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Kunpeng Server Mainboard (S920X00) &amp; Chassis Sizes (pp. 149–150)</h3>
+<ul class="md-list">
+<li><strong>Mainboard Role</strong>: Provides the connection platform integrating CPUs, memory, storage, PCIe expansion cards, and external ports. The <strong>chipset</strong> is the most important component on the mainboard, managing inter-device communication and built-in functions (such as an integrated GPU).</li>
+<li><strong>Kunpeng Server Mainboard Model <code class="inline-code">S920X00</code> (p. 149)</strong>:</li>
+<li><strong>CPUs</strong>: <strong>2 × Kunpeng 920 processors</strong></li>
+<li><strong>Management Chip</strong>: <strong>Hi1710</strong> intelligent management chip</li>
+<li><strong>Memory</strong>: Up to <strong>32 DDR4-2933</strong> memory slots</li>
+<li><strong>PCIe Expansion</strong>: <strong>8 × PCIe 4.0</strong> slots</li>
+<li><strong>Chassis Compatibility</strong>: Compatible with <strong>2U or 4U rack servers</strong> (e.g., TaiShan 2280 2U and TaiShan 5280 4U share this motherboard!).</li>
+<li><strong>Rack Heights (p. 150)</strong>: <strong>1U = 1.75 in (4.45 cm)</strong>, <strong>2U = 3.5 in (8.9 cm)</strong>, <strong>4U = 7 in (17.8 cm)</strong>.</li>
+</ul>
+<p>---</p>
+<h3>2. TaiShan 200 (2280) Front and Rear Panels (pp. 151–152)</h3>
+<ul class="md-list">
+<li><strong>Supported Front Drive Configurations (p. 151)</strong>: <code class="inline-code">12 × 3.5-inch</code>, <code class="inline-code">25 × 2.5-inch</code>, <code class="inline-code">8 × 2.5" SAS/SATA + 12 × 2.5" NVMe</code>, <code class="inline-code">24 × 2.5" SAS/SATA</code>, or <code class="inline-code">8 × 2.5-inch</code> drives.</li>
+<li><strong>Front Panel Components (p. 151)</strong>: (1) UID button/indicator, (2) Health status indicator, (3) Power button/indicator, (4) Fault diagnosis LED, (5) <strong>FlexIO card presence indicator</strong>, (6) Drives, (7) <strong>VGA port</strong>, (8) <strong>USB 3.0 port</strong>, (9) Label with SN.</li>
+<li><strong>Rear Panel Components (p. 152)</strong>:</li>
+<li><strong>I/O module 1, I/O module 2, I/O module 3</strong> (can be drive modules or PCIe riser modules)</li>
+<li><strong>PSU 1 &amp; PSU 2</strong> (with PSU sockets)</li>
+<li><strong>FlexIO card 1 (connected to CPU 1)</strong> and <strong>FlexIO card 2 (connected to CPU 2)</strong></li>
+<li><strong>USB 3.0 port</strong>, <strong>VGA port</strong>, <strong>Debugging serial port</strong>, and <strong>Management network port (iBMC)</strong>.</li>
+</ul>
+<p>---</p>
+<h3>3. Drive Overview (SATA, SAS, NL-SAS, SSD) &amp; Service Categories (pp. 153–154)</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Parameter</th><th>SATA HDD</th><th>SAS HDD</th><th>NL-SAS HDD</th><th>SSD</th></tr></thead><tbody>
+<tr><td><strong>Rotational Speed (RPM)</strong></td><td><strong>7,200</strong></td><td><strong>15,000 / 10,000</strong></td><td><strong>7,200</strong></td><td><strong>N/A</strong> (Flash/DRAM)</td></tr>
+<tr><td><strong>Serial / Parallel</strong></td><td>Serial</td><td>Serial</td><td>Serial</td><td>Serial</td></tr>
+<tr><td><strong>Typical Capacity</strong></td><td>1 T / 2 T / 3 T</td><td>0.6 T / 0.9 T / 1.8 T / 2.4 T</td><td>2 T / 3 T / 4 T / 8 T / 10 T</td><td>480 G / 960 G / 1.92 T / 3.84 T</td></tr>
+<tr><td><strong>MTBF (Hours)</strong></td><td><strong>1,200,000</strong></td><td><strong>1,600,000</strong></td><td><strong>1,200,000</strong></td><td><strong>2,000,000</strong></td></tr>
+<tr><td><strong>Annual Failure Rate (AFR)</strong></td><td><strong>~2%</strong></td><td><strong>&lt; 2%</strong></td><td><strong>~2%</strong></td><td>Lowest</td></tr>
+<tr><td><strong>Key Features</strong></td><td>SATA 3.0 max <strong>600 MB/s</strong></td><td>Compatible with SATA; <strong>3.0 / 6.0 / 12.0 Gbit/s</strong></td><td><strong>Enterprise SATA drive with SAS interface</strong> (ideal for storage tiering)</td><td>Control unit + storage unit (Flash or DRAM chip); highest price</td></tr>
+</tbody></table></div>
+<ul class="md-list">
+<li><strong>HDD Service Categories (p. 154)</strong>: Enterprise-class performance, Enterprise-class capacity (SATA/SAS), Enterprise-class cloud drive (24/7 low power), Desktop drive (<strong>5 day / 8 hour</strong> household/PC use).</li>
+<li>**SSD Service Categories by DWPD (<em>Drive Writes Per Day</em>, p. 154)**:</li>
+<li><strong>Read-intensive SSD</strong>: $\text{DWPD} &lt; 3$ (frequent reads)</li>
+<li><strong>Mixed read/write SSD</strong>: $3 \le \text{DWPD} \le 10$ (balanced reads/writes)</li>
+<li><strong>Write-intensive SSD</strong>: $\text{DWPD} &gt; 10$ (frequent writes)</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>Kunpeng S920X00 mainboard features 2 × Kunpeng 920 CPUs, Hi1710 management chip, 32 DDR4-2933 slots, and 8 PCIe 4.0 slots for 2U/4U rack servers.</li><li>NL-SAS drives are 7,200 RPM enterprise SATA platters equipped with a SAS interface (MTBF 1,200,000 h, AFR ~2%).</li><li>MTBF rankings: SATA/NL-SAS = 1,200,000 h; SAS = 1,600,000 h (&lt;2% AFR); SSD = 2,000,000 h.</li><li>SSD DWPD categories: Read-intensive (&lt; 3), Mixed read/write (3 to 10), Write-intensive (&gt; 10).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: On the TaiShan 200 (2280) rear panel, FlexIO card 1 is connected to CPU 1, and FlexIO card 2 is connected to CPU 2!</div><div class="trap-item">⚠️ EXAM TRAP: Memorize the DWPD thresholds: Read-intensive (&lt; 3), Mixed read/write (3 to 10), Write-intensive (&gt; 10).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h3_s3_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./06-Exercise-Mainboard-S920X00-and-Drive-MTBF-DWPD-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: S920X00 Mainboard & Enterprise Drive Spec Classifier", "duration_mins": 8, "exercise_type": "config", "prompt_label": "hw-eng@taishan-2280:~#", "scenario": "Complete the hardware specification file for the Kunpeng S920X00 mainboard and classify enterprise HDD/SSD drive parameters.", "instructions": ["Set `mainboard_model` to `'S920X00'`, `bmc_management_chip` to `'Hi1710'`, and `pcie_4_slots` to `8`.", "Set `sas_mtbf_hours` to `1600000` and `ssd_mtbf_hours` to `2000000`.", "Set `read_intensive_dwpd_max` to `3` and `write_intensive_dwpd_min` to `10`."], "starter_code": "# S920X00 Mainboard & Drive Classification Spec\nmainboard:\n  mainboard_model: \"___\"\n  bmc_management_chip: \"___\"\n  ddr4_2933_slots: 32\n  pcie_4_slots: ___\n\ndrive_specs:\n  sata_nlsas_mtbf_hours: 1200000\n  sas_mtbf_hours: ___\n  ssd_mtbf_hours: ___\n  read_intensive_dwpd_max: ___\n  write_intensive_dwpd_min: ___\n", "solution_code": "# S920X00 Mainboard & Drive Classification Spec\nmainboard:\n  mainboard_model: \"S920X00\"\n  bmc_management_chip: \"Hi1710\"\n  ddr4_2933_slots: 32\n  pcie_4_slots: 8\n\ndrive_specs:\n  sata_nlsas_mtbf_hours: 1200000\n  sas_mtbf_hours: 1600000\n  ssd_mtbf_hours: 2000000\n  read_intensive_dwpd_max: 3\n  write_intensive_dwpd_min: 10\n", "hints": ["The Kunpeng server mainboard model on page 149 is S920X00 with the Hi1710 chip and 8 PCIe 4.0 slots.", "SAS MTBF is 1,600,000 hours; SSD MTBF is 2,000,000 hours; DWPD thresholds are < 3, 3–10, and > 10."], "validation_checks": [{"step": 1, "description": "Verify S920X00 mainboard model, Hi1710 chip, and 8 PCIe 4.0 slots", "required_any": ["s920x00", "hi1710"], "feedback_fail": "Set mainboard_model to 'S920X00' and bmc_management_chip to 'Hi1710'."}, {"step": 2, "description": "Verify SAS (1,600,000 h) and SSD (2,000,000 h) MTBF values", "required_any": ["1600000", "2000000"], "feedback_fail": "Set sas_mtbf_hours to 1600000 and ssd_mtbf_hours to 2000000."}, {"step": 3, "description": "Verify SSD DWPD thresholds (3 and 10)", "required_any": ["3", "10"], "feedback_fail": "Set read_intensive_dwpd_max to 3 and write_intensive_dwpd_min to 10."}], "simulated_output": "[OK] S920X00 Mainboard & Drive Specs Validated:\n- Mainboard: S920X00 (2 x Kunpeng 920 + Hi1710 BMC + 32 DDR4-2933 + 8 PCIe 4.0)\n- MTBF: SATA/NL-SAS = 1.2M h | SAS = 1.6M h | SSD = 2.0M h\n- SSD DWPD: Read-Intensive (<3) | Mixed (3-10) | Write-Intensive (>10).", "quiz_questions": [{"id": "h3_s3_q1", "type": "single", "question": "What are the rotational speed, interface type, and MTBF of an NL-SAS hard disk drive?", "options": ["A. 15,000 RPM, SATA interface, 1,600,000 hours MTBF", "B. 7,200 RPM, enterprise SATA drive with SAS interface, 1,200,000 hours MTBF", "C. 10,000 RPM, PCIe interface, 2,000,000 hours MTBF", "D. 5,400 RPM, parallel ATA interface, 800,000 hours MTBF"], "answer": "B", "explanation": "According to Ch.03 p.153, NL-SAS drives are 7,200 RPM enterprise-class SATA drives with SAS ports, an MTBF of 1,200,000 hours, and an annual failure rate of about 2%."}, {"id": "h3_s3_q2", "type": "single", "question": "How are enterprise SSDs classified based on Drive Writes Per Day (DWPD)?", "options": ["A. Read-intensive: DWPD < 1; Mixed: DWPD 1–3; Write-intensive: DWPD > 3", "B. Read-intensive: DWPD < 3; Mixed: DWPD 3–10; Write-intensive: DWPD > 10", "C. Read-intensive: DWPD < 5; Mixed: DWPD 5–15; Write-intensive: DWPD > 15", "D. Read-intensive: DWPD < 10; Mixed: DWPD 10–50; Write-intensive: DWPD > 50"], "answer": "B", "explanation": "According to Ch.03 p.154, Read-intensive SSDs have DWPD < 3, Mixed read/write SSDs have DWPD between 3 and 10, and Write-intensive SSDs have DWPD > 10."}, {"id": "h3_s3_q3", "type": "multiple", "question": "Which of the following specifications are true regarding the Kunpeng server mainboard (model S920X00)?", "options": ["A. It is equipped with two Kunpeng 920 processors and the Hi1710 intelligent management chip.", "B. It supports up to 32 DDR4-2933 memory slots.", "C. It provides eight PCIe 4.0 slots.", "D. It is compatible with 2U or 4U rack servers."], "answer": "ABCD", "explanation": "All four statements are explicitly stated on Ch.03 p.149 for the Kunpeng server mainboard (model S920X00)."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

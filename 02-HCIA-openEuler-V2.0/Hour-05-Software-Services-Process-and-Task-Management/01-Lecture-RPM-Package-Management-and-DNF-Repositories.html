@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RPM Package Management &amp; DNF Repository Configuration (`rpm`, `createrepo`) | HCIA-openEuler V2.0 (Operating System &amp; Cloud-Native iSula)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 02-HCIA-openEuler-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 05 • Sprint 1/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="../Hour-04-User-Group-and-Permission-Management/08-Exercise-ACL-and-Sudo-Configuration-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./02-Exercise-RPM-Queries-and-Local-Repo-Creation-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openEuler V2.0 Training Material.pdf • Ch.04, pp. 194–206</span>
+            <span class="badge badge-hour">⏱️ Hour 05 • Sprint 1/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">RPM Package Management &amp; DNF Repository Configuration (<code class="inline-code">rpm</code>, <code class="inline-code">createrepo</code>)</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Parse the standard RPM package naming format (<code class="inline-code">name-version-release.arch.rpm</code>) and execute install, upgrade, uninstall, and query commands (<code class="inline-code">rpm</code>)</li><li>Explain why DNF ('next-generation YUM') outperforms YUM using <code class="inline-code">libsolv</code> and Python 3 plugins</li><li>Configure <code class="inline-code">/etc/dnf/dnf.conf</code>, <code class="inline-code">/etc/yum.repos.d/*.repo</code> files, and local software repositories using <code class="inline-code">createrepo</code></li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. RPM Package Naming &amp; Core <code class="inline-code">rpm</code> Commands</h3>
+<ul class="md-list">
+<li><strong>RPM Naming Format:</strong> <code class="inline-code">name-version-release.arch.rpm</code> (e.g., <code class="inline-code">iSulad-2.0.11-1.oe2203.aarch64.rpm</code>).</li>
+<li><strong>Installation, Upgrade &amp; Removal:</strong></li>
+<li><strong><code class="inline-code">rpm -ivh example.rpm</code>:</strong> Installs a package (<code class="inline-code">-i</code> install, <code class="inline-code">-v</code> verbose details, <code class="inline-code">-h</code> hash <code class="inline-code">#</code> progress bar).</li>
+<li><strong><code class="inline-code">rpm -Uvh example.rpm</code>:</strong> Upgrades a package (replaces existing package, or <strong>installs it if not yet installed</strong>).</li>
+<li><strong><code class="inline-code">rpm -Fvh example.rpm</code>:</strong> Freshens/upgrades <strong>only if an earlier version is already installed</strong>.</li>
+<li><strong><code class="inline-code">rpm -e example</code>:</strong> Uninstalls a package. Force options: <strong><code class="inline-code">--nodeps</code></strong> (ignore dependencies—use with caution) and <strong><code class="inline-code">--allmatches</code></strong> (remove all versions); <strong><code class="inline-code">--force</code></strong> (forcibly install/overwrite files).</li>
+<li><strong>Query &amp; Validation Options (<code class="inline-code">rpm -q...</code>):</strong></li>
+<li><strong><code class="inline-code">-q &lt;pkg&gt;</code>:</strong> Checks if package is installed. <strong><code class="inline-code">-qa</code>:</strong> Lists <strong>all</strong> installed RPM packages.</li>
+<li><strong><code class="inline-code">-qi &lt;pkg&gt;</code>:</strong> Displays detailed package description/metadata (<code class="inline-code">-qpi</code> for an uninstalled <code class="inline-code">.rpm</code> file).</li>
+<li><strong><code class="inline-code">-ql &lt;pkg&gt;</code>:</strong> Lists all files and full paths installed by the package (<code class="inline-code">-qpl</code> for an uninstalled <code class="inline-code">.rpm</code> file).</li>
+<li><strong><code class="inline-code">-qf &lt;filepath&gt;</code>:</strong> Queries <strong>which RPM package owns a specific file</strong> on the server.</li>
+<li><strong><code class="inline-code">-qc &lt;pkg&gt;</code> / <code class="inline-code">-qd &lt;pkg&gt;</code>:</strong> Lists <strong>configuration files (<code class="inline-code">-qc</code>)</strong> or <strong>documentation files (<code class="inline-code">-qd</code>)</strong>.</li>
+<li><strong><code class="inline-code">-Va</code>:</strong> Validates all installed RPM packages to detect missing or modified files.</li>
+</ul>
+<p>---</p>
+<h3>2. Evolution from YUM to DNF &amp; <code class="inline-code">/etc/dnf/dnf.conf</code></h3>
+<ul class="md-list">
+<li><strong>Why DNF?</strong> RPM does not resolve dependencies automatically. <strong>YUM</strong> solved dependency management but suffered from high memory usage and slow dependency resolution on large trees. <strong>DNF (Next-Generation YUM)</strong> maintains CLI compatibility with YUM while using the <strong><code class="inline-code">libsolv</code></strong> library for fast dependency resolution, lower memory footprint, and a modern <strong>Python 3</strong> plugin architecture.</li>
+<li><strong>Global Config (<code class="inline-code">/etc/dnf/dnf.conf</code> — <code class="inline-code">[main]</code> section):</strong></li>
+<li><strong><code class="inline-code">cachedir</code>:</strong> Directory storing downloaded RPMs and database cache.</li>
+<li><strong><code class="inline-code">best</code>:</strong> Always attempts to install the latest available version (default: <strong><code class="inline-code">True</code></strong>).</li>
+<li><strong><code class="inline-code">installonly_limit</code>:</strong> Max number of concurrent versions for <code class="inline-code">installonlypkgs</code> like kernels (default: <strong><code class="inline-code">3</code></strong>; do not decrease).</li>
+<li><strong><code class="inline-code">clean_requirements_on_remove</code>:</strong> Automatically removes unused dependency packages during <code class="inline-code">dnf remove</code> (default: <strong><code class="inline-code">True</code></strong>).</li>
+</ul>
+<p>---</p>
+<h3>3. Configuring <code class="inline-code">/etc/yum.repos.d/*.repo</code> &amp; Local Repositories</h3>
+<p>Repository files reside in <strong><code class="inline-code">/etc/yum.repos.d/</code></strong> by default:</p>
+<div class="code-block"><div class="code-header"><span>INI</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>[OS]
+name=OS
+baseurl=https://repo.openeuler.org/openEuler-24.03-LTS-SP1/OS/$basearch/
+metalink=https://mirrors.openeuler.org/metalink?repo=$releasever/OS&amp;arch=$basearch
+metadata_expire=1h
+enabled=1
+gpgcheck=1
+gpgkey=http://repo.openeuler.org/openEuler-24.03-LTS-SP1/OS/$basearch/RPM-GPG-KEY-openEuler</code></pre></div>
+<ul class="md-list">
+<li><strong><code class="inline-code">baseurl</code></strong> supports three protocols: <code class="inline-code">http://</code>, <code class="inline-code">ftp://</code>, and <strong><code class="inline-code">file:///</code></strong> (for local paths).</li>
+<li><strong>Creating a Local Repository (<code class="inline-code">createrepo</code>):</strong></li>
+</ul>
+<ol class="md-list">
+<li>Install tool as root: <code class="inline-code">dnf install createrepo</code></li>
+<li>Place RPM packages in <code class="inline-code">/mnt/local_repo/</code></li>
+<li>Generate metadata database: <strong><code class="inline-code">createrepo --database /mnt/local_repo</code></strong></li>
+</ol>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>rpm -ivh installs, rpm -Uvh upgrades (or installs), rpm -Fvh upgrades only existing packages, rpm -e uninstalls, rpm -qf &lt;file&gt; finds which package owns a file, and rpm -qc lists config files.</li><li>DNF ('next-generation YUM') uses the libsolv library and Python 3 plugins; its global config is /etc/dnf/dnf.conf (default installonly_limit=3) and repo files live in /etc/yum.repos.d/.</li><li>To build a local repository from a folder of RPMs, install createrepo and run 'createrepo --database /mnt/local_repo'.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Do not confuse /etc/dnf/dnf.conf (global DNF configuration) with /etc/yum.repos.d/ (default directory for .repo files)!</div><div class="trap-item">⚠️ EXAM TRAP: To query files inside an UNINSTALLED .rpm package file on disk, you must include the '-p' flag (e.g., 'rpm -qpl pkg.rpm' or 'rpm -qilp pkg.rpm').</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar2_h5_s1_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./02-Exercise-RPM-Queries-and-Local-Repo-Creation-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Auditing Installed RPMs and Building a Local Repository with `createrepo`", "duration_mins": 8, "exercise_type": "terminal", "prompt_label": "root@openEuler:~#", "scenario": "You need to audit which RPM package owns `/etc/passwd`, list all configuration files belonging to the `bash` RPM package, and initialize a local software repository in `/mnt/local_repo` using `createrepo`.", "instructions": ["Step 1: Query which RPM package owns `/etc/passwd` using `rpm -qf /etc/passwd`.", "Step 2: Query all configuration files installed by the `bash` package using `rpm -qc bash`.", "Step 3: Initialize the local repository database in `/mnt/local_repo` using `createrepo --database /mnt/local_repo`."], "starter_code": "# Step 1: Query which RPM package owns /etc/passwd\n<rpm_qf_command>\n\n# Step 2: Query configuration files in the bash RPM package\n<rpm_qc_command>\n\n# Step 3: Create local repository metadata in /mnt/local_repo\n<createrepo_command>", "solution_code": "# Step 1: Query which RPM package owns /etc/passwd\nrpm -qf /etc/passwd\n\n# Step 2: Query configuration files in the bash RPM package\nrpm -qc bash\n\n# Step 3: Create local repository metadata in /mnt/local_repo\ncreaterepo --database /mnt/local_repo", "hints": ["Use `rpm -qf /etc/passwd` to find the owning RPM package.", "Use `rpm -qc bash` to list configuration files.", "Use `createrepo --database /mnt/local_repo` (exact command from Ch.04 p.206)."], "validation_checks": [{"step": 1, "description": "Find package owning /etc/passwd with rpm -qf", "required_any": ["rpm -qf /etc/passwd"], "feedback_fail": "Use 'rpm -qf /etc/passwd' to query the owning package."}, {"step": 2, "description": "List configuration files of bash with rpm -qc", "required_any": ["rpm -qc bash"], "feedback_fail": "Use 'rpm -qc bash' to list configuration files."}, {"step": 3, "description": "Create local repository metadata with createrepo --database", "required_any": ["createrepo --database /mnt/local_repo", "createrepo /mnt/local_repo"], "feedback_fail": "Use 'createrepo --database /mnt/local_repo'."}], "simulated_output": "setup-2.14.5-2.oe2403.noarch\n\n/etc/skel/.bash_logout\n/etc/skel/.bash_profile\n/etc/skel/.bashrc\n\nDirectory walk started\nDirectory walk done - 42 packages\nTemporary output repo path: /mnt/local_repo/.repodata/\nPreparing sqlite DBs\nPool started (with 5 workers)\nPool finished", "quiz_questions": [{"id": "h5_s1_q1", "type": "single", "question": "Which `rpm` command option queries which installed RPM package a specific server file (such as `/etc/passwd`) belongs to, and which option lists only the configuration files in an installed RPM package?", "options": ["A. `rpm -ql` and `rpm -qi`", "B. `rpm -qf` and `rpm -qc`", "C. `rpm -qa` and `rpm -qd`", "D. `rpm -qp` and `rpm -Va`"], "answer": "B", "explanation": "Per Ch.04 (pp.195, 200), `rpm -qf` searches for the RPM package to which a specified file belongs, and `rpm -qc` queries the configuration files in an installed software package."}, {"id": "h5_s1_q2", "type": "single", "question": "In the global DNF configuration file `/etc/dnf/dnf.conf`, what is the default value of `installonly_limit`, and what does `clean_requirements_on_remove=True` do?", "options": ["A. `installonly_limit=1`; deletes `/etc/yum.repos.d/` on package removal", "B. `installonly_limit=3`; deletes dependencies that are no longer used during `dnf remove`", "C. `installonly_limit=5`; disables GPG signature checks", "D. `installonly_limit=10`; clears the RPM database cache every hour"], "answer": "B", "explanation": "Per Ch.04 (p.204), `installonly_limit` defaults to 3, and `clean_requirements_on_remove` (default True) deletes dependencies that were installed automatically and are no longer needed during `dnf remove`."}, {"id": "h5_s1_q3", "type": "multiple", "question": "Which of the following statements about DNF and software repositories on openEuler are TRUE?", "options": ["A. DNF leverages the `libsolv` library for faster dependency resolution and supports a plugin system based on Python 3.", "B. By default, `.repo` configuration files in openEuler are stored in the `/etc/yum.repos.d/` directory.", "C. The `baseurl` parameter in a `.repo` file supports `http://`, `ftp://`, and `file:///` protocols.", "D. The `createrepo --database <dir>` command initializes metadata for a local RPM software repository."], "answer": "ABCD", "explanation": "Per Ch.04 (pp.202–206), all four statements are explicitly stated in the official training material."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table Partitioning, Kunpeng NUMA Optimization, SMP &amp; High Availability / Ultimate RTO | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 03 • Sprint 4/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./06-Exercise-ANALYZE-Statistics-and-Column-Store-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./08-Exercise-Partitioning-SMP-Switchover-and-RTO-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.03, pp. 174–198</span>
+            <span class="badge badge-hour">⏱️ Hour 03 • Sprint 4/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Table Partitioning, Kunpeng NUMA Optimization, SMP &amp; High Availability / Ultimate RTO</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Create and manage Range, List, and Hash partitioned tables and <code class="inline-code">LOCAL</code>/<code class="inline-code">GLOBAL</code> partitioned indexes</li><li>Explain Kunpeng 920 NUMA optimizations (<code class="inline-code">numactl -H</code>, ARMv8.1 <code class="inline-code">casal</code> atomic instruction, core binding) and SMP (<code class="inline-code">query_dop</code>)</li><li>Execute Primary/Standby <code class="inline-code">switchover</code> vs <code class="inline-code">failover</code> (<code class="inline-code">gs_ctl</code>, <code class="inline-code">gs_om -t refreshconf</code>), configure Ultimate RTO (<code class="inline-code">recovery_parse_workers</code>, <code class="inline-code">recovery_parallelism</code>), and describe Logical Replication</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Table Partitioning (pp. 174–181)</h3>
+<p>openGauss horizontally splits a table into non-overlapping physical partitions to deliver <strong>high query efficiency (partition pruning)</strong>, <strong>high availability</strong>, <strong>easy maintenance</strong>, and <strong>balanced I/O</strong>:</p>
+<ul class="md-list">
+<li><strong>3 Partitioning Modes</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Range Partitioning (<code class="inline-code">PARTITION BY RANGE(col)</code>)</strong>: Maps rows by non-overlapping value ranges (<code class="inline-code">VALUES LESS THAN (...)</code>). Most common (often on time/date columns).</li>
+<li><strong>List Partitioning (<code class="inline-code">PARTITION BY LIST(col)</code>)</strong>: Maps rows by discrete key value lists (<code class="inline-code">VALUES (...)</code>).</li>
+<li><strong>Hash Partitioning (<code class="inline-code">PARTITION BY HASH(col)</code>)</strong>: Maps rows evenly across partitions using an internal hash function.</li>
+</ol>
+<ul class="md-list">
+<li><strong>Core Partition DDL Operations (pp. 177–180)</strong>:</li>
+</ul>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>  ALTER TABLE student1 ADD PARTITION score4 VALUES LESS THAN (101);
+  ALTER TABLE student1 DROP PARTITION score1;
+  ALTER TABLE student1 RENAME PARTITION score2 TO score2_new;
+  ALTER TABLE student1 TRUNCATE PARTITION score2_new;
+  SELECT * FROM student1 PARTITION (score2_new);
+  CREATE INDEX student1_index1 ON student1 (score) LOCAL;
+  ALTER INDEX student1_index2 RENAME PARTITION score1_index TO score1_index_new;</code></pre></div>
+<p>---</p>
+<h3>2. Kunpeng NUMA Architecture Optimization &amp; SMP Parallelism (pp. 182–188)</h3>
+<ul class="md-list">
+<li><strong>Kunpeng 920 NUMA Structure (p. 183)</strong>:</li>
+<li>A 2-socket Kunpeng 920 (64 cores, 2 Dies per socket = <strong>4 NUMA nodes 0–3</strong>) has local node access distance <strong>10</strong>, intra-socket cross-die distance <strong>16</strong> (1.6x latency), and cross-socket distance <strong>25–33</strong>. Inspect via <strong><code class="inline-code">numactl -H</code></strong>.</li>
+<li><strong>5 openGauss NUMA Optimizations (pp. 182–186)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Thread-to-Core Binding</strong>: Separately binds network interrupts and service threads to CPU cores to prevent cross-core thread migration.</li>
+<li><strong>NUMA-Aware Data Structures</strong>: Partitions hotspot structures (e.g., Clog partitions, WAL buffers) per NUMA node to reduce cross-node access.</li>
+<li><strong>Redo Log Batch Insertion</strong> &amp; larger Kunpeng L3 cache-line padding.</li>
+<li><strong>ARMv8.1 LSE Atomic Instruction (<code class="inline-code">casal</code>)</strong>: Replaces 4 instructions (<code class="inline-code">ldxr</code> + <code class="inline-code">stlxr</code> loop) with <strong>1 single atomic instruction (<code class="inline-code">casal</code>)</strong>, boosting 2-socket Kunpeng TPC-C performance by <strong>&gt; 10%</strong> (from <strong>1.34M to 1.51M tpmC</strong>)!</li>
+</ol>
+<ul class="md-list">
+<li><strong>SMP (Symmetric Multi-Processing, pp. 187–188)</strong>:</li>
+<li>Intra-query operator-level multi-threaded parallel execution within a single process (exchanging data in memory via the <strong><code class="inline-code">Stream</code></strong> operator without network overhead).</li>
+<li>Controlled by GUC <strong><code class="inline-code">query_dop</code></strong>: <code class="inline-code">1</code> (disabled, default); <code class="inline-code">0</code> (adaptive selection between <code class="inline-code">[1, 8]</code> when system load &lt; 50%). <em>Note</em>: Data skew or high concurrent OLTP load degrades SMP efficiency.</li>
+</ul>
+<p>---</p>
+<h3>3. High Availability, Switchover/Failover, Ultimate RTO &amp; Logical Replication (pp. 190–198)</h3>
+<ul class="md-list">
+<li><strong>Switchover vs. Failover (pp. 190–193)</strong>:</li>
+<li><strong>Switchover (Planned maintenance, zero data loss)</strong>:</li>
+</ul>
+<div class="code-block"><div class="code-header"><span>BASH</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>    gs_om -t status --detail
+    gs_ctl switchover -D /home/omm/cluster/dn1/   # Run on target standby node as omm
+    gs_om -t refreshconf                          # Save dynamic primary/standby role state</code></pre></div>
+<ul class="md-list">
+<li><strong>Failover (Unplanned primary fault, may cause data loss if async)</strong>:</li>
+</ul>
+<div class="code-block"><div class="code-header"><span>BASH</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>    gs_ctl failover -D /home/omm/cluster/dn1/     # Promote standby to primary
+    gs_om -t refreshconf</code></pre></div>
+<ul class="md-list">
+<li><em>Cascaded standby rule</em>: Cannot be directly promoted to primary; must first switchover/failover to become a normal standby, then primary.</li>
+<li><strong>RPO vs. RTO &amp; Ultimate RTO (pp. 195–197)</strong>:</li>
+<li><strong>RPO (Recovery Point Objective)</strong>: Data-oriented — maximum tolerable period of <strong>data loss</strong> (measures data integrity).</li>
+<li><strong>RTO (Recovery Time Objective)</strong>: Application-oriented — maximum tolerable <strong>service downtime</strong> (measures recovery timeliness).</li>
+<li><strong>Ultimate RTO (Parallel Redo + Incremental Checkpoint)</strong>: Uses multi-level pipelines to replay Xlogs in parallel on the standby node. Enabled only when <strong>both <code class="inline-code">recovery_parse_workers &gt; 1</code> AND <code class="inline-code">recovery_parallelism &gt; 1</code></strong>. <em>(Constraint: Cascaded standby nodes are NOT supported when Ultimate RTO is enabled!)</em></li>
+<li><strong>Logical Replication (p. 198)</strong>: DNs reversely parse physical WAL logs into logical logs (<strong>logical decoding</strong>, supported on standby nodes since v1.1.0); tools like <strong>DRS</strong> convert them into SQL for heterogeneous bidirectional sync with <strong>MySQL</strong> or <strong>Oracle</strong>. <em>(Constraint: Column-store replication is NOT supported!)</em></li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>On Kunpeng 920 (ARMv8.1 LSE), replacing <code class="inline-code">ldxr</code>/<code class="inline-code">stlxr</code> (4 instructions) with the single atomic <code class="inline-code">casal</code> instruction boosts TPC-C throughput from 1.34M to 1.51M tpmC (+10%).</li><li>RPO (Recovery Point Objective) is data-oriented (tolerable data loss), whereas RTO (Recovery Time Objective) is application-oriented (tolerable service downtime).</li><li>After running <code class="inline-code">gs_ctl switchover -D &lt;datadir&gt;</code> or <code class="inline-code">gs_ctl failover -D &lt;datadir&gt;</code> on the standby node, you MUST run <code class="inline-code">gs_om -t refreshconf</code> to update the dynamic configuration file.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Parallel recovery (Ultimate RTO) is active ONLY when BOTH <code class="inline-code">recovery_parse_workers &gt; 1</code> and <code class="inline-code">recovery_parallelism &gt; 1</code>, and cascaded standby nodes are NOT supported when Ultimate RTO is enabled (Ch.03 p. 192 &amp; p. 196).</div><div class="trap-item">⚠️ EXAM TRAP: Logical replication supports row-store tables and standby decoding, but Column-store replication is NOT supported (Ch.03 p. 198).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h3_s4_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./08-Exercise-Partitioning-SMP-Switchover-and-RTO-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Executing Primary/Standby Switchover & Configuring Ultimate RTO", "duration_mins": 8, "exercise_type": "terminal", "prompt_label": "omm@opengauss:~$", "scenario": "You need to enable Ultimate RTO parallel recovery (`recovery_parse_workers = 4`, `recovery_parallelism = 4`), perform a planned primary/standby switchover on standby node `/home/omm/cluster/dn1/`, and persist the new cluster role topology.", "instructions": ["Step 1: Set `recovery_parse_workers=4` and `recovery_parallelism=4` using `gs_guc set`.", "Step 2: Promote standby `/home/omm/cluster/dn1/` via planned switchover using `gs_ctl switchover -D /home/omm/cluster/dn1/`.", "Step 3: Persist the updated dynamic primary/standby configuration using `gs_om -t refreshconf`."], "starter_code": "# Step 1: Configure Ultimate RTO parallel recovery workers\ngs_guc set -N all -I all -c \"____=4\"\ngs_guc set -N all -I all -c \"recovery_parallelism=4\"\n\n# Step 2: Perform planned primary/standby switchover on standby dn1\ngs_ctl ____ -D /home/omm/cluster/dn1/\n\n# Step 3: Record the updated primary/standby roles in the dynamic config file\ngs_om -t ____\n", "solution_code": "gs_guc set -N all -I all -c \"recovery_parse_workers=4\"\ngs_guc set -N all -I all -c \"recovery_parallelism=4\"\ngs_ctl switchover -D /home/omm/cluster/dn1/\ngs_om -t refreshconf", "hints": ["Ultimate RTO requires both `recovery_parse_workers` and `recovery_parallelism` to be greater than 1.", "Use `gs_ctl switchover -D /home/omm/cluster/dn1/` for planned maintenance switchover.", "Always run `gs_om -t refreshconf` after a switchover or failover."], "validation_checks": [{"step": 1, "description": "Set `recovery_parse_workers=4`", "required_any": ["recovery_parse_workers=4", "recovery_parse_workers = 4"], "feedback_fail": "Set `recovery_parse_workers=4` using `gs_guc set`."}, {"step": 2, "description": "Execute `gs_ctl switchover`", "required_any": ["gs_ctl switchover"], "feedback_fail": "Use `gs_ctl switchover -D /home/omm/cluster/dn1/`."}, {"step": 3, "description": "Refresh dynamic configuration with `gs_om -t refreshconf`", "required_any": ["refreshconf"], "feedback_fail": "Run `gs_om -t refreshconf` to save the new primary/standby roles."}], "simulated_output": "Total instances: 2. Failed instances: 0.\nSuccess to perform gs_guc!\n[2026-11-17 14:20:01.102][24810][][gs_ctl]: gs_ctl switchover ,datadir is /home/omm/cluster/dn1/\n[2026-11-17 14:20:03.450][24810][][gs_ctl]: switchover completed (/home/omm/cluster/dn1/)\nGenerating dynamic configuration file for all nodes.\nSuccessfully generated dynamic configuration file.", "quiz_questions": [{"id": "h3_s4_q1", "type": "single", "question": "On Kunpeng 920 (ARMv8.1) processors, which atomic instruction does openGauss use to replace the 4-instruction `ldxr`/`stlxr` loop for Compare-and-Swap (CAS), improving TPC-C throughput by over 10%?", "options": ["A. cmpxchg8b", "B. casal", "C. dmb ish", "D. yield"], "answer": "B", "explanation": "Per Chapter 03 (p. 184), openGauss uses the ARMv8.1 LSE `casal` atomic instruction to implement CAS in 1 instruction instead of 4 (`ldxr` and `stlxr`), increasing throughput from 1.34M to 1.51M tpmC."}, {"id": "h3_s4_q2", "type": "single", "question": "After performing a primary/standby switchover (`gs_ctl switchover`) or failover (`gs_ctl failover`), which command must be executed to update the dynamic configuration file with the current primary and standby roles?", "options": ["A. gs_om -t generateconf", "B. gs_om -t refreshconf", "C. gs_guc reload", "D. gs_ctl build"], "answer": "B", "explanation": "Per Chapter 02 (p. 120) and Chapter 03 (p. 193), `gs_om -t refreshconf` must be executed after a failover or switchover to record the updated primary and standby node roles in the dynamic configuration file."}, {"id": "h3_s4_q3", "type": "tf", "question": "RPO (Recovery Point Objective) is application-oriented and measures the maximum tolerable service downtime, whereas RTO (Recovery Time Objective) is data-oriented and measures the amount of lost data.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.03 pp. 195–196). The definitions are swapped: RTO (Recovery Time Objective) is application-oriented and measures acceptable downtime, whereas RPO (Recovery Point Objective) is data-oriented and measures acceptable data loss over time."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

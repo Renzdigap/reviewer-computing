@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Software: Operating Systems, Middleware &amp; Databases | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 02 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="./02-Exercise-Server-Classification-and-Instruction-Set-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./04-Exercise-Database-Models-OLTP-OLAP-and-Sizing-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.02, pp. 84–101</span>
+            <span class="badge badge-hour">⏱️ Hour 02 • Sprint 2/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">System Software: Operating Systems, Middleware &amp; Databases</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Understand OS architecture (System Call Layer + Kernel) and compare Linux vs. Windows Server 2022 Standard and Datacenter editions</li><li>Differentiate JBoss, Tomcat, WebLogic, and WebSphere middleware</li><li>Master DBS components, Hierarchical vs. Network vs. Relational models, OLTP vs. OLAP, and 4-socket Kunpeng openGauss server sizing</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Operating Systems: Linux vs. Windows Server 2022 (pp. 85–89)</h3>
+<ul class="md-list">
+<li><strong>OS Structure</strong>: Consists of the <strong>Kernel</strong> (manages CPU, memory, and drive hardware) and the <strong>System Call Layer</strong> (provides APIs so engineers can develop software without directly accessing/damaging the kernel).</li>
+<li><strong>Linux</strong>: Open-source OS under <strong>GNU GPL</strong>. Distributions include <strong>openEuler, Red Hat (RHEL), SUSE, and Ubuntu</strong>. Used for <strong>Website servers</strong>, <strong>Key financial/database applications</strong> (openGauss, MySQL, Oracle), and <strong>HPC</strong> (GCC compilation, fluid mechanics).</li>
+<li><strong>Windows Server</strong>: Offers <strong>LTSC</strong> (Long-Term Servicing Channel, core stability/security) and <strong>AC</strong> (Annual Channel, frequent updates for containers/microservices). Common scenarios: <strong>Domain controller (Active Directory)</strong>, <strong>Remote Desktop Service (RDS)</strong>, and <strong>Network server (DNS, DHCP, network controller)</strong>.</li>
+<li><strong>Windows Server 2022 Standard vs. Datacenter (p. 88)</strong>: Datacenter uniquely supports <strong>Software-Defined Networking (SDN)</strong>, <strong>Storage Spaces Direct (S2D)</strong>, <strong>Network Controller</strong>, and <strong>unlimited VMs + 1 Hyper-V host</strong> per license, whereas <strong>Standard permits only 2 VMs + 1 Hyper-V host</strong>.</li>
+</ul>
+<p>---</p>
+<h3>2. Middleware &amp; Runtime (pp. 90–91)</h3>
+<p>Middleware connects system software (OS) and application software across different architectures. <strong>Runtime</strong> refers to the runtime library/environment supporting program execution (e.g., <strong>JRE, C#, Visual Basic .NET</strong>).</p>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Middleware</th><th>License</th><th>JEE / EJB Support &amp; Target Scenario</th></tr></thead><tbody>
+<tr><td><strong>JBoss</strong></td><td>Open-source (<strong>LGPL</strong> — free for commercial use)</td><td>Complies with <strong>JEE</strong>; supports <strong>EJB 1.1, 2.0, and 3</strong>; SOA enterprise applications.</td></tr>
+<tr><td><strong>Tomcat</strong></td><td>Free, open-source (Apache/Sun)</td><td>Lightweight web server complying with <strong>Servlet and JSP</strong> specs; <strong>does NOT support EJB</strong>; used in SMEs with low concurrency.</td></tr>
+<tr><td><strong>WebLogic / WebSphere</strong></td><td>Closed-source commercial</td><td>Full <strong>JEE</strong> middleware with high scalability for large-scale enterprise projects.</td></tr>
+</tbody></table></div>
+<p>---</p>
+<h3>3. Databases, Data Models, OLTP vs. OLAP &amp; Hardware Sizing (pp. 92–101)</h3>
+<ul class="md-list">
+<li><strong>Database System (DBS)</strong>: $\text{DBS} = \text{Database (DB)} + \text{DBMS} + \text{Database Applications}$ (plus DBA and users). DBMS provides <strong>DDL</strong> (Data Definition Language), <strong>DML</strong> (Data Manipulation Language), operation management (integrity, security, concurrency, fault recovery), and maintenance utilities.</li>
+<li><strong>Three Classical Database Models (p. 98 — Official Quiz Q2)</strong>:</li>
+<li><strong>Hierarchical model</strong> (e.g., IBM <strong>IMS</strong>): Tree structure; <strong>only one root node</strong> has no parent; all other nodes have <strong>only one parent node</strong>.</li>
+<li><strong>Network model</strong>: <strong>Allows more than one node to have no parent</strong>, and <strong>a node can have more than one parent</strong>.</li>
+<li><strong>Relational model (born 1969)</strong>: Two-dimensional tables (rows/tuples and columns/attributes); relationships must be normalized with indivisible atomic data items.</li>
+</ul>
+<p><em>(Exam Note: On Ch.02 p.98, the text explicitly defines <strong>Network model</strong> as allowing $&gt;1$ node with $&gt;1$ parent; however, the slide notes on p.124 printed <code class="inline-code">2. C</code> as an answer-key typo. Always know both the technical definition of Network model and the official slide text!)</em></p>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Feature</th><th>OLTP (On-Line Transaction Processing)</th><th>OLAP (On-Line Analytical Processing, Codd 1993)</th></tr></thead><tbody>
+<tr><td><strong>Orientation &amp; Users</strong></td><td><strong>Transaction</strong> / Clerks, DBAs</td><td><strong>Analysis</strong> / Decision-making personnel</td></tr>
+<tr><td><strong>Data &amp; Access</strong></td><td><strong>Current, detailed</strong> / Read &amp; write (short transactions)</td><td><strong>Historical, consolidated</strong> / Mostly read (complex scans)</td></tr>
+<tr><td><strong>Records &amp; Scale</strong></td><td><strong>Dozens</strong> of records / <strong>100 MB to GB</strong></td><td><strong>Millions</strong> of records / <strong>100 GB to TB</strong></td></tr>
+<tr><td><strong>Key Bottleneck / Metric</strong></td><td><strong>Memory efficiency</strong>, TPS, SQL rate, concurrency</td><td><strong>Drive I/O bandwidth</strong>, SQL duration, partitioning</td></tr>
+</tbody></table></div>
+<ul class="md-list">
+<li><strong>Server Requirements for Databases (p. 101)</strong>: Peak CPU load must <strong>not exceed 85%</strong>. Reference 4-socket Kunpeng openGauss 5.0.0+ configuration on <strong>openEuler 20.03 LTS</strong>: <strong>TaiShan 200 (model 2480)</strong>, <strong>4 × Kunpeng 920 64-core CPUs</strong>, <strong>1 TB RAM</strong>, <strong>Hi1822 NIC (4 × 25GE, latency &lt; 0.1 ms)</strong>, <strong>4 × NVMe SSDs</strong> (V5 sequential write $\ge 2600\text{ MB/s}$).</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>Windows Server 2022 Datacenter supports unlimited VMs, SDN, Storage Spaces Direct, and Network Controller; Standard supports only 2 VMs per license.</li><li>Tomcat supports Servlet/JSP but does NOT support EJB (use JBoss under LGPL or commercial WebLogic/WebSphere for EJB).</li><li>Hierarchical model allows only 1 parent per node; Network model allows a node to have &gt;1 parent and &gt;1 root node.</li><li>When selecting a database server CPU, peak CPU load must not exceed 85%.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP (Ch.02 Quiz Q2): Page 98 explicitly states under 'Network model': 'Allows more than one node to have no parent. A node can have more than one parent.' (Note that p.124 slide notes had a typo listing C; in standard Huawei exams, Network model is the multi-parent graph model).</div><div class="trap-item">⚠️ EXAM TRAP: Tomcat is lightweight and does NOT support EJB! If an enterprise requires open-source EJB support, choose JBoss (LGPL).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h2_s2_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./04-Exercise-Database-Models-OLTP-OLAP-and-Sizing-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Database Server Sizing & Middleware Selection", "duration_mins": 7, "exercise_type": "config", "prompt_label": "dba@opengauss-2480:~#", "scenario": "Configure the hardware and software specification sheet for deploying openGauss 5.0.0 on a 4-socket Kunpeng server and validate middleware/OS rules.", "instructions": ["Set `server_model` to `'TaiShan 200 2480'`, `max_cpu_peak_load_percent` to `85`, and `nic_chip` to `'Hi1822'`.", "Set `open_source_ejb_middleware` to `'JBoss'` and `lightweight_no_ejb_middleware` to `'Tomcat'`.", "Set `win2022_standard_max_vms` to `2`."], "starter_code": "# Database Server & Middleware Specification\nopengauss_4p_spec:\n  server_model: \"___\"\n  cpu_sockets_x_cores: \"4 x 64\"\n  memory_capacity: \"1 TB\"\n  max_cpu_peak_load_percent: ___\n  nic_chip: \"___\"\n  nvme_v5_seq_write_mbps: 2600\n\nsoftware_stack:\n  open_source_ejb_middleware: \"___\"\n  lightweight_no_ejb_middleware: \"___\"\n  win2022_standard_max_vms: ___\n", "solution_code": "# Database Server & Middleware Specification\nopengauss_4p_spec:\n  server_model: \"TaiShan 200 2480\"\n  cpu_sockets_x_cores: \"4 x 64\"\n  memory_capacity: \"1 TB\"\n  max_cpu_peak_load_percent: 85\n  nic_chip: \"Hi1822\"\n  nvme_v5_seq_write_mbps: 2600\n\nsoftware_stack:\n  open_source_ejb_middleware: \"JBoss\"\n  lightweight_no_ejb_middleware: \"Tomcat\"\n  win2022_standard_max_vms: 2\n", "hints": ["TaiShan 200 (model 2480) is the 2U 4-socket Kunpeng server; database CPU peak load should not exceed 85%.", "JBoss supports EJB under LGPL, while Tomcat only supports Servlet/JSP. Windows Server 2022 Standard allows 2 VMs."], "validation_checks": [{"step": 1, "description": "Verify TaiShan 2480 model, 85% peak CPU limit, and Hi1822 NIC", "required_any": ["2480", "85", "hi1822"], "feedback_fail": "Specify 'TaiShan 200 2480', 85, and 'Hi1822'."}, {"step": 2, "description": "Verify JBoss and Tomcat middleware distinction", "required_any": ["jboss", "tomcat"], "feedback_fail": "Set open_source_ejb_middleware to 'JBoss' and lightweight_no_ejb_middleware to 'Tomcat'."}, {"step": 3, "description": "Verify Windows Server 2022 Standard 2-VM limit", "required_any": ["2"], "feedback_fail": "Set win2022_standard_max_vms to 2."}], "simulated_output": "[OK] openGauss 4-Socket Hardware & System Software Spec Verified:\n- Server: TaiShan 200 (2480) | 4 x 64-core Kunpeng 920 | 1 TB RAM | Peak CPU <= 85%\n- Network: Hi1822 (4 x 25GE, latency < 0.1 ms) | Storage: 4 x NVMe (>= 2600 MB/s write)\n- Middleware: JBoss (LGPL, supports EJB) vs. Tomcat (Servlet/JSP only).", "quiz_questions": [{"id": "h2_s2_q1", "type": "single", "question": "According to the database model definitions in Chapter 02 (p. 98), which database model allows more than one node to have no parent and allows a node to have more than one parent?", "options": ["A. Hierarchical model", "B. Network model", "C. Relational model", "D. Transaction model"], "answer": "B", "explanation": "On Ch.02 p.98, the Network model is explicitly defined as: 'Allows more than one node to have no parent. A node can have more than one parent.' (Note: p.124 slide notes have a known typo 'C', whereas p.98 defines Network model)."}, {"id": "h2_s2_q2", "type": "single", "question": "Which of the following middleware products is open-source, complies with the LGPL license, and supports Enterprise JavaBeans (EJB) 1.1, 2.0, and 3?", "options": ["A. Tomcat", "B. JBoss", "C. WebLogic", "D. WebSphere"], "answer": "B", "explanation": "JBoss is open-source under LGPL and supports JEE and EJB 1.1, 2.0, and 3. Tomcat is open-source but only supports Servlet/JSP (not EJB). WebLogic and WebSphere are closed-source commercial software (Ch.02, p.91)."}, {"id": "h2_s2_q3", "type": "multiple", "question": "Which of the following statements accurately compare OLTP and OLAP systems?", "options": ["A. OLTP focuses on short, simple online transactions (read and write) and emphasizes memory efficiency and transaction throughput.", "B. OLAP focuses on complex analytical queries (mostly read) over historical data and emphasizes drive I/O bandwidth and query response time.", "C. Typical OLTP database scale is 100 MB to GB accessing dozens of records, whereas OLAP scale is 100 GB to TB accessing millions of records.", "D. When selecting a database server CPU, the peak CPU load should be allowed to reach 99% continuously."], "answer": "ABC", "explanation": "A, B, and C are accurate comparisons from Ch.02 pp. 99–100. D is false because p. 101 states that peak CPU load must not exceed 85% so that the database can respond quickly."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

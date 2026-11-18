@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>openGauss Positioning, Evolution &amp; Differences from PostgreSQL | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 01 • Sprint 3/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./04-Exercise-Transaction-ACID-and-Architecture-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./06-Exercise-openGauss-vs-PostgreSQL-Architecture-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.01, pp. 42–50</span>
+            <span class="badge badge-hour">⏱️ Hour 01 • Sprint 3/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">openGauss Positioning, Evolution &amp; Differences from PostgreSQL</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Trace openGauss's evolution from internal incubation (2001) to open-source release (June 30, 2020) under Mulan PSL v2</li><li>Explain the 4 core value pillars of openGauss: High Performance, High Availability, High Security, and Easy O&amp;M</li><li>Contrast openGauss and PostgreSQL across process/thread model, concurrency control, checkpoints, NUMA, and storage engines</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. openGauss Positioning, License &amp; Evolution Timeline</h3>
+<p><strong>openGauss</strong> is an enterprise-grade, multi-core-optimized open-source relational database developed by Huawei with global partners.</p>
+<ul class="md-list">
+<li><strong>Open-Source License</strong>: Released under <strong>Mulan Permissive Software License v2 (Mulan PSL v2)</strong> — allowing code to be freely modified, used, and referenced commercially.</li>
+<li><strong>4 Milestones in openGauss History (p. 44)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>2001–2011 (Internal Incubation)</strong>: Enterprise in-memory database used across Huawei telecom carrier products.</li>
+<li><strong>2011–2019 (Productization &amp; Joint Innovation)</strong>: Commercialized on HUAWEI CLOUD DWS and major banks; <strong>GaussDB globally released on May 15, 2019</strong>; openGauss open-source announced on <strong>September 19, 2019</strong>.</li>
+<li><strong>June 30, 2020 (Official Open Source)</strong>: Source code officially opened at <code class="inline-code">https://gitee.com/opengauss</code>.</li>
+<li><strong>2021–Future (Ecosystem Building)</strong>: Community governance via Technical Committee (<strong>TC</strong>), <strong>SIGs</strong> (SQL Engine, Storage Engine, Connectors, Docs, Infra, Security), <strong>Maintainers</strong>, <strong>Committers</strong>, and <strong>Contributors</strong>.</li>
+</ol>
+<p>---</p>
+<h3>2. Core Value Pillars of openGauss (p. 46)</h3>
+<ol class="md-list">
+<li><strong>High Performance</strong>: <strong>1.5 million tpmC</strong> on 2-socket Kunpeng 920 (128 cores); NUMA-aware data structures; <strong>SQL-Bypass</strong> intelligent fast path; in-memory <strong>MOT</strong> engine.</li>
+<li><strong>High Availability (HA)</strong>: Hitless primary/standby switchover and Parallel Redo <strong>Ultimate RTO &lt; 10s</strong>.</li>
+<li><strong>High Security</strong>: End-to-end protection including <strong>Fully-Encrypted Equality Query</strong> (TEE/secGear), Dynamic Data Masking, RBAC, RLS, Unified Auditing, and TDE.</li>
+<li><strong>Easy O&amp;M</strong>: Built-in <strong>DBMind AI</strong> (parameter tuning, slow SQL diagnosis, index recommendation, workload time prediction) and WDR snapshots.</li>
+</ol>
+<p>---</p>
+<h3>3. Architectural Comparison: openGauss vs. PostgreSQL (pp. 48–49)</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Differentiation Dimension</th><th>openGauss</th><th>PostgreSQL</th></tr></thead><tbody>
+<tr><td><strong>Execution Model</strong></td><td><strong>Single-process multi-threaded (<code class="inline-code">gaussdb</code>)</strong> with thread pool</td><td><strong>Multi-process (<code class="inline-code">postgres</code>)</strong> — one process per client connection</td></tr>
+<tr><td><strong>Transaction ID &amp; Concurrency</strong></td><td><strong>64-bit Transaction ID (XID)</strong> + <strong>CSN (Commit Sequence Number)</strong>; eliminates XID wraparound &amp; resolves the "five big locks" bottleneck</td><td>32-bit XID wraparound causes periodic VACUUM FREEZE performance drops; "five big locks" limit multi-core scaling</td></tr>
+<tr><td><strong>Logs &amp; Checkpoints</strong></td><td><strong>Incremental checkpoint</strong>, keeping performance fluctuation <strong>&lt; 5%</strong></td><td><strong>Full checkpoint</strong>, causing short-term performance fluctuation <strong>&gt; 15%</strong></td></tr>
+<tr><td><strong>Kunpeng NUMA Scaling</strong></td><td>NUMA data structure reconstruction, cache-line padding, ARMv8.1 native <code class="inline-code">casal</code> spin-lock (<strong>1.5M tpmC</strong> on 2-socket Kunpeng)</td><td>Weak NUMA multi-core capability (<strong>&lt; 600,000 tpmC</strong> on dual-socket server)</td></tr>
+<tr><td><strong>Storage Engines</strong></td><td><strong>Multi-engine</strong>: Row-store (Astore/Ustore in-place update), Column-store, and <strong>MOT (Memory-Optimized Table)</strong></td><td><strong>Row-store only</strong> (append-only MVCC)</td></tr>
+<tr><td><strong>Optimizer &amp; SQL</strong></td><td>CBO + <strong>ABO (AI-Based Optimizer)</strong>; SQL92/99/2003/2011 + enterprise extensions</td><td>Standard CBO; average performance in complex enterprise queries</td></tr>
+</tbody></table></div>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>openGauss uses a single-process multi-threaded architecture (<code class="inline-code">gaussdb</code>), whereas PostgreSQL uses a multi-process architecture.</li><li>openGauss uses 64-bit transaction IDs with Commit Sequence Numbers (CSNs) and incremental checkpoints (&lt; 5% fluctuation), solving PostgreSQL's 32-bit XID wraparound and full checkpoint (&gt; 15% fluctuation) bottlenecks.</li><li>openGauss officially went open source on June 30, 2020 under the Mulan PSL v2 license.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: PostgreSQL supports only row-store natively, whereas openGauss supports Row-store, Column-store, and Memory-Optimized Table (MOT) engines.</div><div class="trap-item">⚠️ EXAM TRAP: On 2-socket Kunpeng 920 (128 cores), openGauss achieves 1.5 million tpmC (1.5x higher than x86 alternatives), with RTO &lt; 10s.</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h1_s3_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./06-Exercise-openGauss-vs-PostgreSQL-Architecture-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Inspecting the Multi-Threaded `gaussdb` Process & Kernel Version", "duration_mins": 8, "exercise_type": "terminal", "prompt_label": "omm@opengauss:~$", "scenario": "Verify that openGauss runs as a single `gaussdb` process with multiple worker and background threads (unlike PostgreSQL's multi-process model) and check the openGauss version and incremental checkpoint setting.", "instructions": ["Step 1: Use `ps ux | grep gaussdb` to view the running `gaussdb` master process.", "Step 2: Use `ps -T -p 24209` to list the threads (`SPID`) inside the `gaussdb` process.", "Step 3: Query the `enable_incremental_checkpoint` parameter using `gsql -d postgres -p 5432 -c \"SHOW enable_incremental_checkpoint;\"`."], "starter_code": "# Step 1: Check the gaussdb process\nps ux | grep ____\n\n# Step 2: View all threads (-T) belonging to process 24209\nps ____ -p 24209\n\n# Step 3: Verify incremental checkpoint is enabled\ngsql -d postgres -p 5432 -c \"SHOW ____;\"\n", "solution_code": "ps ux | grep gaussdb\nps -T -p 24209\ngsql -d postgres -p 5432 -c \"SHOW enable_incremental_checkpoint;\"", "hints": ["The openGauss server binary name is `gaussdb`.", "The `ps -T -p <PID>` flag displays all threads running inside a single process.", "The GUC parameter for incremental checkpointing is `enable_incremental_checkpoint`."], "validation_checks": [{"step": 1, "description": "Check `gaussdb` process with `ps`", "required_any": ["grep gaussdb"], "feedback_fail": "Use `ps ux | grep gaussdb` to inspect the main database process."}, {"step": 2, "description": "List threads of the process using `ps -T -p`", "required_any": ["ps -t -p", "ps -t"], "feedback_fail": "Use `ps -T -p 24209` to inspect the threads inside the `gaussdb` process."}, {"step": 3, "description": "Query `enable_incremental_checkpoint` via `gsql`", "required_any": ["enable_incremental_checkpoint"], "feedback_fail": "Query `SHOW enable_incremental_checkpoint;` using `gsql`."}], "simulated_output": "omm      24209 11.9  1.0 1852000 355816 pts/0  Sl   01:54   0:33 /opt/software/openGauss/bin/gaussdb -D /opt/software/openGauss/data/single_node\n  PID  SPID TTY          TIME CMD\n24209 24209 pts/0    00:00:02 gaussdb\n24209 24215 pts/0    00:00:01 syslogger\n24209 24217 pts/0    00:00:04 pagewriter\n24209 24218 pts/0    00:00:03 bgwriter\n24209 24219 pts/0    00:00:05 checkpointer\n24209 24220 pts/0    00:00:06 walwriter\n enable_incremental_checkpoint \n-------------------------------\n on\n(1 row)", "quiz_questions": [{"id": "h1_s3_q1", "type": "single", "question": "Under which open-source license is the openGauss database released?", "options": ["A. GPL v3", "B. Apache License 2.0", "C. Mulan Permissive Software License v2 (Mulan PSL v2)", "D. BSD 3-Clause License"], "answer": "C", "explanation": "Per Chapter 01 (pp. 43, 46, 50), openGauss is released under the Mulan Permissive Software License v2 (Mulan PSL v2)."}, {"id": "h1_s3_q2", "type": "multiple", "question": "Which of the following accurately describe architectural advantages of openGauss compared with PostgreSQL?", "options": ["A. openGauss uses a single-process multi-threaded architecture instead of PostgreSQL's multi-process architecture", "B. openGauss uses 64-bit transaction IDs and CSNs to eliminate 32-bit transaction ID wraparound bottlenecks", "C. openGauss uses incremental checkpoints with performance fluctuation < 5% instead of full checkpoints (> 15%)", "D. openGauss supports only row-store tables whereas PostgreSQL supports row-store, column-store, and MOT"], "answer": "ABC", "explanation": "Options A, B, and C are exact advantages of openGauss (Ch.01 pp. 48–49). Option D is reversed: openGauss supports row-store, column-store, and MOT, whereas PostgreSQL supports row-store only."}, {"id": "h1_s3_q3", "type": "tf", "question": "In the openGauss community, the Technical Committee (TC) makes decisions regarding the technical development direction of the community.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "True (Ch.01 p. 50). The TC makes decisions on the technical direction, Maintainers attend to project code, Committers monitor code quality and integrate modifications, and Contributors submit requirements/bugs/code."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

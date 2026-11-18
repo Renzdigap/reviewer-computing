@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iSula Installation, Configuration Priority &amp; Container Lifecycle Operations | HCIA-openEuler V2.0 (Operating System &amp; Cloud-Native iSula)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 02-HCIA-openEuler-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 08 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./02-Exercise-Namespaces-Cgroups-and-iSula-Specs-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./04-Exercise-iSula-Container-Lifecycle-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openEuler V2.0 Training Material.pdf • Ch.07, pp. 399–417, 439</span>
+            <span class="badge badge-hour">⏱️ Hour 08 • Sprint 2/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">iSula Installation, Configuration Priority &amp; Container Lifecycle Operations</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Install <code class="inline-code">iSulad</code> via <code class="inline-code">yum</code>/<code class="inline-code">rpm</code> and apply the configuration priority order (<code class="inline-code">CLI &gt; /etc/isulad/daemon.json &gt; default code configurations</code>)</li><li>Identify the 4 official container states (<code class="inline-code">Created</code>, <code class="inline-code">Up</code>, <code class="inline-code">Paused</code>, <code class="inline-code">Exited</code> — Official Ch.07 Quiz Q1!)</li><li>Execute <code class="inline-code">isula</code> container lifecycle commands: <code class="inline-code">create</code>, <code class="inline-code">start</code>, <code class="inline-code">run</code> (<code class="inline-code">-d</code>, <code class="inline-code">-it</code>, <code class="inline-code">-p</code>, <code class="inline-code">-e</code>, <code class="inline-code">--workdir</code>, <code class="inline-code">--name</code>, <code class="inline-code">--dns</code>, <code class="inline-code">--restart</code>, <code class="inline-code">--rm</code>), <code class="inline-code">pause</code>/<code class="inline-code">unpause</code>, <code class="inline-code">exec</code>, <code class="inline-code">ps</code>, <code class="inline-code">inspect</code>, <code class="inline-code">logs</code>, <code class="inline-code">restart</code>, and <code class="inline-code">rm</code></li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Installing &amp; Configuring <code class="inline-code">iSulad</code> (Configuration Priority Rule!)</h3>
+<ul class="md-list">
+<li><strong>Installation:</strong></li>
+<li>Recommended (auto-resolves dependencies): <strong><code class="inline-code">yum install -y iSulad</code></strong> (installs iSula 2.0.11 by default on openEuler 22.03 LTS).</li>
+<li>Offline RPM (must manually install all dependency RPMs): <code class="inline-code">rpm -ihv iSulad-xx.aarch64.rpm</code>.</li>
+<li><strong>Configuration Priority (Highest to Lowest — Ch.07, p.401):</strong></li>
+</ul>
+<p>$$\text{CLI (\texttt{isulad --xxx})} &gt; \text{Configuration file (\texttt{/etc/isulad/daemon.json})} &gt; \text{Default configurations in code}$$</p>
+<ul class="md-list">
+<li><strong>CLI Configuration:</strong> e.g., <strong><code class="inline-code">isulad -l DEBUG</code></strong> (takes effect immediately without restarting; if managed by <code class="inline-code">systemd</code>, modifying <code class="inline-code">OPTIONS</code> in <strong><code class="inline-code">/etc/sysconfig/iSulad</code></strong> is equivalent to CLI configuration).</li>
+<li><strong>Config File (<code class="inline-code">/etc/isulad/daemon.json</code>):</strong> Modifying <code class="inline-code">/etc/isulad/daemon.json</code> <strong>requires restarting <code class="inline-code">iSulad</code></strong> (<strong><code class="inline-code">systemctl restart isulad</code></strong>) to take effect!</li>
+</ul>
+<p>---</p>
+<h3>2. Container Lifecycle &amp; 4 Official Container States (Ch.07 Quiz Q1!)</h3>
+<ul class="md-list">
+<li><strong>Official Ch.07 Quiz Q1 (p.439):</strong> Which of the following are container states?</li>
+<li><strong><code class="inline-code">A. Created</code></strong> (newly created via <code class="inline-code">isula create nginx</code>, not yet started)</li>
+<li><strong><code class="inline-code">B. Exited</code></strong> (stopped container)</li>
+<li><strong><code class="inline-code">C. Up</code></strong> (running container after <code class="inline-code">isula start</code> or <code class="inline-code">isula run</code>)</li>
+<li><strong><code class="inline-code">D. Paused</code></strong> (suspended via <code class="inline-code">isula pause</code>) -&gt; <strong>Answer: <code class="inline-code">ABCD</code>!</strong></li>
+</ul>
+<p>---</p>
+<h3>3. Complete <code class="inline-code">isula</code> Container Lifecycle Commands</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Command</th><th>Key Options &amp; Usage Examples (Ch.07, pp. 405–417)</th></tr></thead><tbody>
+<tr><td><strong><code class="inline-code">isula create &lt;image&gt;</code></strong></td><td>Creates a container in <code class="inline-code">Created</code> state; returns a 64-hex-digit Container ID (first <strong>12 digits</strong> shown in <code class="inline-code">isula ps</code>; can use unambiguous prefix like <code class="inline-code">e</code> or <code class="inline-code">7a</code>).</td></tr>
+<tr><td><strong><code class="inline-code">isula start &lt;ID&gt;</code></strong></td><td>Starts a <code class="inline-code">Created</code> or <code class="inline-code">Exited</code> container -&gt; status changes to <strong><code class="inline-code">Up</code></strong>.</td></tr>
+<tr><td><strong><code class="inline-code">isula run [opts] &lt;img &gt;</code></strong></td><td>Creates and starts a container in one step:&lt;br&gt;• <strong><code class="inline-code">-d</code></strong>: Run in background.&lt;br&gt;• <strong><code class="inline-code">-it</code></strong>: Interactive (<code class="inline-code">-i</code>) + allocate pseudo-TTY (<code class="inline-code">-t</code>), e.g., <code class="inline-code">isula run -it nginx /bin/bash</code>.&lt;br&gt;• <strong><code class="inline-code">-p hostPort:containerPort[/udp]</code></strong>: Port mapping (can pass multiple <code class="inline-code">-p</code>, e.g., <code class="inline-code">isula run -d -p 8081:80 -p 5000:5000 nginx</code>).&lt;br&gt;• <strong><code class="inline-code">-e KEY=VAL</code></strong>: Set environment variable(s) (<code class="inline-code">-e A=100 -e B=200</code>).&lt;br&gt;• <strong><code class="inline-code">--workdir /tmp</code></strong>: Set container working directory.&lt;br&gt;• <strong><code class="inline-code">--name test</code></strong>: Assign container name.&lt;br&gt;• <strong><code class="inline-code">--dns 114.114.114.114</code></strong>: Set container DNS server.&lt;br&gt;• <strong><code class="inline-code">--restart &lt;policy&gt;</code></strong>: Auto-restart policy: <strong><code class="inline-code">no</code></strong> (default), <strong><code class="inline-code">on-failure[:N]</code></strong>, <strong><code class="inline-code">always</code></strong>, <strong><code class="inline-code">unless-stopped</code></strong>.&lt;br&gt;• <strong><code class="inline-code">--rm</code></strong>: Automatically delete container when it stops.</td></tr>
+<tr><td><strong><code class="inline-code">isula pause / unpause</code></strong></td><td><code class="inline-code">isula pause &lt;ID&gt;</code> pauses a running container (<code class="inline-code">Paused</code>); <code class="inline-code">isula unpause &lt;ID&gt;</code> resumes it (<code class="inline-code">Up</code>).</td></tr>
+<tr><td><strong><code class="inline-code">isula exec</code> vs. <code class="inline-code">attach</code></strong></td><td><strong><code class="inline-code">isula exec [-it] &lt;ID&gt; &lt;cmd&gt;</code></strong> creates a new terminal to run commands cleanly (<strong>recommended</strong>; <code class="inline-code">attach</code> may cause errors and is not recommended).</td></tr>
+<tr><td><strong><code class="inline-code">isula ps</code></strong></td><td>Lists running containers. <strong><code class="inline-code">-a</code></strong> (all containers), <strong><code class="inline-code">-q</code></strong> (only IDs), <strong><code class="inline-code">-n 2</code></strong> (latest 2 created containers).</td></tr>
+<tr><td><strong><code class="inline-code">isula inspect / logs</code></strong></td><td><strong><code class="inline-code">isula inspect [--format="{{json .NetworkSettings}}"] &lt;ID&gt;</code></strong> (Go template format by default); <strong><code class="inline-code">isula logs &lt;ID&gt;</code></strong>.</td></tr>
+<tr><td><strong><code class="inline-code">isula restart / rm</code></strong></td><td><strong><code class="inline-code">isula restart &lt;ID&gt;</code></strong>; <strong><code class="inline-code">isula rm &lt;ID&gt;</code></strong> deletes stopped containers (<strong><code class="inline-code">isula rm -f &lt;ID&gt;</code></strong> forcibly deletes a running container!).</td></tr>
+</tbody></table></div>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>iSulad configuration priority from highest to lowest is: CLI (isulad --xxx or /etc/sysconfig/iSulad OPTIONS) &gt; Configuration file (/etc/isulad/daemon.json) &gt; Default code configurations.</li><li>All four states—Created, Exited, Up, and Paused—are valid iSula container states (Official Ch.07 Quiz Q1: ABCD).</li><li>isula rm can only delete stopped containers by default; use 'isula rm -f &lt;ID&gt;' to forcibly delete a running container, or '--rm' on 'isula run' to auto-delete upon exit.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP (Official Ch.07 Quiz Q1): 'Which of the following are container states? A. Created B. Exited C. Up D. Paused' -&gt; ABCD!</div><div class="trap-item">⚠️ EXAM TRAP: In 'isula run -p 8081:80 nginx', the FIRST number (8081) is the HOST port and the SECOND number (80) is the CONTAINER port!</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar2_h8_s2_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./04-Exercise-iSula-Container-Lifecycle-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Running, Exec-ing, Inspecting & Forcibly Removing `iSula` Containers", "duration_mins": 8, "exercise_type": "terminal", "prompt_label": "root@openEuler:~#", "scenario": "You are deploying an `nginx` web container using `iSula` on openEuler (following Ch.07 pp. 408–417). Start a background container named `test` mapping host port `8081` to container port `80` with environment variable `A=100`, execute `/bin/bash` inside `test` using `isula exec -it`, list the latest 2 containers, and forcibly delete container `test`.", "instructions": ["Step 1: Run `nginx` in the background (`-d`) named `test` (`--name test`) with port mapping `-p 8081:80` and environment variable `-e A=100` (`isula run -d --name test -p 8081:80 -e A=100 nginx`).", "Step 2: Execute an interactive shell in container `test` using `isula exec -it test /bin/bash` and list the latest 2 containers using `isula ps -n 2`.", "Step 3: Forcibly remove the running container `test` using `isula rm -f test`."], "starter_code": "# Step 1: Run nginx in background named 'test' with -p 8081:80 and -e A=100\n<isula_run_command>\n\n# Step 2: Run interactive /bin/bash via isula exec and list latest 2 containers\n<isula_exec_command>\n<isula_ps_n2_command>\n\n# Step 3: Forcibly remove running container 'test'\n<isula_rm_force_command>", "solution_code": "# Step 1: Run nginx in background named 'test' with -p 8081:80 and -e A=100\nisula run -d --name test -p 8081:80 -e A=100 nginx\n\n# Step 2: Run interactive /bin/bash via isula exec and list latest 2 containers\nisula exec -it test /bin/bash\nisula ps -n 2\n\n# Step 3: Forcibly remove running container 'test'\nisula rm -f test", "hints": ["Use `isula run -d --name test -p 8081:80 -e A=100 nginx`.", "Use `isula exec -it test /bin/bash` and `isula ps -n 2` (Ch.07 pp.412–413).", "Use `isula rm -f test` (Ch.07 p.417)."], "validation_checks": [{"step": 1, "description": "Run nginx container with -d, --name test, -p 8081:80, and -e A=100", "required_any": ["-p 8081:80"], "feedback_fail": "Include 'isula run -d --name test -p 8081:80 -e A=100 nginx'."}, {"step": 2, "description": "Access container with isula exec -it and list latest 2 containers with isula ps -n 2", "required_any": ["isula ps -n 2"], "feedback_fail": "Include 'isula exec -it test /bin/bash' and 'isula ps -n 2'."}, {"step": 3, "description": "Forcibly delete running container with isula rm -f", "required_any": ["isula rm -f test"], "feedback_fail": "Use 'isula rm -f test' to forcibly remove the running container."}], "simulated_output": "d306049a6b6af9697a1dab8df72f288137b76a99107e7e26ce8dc4b9ad31e219\nroot@d306049a6b6a:/# echo $A\n100\nCONTAINER ID    IMAGE                           COMMAND                  CREATED         STATUS    PORTS                  NAMES\nd306049a6b6a    docker.io/library/nginx:latest  \"/docker-entrypoint.…\"   5 seconds ago   Up        0.0.0.0:8081->80/tcp   test\ntest", "quiz_questions": [{"id": "h8_s2_q1", "type": "multiple", "question": "[Official Ch.07 Quiz Q1] Which of the following are container states?", "options": ["A. Created", "B. Exited", "C. Up", "D. Paused"], "answer": "ABCD", "explanation": "Official Ch.07 Quiz Q1 (p.439): ABCD. All four—`Created`, `Exited`, `Up`, and `Paused`—are valid container states in iSula."}, {"id": "h8_s2_q2", "type": "single", "question": "What is the configuration priority order (from highest to lowest) for the `iSulad` daemon in openEuler?", "options": ["A. Default code configurations > `/etc/isulad/daemon.json` > CLI", "B. `/etc/isulad/daemon.json` > CLI > Default code configurations", "C. CLI (`isulad --xxx`) > Configuration file (`/etc/isulad/daemon.json`) > Default configurations in code", "D. `/etc/fstab` > `/etc/bashrc` > CLI"], "answer": "C", "explanation": "Per Ch.07 (p.401), `iSulad` configuration priority from highest to lowest is: CLI > configuration file (`/etc/isulad/daemon.json`) > default configurations in code."}, {"id": "h8_s2_q3", "type": "single", "question": "When creating a container with `isula run`, which `--restart` policy is used by default if `--restart` is not specified, and which policy restarts a container always EXCEPT when it was already stopped before the `iSulad` daemon started?", "options": ["A. Default: `always`; Exception policy: `on-failure`", "B. Default: `no`; Exception policy: `unless-stopped`", "C. Default: `on-failure`; Exception policy: `no`", "D. Default: `unless-stopped`; Exception policy: `always`"], "answer": "B", "explanation": "Per Ch.07 (p.416), `no` (do not restart when exited) is used by default, and `unless-stopped` always restarts the container when it exits except for containers that were already stopped when the `iSulad` daemon started."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

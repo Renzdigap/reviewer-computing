@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>High Security Part 1 — Fully-Encrypted Database &amp; Dynamic Data Masking | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 04 • Sprint 1/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="../Hour-03-openGauss-Architecture-Resource-Pooling-and-Performance/08-Exercise-Partitioning-SMP-Switchover-and-RTO-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./02-Exercise-Resource-Labels-and-Dynamic-Masking-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.03, pp. 199–208</span>
+            <span class="badge badge-hour">⏱️ Hour 04 • Sprint 1/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">High Security Part 1 — Fully-Encrypted Database &amp; Dynamic Data Masking</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Explain the 3-layer key hierarchy (Root Key, CMK, CEK) and workflow of Fully-Encrypted Equality Queries</li><li>Create Resource Labels (<code class="inline-code">CREATE RESOURCE LABEL</code>) and Dynamic Data Masking Policies (<code class="inline-code">CREATE MASKING POLICY</code>)</li><li>Compare all 7 preset masking functions (<code class="inline-code">creditcardmasking</code>, <code class="inline-code">basicemailmasking</code>, <code class="inline-code">fullemailmasking</code>, <code class="inline-code">alldigitsmasking</code>, <code class="inline-code">shufflemasking</code>, <code class="inline-code">randommasking</code>, <code class="inline-code">maskall</code>) and their constraints</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Equality Query in a Fully-Encrypted Database (pp. 56, 200–204)</h3>
+<p>Protects data privacy across its <strong>entire lifecycle (transmission, computing, and storage)</strong> so data on the server is always in ciphertext — even cloud admins or attackers with root access cannot read plaintext data:</p>
+<ul class="md-list">
+<li><strong>3-Layer Key Hierarchy &amp; Workflow (p. 201)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Root Key (RK)</strong>: Managed locally via <code class="inline-code">keytool</code> on the client host.</li>
+<li><strong>Client Master Key (<code class="inline-code">CMK</code>)</strong>: Stored on the client side and registered in the database metadata; used to encrypt the CEK.</li>
+<li><strong>Column Encryption Key (<code class="inline-code">CEK</code>)</strong>: Encrypted by the CMK on the client and stored as ciphertext on the server; used by the <strong>client driver (<code class="inline-code">ODBC</code>/<code class="inline-code">JDBC</code>/<code class="inline-code">gsql -C</code>)</strong> to encrypt/decrypt column data.</li>
+</ol>
+<ul class="md-list">
+<li><strong>Encryption Types (<code class="inline-code">enc_type</code>)</strong>: <strong><code class="inline-code">DETERMINISTIC</code></strong> (supports equality queries <code class="inline-code">=</code>; server column type becomes <code class="inline-code">BYTEAWITHOUTORDERWITHEQUALCOL</code>) vs. <strong><code class="inline-code">RANDOMIZED</code></strong> (higher security, non-deterministic ciphertext).</li>
+<li><strong>Hardware TEE Support</strong>: Can leverage Intel SGX / Huawei Kunpeng ARM <strong>TEE (<code class="inline-code">secGear</code>)</strong> for isolated computation.</li>
+</ul>
+<p>---</p>
+<h3>2. Dynamic Data Masking (pp. 205–208)</h3>
+<p>Masks sensitive column data dynamically at query time (<code class="inline-code">SELECT</code>) based on the user's identity (<code class="inline-code">ROLES</code>), client tool (<code class="inline-code">APP</code>), and IP (<code class="inline-code">IP</code>) <strong>without modifying the underlying stored data</strong>:</p>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>-- Step 1: Create Resource Labels on target table columns
+CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);
+CREATE RESOURCE LABEL label_for_name ADD COLUMN(user1.table1.name);
+
+-- Step 2: Create Masking Policies bound to Resource Labels
+CREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);
+CREATE MASKING POLICY msk_name randommasking ON LABEL(label_for_name)
+    FILTER ON IP(local), ROLES(dev);</code></pre></div>
+<p>---</p>
+<h3>3. Seven Preconfigured Masking Functions &amp; Constraints (pp. 207–208)</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Preset Masking Function</th><th>Masking Rule</th><th>Official Example (<code class="inline-code">Input</code> -&gt; <code class="inline-code">Output</code>)</th></tr></thead><tbody>
+<tr><td><strong><code class="inline-code">creditcardmasking</code></strong></td><td>Masks all digits <strong>except the last 4 digits</strong> with <code class="inline-code">'x'</code></td><td><code class="inline-code">'4880-9898-4545-2525'</code> -&gt; <strong><code class="inline-code">'xxxx-xxxx-xxxx-2525'</code></strong></td></tr>
+<tr><td><strong><code class="inline-code">basicemailmasking</code></strong></td><td>Masks all text <strong>before <code class="inline-code">@</code></strong> with <code class="inline-code">'x'</code></td><td><code class="inline-code">'abcd@mymail.com'</code> -&gt; <strong><code class="inline-code">'xxxx@mymail.com'</code></strong></td></tr>
+<tr><td><strong><code class="inline-code">fullemailmasking</code></strong></td><td>Masks text <strong>before the first dot (<code class="inline-code">.</code>) (except <code class="inline-code">@</code>)</strong> with <code class="inline-code">'x'</code></td><td><code class="inline-code">'abcd@gmail.com'</code> -&gt; <strong><code class="inline-code">'xxxx@xxxxx.com'</code></strong></td></tr>
+<tr><td><strong><code class="inline-code">alldigitsmasking</code></strong></td><td>Masks <strong>only digits</strong> with <code class="inline-code">'0'</code></td><td><code class="inline-code">'alex123alex'</code> -&gt; <strong><code class="inline-code">'alex000alex'</code></strong></td></tr>
+<tr><td><strong><code class="inline-code">shufflemasking</code></strong></td><td>Randomly shuffles character positions (weak masking)</td><td><code class="inline-code">'hello world'</code> -&gt; <strong><code class="inline-code">'hlwoeor dl'</code></strong></td></tr>
+<tr><td><strong><code class="inline-code">randommasking</code></strong></td><td>Randomly replaces each character</td><td><code class="inline-code">'hello world'</code> -&gt; <strong><code class="inline-code">'ad5f5ghdf5'</code></strong></td></tr>
+<tr><td><strong><code class="inline-code">maskall</code></strong></td><td>Replaces every character with <code class="inline-code">'x'</code></td><td><code class="inline-code">'4880-9898-4545-2525'</code> -&gt; <strong><code class="inline-code">'xxxxxxxxxxxxxxxxxxx'</code></strong></td></tr>
+</tbody></table></div>
+<ul class="md-list">
+<li><strong>Key Constraints (p. 208)</strong>:</li>
+<li>Must be created by <strong><code class="inline-code">POLADMIN</code></strong>, <strong><code class="inline-code">SYSADMIN</code></strong>, or the <strong>initial user</strong> (with GUC <code class="inline-code">enable_security_policy = on</code>).</li>
+<li>Maximum of <strong>98 dynamic data masking policies</strong>; only the <strong>7 preset masking functions</strong> above can be used.</li>
+<li>Applies <strong>only to <code class="inline-code">COLUMN</code> resource labels on base tables</strong> and takes effect <strong>only on <code class="inline-code">SELECT</code></strong> queries (Note: <code class="inline-code">INSERT INTO ... SELECT</code> or <code class="inline-code">MERGE INTO</code> from a masked source column permanently writes the <strong>masked value</strong>!).</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>In a Fully-Encrypted Database, the Client Master Key (CMK) encrypts the Column Encryption Key (CEK), and the client driver encrypts/decrypts data so the server only ever sees ciphertext.</li><li>Dynamic Data Masking uses Resource Labels (<code class="inline-code">CREATE RESOURCE LABEL ... ADD COLUMN(...)</code>) and Masking Policies (<code class="inline-code">CREATE MASKING POLICY ... ON LABEL(...)</code>) and supports 7 preset functions.</li><li><code class="inline-code">basicemailmasking</code> masks only before <code class="inline-code">@</code> (<code class="inline-code">xxxx@gmail.com</code>), whereas <code class="inline-code">fullemailmasking</code> masks everything before the last domain dot except <code class="inline-code">@</code> (<code class="inline-code">xxxx@xxxxx.com</code>).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Dynamic Data Masking can only be created by a user with <code class="inline-code">POLADMIN</code>, <code class="inline-code">SYSADMIN</code>, or initial user privileges, supports at most 98 policies, and only masks <code class="inline-code">SELECT</code> queries on base table columns.</div><div class="trap-item">⚠️ EXAM TRAP: If a user subject to dynamic masking runs <code class="inline-code">INSERT INTO t2 SELECT masked_col FROM t1</code>, the inserted data in <code class="inline-code">t2</code> is the MASKED value and cannot be restored!</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h4_s1_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./02-Exercise-Resource-Labels-and-Dynamic-Masking-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Configuring Resource Labels & Dynamic Data Masking Policies", "duration_mins": 8, "exercise_type": "sql", "prompt_label": "openGauss=#", "scenario": "Protect customer privacy on `user1.table1`: create a resource label `label_for_creditcard` on column `user1.table1.creditcard` and apply the `creditcardmasking` policy `msk_creditcard` so only the last 4 digits are visible.", "instructions": ["Step 1: Create the resource label using `CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);`.", "Step 2: Create the masking policy using `CREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);`.", "Step 3: Query `SELECT creditcard FROM user1.table1;` to verify the masked output."], "starter_code": "-- Step 1: Create a resource label on user1.table1.creditcard\nCREATE ____ LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);\n\n-- Step 2: Create a masking policy using creditcardmasking\nCREATE ____ POLICY msk_creditcard ____ ON LABEL(label_for_creditcard);\n\n-- Step 3: Query the masked column\nSELECT creditcard FROM user1.table1;\n", "solution_code": "CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);\n\nCREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);\n\nSELECT creditcard FROM user1.table1;", "hints": ["Use `CREATE RESOURCE LABEL <label_name> ADD COLUMN(<schema.table.col>);`.", "Use `CREATE MASKING POLICY <policy_name> creditcardmasking ON LABEL(<label_name>);`."], "validation_checks": [{"step": 1, "description": "Create resource label with `CREATE RESOURCE LABEL`", "required_any": ["create resource label label_for_creditcard"], "feedback_fail": "Use `CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);`."}, {"step": 2, "description": "Create masking policy with `CREATE MASKING POLICY` and `creditcardmasking`", "required_any": ["create masking policy msk_creditcard creditcardmasking"], "feedback_fail": "Use `CREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);`."}], "simulated_output": "CREATE RESOURCE LABEL\nCREATE MASKING POLICY\n     creditcard      \n---------------------\n xxxx-xxxx-xxxx-2525\n(1 row)", "quiz_questions": [{"id": "h4_s1_q1", "type": "single", "question": "In openGauss Dynamic Data Masking, how will the string `'abcd@gmail.com'` be displayed when masked by `basicemailmasking` versus `fullemailmasking`?", "options": ["A. `basicemailmasking`: `'xxxx@gmail.com'`; `fullemailmasking`: `'xxxx@xxxxx.com'`", "B. `basicemailmasking`: `'xxxx@xxxxx.com'`; `fullemailmasking`: `'xxxxxxxxxxxxxx'`", "C. `basicemailmasking`: `'a***@gmail.com'`; `fullemailmasking`: `'a***@g****.com'`", "D. `basicemailmasking`: `'abcd@xxxxx.com'`; `fullemailmasking`: `'xxxx@gmail.com'`"], "answer": "A", "explanation": "Per Chapter 03 (p. 207), `basicemailmasking` masks all text before `@` (`'xxxx@gmail.com'`), whereas `fullemailmasking` masks all text before the first dot `.` except `@` (`'xxxx@xxxxx.com'`)."}, {"id": "h4_s1_q2", "type": "multiple", "question": "Which of the following statements about openGauss Fully-Encrypted Database equality queries are TRUE?", "options": ["A. It uses a three-layer key hierarchy consisting of the Root Key, Client Master Key (CMK), and Column Encryption Key (CEK)", "B. The CEK is encrypted by the CMK on the client and stored in ciphertext on the database server", "C. Data is encrypted and decrypted on the client side, while the server processes ciphertext", "D. Plaintext encryption keys are stored in the `pg_class` system catalog on the server so the server can decrypt columns before comparison"], "answer": "ABC", "explanation": "Per Chapter 01 (p. 56) and Chapter 03 (p. 201), A, B, and C are true. Option D is false: plaintext key information is NEVER stored on the database server, and the server cannot decrypt ciphertext."}, {"id": "h4_s1_q3", "type": "tf", "question": "In openGauss, any ordinary database user can create a Dynamic Data Masking policy on tables within the `public` schema.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.03 p. 208). A dynamic data masking policy must be created by a user with the `POLADMIN` or `SYSADMIN` attribute, or by the initial user."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

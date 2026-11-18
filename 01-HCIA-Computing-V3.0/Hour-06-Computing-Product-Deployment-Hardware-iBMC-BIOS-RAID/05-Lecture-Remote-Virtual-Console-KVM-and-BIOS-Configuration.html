@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remote Virtual Console (KVM) &amp; BIOS/PXE Configuration | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 06 • Sprint 3/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./04-Exercise-iBMC-Default-IP-Credentials-and-WebUI-Navigation-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./06-Exercise-BIOS-POST-Boot-Order-and-PXE-Configuration-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.05, pp. 309–317</span>
+            <span class="badge badge-hour">⏱️ Hour 06 • Sprint 3/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Remote Virtual Console (KVM) &amp; BIOS/PXE Configuration</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Distinguish Private vs. Shared modes of Java and HTML5 Integrated Remote Consoles on iBMC</li><li>Master BIOS entry keys (<code class="inline-code">Delete</code> or <code class="inline-code">F4</code>), the 7-step BIOS POST sequence, and saving changes (<code class="inline-code">F10</code>)</li><li>Configure Boot Sequence (<code class="inline-code">Boot &gt; Boot Type Order</code>), onboard NIC UEFI PXE (<code class="inline-code">Advanced &gt; LOM Configuration &gt; PXE Configuration</code>), and iBMC WebUI <code class="inline-code">System &gt; BIOS Settings</code></li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. iBMC Remote Virtual Console (KVM): Private vs. Shared Modes (p. 310)</h3>
+<p>On the iBMC WebUI <strong>Home</strong> page, clicking <strong>Virtual Console $\rightarrow$ Start</strong> offers four options across <strong>Java</strong> and <strong>HTML5</strong> Integrated Remote Consoles:</p>
+<ul class="md-list">
+<li><strong>Java / HTML5 Integrated Remote Console (Private)</strong>: Allows <strong>only 1 local user or VNC user</strong> to access and operate the server through iBMC at a time.</li>
+<li><strong>Java / HTML5 Integrated Remote Console (Shared)</strong>: Allows <strong>up to 2 local users or 5 VNC users</strong> to simultaneously access and perform operations on the server through iBMC (each user can view operations performed by the others).</li>
+</ul>
+<p>---</p>
+<h3>2. Entering the BIOS &amp; The 7-Step POST Sequence (pp. 311–312)</h3>
+<ul class="md-list">
+<li><strong>Entering BIOS Setup (p. 311)</strong>: Power on or reset the server from the Remote Virtual Console, press <strong><code class="inline-code">Delete</code> or <code class="inline-code">F4</code></strong> when the boot menu appears, and enter the BIOS password (default: <strong><code class="inline-code">Admin@9000</code></strong>).</li>
+<li><strong>Power-On Self-Test (POST) 7-Step Sequence (p. 312)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Initialization of the data bus and control bus</strong> (enables inter-device data transmission)</li>
+<li><strong>CPU self-check</strong> (checks model, frequency, functions, caches; sets CPU operating mode)</li>
+<li><strong>Memory self-check</strong> (verifies presence, capacity, speed; configures operating mode and clock frequency)</li>
+<li><strong>Graphics card self-check</strong> (checks model and video memory capacity; sets display mode)</li>
+<li><strong>Self-check of drives and other devices</strong> (checks HDDs/SSDs, optical drive, USB peripherals)</li>
+<li><strong>Result presentation</strong> (presents self-check result via <strong>beep codes</strong> or <strong>on-screen messages</strong>)</li>
+<li><strong>OS startup</strong> (loads OS from bootable device and hands over control to the OS)</li>
+</ol>
+<p>---</p>
+<h3>3. Key BIOS Configuration Tasks &amp; iBMC BIOS Settings (pp. 313–317)</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>BIOS Configuration Task</th><th>Exact Menu Path &amp; Keybindings (pp. 313–317)</th></tr></thead><tbody>
+<tr><td><strong>Configure iBMC IP/User</strong></td><td><strong><code class="inline-code">Advanced &gt; IPMI iBMC Configuration &gt; iBMC Configuration</code></strong></td></tr>
+<tr><td><strong>Set System Date &amp; Time</strong></td><td><strong><code class="inline-code">Main &gt; System Date</code></strong> or <strong><code class="inline-code">Main &gt; System Time</code></strong></td></tr>
+<tr><td><strong>Set Boot Sequence</strong></td><td><strong><code class="inline-code">Boot &gt; Boot Type Order</code></strong>: Use <strong><code class="inline-code">+</code> or <code class="inline-code">-</code></strong> keys to move a boot option up or down, then press <strong><code class="inline-code">F10</code></strong> (<em>Save configuration changes and exit?</em> $\rightarrow$ <strong>Yes</strong>).</td></tr>
+<tr><td><strong>Configure PXE for Onboard NIC</strong></td><td><strong><code class="inline-code">Advanced &gt; LOM Configuration &gt; PXE Configuration</code></strong>: Select <code class="inline-code">PXE1 Configuration</code> $\rightarrow$ <strong><code class="inline-code">Enable</code></strong>, set <strong>PXE Boot Capability</strong> to <strong><code class="inline-code">UEFI: IPv4</code></strong>, <strong><code class="inline-code">UEFI: IPv6</code></strong>, or <strong><code class="inline-code">UEFI: IPv4/IPv6</code></strong>, then press <strong><code class="inline-code">F10</code></strong> to save and restart.</td></tr>
+<tr><td><strong>Set Preferred Boot Medium via iBMC WebUI</strong></td><td><strong><code class="inline-code">System &gt; BIOS Settings</code></strong>: Select the preferred boot medium to take effect <strong>one time</strong> or <strong>permanently</strong>.</td></tr>
+</tbody></table></div>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>Remote Virtual Console (Private) allows 1 local or VNC user; (Shared) allows up to 2 local users or 5 VNC users simultaneously.</li><li>Press Delete or F4 during boot to enter the TaiShan 200 BIOS; use + or - to adjust Boot Type Order; press F10 to save and exit.</li><li>The 7-step BIOS POST order is: Data/control bus init -&gt; CPU self-check -&gt; Memory self-check -&gt; Graphics card self-check -&gt; Drives/peripherals self-check -&gt; Result presentation (beep codes/messages) -&gt; OS startup.</li><li>Enable PXE for the onboard NIC at Advanced &gt; LOM Configuration &gt; PXE Configuration (supports UEFI: IPv4, UEFI: IPv6, or UEFI: IPv4/IPv6).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: In Shared mode of the HTML5/Java Integrated Remote Console, the concurrency limit is up to 2 local users OR 5 VNC users (not 10 users)!</div><div class="trap-item">⚠️ EXAM TRAP: To enter the BIOS on a TaiShan 200 (2280) server, press <code class="inline-code">Delete</code> or <code class="inline-code">F4</code> (and press <code class="inline-code">F10</code> to save and exit).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h6_s3_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./06-Exercise-BIOS-POST-Boot-Order-and-PXE-Configuration-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Remote Console & BIOS/PXE Boot Automation", "duration_mins": 7, "exercise_type": "config", "prompt_label": "bios-setup@taishan-2280:~#", "scenario": "Configure the Remote Virtual Console concurrency parameters and the BIOS boot/PXE settings for automated UEFI PXE network installation.", "instructions": ["Set `shared_console_max_local_users` to `2` and `shared_console_max_vnc_users` to `5`.", "Set `bios_entry_keys` to `'Delete or F4'` and `bios_save_exit_key` to `'F10'`.", "Set `lom_pxe_menu_path` to `'Advanced > LOM Configuration > PXE Configuration'`."], "starter_code": "# Remote Console & BIOS/PXE Configuration\nremote_console:\n  private_console_max_users: 1\n  shared_console_max_local_users: ___\n  shared_console_max_vnc_users: ___\n\nbios_settings:\n  bios_entry_keys: \"___\"\n  boot_order_adjust_keys: \"+ or -\"\n  bios_save_exit_key: \"___\"\n  lom_pxe_menu_path: \"___\"\n  pxe_boot_capabilities:\n    - \"UEFI: IPv4\"\n    - \"UEFI: IPv6\"\n    - \"UEFI: IPv4/IPv6\"\n", "solution_code": "# Remote Console & BIOS/PXE Configuration\nremote_console:\n  private_console_max_users: 1\n  shared_console_max_local_users: 2\n  shared_console_max_vnc_users: 5\n\nbios_settings:\n  bios_entry_keys: \"Delete or F4\"\n  boot_order_adjust_keys: \"+ or -\"\n  bios_save_exit_key: \"F10\"\n  lom_pxe_menu_path: \"Advanced > LOM Configuration > PXE Configuration\"\n  pxe_boot_capabilities:\n    - \"UEFI: IPv4\"\n    - \"UEFI: IPv6\"\n    - \"UEFI: IPv4/IPv6\"\n", "hints": ["Shared remote console supports up to 2 local users or 5 VNC users.", "Enter BIOS with Delete or F4; save and exit with F10; onboard PXE is under Advanced > LOM Configuration > PXE Configuration."], "validation_checks": [{"step": 1, "description": "Verify Shared Remote Console limits (2 local users, 5 VNC users)", "required_any": ["2", "5"], "feedback_fail": "Set shared_console_max_local_users = 2 and shared_console_max_vnc_users = 5."}, {"step": 2, "description": "Verify BIOS entry (Delete or F4) and save/exit (F10) keys", "required_any": ["f4", "f10"], "feedback_fail": "Set bios_entry_keys to 'Delete or F4' and bios_save_exit_key to 'F10'."}, {"step": 3, "description": "Verify LOM Configuration > PXE Configuration path", "required_any": ["lom configuration", "pxe configuration"], "feedback_fail": "Set lom_pxe_menu_path to 'Advanced > LOM Configuration > PXE Configuration'."}], "simulated_output": "[OK] Remote Console & BIOS Configuration Validated:\n- HTML5/Java Console: Private (1 user) | Shared (2 local users or 5 VNC users)\n- BIOS Hotkeys: Entry = Delete / F4 | Move Boot Option = + / - | Save & Exit = F10\n- Onboard PXE: Advanced > LOM Configuration > PXE Configuration (UEFI: IPv4 / IPv6 / IPv4/IPv6).", "quiz_questions": [{"id": "h6_s3_q1", "type": "single", "question": "How many simultaneous users can access the server when using the HTML5 Integrated Remote Console (Shared) mode on the iBMC WebUI?", "options": ["A. Only 1 local user or 1 VNC user", "B. Up to 2 local users or 5 VNC users", "C. Up to 10 local users or 20 VNC users", "D. Unlimited local and VNC users"], "answer": "B", "explanation": "According to Ch.05 p.310, Private mode allows only 1 local user or VNC user, while Shared mode (Java or HTML5) allows up to 2 local users or 5 VNC users simultaneously."}, {"id": "h6_s3_q2", "type": "single", "question": "Which keys are pressed during server startup to enter the TaiShan 200 BIOS Setup utility, and which key saves configuration changes and exits the BIOS?", "options": ["A. Press Ctrl+Alt+Del to enter BIOS; press Esc to save and exit", "B. Press Delete or F4 to enter BIOS; press F10 to save and exit", "C. Press F1 to enter BIOS; press F5 to save and exit", "D. Press Tab to enter BIOS; press Alt+F4 to save and exit"], "answer": "B", "explanation": "According to Ch.05 pp. 298, 311, and 315, press Delete or F4 when the boot menu is displayed to enter the BIOS, use + or - to change boot order, and press F10 to save configuration changes and exit."}, {"id": "h6_s3_q3", "type": "multiple", "question": "In the BIOS Power-On Self-Test (POST) sequence (Ch.05, p. 312), which of the following steps occur BEFORE the BIOS attempts OS startup?", "options": ["A. Initialization of the data bus and control bus", "B. CPU self-check and Memory self-check", "C. Graphics card self-check and Self-check of drives and other peripheral devices", "D. Result presentation in the form of beep codes or on-screen messages"], "answer": "ABCD", "explanation": "All four steps occur in that exact sequence during POST before the BIOS hands over control to OS startup (Ch.05, p.312)."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

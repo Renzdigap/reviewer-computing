@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DML Statements — `INSERT`, `UPDATE` &amp; `DELETE` | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 06 • Sprint 4/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./06-Exercise-Inner-Left-Right-Full-Outer-Join-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./08-Exercise-DML-INSERT-ON-DUPLICATE-UPDATE-and-DELETE-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.05, pp. 396–406</span>
+            <span class="badge badge-hour">⏱️ Hour 06 • Sprint 4/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">DML Statements — <code class="inline-code">INSERT</code>, <code class="inline-code">UPDATE</code> &amp; <code class="inline-code">DELETE</code></h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Master the 3 forms of <code class="inline-code">INSERT</code> (<code class="inline-code">INSERT ... VALUES</code>, <code class="inline-code">INSERT ... SELECT</code>, and <code class="inline-code">INSERT ... ON DUPLICATE KEY UPDATE</code> / <code class="inline-code">INSERT IGNORE</code>)</li><li>Write <code class="inline-code">UPDATE table SET col = expr [WHERE condition]</code> statements (<code class="inline-code">UPDATE STAFFS SET AGE = AGE + 5</code> — Ch.05 Quiz Q1!)</li><li>Write <code class="inline-code">DELETE FROM table [WHERE condition]</code> statements (<code class="inline-code">DELETE FROM student WHERE cid = 6;</code> — Ch.05 Quiz Q3!) and know column-store DML limitations</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Inserting Data (<code class="inline-code">INSERT</code>, pp. 397–399)</h3>
+<p>openGauss supports <strong>three <code class="inline-code">INSERT</code> syntax patterns</strong>:</p>
+<ol class="md-list">
+<li><strong>Insert explicit row values</strong>:</li>
+</ol>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>   INSERT INTO bank_card(b_number, b_type, b_c_id) VALUES ('6222021302020000001', 'Credit Card', 1);</code></pre></div>
+<ol class="md-list">
+<li><strong>Insert from a query (<code class="inline-code">INSERT ... SELECT</code>)</strong>:</li>
+</ol>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>   INSERT INTO bank_card1 SELECT * FROM bank_card;
+   -- Number of columns in SELECT list must match the target columns!</code></pre></div>
+<ol class="md-list">
+<li><strong>Upsert on primary/unique key conflict (<code class="inline-code">ON DUPLICATE KEY UPDATE</code> vs. <code class="inline-code">IGNORE</code>)</strong>:</li>
+</ol>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>   INSERT INTO bank_card VALUES ('6222021302020000001', 'Credit Card', 1)
+       ON DUPLICATE KEY UPDATE b_type = 'Savings Card';</code></pre></div>
+<ul class="md-list">
+<li><strong><code class="inline-code">IGNORE</code></strong> (<code class="inline-code">INSERT IGNORE INTO ...</code>): Silently ignores rows that cause duplicate key errors (<strong>cannot</strong> be used together with <code class="inline-code">ON DUPLICATE KEY UPDATE</code>!).</li>
+<li><strong>Permissions</strong>:</li>
+<li><code class="inline-code">RETURNING</code> clause requires <code class="inline-code">SELECT</code> permission on the table.</li>
+<li><code class="inline-code">ON DUPLICATE KEY UPDATE</code> requires <code class="inline-code">INSERT</code>, <code class="inline-code">SELECT</code>, and <code class="inline-code">UPDATE</code> on the table plus <code class="inline-code">SELECT</code> on the unique/primary key index.</li>
+<li><strong>Record Size Limit (p. 397)</strong>: Data size of a single inserted record must be <strong>&lt; 64,000 bytes</strong> in standard row-store insert precautions.</li>
+</ul>
+<p>---</p>
+<h3>2. Updating Data (<code class="inline-code">UPDATE</code>, pp. 400–401, Ch.05 p. 405 Quiz Q1!)</h3>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>UPDATE table_reference SET col_name = expression [, ...] [ WHERE condition ];</code></pre></div>
+<ul class="md-list">
+<li><strong>Official Exam Question (Ch.05 p. 405 Quiz Q1: C!)</strong>:</li>
+<li>To increase the value of the <code class="inline-code">AGE</code> column in the <code class="inline-code">STAFFS</code> table by 5 years:</li>
+</ul>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>    UPDATE STAFFS SET AGE = AGE + 5;</code></pre></div>
+<ul class="md-list">
+<li><em>(Why are A, B, D wrong? Because SQL <code class="inline-code">UPDATE</code> uses <code class="inline-code">UPDATE &lt;table&gt; SET &lt;col&gt; = &lt;expr&gt;</code>, NEVER <code class="inline-code">WITH</code>!)</em></li>
+<li><strong>Column-Store <code class="inline-code">UPDATE</code> Precautions (p. 400)</strong>:</li>
+<li><code class="inline-code">RETURNING</code> clause is <strong>not supported</strong> for column-store tables.</li>
+<li>Memory/space holding old records in a column-store table is <strong>not automatically recycled</strong> after <code class="inline-code">UPDATE</code> — you must run <strong><code class="inline-code">VACUUM FULL table_name;</code></strong> to reclaim it.</li>
+<li><code class="inline-code">UPDATE</code> is <strong>not supported</strong> on column-store replication tables.</li>
+</ul>
+<p>---</p>
+<h3>3. Deleting Data (<code class="inline-code">DELETE</code>, pp. 402–404, Ch.05 p. 406 Quiz Q3!)</h3>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>DELETE FROM [schema_name.]table_name [ WHERE condition ];</code></pre></div>
+<ul class="md-list">
+<li><strong>Official Exam Question (Ch.05 p. 406 Quiz Q3: A!)</strong>:</li>
+<li>To delete records for all students whose class ID (<code class="inline-code">cid</code>) is <code class="inline-code">6</code> from the <code class="inline-code">student</code> table:</li>
+</ul>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>    DELETE FROM student WHERE cid = 6;</code></pre></div>
+<ul class="md-list">
+<li><strong>CRITICAL SYNTAX TRAP</strong>: Never put <code class="inline-code"><em></code> after <code class="inline-code">DELETE</code> (<code class="inline-code">DELETE </em> FROM ...</code> is a syntax error!), and use <code class="inline-code">WHERE</code> (not <code class="inline-code">ON</code>) for the filter condition!</li>
+<li>If the <code class="inline-code">WHERE</code> clause is omitted (<code class="inline-code">DELETE FROM student;</code>), <strong>all rows in the table are deleted</strong>, leaving the empty table structure intact.</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>To increment <code class="inline-code">AGE</code> by 5 in <code class="inline-code">STAFFS</code>, use <code class="inline-code">UPDATE STAFFS SET AGE = AGE + 5;</code> (Ch.05 p. 405 Quiz Q1: C).</li><li>To delete rows where <code class="inline-code">cid = 6</code> from <code class="inline-code">student</code>, use <code class="inline-code">DELETE FROM student WHERE cid = 6;</code> — there is NO <code class="inline-code">*</code> between <code class="inline-code">DELETE</code> and <code class="inline-code">FROM</code>, and the filter uses <code class="inline-code">WHERE</code>, not <code class="inline-code">ON</code> (Ch.05 p. 406 Quiz Q3: A).</li><li><code class="inline-code">INSERT ... ON DUPLICATE KEY UPDATE</code> updates specified columns when a primary/unique key conflict occurs, and cannot be combined with <code class="inline-code">INSERT IGNORE</code>.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP (Ch.05 p. 406 Quiz Q3): <code class="inline-code">DELETE <em> FROM student WHERE cid = 6;</code> (B) is INVALID SQL! <code class="inline-code">DELETE</code> deletes entire rows, so <code class="inline-code"></em></code> is never used after <code class="inline-code">DELETE</code>. The correct statement is <code class="inline-code">DELETE FROM student WHERE cid = 6;</code> (A).</div><div class="trap-item">⚠️ EXAM TRAP: After updating rows in a column-store table, old record space is not recycled automatically; you must run <code class="inline-code">VACUUM FULL table_name;</code> (Ch.05 p. 400).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h6_s4_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./08-Exercise-DML-INSERT-ON-DUPLICATE-UPDATE-and-DELETE-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Executing Upsert (`ON DUPLICATE KEY UPDATE`), `UPDATE`, and `DELETE`", "duration_mins": 8, "exercise_type": "sql", "prompt_label": "openGauss=#", "scenario": "Execute the three high-yield DML operations from Chapter 05: perform an upsert on `bank_card` using `ON DUPLICATE KEY UPDATE`, increment all employees' ages by 5 in `STAFFS`, and delete all students in class `cid = 6` from `student`.", "instructions": ["Step 1: Insert `('6222021302020000001', 'Credit Card', 1)` into `bank_card` and update `b_type = 'Savings Card'` on duplicate key.", "Step 2: Increase the `AGE` column in the `STAFFS` table by 5 years using `UPDATE STAFFS SET AGE = AGE + 5;`.", "Step 3: Delete all records from `student` where `cid = 6` using `DELETE FROM student WHERE cid = 6;`."], "starter_code": "-- Step 1: Upsert into bank_card using ON DUPLICATE KEY UPDATE\nINSERT INTO bank_card VALUES ('6222021302020000001', 'Credit Card', 1)\n____ ____ ____ UPDATE b_type = 'Savings Card';\n\n-- Step 2 (Ch.05 Quiz Q1): Increase AGE in STAFFS by 5 years\nUPDATE STAFFS ____ AGE = ____;\n\n-- Step 3 (Ch.05 Quiz Q3): Delete students with cid = 6\n____ ____ student ____ cid = 6;\n", "solution_code": "INSERT INTO bank_card VALUES ('6222021302020000001', 'Credit Card', 1)\nON DUPLICATE KEY UPDATE b_type = 'Savings Card';\n\nUPDATE STAFFS SET AGE = AGE + 5;\n\nDELETE FROM student WHERE cid = 6;", "hints": ["Use `ON DUPLICATE KEY UPDATE b_type = 'Savings Card'`.", "Use `UPDATE STAFFS SET AGE = AGE + 5;`.", "Use `DELETE FROM student WHERE cid = 6;` (do not put `*` after `DELETE`)."], "validation_checks": [{"step": 1, "description": "Use `ON DUPLICATE KEY UPDATE`", "required_any": ["on duplicate key update"], "feedback_fail": "Include `ON DUPLICATE KEY UPDATE b_type = 'Savings Card';`."}, {"step": 2, "description": "Update `STAFFS` with `UPDATE STAFFS SET AGE = AGE + 5`", "required_any": ["update staffs set age = age + 5", "update staffs set age=age+5", "update staffs set age = age+5"], "feedback_fail": "Use `UPDATE STAFFS SET AGE = AGE + 5;`."}, {"step": 3, "description": "Delete from `student` with `DELETE FROM student WHERE cid = 6`", "required_any": ["delete from student where cid = 6", "delete from student where cid=6"], "feedback_fail": "Use `DELETE FROM student WHERE cid = 6;`."}], "simulated_output": "INSERT 0 1\nUPDATE 42\nDELETE 8", "quiz_questions": [{"id": "h6_s4_q1", "type": "single", "question": "(Official Ch.05 Quiz p. 405 Q1) Which of the following SQL commands can be used to increase the value of the `AGE` column in the `STAFFS` table by five years?", "options": ["A. UPDATE SET AGE WITH AGE+5", "B. UPDATE AGE WITH AGE+5", "C. UPDATE STAFFS SET AGE = AGE+5", "D. UPDATE STAFFS AGE WITH AGE+5"], "answer": "C", "explanation": "Per Chapter 05 (p. 401 & p. 405), the correct `UPDATE` syntax is `UPDATE table_name SET column_name = expression`, so `UPDATE STAFFS SET AGE = AGE+5` is correct."}, {"id": "h6_s4_q2", "type": "single", "question": "(Official Ch.05 Quiz p. 406 Q3) Which of the following SQL statements will delete records for all students whose class ID (specified by `cid`) is 6 from the `student` table?", "options": ["A. delete FROM student where cid = 6;", "B. delete * FROM student where cid = 6;", "C. delete FROM student on cid = 6;", "D. delete * FROM student on cid = 6;"], "answer": "A", "explanation": "Per Chapter 05 (p. 403 & p. 406), the `DELETE` syntax is `DELETE FROM table_name WHERE condition;`. Putting `*` after `DELETE` or using `ON` instead of `WHERE` is invalid."}, {"id": "h6_s4_q3", "type": "tf", "question": "In openGauss, the `IGNORE` keyword in `INSERT IGNORE INTO ...` can be used together with the `ON DUPLICATE KEY UPDATE` clause in the same `INSERT` statement.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.05 p. 398). `IGNORE` ignores records that cause duplicate key errors and CANNOT be used together with `ON DUPLICATE KEY UPDATE`."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

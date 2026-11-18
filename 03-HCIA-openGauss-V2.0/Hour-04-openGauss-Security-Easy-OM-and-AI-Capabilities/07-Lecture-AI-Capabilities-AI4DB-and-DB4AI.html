@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Capabilities — AI4DB (`X-Tuner`, `SQLdiag`, `Index-advisor`) &amp; DB4AI (`DeepSQL`, Native DB4AI) | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 04 • Sprint 4/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./06-Exercise-WDR-Snapshot-and-Session-Diagnosis-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./08-Exercise-Index-Advisor-Virtual-Index-and-DB4AI-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.03, pp. 243–267</span>
+            <span class="badge badge-hour">⏱️ Hour 04 • Sprint 4/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">AI Capabilities — AI4DB (<code class="inline-code">X-Tuner</code>, <code class="inline-code">SQLdiag</code>, <code class="inline-code">Index-advisor</code>) &amp; DB4AI (<code class="inline-code">DeepSQL</code>, Native DB4AI)</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Distinguish the two sub-pillars of DBMind: AI4DB (X-Tuner, SQLdiag, Index-advisor, Anomaly-detection) and DB4AI (DeepSQL, Native DB4AI)</li><li>Operate X-Tuner (<code class="inline-code">recommend</code>, <code class="inline-code">train</code>, <code class="inline-code">tune</code>), SQLdiag (<code class="inline-code">train</code>, <code class="inline-code">predict</code>), and Index-advisor (<code class="inline-code">gs_index_advise</code>, <code class="inline-code">hypopg_create_index</code>, <code class="inline-code">index_advisor_workload.py</code>)</li><li>Describe DeepSQL (60+ ML/graph algorithms) and Native DB4AI (<code class="inline-code">CREATE MODEL</code>, <code class="inline-code">PREDICT BY</code>)</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. openGauss AI Architecture (<code class="inline-code">DBMind</code>: <code class="inline-code">AI4DB</code> + <code class="inline-code">DB4AI</code>, p. 244)</h3>
+<ul class="md-list">
+<li><strong>AI4DB (AI for Database)</strong>: Uses AI to make the database self-tuning, self-diagnosing, self-healing, and self-securing. Includes <strong><code class="inline-code">X-Tuner</code></strong>, <strong><code class="inline-code">SQLdiag</code></strong>, <strong><code class="inline-code">Index-advisor</code></strong>, and <strong><code class="inline-code">Anomaly-detection</code></strong>.</li>
+<li><strong>DB4AI (Database for AI)</strong>: Runs machine learning and deep learning directly inside the database engine using SQL-like syntax without moving data across platforms. Includes <strong><code class="inline-code">DeepSQL</code></strong> and the <strong><code class="inline-code">Native DB4AI Engine</code></strong>.</li>
+</ul>
+<p>---</p>
+<h3>2. AI4DB Tools: <code class="inline-code">X-Tuner</code>, <code class="inline-code">SQLdiag</code> &amp; <code class="inline-code">Index-advisor</code> (pp. 245–263)</h3>
+<h4>A. <code class="inline-code">X-Tuner</code> (Knob Parameter Tuning Tool, pp. 245–249)</h4>
+<ul class="md-list">
+<li>Uses <strong>Deep Reinforcement Learning (DRL, e.g., DDPG)</strong> and <strong>Global Search Algorithms (Bayesian optimization, Particle Swarm Optimization / PSO)</strong>. Can be run from source (<code class="inline-code">python main.py</code>) or installed via <code class="inline-code">python setup.py install</code> (<code class="inline-code">gs_xtuner</code>).</li>
+<li><strong>3 Running Modes (p. 247)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong><code class="inline-code">recommend</code></strong>: Inspects current workload features and generates a parameter recommendation report <strong>in seconds without restarting the database</strong>.</li>
+<li><strong><code class="inline-code">train</code></strong>: Iteratively modifies knobs and runs benchmarks to train a DRL model (may restart DB repeatedly).</li>
+<li><strong><code class="inline-code">tune</code></strong>: Tunes parameters using either a trained DRL model (requires <code class="inline-code">train</code> first with identical knob list/min/max) or a Global Search algorithm (no pre-training required).</li>
+</ol>
+<h4>B. <code class="inline-code">SQLdiag</code> (SQL Execution Time Prediction, pp. 250–253)</h4>
+<ul class="md-list">
+<li>Predicts execution duration of unknown SQL queries using <strong>SQL vectorization and template-based similarity</strong> against historical execution logs <strong>without collecting execution plans</strong> (zero impact on DB performance; works for both OLTP and OLAP!).</li>
+<li>Requires GUC <code class="inline-code">log_statement = all</code> and <code class="inline-code">log_statement_stats = on</code>.</li>
+<li>Usage: <code class="inline-code">python main.py -m train -f data/train.csv</code> and <code class="inline-code">python main.py -m predict -f data/predict.csv</code>.</li>
+</ul>
+<h4>C. <code class="inline-code">Index-advisor</code> (3 Index Recommendation Functions, pp. 254–263)</h4>
+<ol class="md-list">
+<li><strong>Single-Query Index Recommendation</strong>:</li>
+</ol>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>   SELECT * FROM gs_index_advise('SELECT name, age, sex FROM t1 WHERE age &gt;= 18 AND age &lt; 35 AND sex = ''f'';');
+   -- Supports ONLY a single SELECT statement on standard row-store tables!</code></pre></div>
+<ol class="md-list">
+<li><strong>Virtual (Hypothetical) Index Recommendation</strong>:</li>
+</ol>
+<ul class="md-list">
+<li>Simulates an index in the optimizer without physical creation time/space overhead:</li>
+</ul>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>   SELECT * FROM hypopg_create_index('CREATE INDEX ON bmsql_customer(c_w_id)');
+   SET enable_hypo_index = on;               -- Default is off!
+   EXPLAIN SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10;
+   -- Companion functions: hypopg_display_index(), hypopg_drop_index(oid), hypopg_reset_index(), hypopg_estimate_size(oid)</code></pre></div>
+<ol class="md-list">
+<li><strong>Workload-Level Index Recommendation</strong>:</li>
+</ol>
+<div class="code-block"><div class="code-header"><span>BASH</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>   python index_advisor_workload.py 6001 postgres tpcc_log.txt --max_index_num 10 --multi_iter_mode</code></pre></div>
+<p>---</p>
+<h3>3. DB4AI: <code class="inline-code">DeepSQL</code> &amp; Native DB4AI Engine (pp. 264–267)</h3>
+<ul class="md-list">
+<li><strong><code class="inline-code">DeepSQL</code></strong>: Encapsulates <strong>60+ machine learning &amp; graph algorithms</strong> (Linear/Logistic Regression, Random Forest, KNN, K-Means, PCA, shortest path, graph diameter, Pearson correlation) into SQL statements (requires Python 2.7.12+ and <code class="inline-code">PL/Python</code>).</li>
+<li><strong>Native DB4AI Engine</strong>: Integrates native AI operators and execution planning directly into the openGauss kernel with SQL-like syntax (<strong><code class="inline-code">CREATE MODEL ...</code></strong> and <strong><code class="inline-code">PREDICT BY ...</code></strong>), eliminating external Python/platform data transfers.</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>X-Tuner runs in 3 modes: <code class="inline-code">recommend</code> (completes in seconds without DB restart), <code class="inline-code">train</code> (trains DRL model), and <code class="inline-code">tune</code> (uses DRL or global search algorithms).</li><li>SQLdiag predicts SQL execution time from historical logs using SQL vectorization and templates WITHOUT needing SQL execution plans.</li><li>Index-advisor provides 3 levels: <code class="inline-code">gs_index_advise('SELECT ...')</code> (single query), <code class="inline-code">hypopg_create_index(...)</code> with <code class="inline-code">SET enable_hypo_index = on</code> (virtual index), and <code class="inline-code">index_advisor_workload.py</code> (workload-level).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: After creating a virtual index with <code class="inline-code">hypopg_create_index()</code>, the optimizer will NOT use it in <code class="inline-code">EXPLAIN</code> unless you set <code class="inline-code">SET enable_hypo_index = on;</code> (default is <code class="inline-code">off</code>, Ch.03 p. 258)!</div><div class="trap-item">⚠️ EXAM TRAP: <code class="inline-code">gs_index_advise()</code> supports ONLY a single <code class="inline-code">SELECT</code> statement and does NOT support column-store tables, views, materialized views, global temp tables, or encrypted databases (Ch.03 p. 255).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h4_s4_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./08-Exercise-Index-Advisor-Virtual-Index-and-DB4AI-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Recommending & Testing Indexes with `gs_index_advise` and Virtual Indexes", "duration_mins": 8, "exercise_type": "sql", "prompt_label": "openGauss=#", "scenario": "A query `SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10` is running a slow `Seq Scan`. Use `gs_index_advise` to get an index recommendation, create a virtual index using `hypopg_create_index`, enable `enable_hypo_index`, and verify the optimizer switches to an `Index Scan`.", "instructions": ["Step 1: Call `SELECT * FROM gs_index_advise('SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10');`.", "Step 2: Create a virtual index using `SELECT * FROM hypopg_create_index('CREATE INDEX ON bmsql_customer(c_w_id)');`.", "Step 3: Enable virtual indexes with `SET enable_hypo_index = on;` and run `EXPLAIN SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10;`."], "starter_code": "-- Step 1: Get single-query index recommendation\nSELECT * FROM ____('SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10');\n\n-- Step 2: Create a virtual (hypothetical) index on bmsql_customer(c_w_id)\nSELECT * FROM ____('CREATE INDEX ON bmsql_customer(c_w_id)');\n\n-- Step 3: Enable virtual index evaluation in the optimizer and run EXPLAIN\nSET ____ = on;\nEXPLAIN SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10;\n", "solution_code": "SELECT * FROM gs_index_advise('SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10');\n\nSELECT * FROM hypopg_create_index('CREATE INDEX ON bmsql_customer(c_w_id)');\n\nSET enable_hypo_index = on;\nEXPLAIN SELECT c_discount FROM bmsql_customer WHERE c_w_id = 10;", "hints": ["Use `gs_index_advise('<SQL>')` for single-query index recommendation.", "Use `hypopg_create_index('<CREATE INDEX SQL>')` to create a virtual index.", "Set `enable_hypo_index = on` before running `EXPLAIN`."], "validation_checks": [{"step": 1, "description": "Call `gs_index_advise`", "required_any": ["gs_index_advise"], "feedback_fail": "Call `SELECT * FROM gs_index_advise(...)`."}, {"step": 2, "description": "Create virtual index with `hypopg_create_index`", "required_any": ["hypopg_create_index"], "feedback_fail": "Call `SELECT * FROM hypopg_create_index(...)`."}, {"step": 3, "description": "Enable `enable_hypo_index = on`", "required_any": ["enable_hypo_index = on", "enable_hypo_index=on"], "feedback_fail": "Run `SET enable_hypo_index = on;` so `EXPLAIN` uses the virtual index."}], "simulated_output": "     table      |  column  \n----------------+----------\n bmsql_customer | (c_w_id)\n(1 row)\n\n indexrelid |              indexname              \n------------+-------------------------------------\n     329726 | <329726>btree_bmsql_customer_c_w_id\n(1 row)\n\nSET\n                                                 QUERY PLAN                                                 \n------------------------------------------------------------------------------------------------------------\n [Bypass]\n Index Scan using <329726>btree_bmsql_customer_c_w_id on bmsql_customer  (cost=0.00..39678.69 rows=31224 width=4)\n   Index Cond: (c_w_id = 10)\n(3 rows)", "quiz_questions": [{"id": "h4_s4_q1", "type": "single", "question": "Which running mode of the openGauss `X-Tuner` parameter tuning tool generates a parameter recommendation report in seconds based on the running workload WITHOUT restarting the database?", "options": ["A. train", "B. tune", "C. recommend", "D. predict"], "answer": "C", "explanation": "Per Chapter 03 (p. 247), X-Tuner runs in three modes: `recommend`, `train`, and `tune`. In `recommend` mode, operations complete in seconds and the database does not need to be restarted."}, {"id": "h4_s4_q2", "type": "multiple", "question": "Which of the following statements about the openGauss `Index-advisor` and virtual indexes are TRUE?", "options": ["A. `Index-advisor` provides single-query index recommendation (`gs_index_advise`), virtual index recommendation, and workload-level index recommendation (`index_advisor_workload.py`)", "B. To allow the optimizer to consider virtual indexes during `EXPLAIN`, the GUC parameter `enable_hypo_index` must be set to `on`", "C. Virtual indexes created by `hypopg_create_index` persist permanently on disk even after the database is restarted", "D. `hypopg_estimate_size` can estimate the disk space required to create a specified virtual index"], "answer": "ABD", "explanation": "Per Chapter 03 (pp. 254–261), A, B, and D are true. Option C is false: virtual indexes exist in memory at the instance level and are cleared when the database is restarted."}, {"id": "h4_s4_q3", "type": "tf", "question": "`SQLdiag` requires collecting the execution plans of SQL statements in advance to predict their execution time.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.03 pp. 250–251). `SQLdiag` predicts SQL execution time based on statement logic similarity and historical execution logs WITHOUT obtaining the SQL execution plan, so it has no impact on database performance."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transactions (ACID), NoSQL vs NewSQL &amp; Database Deployment Architectures | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 01 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./02-Exercise-DBS-Components-and-Data-Models-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./04-Exercise-Transaction-ACID-and-Architecture-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.01, pp. 20–41</span>
+            <span class="badge badge-hour">⏱️ Hour 01 • Sprint 2/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Transactions (ACID), NoSQL vs NewSQL &amp; Database Deployment Architectures</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Trace the 5 transaction execution states and explain the 4 ACID properties</li><li>Compare Relational Databases, NoSQL (CAP Theorem), and NewSQL</li><li>Contrast Single-Node, Master/Backup, Master/Slave, Multi-Master, Shared-Disk, Sharding, Shared-Nothing MPP, and OLTP vs OLAP</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Database Transactions &amp; ACID Properties</h3>
+<p>A <strong>transaction</strong> is an indivisible logical unit of work used for database recovery and concurrency control.</p>
+<ul class="md-list">
+<li><strong>5 Transaction States (p. 21)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Active</strong>: Initial state while statements are executing.</li>
+<li><strong>Partially committed</strong>: Immediately after the final statement executes, before disk flush completes.</li>
+<li><strong>Failed</strong>: Normal execution can no longer proceed.</li>
+<li><strong>Aborted</strong>: Transaction is rolled back and database is restored to its pre-transaction state.</li>
+<li><strong>Committed</strong>: All operations succeeded and changes are permanently stored.</li>
+</ol>
+<ul class="md-list">
+<li><strong>ACID Properties (p. 22)</strong>:</li>
+<li><strong>Atomicity (A)</strong>: Either all operations in the transaction succeed or none do (all-or-nothing rollback on failure).</li>
+<li><strong>Consistency (C)</strong>: A transaction transitions the database from one valid/consistent state to another (e.g., total money across accounts before and after transfer remains invariant).</li>
+<li><strong>Isolation (I)</strong>: Concurrent transactions execute independently without interfering with each other or exposing uncommitted intermediate states.</li>
+<li><strong>Durability (D)</strong>: Once committed, changes are permanent and survive power loss or system crashes (implemented via <strong>WAL — Write-Ahead Logging</strong>).</li>
+</ul>
+<p>---</p>
+<h3>2. NoSQL (CAP Theory) vs. NewSQL</h3>
+<ul class="md-list">
+<li><strong>NoSQL ("Not Only SQL")</strong>: Designed for ultra-large-scale concurrent access without fixed schemas:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Key-Value</strong>: Redis, Memcached, DynamoDB.</li>
+<li><strong>Document (JSON)</strong>: MongoDB, CouchDB, Couchbase.</li>
+<li><strong>Search Engine</strong>: Elasticsearch, Solr, Splunk.</li>
+<li><strong>Wide-Column / Distributed</strong>: HBase, Cassandra.</li>
+</ol>
+<ul class="md-list">
+<li><strong>CAP Theorem</strong>: A distributed system can satisfy at most <strong>two</strong> of <strong>Consistency (C)</strong>, <strong>Availability (A)</strong>, and <strong>Partition Tolerance (P)</strong>. Because network partitions are inevitable in distributed systems (<strong>P is mandatory</strong>), distributed NoSQL systems must balance between <strong>CP</strong> (e.g., HBase, MongoDB, Redis) and <strong>AP</strong> (e.g., Cassandra, Dynamo, CouchDB), whereas traditional single-site RDBMSs are <strong>CA</strong>.</li>
+<li><strong>NewSQL (<code class="inline-code">SQL + NoSQL = NewSQL</code>)</strong>: Combines the horizontal scalability of NoSQL with the relational model, SQL interface, and ACID transactions of RDBMS (e.g., Google Spanner, VoltDB, GaussDB).</li>
+</ul>
+<p>---</p>
+<h3>3. Evolution of Relational Database Architectures &amp; OLTP vs. OLAP</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Architecture</th><th>Key Characteristics</th><th>Pros &amp; Bottlenecks</th></tr></thead><tbody>
+<tr><td><strong>Single-Node / Standalone</strong></td><td>App &amp; DB separated on standalone server</td><td>Easy O&amp;M; limited to vertical <strong>Scale-Up</strong>, suffers from SPOF.</td></tr>
+<tr><td><strong>Master/Backup</strong></td><td>Master does R/W; Backup is idle until failover</td><td>Improves fault tolerance; wastes standby resources; single-node perf limit.</td></tr>
+<tr><td><strong>Master/Slave</strong></td><td>Master handles Writes; Slaves handle Reads</td><td>Read/write isolation scales reads; replication lag causes temporary inconsistency.</td></tr>
+<tr><td><strong>Multi-Master</strong></td><td>Active-active bidirectional R/W</td><td>High resource utilization; complex bidirectional sync and conflict resolution.</td></tr>
+<tr><td><strong>Shared-Disk</strong></td><td>Multiple compute nodes share SAN/FC storage (e.g., Oracle RAC)</td><td>High availability; storage I/O bus bandwidth becomes bottleneck.</td></tr>
+<tr><td><strong>Shared-Nothing / MPP</strong></td><td>Each node has independent CPU, RAM, and disk; horizontal <strong>Sharding</strong></td><td>Near-linear <strong>Scale-Out</strong>, no shared bottleneck (e.g., GaussDB, DB2 DPF).</td></tr>
+</tbody></table></div>
+<ul class="md-list">
+<li><strong>OLTP (Online Transaction Processing)</strong> vs. <strong>OLAP (Online Analytical Processing)</strong>:</li>
+<li><strong>OLTP</strong>: Routine short transactions (insert/update/delete), read/write, dozens of rows via index/hash, 100 MB–GB scale, measured by <strong>transaction throughput (tpmC)</strong> and memory efficiency.</li>
+<li><strong>OLAP</strong>: Decision support &amp; data warehousing, complex multi-dimensional aggregation queries, mostly reads, millions of rows via full/partition scans, 100 GB–TB+ scale, measured by <strong>disk I/O bandwidth and query response time</strong>.</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>In ACID, 'I' stands for Isolation (concurrent transactions do not interfere), NOT Availability!</li><li>CAP Theorem states a distributed system can guarantee at most two of Consistency (C), Availability (A), and Partition Tolerance (P).</li><li>Shared-Nothing (MPP) gives each node independent CPU, memory, and disk, enabling near-linear horizontal scale-out.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP (Ch.01 Quiz Q2): Option C claims 'I refers to availability, whereby the database system must provide the highest availability possible'. That is INCORRECT! 'I' stands for Isolation.</div><div class="trap-item">⚠️ EXAM TRAP: Do not confuse Master/Backup (standby does NOT provide read services during normal operation) with Master/Slave (slave provides read services via read/write splitting).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h1_s2_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./04-Exercise-Transaction-ACID-and-Architecture-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Simulating Bank Transfer ACID Transactions in openGauss", "duration_mins": 8, "exercise_type": "sql", "prompt_label": "openGauss=#", "scenario": "Implement the Chapter 01 (p. 62) bank transfer scenario where Zhang (Account 1, balance 500) starts transferring 200 to Wang (Account 2, balance 100) but cancels (`ROLLBACK`), while Li (Account 3, balance 600) transfers 300 to Wang and commits (`COMMIT`).", "instructions": ["Step 1: Start a transaction with `START TRANSACTION;`, deduct 200 from Zhang (`id = 1`), add 200 to Wang (`id = 2`), and then cancel the transaction with `ROLLBACK;`.", "Step 2: Start a second transaction with `START TRANSACTION;`, deduct 300 from Li (`id = 3`), add 300 to Wang (`id = 2`), and permanently save it with `COMMIT;`.", "Step 3: Query `SELECT id, holder, balance FROM accounts ORDER BY id;` to verify Wang's final balance is 400."], "starter_code": "-- Zhang's canceled transfer (Atomicity rollback)\nSTART TRANSACTION;\nUPDATE accounts SET balance = balance - 200 WHERE id = 1;\nUPDATE accounts SET balance = balance + 200 WHERE id = 2;\n____;\n\n-- Li's completed transfer (Atomicity, Consistency, Durability)\nSTART TRANSACTION;\nUPDATE accounts SET balance = balance - 300 WHERE id = 3;\nUPDATE accounts SET balance = balance + 300 WHERE id = 2;\n____;\n\nSELECT id, holder, balance FROM accounts ORDER BY id;\n", "solution_code": "START TRANSACTION;\nUPDATE accounts SET balance = balance - 200 WHERE id = 1;\nUPDATE accounts SET balance = balance + 200 WHERE id = 2;\nROLLBACK;\n\nSTART TRANSACTION;\nUPDATE accounts SET balance = balance - 300 WHERE id = 3;\nUPDATE accounts SET balance = balance + 300 WHERE id = 2;\nCOMMIT;\n\nSELECT id, holder, balance FROM accounts ORDER BY id;", "hints": ["Use ROLLBACK; to abort Zhang's transfer and restore Wang's balance to 100.", "Use COMMIT; to permanently persist Li's transfer of 300 so Wang's balance becomes 400."], "validation_checks": [{"step": 1, "description": "Use `ROLLBACK` to cancel Zhang's uncommitted transaction", "required_any": ["rollback"], "feedback_fail": "Make sure you include `ROLLBACK;` at the end of Zhang's transaction."}, {"step": 2, "description": "Use `COMMIT` to persist Li's transfer transaction", "required_any": ["commit"], "feedback_fail": "Make sure you include `COMMIT;` at the end of Li's transaction."}, {"step": 3, "description": "Query the final account balances", "required_any": ["select id, holder, balance from accounts"], "feedback_fail": "Keep the final `SELECT id, holder, balance FROM accounts` statement."}], "simulated_output": "START TRANSACTION\nUPDATE 1\nUPDATE 1\nROLLBACK\nSTART TRANSACTION\nUPDATE 1\nUPDATE 1\nCOMMIT\n id | holder | balance \n----+--------+---------\n  1 | Zhang  |     500\n  2 | Wang   |     400\n  3 | Li     |     300\n(3 rows)", "quiz_questions": [{"id": "h1_s2_q1", "type": "single", "question": "(Official Ch.01 Quiz Q2) Which of the following statements about the ACID feature of database transactions is INCORRECT?", "options": ["A. A indicates atomicity, whereby operations in a transaction are either all successful or all failed.", "B. C refers to consistency, whereby the system status can only be the status before the transaction or after the transaction is successful. No inconsistent intermediate status can occur.", "C. I refers to availability, whereby the database system must provide the highest availability possible for transaction execution in order to ensure as many successfully executed transactions as possible.", "D. D refers to durability, whereby the status of a successful transaction can be maintained, even if the machine is powered off."], "answer": "C", "explanation": "In ACID, 'I' stands for Isolation (transactions are isolated from each other and do not interfere when executed concurrently), NOT Availability."}, {"id": "h1_s2_q2", "type": "single", "question": "In which multi-node database architecture does each processing unit have its own independent CPU, memory, and hard disk without sharing hardware resources?", "options": ["A. Shared-Everything", "B. Shared-Disk (e.g., Oracle RAC)", "C. Shared-Nothing / MPP", "D. Single-Host Standalone"], "answer": "C", "explanation": "In Shared-Nothing (and MPP) architecture, each node has its own private CPU, memory, and disk, communicating via network protocols for horizontal scale-out."}, {"id": "h1_s2_q3", "type": "tf", "question": "According to the CAP theory for distributed systems, a distributed database can simultaneously satisfy Consistency (C), Availability (A), and Partition Tolerance (P) at all times.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False. CAP theory states that a distributed system can satisfy at most TWO of Consistency (C), Availability (A), and Partition Tolerance (P) at the same time."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

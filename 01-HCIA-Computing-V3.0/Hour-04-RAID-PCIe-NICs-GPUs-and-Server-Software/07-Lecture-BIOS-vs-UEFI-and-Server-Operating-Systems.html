@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIOS vs. UEFI Boot Flows, OS Kernel/Shell &amp; Linux Directory Tree | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 04 • Sprint 4/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="./06-Exercise-Redfish-RESTful-API-and-SNMP-Architecture-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./08-Exercise-Linux-Root-Directory-Hierarchy-and-Boot-Flow-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.03, pp. 203–219</span>
+            <span class="badge badge-hour">⏱️ Hour 04 • Sprint 4/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">BIOS vs. UEFI Boot Flows, OS Kernel/Shell &amp; Linux Directory Tree</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Compare conventional BIOS and UEFI features and step-by-step boot processes</li><li>Understand OS User Space vs. Kernel Space (Applications/Shell -&gt; Function Libraries -&gt; System Calls -&gt; Kernel)</li><li>Master Unix/Linux history (Multics, Unix, BSD, GNU, MINIX, Linux 1991, openEuler 2019), POSIX.1, and every standard Linux root directory (<code class="inline-code">/bin</code> to <code class="inline-code">/opt</code>)</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. BIOS vs. UEFI Overview &amp; Running Processes (pp. 204–206)</h3>
+<ul class="md-list">
+<li><strong>BIOS (Basic Input/Output System, p. 204)</strong>: Embedded firmware bridging the OS kernel and hardware layer. Core functions: <strong>Hardware detection and initialization</strong>, <strong>OS boot</strong>, and <strong>Advanced power management</strong> (plus software upgrade/loading, basic OAM, serial port management, fault recovery, ECC management, hardware diagnosis).</li>
+<li><strong>UEFI (Unified Extensible Firmware Interface, p. 205)</strong>: Defines a software interface between the OS and platform firmware as a modern alternative to legacy BIOS.</li>
+<li><strong>Six Key UEFI Features</strong>: <strong>Large drive capacity</strong> (GPT $&gt;2\text{ TB}$), <strong>High efficiency</strong>, <strong>64-bit system</strong>, <strong>Easy batch installation</strong>, <strong>Fast boot and recovery from hibernation</strong>, and <strong>Secure startup (Secure Boot)</strong>.</li>
+<li><strong>Running Processes Comparison (p. 206)</strong>:</li>
+<li><strong>Conventional BIOS Process (6 steps)</strong>: Power on &amp; start device $\rightarrow$ CPU loads BIOS $\rightarrow$ Initialize hardware $\rightarrow$ Perform <strong>POST</strong> (Power-On Self-Test) &amp; hardware self-check $\rightarrow$ Load boot options $\rightarrow$ Process system instructions.</li>
+<li><strong>UEFI Process (4 steps)</strong>: Power on &amp; start device $\rightarrow$ Initialize UEFI $\rightarrow$ Boot the OS $\rightarrow$ Enter the OS.</li>
+</ul>
+<p>---</p>
+<h3>2. OS Architecture &amp; Unix/Linux Evolution Timeline (pp. 208–218)</h3>
+<ul class="md-list">
+<li><strong>OS Layered Architecture (p. 210)</strong>:</li>
+<li><strong>User Space</strong>: <strong>Applications &amp; Shells</strong> (CLI command interpreter) $\rightarrow$ <strong>Function Libraries</strong> (encapsulate system calls for complex logic) $\rightarrow$ <strong>System Calls</strong> (kernel access interface).</li>
+<li><strong>Kernel Space</strong>: <strong>Kernel</strong> (manages CPU, memory, file system, processes, and device drivers).</li>
+<li><strong>Unix &amp; Linux Historical Timeline (pp. 214, 217)</strong>:</li>
+<li><strong>1964</strong>: Multics released $\rightarrow$ <strong>1969</strong>: First Unix $\rightarrow$ <strong>1973</strong>: C-based Unix v3 $\rightarrow$ <strong>1977</strong>: BSD $\rightarrow$ <strong>1979</strong>: Unix System V7 $\rightarrow$ <strong>Sept 27, 1983 / 1984</strong>: <strong>Richard Stallman</strong> announced <strong>GNU Project</strong> (<em>"GNU's Not Unix"</em>) $\rightarrow$ <strong>1987</strong>: <strong>MINIX</strong> (educational Unix-like OS) $\rightarrow$ <strong>Sept/Oct 5, 1991</strong>: <strong>Linus Torvalds</strong> (Univ. of Helsinki) released the first <strong>Linux kernel</strong> (10,000 lines of code) $\rightarrow$ <strong>1993</strong>: Slackware/Debian $\rightarrow$ <strong>1994</strong>: Red Hat/SUSE 1.0 $\rightarrow$ <strong>2004</strong>: Ubuntu $\rightarrow$ <strong>2019</strong>: <strong>EulerOS open-sourced as openEuler</strong>.</li>
+<li><strong>Linux Core Features (p. 218)</strong>: Multi-platform, Multi-user &amp; multitasking, Free/open-source (<strong>GPL</strong>), <strong>Fully compatible with POSIX.1</strong> (<strong>IEEE 1003 / ISO/IEC 9945</strong>), and <strong>"Everything is a file"</strong> (files, directories, character/block devices, sockets, printers, processes, pipes accessed via <code class="inline-code">fopen()</code>, <code class="inline-code">fclose()</code>, <code class="inline-code">fwrite()</code>, <code class="inline-code">fread()</code>).</li>
+</ul>
+<p>---</p>
+<h3>3. Linux File Directory Structure (<code class="inline-code">/</code>, p. 219)</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Directory</th><th>Official Function in HCIA-Computing (p. 219)</th></tr></thead><tbody>
+<tr><td><strong><code class="inline-code">/bin</code></strong></td><td>Short for <strong>binary</strong>; stores frequently used binary programs/commands used by all users.</td></tr>
+<tr><td><strong><code class="inline-code">/boot</code></strong></td><td>Stores core files used for <strong>starting (booting) the Linux OS</strong>, including connection files and kernel image files.</td></tr>
+<tr><td><strong><code class="inline-code">/dev</code></strong></td><td>Short for <strong>device</strong>; stores <strong>peripheral device files</strong> of Linux.</td></tr>
+<tr><td><strong><code class="inline-code">/etc</code></strong></td><td>Stores all <strong>configuration files</strong> and subdirectories required for system management.</td></tr>
+<tr><td><strong><code class="inline-code">/lib</code> &amp; <code class="inline-code">/lib64</code></strong></td><td>Stores the system's most basic <strong>dynamic link libraries (DLLs / shared libraries)</strong> (32-bit and 64-bit).</td></tr>
+<tr><td><strong><code class="inline-code">/media</code></strong></td><td>Removable media devices (USB flash drives, CD-ROMs) <strong>automatically identified and mounted</strong> by Linux.</td></tr>
+<tr><td><strong><code class="inline-code">/mnt</code></strong></td><td><strong>Temporary mount point</strong> for manual mounting of other file systems (e.g., mounting CD-ROM to <code class="inline-code">/mnt</code>).</td></tr>
+<tr><td><strong><code class="inline-code">/opt</code></strong></td><td>Stores <strong>additional third-party application software</strong> installed on the host (e.g., Oracle installation packages); empty by default.</td></tr>
+</tbody></table></div>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>UEFI supports large drive capacity (&gt;2 TB via GPT), 64-bit systems, fast boot, and secure startup, streamlining the 6-step legacy BIOS boot flow into 4 steps.</li><li>OS call hierarchy from top to bottom: Applications &amp; Shells -&gt; Function Libraries -&gt; System Calls -&gt; Kernel -&gt; Hardware.</li><li>POSIX is IEEE 1003 / ISO/IEC 9945; GNU stands for 'GNU's Not Unix' (Richard Stallman, 1983); Linus Torvalds released Linux in 1991; EulerOS was open-sourced as openEuler in 2019.</li><li>Know the exact Linux directories: /bin (binaries), /boot (boot loader/images), /dev (devices), /etc (config files), /lib &amp; /lib64 (shared libraries), /media (auto-mounted removable media), /mnt (temporary manual mount point), /opt (additional application software).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Do not confuse <code class="inline-code">/media</code> (where Linux AUTOMATICALLY identifies and mounts removable USB/CD-ROM devices) with <code class="inline-code">/mnt</code> (TEMPORARY mount point used by administrators for manual mounting)!</div><div class="trap-item">⚠️ EXAM TRAP: Unix is commercial closed-source software (AIX, HP-UX, Solaris) usually bound to specific hardware, whereas Linux is open-source (GPL) and runs across diverse hardware platforms.</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h4_s4_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./08-Exercise-Linux-Root-Directory-Hierarchy-and-Boot-Flow-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Linux Root Directory Inspection & OS Call Chain", "duration_mins": 7, "exercise_type": "terminal", "prompt_label": "root@openeuler:~#", "scenario": "Inspect the openEuler root filesystem (`/`) and verify the exact standard directories for configuration files, peripheral devices, temporary mounts, and third-party software packages.", "instructions": ["Run `ls /` to list the top-level directories under the root filesystem.", "Set `CONFIG_DIR` to `'/etc'`, `DEVICE_DIR` to `'/dev'`, `TEMP_MOUNT_DIR` to `'/mnt'`, and `THIRD_PARTY_APP_DIR` to `'/opt'`.", "Set `POSIX_IEEE_STANDARD` to `'IEEE 1003'`."], "starter_code": "# 1. List all directories under the root filesystem:\n___\n\n# 2. Map standard Linux directories and POSIX standard:\nCONFIG_DIR=\"___\"\nDEVICE_DIR=\"___\"\nTEMP_MOUNT_DIR=\"___\"\nTHIRD_PARTY_APP_DIR=\"___\"\nPOSIX_IEEE_STANDARD=\"___\"\n", "solution_code": "# 1. List all directories under the root filesystem:\nls /\n\n# 2. Map standard Linux directories and POSIX standard:\nCONFIG_DIR=\"/etc\"\nDEVICE_DIR=\"/dev\"\nTEMP_MOUNT_DIR=\"/mnt\"\nTHIRD_PARTY_APP_DIR=\"/opt\"\nPOSIX_IEEE_STANDARD=\"IEEE 1003\"\n", "hints": ["Use `ls /` to list the root directory.", "`/etc` holds configuration files, `/dev` holds device files, `/mnt` is the temporary manual mount directory, `/opt` holds additional application software, and POSIX is IEEE 1003."], "validation_checks": [{"step": 1, "description": "Execute ls / to inspect the root directory", "required_any": ["ls /"], "feedback_fail": "Include `ls /` to list the root directory."}, {"step": 2, "description": "Map /etc, /dev, /mnt, and /opt accurately", "required_any": ["/etc", "/dev", "/mnt", "/opt"], "feedback_fail": "Make sure CONFIG_DIR='/etc', DEVICE_DIR='/dev', TEMP_MOUNT_DIR='/mnt', and THIRD_PARTY_APP_DIR='/opt'."}, {"step": 3, "description": "Specify IEEE 1003 for POSIX standard", "required_any": ["1003"], "feedback_fail": "Set POSIX_IEEE_STANDARD to 'IEEE 1003'."}], "simulated_output": "bin   dev  home  lib64       media  opt   root  sbin  sys  usr\nboot  etc  lib   lost+found  mnt    proc  run   srv   tmp  var\n[OK] Linux root directory hierarchy and IEEE 1003 (POSIX.1) verified.", "quiz_questions": [{"id": "h4_s4_q1", "type": "single", "question": "In the Linux file directory structure, which directory stores all system management configuration files, and which directory is used to store additional third-party application software (such as an Oracle installation package)?", "options": ["A. /bin (configuration files) and /lib (additional software)", "B. /etc (configuration files) and /opt (additional software)", "C. /dev (configuration files) and /mnt (additional software)", "D. /boot (configuration files) and /media (additional software)"], "answer": "B", "explanation": "According to Ch.03 p.219, `/etc` stores all configuration files and subdirectories required for system management, and `/opt` stores additional application software installed on the host (empty by default)."}, {"id": "h4_s4_q2", "type": "multiple", "question": "Which of the following are advantages and features of UEFI compared with conventional BIOS?", "options": ["A. Supports large drive capacities and 64-bit systems", "B. High efficiency, fast boot, and fast recovery from hibernation", "C. Easy batch installation", "D. Secure startup (Secure Boot)"], "answer": "ABCD", "explanation": "All four options list the official features of UEFI on Ch.03 p.205: Large drive capacity, High efficiency, 64-bit system, Easy batch installation, Fast boot and recovery from hibernation, and Secure startup."}, {"id": "h4_s4_q3", "type": "single", "question": "Which of the following statements about Unix and Linux is FALSE?", "options": ["A. Unix systems (such as IBM AIX and HP-UX) are commercial software and are usually compatible only with specific hardware.", "B. Linux is an open-source Unix-like OS whose kernel was first released by Linus Torvalds in 1991.", "C. Linux is fully compatible with the POSIX.1 standard (IEEE 1003 / ISO/IEC 9945) and follows the philosophy 'everything is a file'.", "D. EulerOS was open-sourced by Huawei in 1994 and renamed MINIX."], "answer": "D", "explanation": "D is false because EulerOS was open-sourced by Huawei in 2019 and named openEuler, whereas MINIX was released in 1987 as an educational Unix-like OS (Ch.03, pp. 214, 217)."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

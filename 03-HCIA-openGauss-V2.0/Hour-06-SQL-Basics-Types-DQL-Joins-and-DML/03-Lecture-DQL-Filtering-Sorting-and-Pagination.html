@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DQL Queries — Filtering (`WHERE`), Sorting (`ORDER BY`) &amp; Pagination (`LIMIT`/`OFFSET`) | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 06 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./02-Exercise-SQL-Data-Types-and-Storage-Sizes-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openGauss V2.0 Training Material.pdf • Ch.05, pp. 373–395</span>
+            <span class="badge badge-hour">⏱️ Hour 06 • Sprint 2/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">DQL Queries — Filtering (<code class="inline-code">WHERE</code>), Sorting (<code class="inline-code">ORDER BY</code>) &amp; Pagination (<code class="inline-code">LIMIT</code>/<code class="inline-code">OFFSET</code>)</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Write <code class="inline-code">SELECT</code> queries with column/table aliases (<code class="inline-code">AS</code> or space) and <code class="inline-code">WHERE</code> conditions (<code class="inline-code">Position = 'Engineer' AND Salary &gt; 6000</code>, <code class="inline-code">BETWEEN ... AND ...</code>)</li><li>Sort results with <code class="inline-code">ORDER BY</code> using column names, 1-based column positions (<code class="inline-code">ORDER BY 2 DESC, 3 ASC</code> — Ch.05 Quiz!), or expressions, plus <code class="inline-code">NULLS FIRST | LAST</code></li><li>Paginate queries using <code class="inline-code">LIMIT count OFFSET start</code>, <code class="inline-code">OFFSET start LIMIT count</code>, and <code class="inline-code">LIMIT offset, count</code></li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Relational Operations &amp; Conditional Filtering (<code class="inline-code">WHERE</code>, pp. 374–382, 394)</h3>
+<ul class="md-list">
+<li><strong>3 Relational Algebra Operations in <code class="inline-code">SELECT</code> (p. 374)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong><code class="inline-code">SELECT</code> (Selection)</strong>: Filters rows (tuples) that satisfy a condition.</li>
+<li><strong><code class="inline-code">PROJECT</code> (Projection)</strong>: Selects specific columns (attributes) and filters out others.</li>
+<li><strong><code class="inline-code">JOIN</code></strong>: Combines rows from multiple tables.</li>
+</ol>
+<ul class="md-list">
+<li><strong>Conditional Query Rules (<code class="inline-code">WHERE</code>, pp. 380–382, Ch.05 p. 394 Quizzes!)</strong>:</li>
+<li><strong>String &amp; Date Literals</strong>: Single quotation marks (<code class="inline-code">'...'</code>) are optional for numbers but <strong>mandatory for character strings and dates</strong>!</li>
+<li><strong>Ch.05 p. 394 Quiz Q1</strong>: Searching for records whose position is an engineer and salary &gt; 6000 is <strong><code class="inline-code">Position = 'Engineer' AND Salary &gt; 6000</code></strong> (Option D — <code class="inline-code">'Engineer'</code> must be in single quotes and joined with <code class="inline-code">AND</code>!).</li>
+<li><strong>Range Predicate (<code class="inline-code">BETWEEN ... AND ...</code>)</strong>: Inclusive on both bounds!</li>
+<li><strong>Ch.05 p. 394 Quiz Q2</strong>: <strong><code class="inline-code">age BETWEEN 20 AND 30</code></strong> is strictly equivalent to <strong><code class="inline-code">age &gt;= 20 AND age &lt;= 30</code></strong> (Option A!).</li>
+<li><strong>Logical Operator Precedence &amp; Three-Valued Logic (<code class="inline-code">TRUE</code>, <code class="inline-code">FALSE</code>, <code class="inline-code">NULL</code>)</strong>:</li>
+<li>Priority order: <strong><code class="inline-code">NOT</code> &gt; <code class="inline-code">AND</code> &gt; <code class="inline-code">OR</code></strong>.</li>
+<li>Truth table with <code class="inline-code">NULL</code> (Unknown):</li>
+<li><strong><code class="inline-code">TRUE OR NULL</code> -&gt; <code class="inline-code">TRUE</code></strong>; <strong><code class="inline-code">FALSE OR NULL</code> -&gt; <code class="inline-code">NULL</code></strong>.</li>
+<li><strong><code class="inline-code">FALSE AND NULL</code> -&gt; <code class="inline-code">FALSE</code></strong>; <strong><code class="inline-code">TRUE AND NULL</code> -&gt; <code class="inline-code">NULL</code></strong>.</li>
+<li><strong><code class="inline-code">NOT NULL</code> -&gt; <code class="inline-code">NULL</code></strong>.</li>
+</ul>
+<p>---</p>
+<h3>2. Data Sorting (<code class="inline-code">ORDER BY</code>, pp. 390–391, 395)</h3>
+<div class="code-block"><div class="code-header"><span>SQL</span><button class="copy-btn" onclick="copyCodeBlock(this)">Copy</button></div><pre><code>ORDER BY { column_name | number | expression } [ ASC | DESC ] [ NULLS FIRST | NULLS LAST ] [, ...]</code></pre></div>
+<ul class="md-list">
+<li><strong>Default Order</strong>: <strong><code class="inline-code">ASC</code></strong> (ascending) is the default when neither <code class="inline-code">ASC</code> nor <code class="inline-code">DESC</code> is specified!</li>
+<li><strong>Sorting by Column Position (<code class="inline-code">number</code>)</strong>: <code class="inline-code">1</code> refers to the 1st column in the <code class="inline-code">SELECT</code> list, <code class="inline-code">2</code> refers to the 2nd column, etc.</li>
+<li><strong>Ch.05 p. 395 Quiz Q3 (Answer: AC!)</strong>: To query <code class="inline-code">name, age, score</code> from <code class="inline-code">student</code> sorted by <code class="inline-code">age</code> descending and then <code class="inline-code">score</code> ascending:</li>
+<li><strong>Option A</strong>: <code class="inline-code">SELECT name, age, score FROM student order by age desc, score;</code> (valid because <code class="inline-code">score</code> defaults to <code class="inline-code">ASC</code>!)</li>
+<li><strong>Option C</strong>: <code class="inline-code">SELECT name, age, score FROM student order by 2 desc, 3 asc;</code> (valid because <code class="inline-code">2</code> is <code class="inline-code">age</code> and <code class="inline-code">3</code> is <code class="inline-code">score</code>!)</li>
+<li><strong>Default <code class="inline-code">NULL</code> Placement (p. 390)</strong>:</li>
+<li>For <strong><code class="inline-code">ASC</code></strong>, <strong><code class="inline-code">NULLS FIRST</code></strong> is the default in openGauss (per slide 38, p. 390).</li>
+<li>For <strong><code class="inline-code">DESC</code></strong>, <strong><code class="inline-code">NULLS LAST</code></strong> is the default.</li>
+</ul>
+<p>---</p>
+<h3>3. Data Limit &amp; Pagination (<code class="inline-code">LIMIT</code> and <code class="inline-code">OFFSET</code>, pp. 392–393)</h3>
+<ul class="md-list">
+<li><strong><code class="inline-code">LIMIT count</code></strong>: Maximum number of rows to return.</li>
+<li><strong><code class="inline-code">OFFSET start</code></strong>: Number of initial rows to skip before returning rows.</li>
+<li><strong>Three Equivalent Syntax Forms in openGauss (p. 392)</strong>:</li>
+<li><strong><code class="inline-code">LIMIT 5, 20</code></strong> $\equiv$ <strong><code class="inline-code">LIMIT 20 OFFSET 5</code></strong> $\equiv$ <strong><code class="inline-code">OFFSET 5 LIMIT 20</code></strong></li>
+<li>All three mean: <strong>skip the first 5 rows, and return at most 20 rows</strong>!</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>String literals in <code class="inline-code">WHERE</code> must be enclosed in single quotes (<code class="inline-code">Position = 'Engineer' AND Salary &gt; 6000</code>), and <code class="inline-code">age BETWEEN 20 AND 30</code> is equivalent to <code class="inline-code">age &gt;= 20 AND age &lt;= 30</code> (Ch.05 p. 394 Q1 &amp; Q2).</li><li>In <code class="inline-code">ORDER BY</code>, <code class="inline-code">ASC</code> is the default direction, and you can reference <code class="inline-code">SELECT</code> columns by their 1-based position (<code class="inline-code">ORDER BY 2 DESC, 3 ASC</code> is equivalent to <code class="inline-code">ORDER BY age DESC, score</code> for <code class="inline-code">SELECT name, age, score</code> — Ch.05 p. 395 Q3: AC).</li><li><code class="inline-code">LIMIT 5, 20</code>, <code class="inline-code">LIMIT 20 OFFSET 5</code>, and <code class="inline-code">OFFSET 5 LIMIT 20</code> are all equivalent and output 20 rows after skipping 5 rows.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP (Ch.05 p. 395 Quiz Q3): Both <code class="inline-code">SELECT name, age, score FROM student order by age desc, score;</code> (A) and <code class="inline-code">SELECT name, age, score FROM student order by 2 desc, 3 asc;</code> (C) are correct! Don't forget that omitting <code class="inline-code">ASC</code> after <code class="inline-code">score</code> defaults to ascending order.</div><div class="trap-item">⚠️ EXAM TRAP: In <code class="inline-code">LIMIT 5, 20</code> (comma syntax), the FIRST number (<code class="inline-code">5</code>) is the offset (rows skipped) and the SECOND number (<code class="inline-code">20</code>) is the row count, whereas in <code class="inline-code">LIMIT 20 OFFSET 5</code>, <code class="inline-code">20</code> is the count and <code class="inline-code">5</code> is the offset!</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h6_s2_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Filtering, Positional `ORDER BY`, and `LIMIT / OFFSET` Pagination", "duration_mins": 8, "exercise_type": "sql", "prompt_label": "openGauss=#", "scenario": "Write three DQL queries against the `employees` and `student` tables to verify exact Huawei exam syntax for `WHERE` filtering, positional `ORDER BY`, and `LIMIT / OFFSET` pagination.", "instructions": ["Step 1: Query all columns from `employees` where `Position = 'Engineer' AND Salary > 6000` and `age BETWEEN 20 AND 30`.", "Step 2: Query `name, age, score` from `student` sorted by `age` descending and `score` ascending using positional numbers (`ORDER BY 2 DESC, 3 ASC`).", "Step 3: Add `LIMIT 20 OFFSET 5` to skip 5 rows and return 20 rows."], "starter_code": "-- Step 1: Filter Engineers with Salary > 6000 and age between 20 and 30\nSELECT * FROM employees\nWHERE Position = ____ AND Salary > 6000 AND age ____ 20 AND 30;\n\n-- Step 2 & 3: Query student sorted by 2nd col DESC, 3rd col ASC, skipping 5 rows and returning 20\nSELECT name, age, score FROM student\nORDER BY ____ DESC, ____ ASC\nLIMIT ____ OFFSET ____;\n", "solution_code": "SELECT * FROM employees\nWHERE Position = 'Engineer' AND Salary > 6000 AND age BETWEEN 20 AND 30;\n\nSELECT name, age, score FROM student\nORDER BY 2 DESC, 3 ASC\nLIMIT 20 OFFSET 5;", "hints": ["Enclose `'Engineer'` in single quotes and use the `BETWEEN 20 AND 30` operator.", "In `SELECT name, age, score`, `age` is column `2` and `score` is column `3`.", "To skip 5 rows and return 20 rows, use `LIMIT 20 OFFSET 5`."], "validation_checks": [{"step": 1, "description": "Filter with `Position = 'Engineer'` and `BETWEEN 20 AND 30`", "required_any": ["position = 'engineer'"], "feedback_fail": "Ensure `'Engineer'` is enclosed in single quotes."}, {"step": 2, "description": "Sort by positional columns `ORDER BY 2 DESC, 3 ASC`", "required_any": ["order by 2 desc, 3 asc"], "feedback_fail": "Use `ORDER BY 2 DESC, 3 ASC`."}, {"step": 3, "description": "Paginate with `LIMIT 20 OFFSET 5`", "required_any": ["limit 20 offset 5"], "feedback_fail": "Use `LIMIT 20 OFFSET 5` to return 20 rows after skipping 5 rows."}], "simulated_output": " emp_id |  name   | position | salary | age \n--------+---------+----------+--------+-----\n    101 | Li Ming | Engineer |   8500 |  26\n(1 row)\n\n   name   | age | score \n----------+-----+-------\n Zhang Yi |  22 |    88\n Wang Wu  |  22 |    95\n Zhao Liu |  21 |    91\n(3 rows)", "quiz_questions": [{"id": "h6_s2_q1", "type": "single", "question": "(Official Ch.05 Quiz p. 394 Q1) Which of the following logical expressions is used to search for records whose position is an engineer and salary is greater than 6000?", "options": ["A. Position = 'Engineer' OR Salary > 6000", "B. Position = Engineer AND Salary > 6000", "C. Position = Engineer OR Salary > 6000", "D. Position = 'Engineer' AND Salary > 6000"], "answer": "D", "explanation": "Per Chapter 05 (p. 381 & p. 394), character string literals must be enclosed in single quotation marks (`'Engineer'`), and both conditions must hold simultaneously (`AND`)."}, {"id": "h6_s2_q2", "type": "single", "question": "(Official Ch.05 Quiz p. 394 Q2) In a `WHERE` clause, the expression `age between 20 and 30` is equivalent to:", "options": ["A. age >= 20 and age <= 30", "B. age >= 20 or age <= 30", "C. age > 20 and age < 30", "D. age > 20 or age < 30"], "answer": "A", "explanation": "Per Chapter 05 (p. 394), `BETWEEN 20 AND 30` is inclusive of both endpoints and is equivalent to `age >= 20 and age <= 30`."}, {"id": "h6_s2_q3", "type": "multiple", "question": "(Official Ch.05 Quiz p. 395 Q3) Assume that you want to query student names, ages, and scores from the `student` table, and want the results sorted in descending order by age. If there are students of the same age, they are sorted in ascending order by score instead. Which of the following SQL statements can be used?", "options": ["A. SELECT name, age, score FROM student order by age desc, score;", "B. SELECT name, age, score FROM student order by age, score asc;", "C. SELECT name, age, score FROM student order by 2 desc, 3 asc;", "D. SELECT name, age, score FROM student order by 1 desc, 2;"], "answer": "AC", "explanation": "Per Chapter 05 (p. 390 & p. 395), Option A sorts by `age desc` and `score` (which defaults to `ASC`), and Option C uses 1-based column positions (`2` = `age`, `3` = `score`) with `2 desc, 3 asc`."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

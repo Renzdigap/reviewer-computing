@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCIe 1.0–5.0, Riser Cards, Huawei NICs/iNICs, GPU/NPU &amp; Power/Cooling | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 04 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="./02-Exercise-RAID-Capacity-Fault-Tolerance-and-Parity-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./04-Exercise-PCIe-Bandwidth-Huawei-NIC-Types-and-PSU-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.03, pp. 170–189, 220</span>
+            <span class="badge badge-hour">⏱️ Hour 04 • Sprint 2/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">PCIe 1.0–5.0, Riser Cards, Huawei NICs/iNICs, GPU/NPU &amp; Power/Cooling</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Master bus evolution (PC/XT, ISA, EISA, PCI, AGP, PCIe), Riser slot mappings on TaiShan 200, and PCIe 1.0–5.0 transfer rates and bandwidths</li><li>Distinguish Huawei server NIC types (LOM, PCIe card, FlexIO card, Mezzanine card — Ch.03 Quiz Q1!) and Hi1822 iNIC features</li><li>Compare CPU vs. GPU vs. NPU architectures, FLOPS vs. TOPS, Air vs. Liquid Cooling (Cold-plate, Spray, Immersion), and ATX vs. SSI/CRPS PSUs</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Bus Evolution, Riser Cards &amp; PCIe 1.0–5.0 Specifications (pp. 170–173)</h3>
+<ul class="md-list">
+<li><strong>Bus History (p. 171)</strong>:</li>
+<li><strong>1st-Gen Buses</strong>: <strong>PC/XT (1981</strong>, 8-bit 8088), <strong>ISA (1984</strong>, 16-bit 80286, max <strong>8 MB/s</strong>), <strong>EISA (1988</strong>, 32-bit @ 8 MHz, <strong>32 MB/s</strong>), VESA, Micro Channel.</li>
+<li><strong>2nd-Gen Buses</strong>: <strong>PCI (1992)</strong>, <strong>AGP (1996)</strong>, <strong>PCI-X</strong>, and <strong>PCIe (2004)</strong>.</li>
+<li><strong>TaiShan 200 Riser Cards &amp; PCIe Slots (p. 172)</strong>: Rear <strong>I/O module 1</strong> provides <strong>slots 1–3</strong> (when riser installed: <strong>slot 2 &amp; slot 3</strong>); <strong>I/O module 2</strong> provides <strong>slots 4–6</strong> (when riser installed: <strong>slot 5 &amp; slot 6</strong>); <strong>I/O module 3</strong> provides <strong>slots 7–8</strong>.</li>
+<li><strong>PCIe 1.0 to 5.0 Transmission Rates &amp; Bandwidths (p. 173)</strong>:</li>
+</ul>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>PCIe Version</th><th>Launch Year</th><th>Transfer Rate</th><th>$\times 1$ Bandwidth</th><th>$\times 4$ Bandwidth</th><th>$\times 8$ Bandwidth</th><th>$\times 16$ Bandwidth</th></tr></thead><tbody>
+<tr><td><strong>PCIe 1.0</strong></td><td>2003</td><td><strong>2.5 GT/s</strong></td><td>250 MB/s</td><td>1.0 GB/s</td><td>2.0 GB/s</td><td><strong>4.0 GB/s</strong></td></tr>
+<tr><td><strong>PCIe 2.0</strong></td><td>2007</td><td><strong>5.0 GT/s</strong></td><td>500 MB/s</td><td>2.0 GB/s</td><td>4.0 GB/s</td><td><strong>8.0 GB/s</strong></td></tr>
+<tr><td><strong>PCIe 3.0</strong></td><td>2010</td><td><strong>8.0 GT/s</strong></td><td>984.6 MB/s</td><td>3.94 GB/s</td><td>7.88 GB/s</td><td><strong>15.8 GB/s</strong></td></tr>
+<tr><td><strong>PCIe 4.0</strong></td><td>2017</td><td><strong>16.0 GT/s</strong></td><td>1969 MB/s</td><td>7.88 GB/s</td><td>15.75 GB/s</td><td><strong>31.5 GB/s</strong></td></tr>
+<tr><td><strong>PCIe 5.0</strong></td><td>2019</td><td><strong>32.0 GT/s</strong></td><td>3938 MB/s</td><td>15.75 GB/s</td><td>31.51 GB/s</td><td><strong>63.0 GB/s</strong></td></tr>
+</tbody></table></div>
+<p><em>(Pin counts &amp; lengths: $\times 1 = 36\text{ pins} / 25\text{ mm}$; $\times 4 = 64\text{ pins} / 39\text{ mm}$; $\times 8 = 98\text{ pins} / 56\text{ mm}$; $\times 16 = 164\text{ pins} / 89\text{ mm}$.)</em></p>
+<p>---</p>
+<h3>2. Huawei Server NICs &amp; Hi1822 iNIC (pp. 174–180 — Official Quiz Q1!)</h3>
+<ul class="md-list">
+<li><strong>Ports</strong>: <strong>Electrical port (RJ45)</strong> for twisted-pair cables (e.g., <strong>TM210</strong> FlexIO $4 \times \text{GE}$); <strong>Optical port</strong> (optical cage for <strong>SFP+, SFP28, QSFP+</strong> modules, e.g., <strong>TM280</strong> FlexIO $4 \times 25\text{GE}$).</li>
+<li><strong>Four Huawei Server NIC Structural Types (p. 177 — Ch.03 Quiz Q1!)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>LOM (LAN on Motherboard)</strong>: <strong>Integrated directly in the PCH chip of the server mainboard and CANNOT be replaced</strong>. Provides $2 \times \text{GE}$ electrical + $2 \times 10\text{GE}$ optical/electrical ports; <strong>does NOT occupy PCIe slots</strong>.</li>
+<li><strong>PCIe Standard Card</strong>: Self-developed or purchased; installed in <strong>standard PCIe slots</strong>.</li>
+<li><strong>FlexIO Card</strong>: Non-standard Huawei-developed PCIe card mounted at the <strong>rear panel</strong>, used <strong>ONLY on Huawei rack servers</strong>.</li>
+<li><strong>Mezzanine Card</strong>: Used <strong>ONLY on compute nodes of Huawei E9000 blade servers</strong> (no external physical ports; signals route via blade backplane; not interchangeable across vendors).</li>
+</ol>
+<ul class="md-list">
+<li><strong>Huawei Intelligent Converged Network Chips &amp; IN200 iNIC (pp. 179–180)</strong>:</li>
+<li>Evolution: <strong>FE308 (2004, 1st-gen)</strong> $\rightarrow$ <strong>Hi1821 (2014, 2nd-gen)</strong> $\rightarrow$ <strong>Hi1822 (2018, 3rd-gen)</strong>.</li>
+<li><strong>Hi1822 / IN200 iNIC</strong>: Converged Ethernet (25GE–100GE) &amp; FC (16G–32G), <strong>48 built-in programmable data forwarding cores</strong>, OVS (15 Mpps) &amp; <strong>RoCE v1/v2</strong> offloading, SR-IOV, PCIe 3.0 x16 HHHL card.</li>
+</ul>
+<p>---</p>
+<h3>3. GPU vs. NPU, FLOPS vs. TOPS, Liquid Cooling &amp; PSUs (pp. 181–189)</h3>
+<ul class="md-list">
+<li><strong>CPU vs. GPU vs. NPU (pp. 181–183)</strong>:</li>
+<li><strong>ALU Chip Area</strong>: ALU accounts for <strong>5% of CPU chip space</strong> vs. <strong>40% of GPU chip space</strong>. Discrete GPUs (PCIe, e.g., NVIDIA Tesla/GeForce, AMD Radeon/FireStream) have independent video memory; Integrated GPUs (in CPU) occupy system memory.</li>
+<li><strong>NPU</strong>: Simulates biological neurons and synapses at the circuit layer; <strong>intermediate neuron layer results do NOT need to be output to main memory</strong> but pass directly to the next layer, Processing a group of neurons in 1 or a few instructions. Both GPUs and NPUs require <strong>CPU cooperation</strong>.</li>
+<li><strong>Computing Power Metrics (pp. 184–185)</strong>:</li>
+<li><strong>FLOPS</strong> (Floating-Point Operations/s): <strong>MFLOPS ($10^6$)</strong>, <strong>GFLOPS ($10^9$)</strong>, <strong>TFLOPS ($10^{12}$)</strong>, <strong>PFLOPS ($10^{15}$)</strong>, <strong>EFLOPS ($10^{18}$)</strong>.</li>
+<li><strong>TOPS</strong> ($10^{12}$ Ops/s): Focuses on <strong>integer computing power</strong>.</li>
+<li><strong>Server Cooling (pp. 186–187)</strong>:</li>
+<li><strong>Indirect Liquid Cooling</strong>: <strong>Cold plate</strong> (uses safe, non-toxic deionized water + glycol in closed loop over main heat components; other components cooled by air/liquid doors).</li>
+<li><strong>Direct Liquid Cooling (100% liquid)</strong>: <strong>Spray</strong> (selective coolant spray) and <strong>Immersion</strong> (single-phase or two-phase low-boiling-point refrigerant).</li>
+<li><strong>Server Power Supplies (pp. 188–189)</strong>:</li>
+<li><strong>ATX</strong> (125–350 W, 20-pin, ATX12V added 4-pin 12V for Pentium 4) vs. <strong>SSI</strong> (Server System Infrastructure, supplies UPS/HVDC).</li>
+<li><strong>Width standards</strong>: <strong>73.5 mm</strong> (CRPS 800W/1300W) and <strong>68.0 mm</strong> (Kunpeng 900W/2000W used in <strong>TaiShan 200 2280</strong> and <strong>2288X V5</strong>; AC input <code class="inline-code">90V–264V AC</code>, DC input <code class="inline-code">180V–300V/320V DC</code>, output <code class="inline-code">12V DC</code>).</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>PCIe transfer rates double each generation from Gen 1 to Gen 5: 2.5 -&gt; 5.0 -&gt; 8.0 -&gt; 16.0 -&gt; 32.0 GT/s (x16 bandwidth: 4 -&gt; 8 -&gt; 15.8 -&gt; 31.5 -&gt; 63.0 GB/s).</li><li>Huawei NIC types (Ch.03 Quiz Q1): LOM is integrated in the mainboard PCH chip and cannot be replaced; PCIe cards fit standard PCIe slots; FlexIO cards are rear-panel cards for Huawei rack servers; Mezzanine cards are ONLY for E9000 blade servers.</li><li>ALU accounts for 5% of CPU die area vs. 40% of GPU die area; NPUs pass neuron outputs directly between layers without writing back to main memory.</li><li>Cold-plate is indirect liquid cooling, while Immersion and Spray are direct (100%) liquid cooling. TaiShan 200 (2280) uses 68.0 mm Kunpeng PSUs (900W / 2000W).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP (Ch.03 Quiz Q1): Mezzanine cards can ONLY be used on Huawei E9000 blade servers (NOT rack servers!), and FlexIO cards are installed in rear-panel FlexIO slots of rack servers (NOT integrated on the front panel for front-end service connection!). Only A and B are true in Ch.03 Quiz Q1.</div><div class="trap-item">⚠️ EXAM TRAP: Cold-plate liquid cooling is INDIRECT cooling (coolant does not touch electronics directly), whereas Spray and Immersion are DIRECT cooling.</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h4_s2_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./04-Exercise-PCIe-Bandwidth-Huawei-NIC-Types-and-PSU-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: PCIe Gen 1–5 Bandwidth & Huawei Server NIC Audit", "duration_mins": 8, "exercise_type": "config", "prompt_label": "hw-architect@taishan-2280:~#", "scenario": "Complete the hardware verification file for PCIe 4.0/5.0 bandwidths, Huawei server NIC form factors, CPU/GPU ALU ratios, and TaiShan PSU dimensions.", "instructions": ["Set `pcie4_gt_s` to `16.0`, `pcie4_x16_gbs` to `31.5`, and `pcie5_x16_gbs` to `63.0`.", "Set `non_replaceable_pch_nic` to `'LOM'` and `blade_only_nic` to `'Mezzanine'`.", "Set `cpu_alu_area_percent` to `5`, `gpu_alu_area_percent` to `40`, and `taishan_2280_psu_width_mm` to `68.0`."], "starter_code": "# PCIe, NIC, GPU/NPU & PSU Hardware Audit\npcie_specs:\n  pcie3_gt_s: 8.0\n  pcie4_gt_s: ___\n  pcie4_x16_gbs: ___\n  pcie5_x16_gbs: ___\n\nhuawei_nics:\n  non_replaceable_pch_nic: \"___\"\n  rack_only_nonstandard_nic: \"FlexIO\"\n  blade_only_nic: \"___\"\n  third_gen_inic_chip: \"Hi1822\"\n\ncompute_and_power:\n  cpu_alu_area_percent: ___\n  gpu_alu_area_percent: ___\n  taishan_2280_psu_width_mm: ___\n", "solution_code": "# PCIe, NIC, GPU/NPU & PSU Hardware Audit\npcie_specs:\n  pcie3_gt_s: 8.0\n  pcie4_gt_s: 16.0\n  pcie4_x16_gbs: 31.5\n  pcie5_x16_gbs: 63.0\n\nhuawei_nics:\n  non_replaceable_pch_nic: \"LOM\"\n  rack_only_nonstandard_nic: \"FlexIO\"\n  blade_only_nic: \"Mezzanine\"\n  third_gen_inic_chip: \"Hi1822\"\n\ncompute_and_power:\n  cpu_alu_area_percent: 5\n  gpu_alu_area_percent: 40\n  taishan_2280_psu_width_mm: 68.0\n", "hints": ["PCIe 4.0 runs at 16.0 GT/s (31.5 GB/s for x16); PCIe 5.0 runs at 32.0 GT/s (63.0 GB/s for x16).", "LOM is embedded in the PCH chip; Mezzanine cards are for blade servers only. ALU occupies 5% of CPU vs. 40% of GPU; TaiShan 2280 PSUs are 68.0 mm wide."], "validation_checks": [{"step": 1, "description": "Verify PCIe 4.0 (16.0 GT/s, 31.5 GB/s) and PCIe 5.0 (63.0 GB/s) specs", "required_any": ["16.0", "31.5", "63.0"], "feedback_fail": "Set pcie4_gt_s = 16.0, pcie4_x16_gbs = 31.5, and pcie5_x16_gbs = 63.0."}, {"step": 2, "description": "Verify LOM and Mezzanine card classifications", "required_any": ["lom", "mezzanine"], "feedback_fail": "Set non_replaceable_pch_nic to 'LOM' and blade_only_nic to 'Mezzanine'."}, {"step": 3, "description": "Verify CPU (5%) vs GPU (40%) ALU area and 68.0 mm PSU width", "required_any": ["40", "68"], "feedback_fail": "Set cpu_alu_area_percent = 5, gpu_alu_area_percent = 40, and taishan_2280_psu_width_mm = 68.0."}], "simulated_output": "[OK] PCIe, NIC, Accelerator & PSU Specs Validated:\n- PCIe 4.0 x16 = 31.5 GB/s (16.0 GT/s) | PCIe 5.0 x16 = 63.0 GB/s (32.0 GT/s)\n- NICs: LOM (PCH embedded) | PCIe (Standard) | FlexIO (Rack rear) | Mezzanine (E9000 Blade)\n- ALU Area: CPU = 5%, GPU = 40% | TaiShan 2280 PSU Width = 68.0 mm.", "quiz_questions": [{"id": "h4_s2_q1", "type": "multiple", "question": "(Official Ch.03 Quiz Q1) Which of the following statements are true about NICs of Huawei servers?", "options": ["A. A LOM is integrated in the PCH chip of the server mainboard and cannot be replaced.", "B. Huawei-developed PCIe cards can be installed in standard PCIe slots.", "C. A FlexIO card is integrated on the server panel for front-end service connection.", "D. Mezzanine cards can be used for Huawei rack servers."], "answer": "AB", "explanation": "According to Ch.03 p.177 and p.220 Quiz Q1, A and B are true. C is false (FlexIO cards are pluggable non-standard PCIe cards installed on the rear panel of Huawei rack servers), and D is false (Mezzanine cards can ONLY be used on compute nodes of Huawei E9000 blade servers)."}, {"id": "h4_s2_q2", "type": "single", "question": "What are the transmission rate and x16 bandwidth of PCIe 4.0?", "options": ["A. 8.0 GT/s and 15.8 GB/s", "B. 16.0 GT/s and 31.5 GB/s", "C. 32.0 GT/s and 63.0 GB/s", "D. 5.0 GT/s and 8.0 GB/s"], "answer": "B", "explanation": "According to Ch.03 p.173, PCIe 4.0 (launched in 2017) has an original transmission rate of 16.0 GT/s and a ×16 bandwidth of 31.5 GB/s (×1 = 1969 MB/s, ×4 = 7.88 GB/s, ×8 = 15.75 GB/s)."}, {"id": "h4_s2_q3", "type": "single", "question": "Which of the following liquid cooling solutions is classified as an INDIRECT liquid cooling solution where the coolant does not directly contact electronic components?", "options": ["A. Single-phase immersion liquid cooling", "B. Two-phase immersion liquid cooling", "C. Spray liquid cooling", "D. Cold-plate liquid cooling"], "answer": "D", "explanation": "According to Ch.03 p.187, liquid cooling is divided into direct cooling (Immersion and Spray, 100% liquid cooling where coolant directly contacts heating components) and indirect cooling (Cold plate, where deionized water/glycol flows inside closed cold plates)."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

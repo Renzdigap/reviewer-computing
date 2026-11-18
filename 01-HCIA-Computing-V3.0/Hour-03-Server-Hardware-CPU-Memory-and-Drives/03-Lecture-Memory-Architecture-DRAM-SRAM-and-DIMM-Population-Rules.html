@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Architecture, DRAM/SRAM/ROM &amp; DIMM Installation Rules | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 03 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="./02-Exercise-CPU-Instruction-Cycle-and-Kunpeng-920-SKU-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.03, pp. 142–148, 224–225</span>
+            <span class="badge badge-hour">⏱️ Hour 03 • Sprint 2/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Memory Architecture, DRAM/SRAM/ROM &amp; DIMM Installation Rules</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Identify the components of a memory module including the 8-pin 256-byte SPD EEPROM (24LC01B) and timing calibration register</li><li>Contrast DRAM (capacitor, periodic refresh, main memory) vs. SRAM (transistor latch, no refresh, CPU cache) vs. ROM/Flash</li><li>Master TaiShan 200 (2280) 32-slot (8-channel × 2 DPC) DDR4 DIMM installation and channel-balance rules</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. Memory Module Structure &amp; SPD Chip (pp. 142–143, 224)</h3>
+<p>Memory (internal/main memory) acts as the communication bridge between external storage (drives) and the CPU.</p>
+<ul class="md-list">
+<li><strong>Physical Components of a Memory Module (p. 143)</strong>: Memory chip, Register (used for <strong>timing calibration</strong>), Edge connector, Resistor/Capacitor, Specification mark, Anti-counterfeit mark, and <strong>SPD &amp; TSOD</strong>.</li>
+<li><strong>Serial Presence Detect (SPD, pp. 143, 224)</strong>:</li>
+<li>An <strong>8-pin SOIC-encapsulated (3 mm × 4 mm) electrically erasable programmable read-only memory (EEPROM)</strong> with a capacity of <strong>256 bytes</strong> (main model: <strong>24LC01B</strong>, located on the right side of the front of a DIMM).</li>
+<li>Stores memory capacity, chip/module manufacturer, operating speed, voltage, and row/column address bandwidth. During boot, the mainboard automatically reads the SPD to configure memory working parameters.</li>
+</ul>
+<p>---</p>
+<h3>2. Memory Categories: DRAM vs. SRAM vs. ROM &amp; SIMM/DIMM (pp. 144–146, 225)</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Memory Type</th><th>Storage Element &amp; Refresh</th><th>Integration / Speed / Power</th><th>Primary Application</th></tr></thead><tbody>
+<tr><td><strong>DRAM (Dynamic RAM)</strong></td><td><strong>Capacitor</strong> + components (charge level = 0 or 1); <strong>requires periodic refresh</strong> due to leakage</td><td>Simple architecture, <strong>high integration</strong>, lower cost</td><td><strong>Main memory modules (DIMMs)</strong></td></tr>
+<tr><td><strong>SRAM (Static RAM)</strong></td><td><strong>Transistor latch</strong>; <strong>does NOT require refreshing</strong></td><td>Low integration, <strong>high speed</strong>, high power consumption</td><td><strong>Small-capacity, high-efficiency CPU Caches (L1/L2/L3)</strong></td></tr>
+<tr><td><strong>ROM / Flash</strong></td><td>Nonvolatile (retains data when powered off)</td><td>Includes traditional ROM, <strong>EPROM, EEPROM, and Flash memory</strong></td><td><strong>BIOS ROM</strong> (stored in Flash ROM), SSDs, USB flash drives</td></tr>
+</tbody></table></div>
+<ul class="md-list">
+<li><strong>Memory Parameters (p. 146)</strong>:</li>
+<li><strong>Memory Frequency</strong>: Measured in <strong>MT/s</strong> (<em>millions of transfers/times per second</em>, e.g., 2666, 2933, 3000, 3200, 3600 MT/s).</li>
+<li><strong>SIMM vs. DIMM</strong>: A Single Inline Memory Module (<strong>SIMM</strong>) provides a <strong>32-bit</strong> data channel (4 Bytes); a Dual Inline Memory Module (<strong>DIMM</strong>) provides a <strong>64-bit</strong> data channel (<strong>8 Bytes</strong>).</li>
+<li><strong>Theoretical Memory Bandwidth Formula</strong>: $\text{Bandwidth} = \text{Memory Frequency (MT/s)} \times 8\text{ Bytes (64 bits)} \times \text{Number of Channels}$.</li>
+</ul>
+<p>---</p>
+<h3>3. TaiShan 200 (2280) DIMM Slots &amp; Installation Rules (pp. 147–148)</h3>
+<ul class="md-list">
+<li><strong>Slot Topology (p. 147)</strong>: Equipped with two Kunpeng 920 processors (e.g., 7260 or 5250), a TaiShan 200 (2280) provides up to <strong>32 DDR4 DIMM slots</strong>:</li>
+<li>Each processor supports <strong>8 DIMM channels</strong>, and each channel supports <strong>2 DIMMs</strong> ($2\text{ CPUs} \times 8\text{ channels} \times 2\text{ DIMMs/channel} = 32\text{ DIMMs}$).</li>
+<li><strong>Mandatory DIMM Installation Rules (p. 148)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>At least one DIMM must be configured in slots supported by CPU 1</strong>.</li>
+<li><strong>All DIMMs on a server must have the exact same specifications</strong> (capacity, bit width, rank, height) — i.e., <strong>the same part number (P/N code)</strong>.</li>
+<li><strong>Balanced Configuration Principle</strong>: Optimal performance requires both CPUs to have the <strong>same number of DIMMs</strong> (processor balance) and DIMMs to be <strong>evenly distributed across the 8 memory channels</strong> (channel balance: <strong>1, 2, 4, 6, 8, or 16 DIMMs per CPU</strong>, though 6 is partially populated, <strong>3, 5, 7, 9, 10, 11, 12, 13, 14, or 15 DIMMs on a single CPU</strong> are explicitly listed on p. 148 as <strong>unbalanced channel configurations</strong>!).</li>
+</ol>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>SPD (Serial Presence Detect, model 24LC01B) is an 8-pin, 256-byte EEPROM on a DIMM that stores speed, capacity, voltage, and manufacturer metadata read during startup.</li><li>DRAM uses capacitors and requires periodic refreshing (used for main memory); SRAM uses transistor latches, needs no refreshing, and is used for CPU L1/L2/L3 caches.</li><li>SIMM has a 32-bit data channel; DIMM has a 64-bit (8-byte) data channel.</li><li>TaiShan 200 (2280) has 32 DIMM slots (2 CPUs × 8 channels × 2 DIMMs/channel). All DIMMs must share the same P/N code, at least 1 DIMM must be on CPU 1, and configuring 3, 5, 7, 9, 10, 11, 12, 13, 14, or 15 DIMMs per CPU causes an unbalanced channel configuration.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Do not confuse DRAM and SRAM! DRAM uses capacitors (needs periodic refresh -&gt; main memory), while SRAM uses transistor latches (no refresh needed -&gt; CPU cache).</div><div class="trap-item">⚠️ EXAM TRAP: On a Kunpeng 920 CPU (8 memory channels), installing 12 DIMMs per CPU is an UNBALANCED channel configuration (12 is not divisible by 8); balanced full/half channel counts per CPU are 1, 2, 4, 8, or 16 DIMMs!</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h3_s2_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Kunpeng 8-Channel Memory Bandwidth & DIMM Balance Calculator", "duration_mins": 8, "exercise_type": "script", "prompt_label": "python3@taishan-2280:~$", "scenario": "Write a Python script to validate the SPD EEPROM specs, compute the theoretical peak memory bandwidth of a dual-socket Kunpeng 920 server with DDR4-2933 across 16 total channels (2 × 8 channels), and check DIMM population rules.", "instructions": ["Set `spd_pins` to `8`, `spd_capacity_bytes` to `256`, and `dimm_data_width_bits` to `64`.", "Set `channels_per_cpu` to `8` and `total_dimm_slots_2p` to `32`.", "Specify `dram_storage_element` as `'capacitor'` and `sram_storage_element` as `'transistor'`."], "starter_code": "# TaiShan 200 (2280) Memory & SPD Validator\nspd_pins = ___\nspd_capacity_bytes = ___\ndimm_data_width_bits = ___\nchannels_per_cpu = ___\ntotal_dimm_slots_2p = ___\ndram_storage_element = \"___\"\nsram_storage_element = \"___\"\n\n# Bandwidth per CPU at 2933 MT/s (GB/s) = 2933 * 8 bytes * 8 channels / 1000\nbw_per_cpu_gbs = round(2933 * (dimm_data_width_bits // 8) * channels_per_cpu / 1000, 1)\nprint(f\"SPD: {spd_pins}-pin {spd_capacity_bytes}B | Slots: {total_dimm_slots_2p} | BW/CPU: {bw_per_cpu_gbs} GB/s\")", "solution_code": "# TaiShan 200 (2280) Memory & SPD Validator\nspd_pins = 8\nspd_capacity_bytes = 256\ndimm_data_width_bits = 64\nchannels_per_cpu = 8\ntotal_dimm_slots_2p = 32\ndram_storage_element = \"capacitor\"\nsram_storage_element = \"transistor\"\n\n# Bandwidth per CPU at 2933 MT/s (GB/s) = 2933 * 8 bytes * 8 channels / 1000\nbw_per_cpu_gbs = round(2933 * (dimm_data_width_bits // 8) * channels_per_cpu / 1000, 1)\nprint(f\"SPD: {spd_pins}-pin {spd_capacity_bytes}B | Slots: {total_dimm_slots_2p} | BW/CPU: {bw_per_cpu_gbs} GB/s\")", "hints": ["SPD is an 8-pin, 256-byte EEPROM; each DIMM has a 64-bit data bus.", "TaiShan 200 (2280) has 8 channels per CPU and 32 DIMM slots total; DRAM uses a capacitor while SRAM uses a transistor latch."], "validation_checks": [{"step": 1, "description": "Verify SPD 8-pin 256-byte EEPROM and 64-bit DIMM data width", "required_any": ["256", "64"], "feedback_fail": "Set spd_pins = 8, spd_capacity_bytes = 256, and dimm_data_width_bits = 64."}, {"step": 2, "description": "Verify 8 channels per CPU and 32 total DIMM slots", "required_any": ["32", "8"], "feedback_fail": "Set channels_per_cpu = 8 and total_dimm_slots_2p = 32."}, {"step": 3, "description": "Verify capacitor (DRAM) vs transistor (SRAM)", "required_any": ["capacitor", "transistor"], "feedback_fail": "Set dram_storage_element = 'capacitor' and sram_storage_element = 'transistor'."}], "simulated_output": "SPD: 8-pin 256B | Slots: 32 | BW/CPU: 187.7 GB/s\n[OK] Memory architecture, DRAM/SRAM cell types, and 8-channel DIMM rules verified.", "quiz_questions": [{"id": "h3_s2_q1", "type": "single", "question": "What is the capacity and function of the Serial Presence Detect (SPD) chip on a server memory module (DIMM)?", "options": ["A. A 64-KB SRAM cache chip used to store CPU L1 instructions", "B. An 8-pin, 256-byte EEPROM chip that stores memory capacity, manufacturer, voltage, and operating speed read by the mainboard during startup", "C. A 16-MB Flash ROM chip that stores the UEFI operating system boot loader", "D. A timing calibration register that converts 32-bit SIMM channels into 64-bit DIMM channels"], "answer": "B", "explanation": "According to Ch.03 pp. 143 and 224, SPD (model 24LC01B) is an 8-pin electrically erasable programmable read-only memory (EEPROM) with a capacity of 256 bytes that stores memory metadata (capacity, manufacturer, speed, voltage) detected during startup."}, {"id": "h3_s2_q2", "type": "multiple", "question": "Which of the following statements about DRAM, SRAM, and TaiShan 200 (model 2280) DIMM installation rules are true?", "options": ["A. A storage unit of DRAM uses a capacitor and requires periodic refresh, making it suitable for main memory modules.", "B. A storage unit of SRAM is a transistor latch that does not require refreshing, making it suitable for CPU caches.", "C. All DIMMs installed on the same server must have the same specifications and part number (P/N code), and at least one DIMM must be installed in a slot supported by CPU 1.", "D. Configuring 12 DIMMs on a single 8-channel Kunpeng 920 processor is a balanced channel configuration."], "answer": "ABC", "explanation": "A, B, and C are true (Ch.03, pp. 144, 148). D is false because on an 8-channel processor, configuring 3, 5, 7, 9, 10, 11, 12, 13, 14, or 15 DIMMs per CPU results in an unbalanced channel configuration (p. 148)."}, {"id": "h3_s2_q3", "type": "single", "question": "How many data channel bits does a Single Inline Memory Module (SIMM) provide compared to a Dual Inline Memory Module (DIMM)?", "options": ["A. SIMM provides 16-bit data channels; DIMM provides 32-bit data channels", "B. SIMM provides 32-bit data channels; DIMM provides 64-bit data channels", "C. SIMM provides 64-bit data channels; DIMM provides 128-bit data channels", "D. Both SIMM and DIMM provide 64-bit data channels"], "answer": "B", "explanation": "According to Ch.03 p.146, each SIMM provides 32-bit data channels, whereas each DIMM provides 64-bit data channels."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HCIA-openGauss V2.0 — National Stage Final Mock Exam</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .exam-header {
+      height: 62px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .exam-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: calc(100vh - 62px);
+    }
+    .exam-sidebar {
+      background: #111827;
+      border-right: 1px solid var(--border);
+      padding: 18px;
+      position: sticky;
+      top: 62px;
+      height: calc(100vh - 62px);
+      overflow-y: auto;
+    }
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin: 12px 0 18px 0;
+    }
+    .pal-btn {
+      height: 34px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #1f2937;
+      color: #e5e7eb;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .pal-btn.answered { background: rgba(59, 130, 246, 0.28); border-color: #3b82f6; color: #93c5fd; }
+    .pal-btn.flagged { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+    .pal-btn.correct { background: rgba(16, 185, 129, 0.3); border-color: #10b981; color: #6ee7b7; }
+    .pal-btn.wrong { background: rgba(225, 29, 72, 0.3); border-color: #e11d48; color: #fda4af; }
+    .exam-main {
+      padding: 26px 36px;
+      max-width: 980px;
+    }
+    .countdown-box {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: rgba(225, 29, 72, 0.15);
+      border: 1px solid rgba(225, 29, 72, 0.45);
+      color: #fda4af;
+    }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .filter-chip {
+      background: #1f2937;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .filter-chip.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .mock-q-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 18px;
+    }
+    .mock-q-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .flag-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 3px 9px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      cursor: pointer;
+    }
+    .flag-btn.active { border-color: var(--amber); color: var(--amber); background: rgba(245,158,11,0.1); }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13.5px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: none;
+    }
+    .lab-input {
+      width: 100%;
+      min-height: 90px;
+      background: #0d1117;
+      color: #e6edf3;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .score-banner {
+      display: none;
+      padding: 22px 26px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      border: 2px solid var(--accent-bright);
+      background: linear-gradient(135deg, rgba(5,150,105,0.2), rgba(17,24,39,0.95));
+    }
+    .btn-submit-exam {
+      width: 100%;
+      padding: 12px;
+      background: var(--huawei-red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn-submit-exam:hover { opacity: 0.92; }
+  </style>
+</head>
+<body>
+  <div class="exam-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="../../index.html" style="background:#1e293b;padding:6px 12px;border-radius:6px;color:#fff;font-size:12.5px;">🏠 Hub</a>
+      <a href="../index.html" style="background:#1e293b;padding:6px 12px;border-radius:6px;color:#fff;font-size:12.5px;">← Pillar Course</a>
+      <h2 style="margin:0;border:none;font-size:1.05rem;">🏆 HCIA-openGauss V2.0 — National Stage Final Mock Exam</h2>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span id="answered-counter" style="font-size:13px;color:var(--text-muted);">0 / 60 Answered</span>
+      <div id="exam-timer" class="countdown-box">⏱️ 60:00</div>
+    </div>
+  </div>
+
+  <div class="exam-layout">
+    <div class="exam-sidebar">
+      <div style="font-weight:700;font-size:13.5px;margin-bottom:4px;">Question Navigator (1–60)</div>
+      <div style="font-size:11.5px;color:var(--text-muted);">Click any number to jump. Strict Huawei multi-choice scoring enabled.</div>
+      <div id="palette" class="palette-grid"></div>
+
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">
+        <div>• Single-Choice: 20 × 15 pts = 300 pts</div>
+        <div>• Multiple-Choice: 20 × 20 pts = 400 pts</div>
+        <div>• True/False: 10 × 10 pts = 100 pts</div>
+        <div>• Hands-On Lab: 10 × 20 pts = 200 pts</div>
+        <div style="margin-top:4px;color:#38bdf8;font-weight:600;">Target Score: 800 / 1000 pts</div>
+      </div>
+
+      <button class="btn-submit-exam" onclick="submitExam()">🎯 Submit & Grade Mock Exam</button>
+      <button onclick="resetExam()" style="width:100%;margin-top:8px;padding:8px;background:#1f2937;color:#9ca3af;border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px;">↺ Reset Exam</button>
+    </div>
+
+    <div class="exam-main">
+      <div id="score-banner" class="score-banner"></div>
+
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="filterQuestions('all', this)">All (60)</button>
+        <button class="filter-chip" onclick="filterQuestions('single', this)">Single-Choice</button>
+        <button class="filter-chip" onclick="filterQuestions('multiple', this)">Multiple-Choice</button>
+        <button class="filter-chip" onclick="filterQuestions('tf', this)">True / False</button>
+        <button class="filter-chip" onclick="filterQuestions('lab', this)">Practical Labs</button>
+        <button class="filter-chip" onclick="filterQuestions('flagged', this)">🚩 Flagged</button>
+      </div>
+
+      <div id="questions-list"></div>
+    </div>
+  </div>
+
+  <script>
+    const PILLAR_ID = "pillar3";
+    const MOCK = {"folder_name": "Hour-09-Final-Mock-Exam", "title": "HCIA-openGauss V2.0 — National Stage Final Mock Exam", "duration_mins": 60, "total_points": 1000, "passing_points": 800, "instructions": "60 Questions in 60 Minutes: 20 Single-Choice (15 pts each), 20 Multiple-Choice (20 pts each, strict all-or-nothing grading), 10 True/False (10 pts each), and 10 Hands-On Command/SQL/Scenario Fill-in Labs (20 pts each).", "questions": [{"id": 1, "type": "single", "points": 15, "chapter": "Ch.01 openGauss Overview", "question": "(Official Ch.01 Quiz Q1) Which of the following is NOT a component of a database system (DBS)?", "options": ["A. Database", "B. DBMS", "C. Database application", "D. Database storage medium"], "answer": "D", "explanation": "Per Chapter 01 (p. 9 & p. 67), a DBS consists of three logical parts: Database, DBMS, and Database application. Database storage medium is hardware, not one of the three DBS components."}, {"id": 2, "type": "single", "points": 15, "chapter": "Ch.01 openGauss Overview", "question": "(Official Ch.01 Quiz Q2) Which of the following statements about the ACID feature of database transactions is INCORRECT?", "options": ["A. A indicates atomicity, whereby operations in a transaction are either all successful or all failed.", "B. C refers to consistency, whereby the system status can only be the status before the transaction or after the transaction is successful. No inconsistent intermediate status can occur.", "C. I refers to availability, whereby the database system must provide the highest availability possible for transaction execution in order to ensure as many successfully executed transactions as possible.", "D. D refers to durability, whereby the status of a successful transaction can be maintained, even if the machine is powered off."], "answer": "C", "explanation": "Per Chapter 01 (p. 22 & p. 67), 'I' in ACID stands for Isolation (concurrent transactions do not interfere with one another), NOT Availability."}, {"id": 3, "type": "single", "points": 15, "chapter": "Ch.01 openGauss Overview", "question": "According to the openGauss technical specifications (Ch.01 p. 57), what is the maximum number of partitions supported in a single partitioned table for Range partitioning versus Hash/List partitioning?", "options": ["A. 1,024 (Range) / 32 (Hash or List)", "B. 32,768 (Range) / 64 (Hash or List)", "C. 65,536 (Range) / 256 (Hash or List)", "D. Unlimited (Range) / 1,024 (Hash or List)"], "answer": "B", "explanation": "Per Chapter 01 (p. 57), a partitioned table in openGauss supports up to 32,768 partitions for range partitioning and 64 partitions for hash or list partitioning."}, {"id": 4, "type": "single", "points": 15, "chapter": "Ch.02 Database Installation and Deployment", "question": "(Official Ch.02 Quiz Q1) Which of the following is NOT an openGauss server tool?", "options": ["A. gs_check", "B. gs_guc", "C. gsql", "D. gs_collector"], "answer": "C", "explanation": "Per Chapter 02 (p. 102 & p. 126), `gsql` is a Client tool used to connect to the database, whereas `gs_check`, `gs_guc`, and `gs_collector` are Server tools."}, {"id": 5, "type": "single", "points": 15, "chapter": "Ch.02 Database Installation and Deployment", "question": "(Official Ch.02 Quiz Q2) When the `gs_checkperf` tool is used to check system performance, which of the following can be viewed ONLY by user `root`?", "options": ["A. openGauss level", "B. Host level", "C. Session/Process level", "D. SSD performance"], "answer": "D", "explanation": "Per Chapter 02 (p. 109, p. 110 & p. 126), SSD read/write performance (`gs_checkperf -U USER -i SSD`) can be viewed ONLY by user `root`."}, {"id": 6, "type": "single", "points": 15, "chapter": "Ch.02 Database Installation and Deployment", "question": "When using `gs_dump` to export a database, which `-F` (`--format`) option generates a binary archive with medium compression by default that is recommended for medium or large databases and restored using `gs_restore`?", "options": ["A. p (Plain-text)", "B. c (Custom)", "C. d (Directory)", "D. t (.tar)"], "answer": "B", "explanation": "Per Chapter 02 (p. 114), `-F c` (Custom) generates a binary archive with medium compression by default, is recommended for medium or large databases, and allows selective object restoration using `gs_restore`."}, {"id": 7, "type": "single", "points": 15, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "In the openGauss instance architecture, which background thread copies dirty pages to the double-writer space and flushes them to disk to prevent torn-page corruption before forwarding them to `bgwriter` subthreads?", "options": ["A. walwriter", "B. pagewriter", "C. GaussMaster", "D. Stat_collector"], "answer": "B", "explanation": "Per Chapter 03 (p. 138), `pagewriter` copies dirty page data to the double-writer space and flushes it to disk to prevent data page corruption, then forwards dirty pages to `bgwriter` subthreads."}, {"id": 8, "type": "single", "points": 15, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "In the openGauss Resource Pooling architecture, which component includes an independent server process (`DSS Server`) that directly manages raw devices of disk arrays and provides capabilities similar to distributed file systems?", "options": ["A. DMS (Distributed Memory Service)", "B. DSS (Distributed Storage Service)", "C. SPQ (Shared-Everything Parallel Query)", "D. OCK RDMA"], "answer": "B", "explanation": "Per Chapter 03 (p. 147), DSS (Distributed Storage Service) includes DSS API and DSS Server (an independent process that directly manages raw devices of disk arrays)."}, {"id": 9, "type": "single", "points": 15, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "In openGauss Dynamic Data Masking, which preset masking function displays `'4880-9898-4545-2525'` as `'xxxx-xxxx-xxxx-2525'` (masking all digits except the last four)?", "options": ["A. maskall", "B. alldigitsmasking", "C. creditcardmasking", "D. randommasking"], "answer": "C", "explanation": "Per Chapter 03 (p. 207), `creditcardmasking` masks all digits with `'x'` except the last four digits (`'xxxx-xxxx-xxxx-2525'`)."}, {"id": 10, "type": "single", "points": 15, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "In openGauss Workload Diagnosis Report (WDR), what are the default values of `enable_wdr_snapshot`, `wdr_snapshot_interval`, and `wdr_snapshot_retention_days`?", "options": ["A. `on`, 30 minutes, 7 days", "B. `off`, 1 hour, 8 days", "C. `on`, 1 hour, 30 days", "D. `off`, 10 minutes, 14 days"], "answer": "B", "explanation": "Per Chapter 03 (p. 230), `enable_wdr_snapshot` is `off` by default, `wdr_snapshot_interval` is 1 hour by default, and `wdr_snapshot_retention_days` is 8 days by default."}, {"id": 11, "type": "single", "points": 15, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "Which built-in openGauss function generates a single-query index recommendation (returning `table` and `column`) when passed a single `SELECT` statement string?", "options": ["A. hypopg_create_index", "B. gs_index_advise", "C. create_wdr_snapshot", "D. hypopg_estimate_size"], "answer": "B", "explanation": "Per Chapter 03 (pp. 255–257), `gs_index_advise('SELECT ...')` generates a recommended index (table name and column names) for a single `SELECT` query."}, {"id": 12, "type": "single", "points": 15, "chapter": "Ch.04 Database and Object Management", "question": "(Official Ch.04 Quiz Q2) Which of the following commands can be used to export partial data from the `student` table?", "options": ["A. gs_dump", "B. gs_dumpall", "C. copy Conditional statement", "D. gs_backup"], "answer": "C", "explanation": "Per Chapter 04 (p. 332 & p. 346), `COPY (SELECT * FROM student WHERE ...) TO '...'` (a `copy` conditional statement) exports a query result set (partial table data)."}, {"id": 13, "type": "single", "points": 15, "chapter": "Ch.04 Database and Object Management", "question": "Which system catalog in openGauss stores information about database authorization identifiers (roles and users, including `rolcanlogin`) across the entire cluster and is accessible only to system administrators?", "options": ["A. PG_CLASS", "B. PG_AUTHID", "C. PG_DEPEND", "D. PG_NAMESPACE"], "answer": "B", "explanation": "Per Chapter 04 (p. 317 & p. 324), `PG_AUTHID` stores information about database authorization identifiers (roles/users, where a user is a role with `rolcanlogin` set) and is accessible only to system administrators."}, {"id": 14, "type": "single", "points": 15, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 394 Q1) Which of the following logical expressions is used to search for records whose position is an engineer and salary is greater than 6000?", "options": ["A. Position = 'Engineer' OR Salary > 6000", "B. Position = Engineer AND Salary > 6000", "C. Position = Engineer OR Salary > 6000", "D. Position = 'Engineer' AND Salary > 6000"], "answer": "D", "explanation": "Per Chapter 05 (p. 381 & p. 394), character literals must be enclosed in single quotes (`'Engineer'`) and combined with `AND`."}, {"id": 15, "type": "single", "points": 15, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 394 Q2) In a `WHERE` clause, the expression `age between 20 and 30` is equivalent to:", "options": ["A. age >= 20 and age <= 30", "B. age >= 20 or age <= 30", "C. age > 20 and age < 30", "D. age > 20 or age < 30"], "answer": "A", "explanation": "Per Chapter 05 (p. 394), `BETWEEN 20 AND 30` is inclusive of both 20 and 30 (`age >= 20 and age <= 30`)."}, {"id": 16, "type": "single", "points": 15, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 405 Q1) Which of the following SQL commands can be used to increase the value of the `AGE` column in the `STAFFS` table by five years?", "options": ["A. UPDATE SET AGE WITH AGE+5", "B. UPDATE AGE WITH AGE+5", "C. UPDATE STAFFS SET AGE = AGE+5", "D. UPDATE STAFFS AGE WITH AGE+5"], "answer": "C", "explanation": "Per Chapter 05 (p. 401 & p. 405), the standard `UPDATE` syntax is `UPDATE STAFFS SET AGE = AGE+5`."}, {"id": 17, "type": "single", "points": 15, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 405 Q2) Which of the following four groups of SQL commands belong to the DML commands?", "options": ["A. CREATE, DROP, UPDATE", "B. INSERT, UPDATE, DELETE", "C. INSERT, DROP, ALTER", "D. UPDATE, DELETE, ALTER"], "answer": "B", "explanation": "Per Chapter 05 (p. 359 & p. 405), `INSERT`, `UPDATE`, and `DELETE` are Data Manipulation Language (DML) commands."}, {"id": 18, "type": "single", "points": 15, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 406 Q3) Which of the following SQL statements will delete records for all students whose class ID (specified by `cid`) is 6 from the `student` table?", "options": ["A. delete FROM student where cid = 6;", "B. delete * FROM student where cid = 6;", "C. delete FROM student on cid = 6;", "D. delete * FROM student on cid = 6;"], "answer": "A", "explanation": "Per Chapter 05 (p. 403 & p. 406), `delete FROM student where cid = 6;` is the valid SQL `DELETE` statement (never put `*` after `DELETE`, and use `WHERE` rather than `ON`)."}, {"id": 19, "type": "single", "points": 15, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 446 Q2) SQL integrates data query, data manipulation, data definition, and data control. Which of the following functions is implemented by the `CREATE`, `DROP`, and `ALTER` statements?", "options": ["A. Data query", "B. Data manipulation", "C. Data definition", "D. Data control"], "answer": "C", "explanation": "Per Chapter 05 (p. 408 & p. 446), `CREATE`, `DROP`, and `ALTER` implement Data Definition (DDL)."}, {"id": 20, "type": "single", "points": 15, "chapter": "Ch.06 GaussDB", "question": "(Official Ch.06 Quiz Q1) In the GaussDB distributed architecture, which of the following components is used for sharing configuration and service discovery (service registration and search)?", "options": ["A. CN", "B. DN", "C. GTM", "D. ETCD"], "answer": "D", "explanation": "Per Chapter 06 (p. 495 & p. 527), `ETCD` is used for sharing configurations and discovering services (service registration and search)."}, {"id": 21, "type": "multiple", "points": 20, "chapter": "Ch.01 openGauss Overview", "question": "(Official Ch.01 Quiz Q3) Which of the following phases are involved in the development of data management technologies?", "options": ["A. Manual management", "B. File system", "C. DBS", "D. AI management"], "answer": "ABC", "explanation": "Per Chapter 01 (p. 10 & p. 68), data management technologies went through three stages: Manual management, File system, and DBS."}, {"id": 22, "type": "multiple", "points": 20, "chapter": "Ch.01 openGauss Overview", "question": "Which three significant common features are shared by all NewSQL database systems (`SQL + NoSQL = NewSQL`)?", "options": ["A. They support the relational data model", "B. They use SQL as the main interface", "C. They meet the features of a distributed database (scalable across nodes)", "D. They completely abandon ACID transactions in favor of eventual consistency only"], "answer": "ABC", "explanation": "Per Chapter 01 (p. 30), all NewSQL systems share three significant common features: they support the relational data model, use SQL as the main interface, and meet the features of a distributed database while preserving ACID transactions."}, {"id": 23, "type": "multiple", "points": 20, "chapter": "Ch.01 openGauss Overview", "question": "Which of the following are categories of execution plan nodes in the openGauss Execution Engine (Ch.01 pp. 53–54)?", "options": ["A. Scan plan node (e.g., SeqScan, IndexScan, SubQueryScan)", "B. Control plan node (e.g., Limit, RecursiveUnion, Union)", "C. Materialize plan node (e.g., Agg, Sort)", "D. Join plan node (e.g., MergeJoin, SortJoin, HashJoin)"], "answer": "ABCD", "explanation": "Per Chapter 01 (pp. 53–54), the operators in the openGauss execution engine are classified into four types: Scan plan nodes, Control plan nodes, Materialize plan nodes, and Join plan nodes."}, {"id": 24, "type": "multiple", "points": 20, "chapter": "Ch.02 Database Installation and Deployment", "question": "(Official Ch.02 Quiz Q3) Which of the following are the prerequisites for installing openGauss on a single node?", "options": ["A. User groups and common users have been created, and the operating systems and networks of all servers are running properly.", "B. Common users must have the read, write, and execute permissions on the database package decompression directory and installation directory, and the installation directory must be empty.", "C. A common user has the execution permission on the downloaded openGauss package.", "D. Before the installation, check whether the specified openGauss port is occupied. If the port is occupied, change the port number or stop the process that uses the port."], "answer": "ABCD", "explanation": "Per Chapter 02 (p. 92 & p. 127), all four statements (ABCD) are required prerequisites for installing openGauss on a single node."}, {"id": 25, "type": "multiple", "points": 20, "chapter": "Ch.02 Database Installation and Deployment", "question": "Which of the following `HOSTTYPE` and `authentication-options` values are supported in `pg_hba.conf` when configuring client authentication via `gs_guc -h`?", "options": ["A. `HOSTTYPE` can be `local`, `host`, `hostssl`, or `hostnossl`", "B. `sha256` is the recommended password authentication method", "C. `trust`, `reject`, `md5`, `cert`, and `gss` are valid authentication options", "D. Remote hosts are permitted to connect using `trust` authentication by default"], "answer": "ABC", "explanation": "Per Chapter 02 (p. 96 & p. 118), A, B, and C are true. Option D is false: remote hosts are NOT allowed to access openGauss if `trust` is configured."}, {"id": 26, "type": "multiple", "points": 20, "chapter": "Ch.02 Database Installation and Deployment", "question": "Which two parts are exported when `gs_dumpall` is used to export all databases in an openGauss cluster (Ch.02 p. 115)?", "options": ["A. All global objects, including database users and groups, tablespaces, and global attributes/permissions", "B. SQL scripts from each openGauss database (by calling `gs_dump`) containing all SQL statements required to restore the databases", "C. Binary `.tar` archives that can only be imported using `gs_restore`", "D. Operating system kernel parameters and SSD `dd` benchmark logs"], "answer": "AB", "explanation": "Per Chapter 02 (p. 115), `gs_dumpall` exports all databases in two parts: (1) all global objects (users/groups, tablespaces, attributes) and (2) SQL scripts from each database by calling `gs_dump`. Both exported parts are plain-text SQL scripts restored using `gsql`."}, {"id": 27, "type": "multiple", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "(Official Ch.03 Quiz Q1) Which of the following are the openGauss deployment modes?", "options": ["A. Single-node deployment", "B. Deployment with one primary and one standby", "C. Deployment with one primary and multiple standbys", "D. Deployment with dual primary nodes"], "answer": "ABC", "explanation": "Per Chapter 03 Quiz Q1 (p. 268), openGauss supports single-node deployment, one primary and one standby, and one primary and multiple standbys (`ABC`). Dual primary nodes (`D`) is not supported."}, {"id": 28, "type": "multiple", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "Which three key components make up the Cost-Based Optimizer (CBO) in openGauss (Ch.03 p. 165)?", "options": ["A. Query converter", "B. Cost estimator", "C. Execution plan generator", "D. Redo log replayer"], "answer": "ABC", "explanation": "Per Chapter 03 (p. 165), a CBO consists of three key components: Query converter, Cost estimator, and Execution plan generator."}, {"id": 29, "type": "multiple", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "Which of the following are advantages of a partitioned table over an ordinary table in openGauss (Ch.03 p. 174 & Ch.05 p. 427)?", "options": ["A. High query efficiency (queries can specify partitions / use partition pruning)", "B. High availability (if one partition is faulty, data in other partitions remains available)", "C. Easy maintenance (if a partition is faulty, only that partition needs to be repaired)", "D. Balanced I/O (partitions can be mapped to different disks to balance I/O)"], "answer": "ABCD", "explanation": "Per Chapter 03 (p. 174) and Chapter 05 (p. 427), partitioned tables provide all four advantages: high query efficiency, high availability, easy maintenance, and balanced I/O."}, {"id": 30, "type": "multiple", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "How does Symmetric Multi-Processing (SMP) parallel technology improve openGauss database performance on multi-core servers (Ch.03 pp. 187–188)?", "options": ["A. Significantly reduces the time needed to execute a single complex query", "B. Improves system throughput for a given period of time and improves system resource utilization", "C. Operates parallel threads within the same process and exchanges data directly through memory via the `Stream` operator without occupying network bandwidth", "D. Eliminates all resource contention even when system concurrency is extremely high and data is severely skewed"], "answer": "ABC", "explanation": "Per Chapter 03 (pp. 187–188), A, B, and C are true. Option D is false: severe data skew or high system concurrency deteriorates SMP performance."}, {"id": 31, "type": "multiple", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "In openGauss Role-Based Access Control (RBAC), authorization defines relationships among which three core elements (Ch.03 p. 211)?", "options": ["A. Who (owner or subject of the permission, e.g., a user)", "B. What (object such as a table or function to which the permission applies)", "C. How (specific permission, positive or negative authorization)", "D. Where (physical disk sector and NUMA node distance)"], "answer": "ABC", "explanation": "Per Chapter 03 (p. 211), RBAC authorization defines relationships among Who, What, and How."}, {"id": 32, "type": "multiple", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "Which system catalogs in openGauss store metadata related to Unified Auditing policies (Ch.03 p. 223)?", "options": ["A. GS_AUDITING_POLICY", "B. GS_AUDITING_POLICY_ACCESS", "C. GS_AUDITING_POLICY_FILTERS", "D. GS_AUDITING_POLICY_PRIVILEGES"], "answer": "ABCD", "explanation": "Per Chapter 03 (p. 223), the four system catalogs related to unified auditing are `GS_AUDITING_POLICY` (main info), `GS_AUDITING_POLICY_ACCESS` (DML), `GS_AUDITING_POLICY_FILTERS` (filters), and `GS_AUDITING_POLICY_PRIVILEGES` (DDL)."}, {"id": 33, "type": "multiple", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "Which of the following are the three running modes of the `X-Tuner` parameter tuning tool in openGauss (Ch.03 p. 247)?", "options": ["A. recommend", "B. train", "C. tune", "D. compile"], "answer": "ABC", "explanation": "Per Chapter 03 (p. 247), X-Tuner runs in three modes: `recommend`, `train`, and `tune`."}, {"id": 34, "type": "multiple", "points": 20, "chapter": "Ch.04 Database and Object Management", "question": "(Official Ch.04 Quiz Q3) Which of the following statements about row-store tables and column-store tables are TRUE?", "options": ["A. Row-store tables are used in scenarios where INSERT and UPDATE operations are frequently performed.", "B. Row-store tables are applicable to point queries, that is, simple index-based queries that return a small number of records.", "C. Column-store tables are more efficient in compression and projection.", "D. Row-store tables are used in scenarios where there are a large number of queries for statistical analysis."], "answer": "ABC", "explanation": "Per Chapter 04 Quiz Q3 (p. 347), A, B, and C are true (`ABC`). D is false because statistical analysis queries over large datasets are suited for column-store tables."}, {"id": 35, "type": "multiple", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 395 Q3) Assume that you want to query student names, ages, and scores from the `student` table, and want the results sorted in descending order by age. If there are students of the same age, they are sorted in ascending order by score instead. Which of the following SQL statements can be used?", "options": ["A. SELECT name, age, score FROM student order by age desc, score;", "B. SELECT name, age, score FROM student order by age, score asc;", "C. SELECT name, age, score FROM student order by 2 desc, 3 asc;", "D. SELECT name, age, score FROM student order by 1 desc, 2;"], "answer": "AC", "explanation": "Per Chapter 05 (p. 395), Option A (`order by age desc, score` where `score` defaults to `ASC`) and Option C (`order by 2 desc, 3 asc` referencing the 2nd and 3rd selected columns) are correct (`AC`)."}, {"id": 36, "type": "multiple", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "Which of the following `LIMIT` / `OFFSET` clauses in openGauss are equivalent and output 20 rows after skipping the first 5 rows (Ch.05 p. 392)?", "options": ["A. LIMIT 5, 20", "B. LIMIT 20 OFFSET 5", "C. OFFSET 5 LIMIT 20", "D. LIMIT 5 OFFSET 20"], "answer": "ABC", "explanation": "Per Chapter 05 (p. 392), `LIMIT 5, 20` is equivalent to `LIMIT 20 OFFSET 5` and `OFFSET 5 LIMIT 20` — all three skip 5 rows and return 20 rows."}, {"id": 37, "type": "multiple", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 447 Q3) Create a decremental sequence named `seq_1`. The starting value is 400, the step is –4, and the minimum value is 100. When the sequence reaches the minimum value, it can be cyclically executed. Which of the following statements are correct?", "options": ["A. CREATE SEQUENCE seq_1 START WITH 400 MAXVALUE 100 INCREMENT BY -4 CYCLE;", "B. CREATE SEQUENCE seq_1 MAXVALUE 400 MINVALUE 100 INCREMENT BY -4 CYCLE;", "C. CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 INCREMENT BY -4 CYCLE;", "D. CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 MAXVALUE 400 INCREMENT BY -4 CYCLE;"], "answer": "BD", "explanation": "Per Chapter 05 (p. 442 & p. 447), for a descending sequence (`INCREMENT BY -4`), default `MAXVALUE` is `-1` and default `START WITH` is `maxvalue`. Thus `MAXVALUE 400` must be specified, and `START WITH 400` is optional (`BD`)."}, {"id": 38, "type": "multiple", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 468 Q2) Which of the following are arithmetic functions in openGauss?", "options": ["A. length(str)", "B. sin(n)", "C. round(v numeric, s int)", "D. hex(p1)"], "answer": "BC", "explanation": "Per Chapter 05 (p. 468), `sin(n)` and `round(v numeric, s int)` are arithmetic functions (`BC`), whereas `length(str)` and `hex(p1)` are string functions."}, {"id": 39, "type": "multiple", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 469 Q3 & Q4) Which three separate approaches to pattern matching are provided by openGauss?", "options": ["A. LIKE", "B. Same", "C. SIMILAR TO", "D. POSIX regular expressions"], "answer": "ACD", "explanation": "Per Chapter 05 (p. 469), the three pattern matching approaches are `LIKE`, `SIMILAR TO`, and `POSIX regular expressions` (`ACD`)."}, {"id": 40, "type": "multiple", "points": 20, "chapter": "Ch.06 GaussDB", "question": "(Official Ch.06 Quiz Q2) Which of the following are core functions of UGO (Database and Application Migration UGO)?", "options": ["A. Source database profiling", "B. Destination database selection and specification recommendation & Destination database compatibility analysis", "C. Migration workload evaluation", "D. Database structure migration & Application SQL migration"], "answer": "ABCD", "explanation": "Per Chapter 06 (p. 512 & p. 527), all six items listed across A, B, C, and D constitute the exact 6 core functions of UGO."}, {"id": 41, "type": "tf", "points": 10, "chapter": "Ch.01 openGauss Overview", "question": "openGauss uses a single-process multi-threaded architecture (`gaussdb`) and incremental checkpoints (performance fluctuation < 5%), whereas PostgreSQL uses a multi-process architecture and full checkpoints (fluctuation > 15%).", "options": ["A. True", "B. False"], "answer": "A", "explanation": "True (Ch.01 pp. 48–49). openGauss uses a single-process multi-threaded model with 64-bit XIDs/CSNs and incremental checkpoints."}, {"id": 42, "type": "tf", "points": 10, "chapter": "Ch.02 Database Installation and Deployment", "question": "Only user `root` is authorized to run the `gs_checkos` and `gs_postuninstall` commands in openGauss.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "True (Ch.02 p. 107 & p. 125). Both `gs_checkos` and `gs_postuninstall` require `root` privileges."}, {"id": 43, "type": "tf", "points": 10, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "When Ultimate RTO is enabled in openGauss (`recovery_parse_workers > 1` and `recovery_parallelism > 1`), cascaded standby nodes are fully supported.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.03 p. 192). When Ultimate RTO is enabled, cascaded standby nodes are NOT supported because the standby node cannot synchronize data with a cascaded standby node during parallel recovery."}, {"id": 44, "type": "tf", "points": 10, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "In openGauss Row-Level Security (RLS), initial users and system administrators (`SYSADMIN`) are not affected by row-level security policies.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "True (Ch.03 p. 215). Initial users and system administrators bypass row-level security policies."}, {"id": 45, "type": "tf", "points": 10, "chapter": "Ch.04 Database and Object Management", "question": "(Official Ch.04 Quiz Q1) Users and roles have the same syntax in the openGauss database. Therefore, they are fully equivalent.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.04 p. 314 & p. 346). Users have the `LOGIN` attribute by default, whereas roles do not have login permission by default."}, {"id": 46, "type": "tf", "points": 10, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 372 Q1) `BIGINT` occupies four bytes.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.05 p. 362 & p. 372). `BIGINT` (`INT8`) occupies eight (8) bytes."}, {"id": 47, "type": "tf", "points": 10, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 372 Q2) `CLOB` is used to store large object data of the `TEXT` type.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "True (Ch.05 p. 366 & p. 372). `CLOB` is the alias of `TEXT` (up to 1 GB minus 1 byte) for storing large text data."}, {"id": 48, "type": "tf", "points": 10, "chapter": "Ch.05 SQL Basics", "question": "(Official Ch.05 Quiz p. 446 Q1) When an index is created for a table, the corresponding base table is deleted if the index is canceled.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.05 p. 446). Dropping an index (`DROP INDEX`) removes only the index and never deletes the base table."}, {"id": 49, "type": "tf", "points": 10, "chapter": "Ch.05 SQL Basics", "question": "In openGauss, `CREATE DATABASE` and `DROP DATABASE` statements cannot be executed inside a transaction block, and the preinstalled `POSTGRES`, `TEMPLATE0`, and `TEMPLATE1` databases cannot be deleted.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "True (Ch.05 p. 410 & p. 414). Neither `CREATE DATABASE` nor `DROP DATABASE` can run inside a transaction block, and the three preinstalled databases are protected."}, {"id": 50, "type": "tf", "points": 10, "chapter": "Ch.06 GaussDB", "question": "In GaussDB Cloud Trace Service (CTS), operation records from the last seven days can be queried on the management console, and traces are regularly dumped to OBS buckets and encrypted using KMS keys.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "True (Ch.06 p. 514). CTS allows querying the last 7 days of traces on the management console and dumps compressed trace files to OBS encrypted with KMS keys."}, {"id": 51, "type": "lab", "points": 20, "chapter": "Ch.02 Database Installation and Deployment", "question": "Lab 1: Write the `gs_guc` command to dynamically add and immediately reload a client authentication rule in `pg_hba.conf` across all nodes (`-N all -I all`) allowing `host` access to `all` databases by user `testuser` from `10.252.95.191/32` using `sha256` authentication.", "starter_code": "gs_guc ____ -N all -I all -h \"host all testuser 10.252.95.191/32 ____\"", "accepted_keywords": ["gs_guc reload", "sha256"], "solution": "gs_guc reload -N all -I all -h \"host all testuser 10.252.95.191/32 sha256\"", "options": [], "answer": "gs_guc reload -N all -I all -h \"host all testuser 10.252.95.191/32 sha256\"", "explanation": "Use `gs_guc reload` (which modifies `pg_hba.conf` and signals the database process to reload immediately) and specify `sha256` as the authentication method (Ch.02 p. 96 & p. 118)."}, {"id": 52, "type": "lab", "points": 20, "chapter": "Ch.02 Database Installation and Deployment", "question": "Lab 2: Write the command (executed as user `root`) to check SSD read/write performance using `gs_checkperf` for cluster user `omm`.", "starter_code": "gs_checkperf -U omm -i ____", "accepted_keywords": ["gs_checkperf", "-i ssd"], "solution": "gs_checkperf -U omm -i SSD", "options": [], "answer": "gs_checkperf -U omm -i SSD", "explanation": "Per Chapter 02 (p. 109 & Quiz Q2), SSD performance can only be viewed by `root` using `gs_checkperf -U omm -i SSD`."}, {"id": 53, "type": "lab", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "Lab 3: Write the two commands (executed as user `omm` on the standby node) to perform a planned primary/standby switchover for data directory `/home/omm/cluster/dn1/` and then record the updated primary/standby roles in the dynamic configuration file.", "starter_code": "gs_ctl ____ -D /home/omm/cluster/dn1/\ngs_om -t ____", "accepted_keywords": ["gs_ctl switchover", "refreshconf"], "solution": "gs_ctl switchover -D /home/omm/cluster/dn1/\ngs_om -t refreshconf", "options": [], "answer": "gs_ctl switchover -D /home/omm/cluster/dn1/\ngs_om -t refreshconf", "explanation": "Per Chapter 03 (pp. 192–193), run `gs_ctl switchover -D /home/omm/cluster/dn1/` on the standby node followed by `gs_om -t refreshconf`."}, {"id": 54, "type": "lab", "points": 20, "chapter": "Ch.03 openGauss Architecture and Key Features", "question": "Lab 4: Write the SQL statements to create a resource label `label_for_creditcard` on column `user1.table1.creditcard` and create a dynamic data masking policy `msk_creditcard` using the `creditcardmasking` function.", "starter_code": "CREATE ____ LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);\nCREATE ____ POLICY msk_creditcard ____ ON LABEL(label_for_creditcard);", "accepted_keywords": ["create resource label", "create masking policy", "creditcardmasking"], "solution": "CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);\nCREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);", "options": [], "answer": "CREATE RESOURCE LABEL label_for_creditcard ADD COLUMN(user1.table1.creditcard);\nCREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);", "explanation": "Per Chapter 03 (p. 206), first create the resource label with `CREATE RESOURCE LABEL ... ADD COLUMN(...)`, then bind the masking policy with `CREATE MASKING POLICY msk_creditcard creditcardmasking ON LABEL(label_for_creditcard);`."}, {"id": 55, "type": "lab", "points": 20, "chapter": "Ch.04 Database and Object Management", "question": "Lab 5: Write the SQL statements to create a column-store table `customer_t2(state_ID CHAR(2), state_NAME VARCHAR2(40), area_ID NUMBER)` and a Memory-Optimized Table (MOT) `mot_test(x INT)` on `mot_server`.", "starter_code": "CREATE TABLE customer_t2(state_ID CHAR(2), state_NAME VARCHAR2(40), area_ID NUMBER) WITH (____ = ____);\nCREATE ____ TABLE mot_test(x INT) SERVER mot_server;", "accepted_keywords": ["orientation = column", "create foreign table"], "solution": "CREATE TABLE customer_t2(state_ID CHAR(2), state_NAME VARCHAR2(40), area_ID NUMBER) WITH (ORIENTATION = COLUMN);\nCREATE FOREIGN TABLE mot_test(x INT) SERVER mot_server;", "options": [], "answer": "CREATE TABLE customer_t2(state_ID CHAR(2), state_NAME VARCHAR2(40), area_ID NUMBER) WITH (ORIENTATION = COLUMN);\nCREATE FOREIGN TABLE mot_test(x INT) SERVER mot_server;", "explanation": "Per Chapter 04 (p. 299 & p. 305), column-store tables are declared with `WITH (ORIENTATION = COLUMN)` and MOTs are created with `CREATE FOREIGN TABLE ... SERVER mot_server;`."}, {"id": 56, "type": "lab", "points": 20, "chapter": "Ch.04 Database and Object Management", "question": "Lab 6 (Official Ch.04 Quiz Q2): Write the SQL `COPY` statement to export partial data from table `t1` where `a2 = 1` to `/data/input/t1_output.txt` using delimiter `'^'`.", "starter_code": "____ (SELECT * FROM t1 WHERE a2 = 1) ____ '/data/input/t1_output.txt' DELIMITER '^';", "accepted_keywords": ["copy (select * from t1", "to '/data/input/t1_output.txt'"], "solution": "COPY (SELECT * FROM t1 WHERE a2 = 1) TO '/data/input/t1_output.txt' DELIMITER '^';", "options": [], "answer": "COPY (SELECT * FROM t1 WHERE a2 = 1) TO '/data/input/t1_output.txt' DELIMITER '^';", "explanation": "Per Chapter 04 (p. 332 & p. 346), `COPY (SELECT * FROM t1 WHERE a2 = 1) TO '/data/input/t1_output.txt' DELIMITER '^';` exports a filtered query result set to a file."}, {"id": 57, "type": "lab", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "Lab 7 (Official Ch.05 Quiz p. 405 Q1 & p. 406 Q3): Write the two DML statements to: (1) increase the `AGE` column in the `STAFFS` table by 5 years, and (2) delete all records from the `student` table where `cid = 6`.", "starter_code": "UPDATE STAFFS ____ AGE = ____;\n____ ____ student ____ cid = 6;", "accepted_keywords": ["update staffs set age", "delete from student where cid = 6"], "solution": "UPDATE STAFFS SET AGE = AGE + 5;\nDELETE FROM student WHERE cid = 6;", "options": [], "answer": "UPDATE STAFFS SET AGE = AGE + 5;\nDELETE FROM student WHERE cid = 6;", "explanation": "Per Chapter 05 (pp. 405–406), use `UPDATE STAFFS SET AGE = AGE + 5;` and `DELETE FROM student WHERE cid = 6;`."}, {"id": 58, "type": "lab", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "Lab 8 (Official Ch.05 Quiz p. 447 Q3): Write the SQL statement to create a decremental sequence named `seq_1` with starting value `400`, minimum value `100`, maximum value `400`, step `-4`, and cyclic execution.", "starter_code": "CREATE SEQUENCE seq_1 START WITH 400 ____ 100 ____ 400 INCREMENT BY -4 ____;", "accepted_keywords": ["minvalue 100", "maxvalue 400", "increment by -4", "cycle"], "solution": "CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 MAXVALUE 400 INCREMENT BY -4 CYCLE;", "options": [], "answer": "CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 MAXVALUE 400 INCREMENT BY -4 CYCLE;", "explanation": "Per Chapter 05 (p. 447 Quiz Q3), a decremental sequence starting at 400 with step -4 and minimum 100 must specify `MAXVALUE 400` and `MINVALUE 100` (`CREATE SEQUENCE seq_1 START WITH 400 MINVALUE 100 MAXVALUE 400 INCREMENT BY -4 CYCLE;`)."}, {"id": 59, "type": "lab", "points": 20, "chapter": "Ch.05 SQL Basics", "question": "Lab 9 (Official Ch.05 Quiz p. 468 Q1): Write the SQL query to add 7 days (`integer '7'`) to `date '2021-4-28'` aliased as `RESULT`, and include a SQL comment (`-- YYYY-MM-DD`) stating the resulting date.", "starter_code": "SELECT date '2021-4-28' + ____ '7' AS RESULT;\n-- Resulting date: ____-__-__", "accepted_keywords": ["date '2021-4-28'", "integer '7'", "2021-05-05"], "solution": "SELECT date '2021-4-28' + integer '7' AS RESULT;\n-- Resulting date: 2021-05-05", "options": [], "answer": "SELECT date '2021-4-28' + integer '7' AS RESULT; (2021-05-05)", "explanation": "Per Chapter 05 (p. 459 & p. 468), `SELECT date '2021-4-28' + integer '7' AS RESULT;` adds 7 days to April 28, returning May 5 (`2021-05-05` / `2021-05-05 00:00:00`)."}, {"id": 60, "type": "lab", "points": 20, "chapter": "Ch.06 GaussDB", "question": "Lab 10 (Official Ch.06 Quiz Q1 & Q2): Complete the SQL query returning the GaussDB distributed component used for sharing configuration and service discovery, and the Huawei tool used for heterogeneous database structure and application SQL migration.", "starter_code": "SELECT '____' AS config_discovery_component, '____' AS heterogeneous_migration_tool;", "accepted_keywords": ["etcd", "ugo"], "solution": "SELECT 'ETCD' AS config_discovery_component, 'UGO' AS heterogeneous_migration_tool;", "options": [], "answer": "SELECT 'ETCD' AS config_discovery_component, 'UGO' AS heterogeneous_migration_tool;", "explanation": "Per Chapter 06 (p. 495, p. 512 & p. 527), `ETCD` is used for sharing configurations and service discovery, and `UGO` is used for heterogeneous database structure and application SQL migration."}]};
+    const QS = MOCK.questions || [];
+    let flagged = new Set();
+    let examSubmitted = false;
+    let remainingSecs = (MOCK.duration_mins || 60) * 60;
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    const timerInterval = setInterval(() => {
+      if (examSubmitted || remainingSecs <= 0) return;
+      remainingSecs--;
+      const m = String(Math.floor(remainingSecs / 60)).padStart(2, '0');
+      const s = String(remainingSecs % 60).padStart(2, '0');
+      document.getElementById('exam-timer').textContent = `⏱️ ${m}:${s}`;
+      if (remainingSecs === 0) submitExam();
+    }, 1000);
+
+    function initExam() {
+      const pal = document.getElementById('palette');
+      pal.innerHTML = QS.map((q, i) =>
+        `<button id="pal-${i}" class="pal-btn" onclick="scrollToQ(${i})">${i+1}</button>`
+      ).join('');
+
+      const list = document.getElementById('questions-list');
+      list.innerHTML = QS.map((q, i) => {
+        const badgeMap = {
+          single: '<span class="badge badge-lecture">Single-Choice • ' + (q.points||15) + ' pts</span>',
+          multiple: '<span class="badge badge-ref">Multiple-Choice (Select ALL) • ' + (q.points||20) + ' pts</span>',
+          tf: '<span class="badge badge-hour">True / False • ' + (q.points||10) + ' pts</span>',
+          lab: '<span class="badge badge-exercise">Hands-On Lab • ' + (q.points||20) + ' pts</span>'
+        };
+        let bodyHtml = '';
+        if (q.type === 'lab') {
+          const starter = q.starter_code ? `<pre style="background:#0d1117;padding:10px;border-radius:6px;font-family:var(--font-mono);font-size:12.5px;margin-bottom:8px;border:1px solid var(--border);">${escHtml(q.starter_code)}</pre>` : '';
+          bodyHtml = `${starter}<textarea id="lab_ans_${i}" class="lab-input" placeholder="Type the exact command, SQL statement, or configuration value..." oninput="updateProgress(${i})"></textarea>`;
+        } else {
+          const inputType = q.type === 'multiple' ? 'checkbox' : 'radio';
+          bodyHtml = (q.options || []).map(opt => {
+            const letter = opt.trim().charAt(0).toUpperCase();
+            return `<label class="q-opt"><input type="${inputType}" name="mq_${i}" value="${letter}" onchange="updateProgress(${i})" /> <span>${fmtText(opt)}</span></label>`;
+          }).join('');
+        }
+        return `<div id="mq-card-${i}" class="mock-q-card" data-qtype="${q.type}">
+          <div class="mock-q-head">
+            <div style="display:flex;gap:8px;align-items:center;">
+              <strong style="color:#fff;">Question ${i+1}</strong>
+              ${badgeMap[q.type] || ''}
+              <span style="font-size:12px;color:var(--text-muted);">${escHtml(q.chapter || '')}</span>
+            </div>
+            <button id="flag-btn-${i}" class="flag-btn" onclick="toggleFlag(${i})">🚩 Flag</button>
+          </div>
+          <div style="font-size:14.5px;font-weight:600;margin-bottom:10px;color:#f3f4f6;">${fmtText(q.question)}</div>
+          <div>${bodyHtml}</div>
+          <div id="mq-exp-${i}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function isAnswered(i) {
+      const q = QS[i];
+      if (q.type === 'lab') {
+        const val = (document.getElementById(`lab_ans_${i}`)?.value || '').trim();
+        return val.length > 0;
+      }
+      return document.querySelectorAll(`input[name="mq_${i}"]:checked`).length > 0;
+    }
+
+    function updateProgress(i) {
+      const btn = document.getElementById(`pal-${i}`);
+      if (btn) {
+        if (isAnswered(i)) btn.classList.add('answered');
+        else btn.classList.remove('answered');
+      }
+      let count = 0;
+      for (let idx = 0; idx < QS.length; idx++) if (isAnswered(idx)) count++;
+      document.getElementById('answered-counter').textContent = `${count} / ${QS.length} Answered`;
+    }
+
+    function toggleFlag(i) {
+      const btn = document.getElementById(`flag-btn-${i}`);
+      const pal = document.getElementById(`pal-${i}`);
+      if (flagged.has(i)) {
+        flagged.delete(i);
+        btn.classList.remove('active');
+        pal.classList.remove('flagged');
+      } else {
+        flagged.add(i);
+        btn.classList.add('active');
+        pal.classList.add('flagged');
+      }
+    }
+
+    function scrollToQ(i) {
+      const el = document.getElementById(`mq-card-${i}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function filterQuestions(mode, chip) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      QS.forEach((q, i) => {
+        const card = document.getElementById(`mq-card-${i}`);
+        if (mode === 'all') card.style.display = 'block';
+        else if (mode === 'flagged') card.style.display = flagged.has(i) ? 'block' : 'none';
+        else card.style.display = (q.type === mode) ? 'block' : 'none';
+      });
+    }
+
+    function submitExam() {
+      examSubmitted = true;
+      let earnedPoints = 0;
+      let totalPoints = 0;
+      let correctCount = 0;
+      let chapterStats = {};
+
+      QS.forEach((q, i) => {
+        const pts = q.points || 15;
+        totalPoints += pts;
+        const ch = q.chapter || 'General';
+        if (!chapterStats[ch]) chapterStats[ch] = { earned: 0, total: 0 };
+        chapterStats[ch].total += pts;
+
+        let isCorrect = false;
+        let userAnsDisplay = '';
+        let officialDisplay = '';
+
+        if (q.type === 'lab') {
+          const raw = (document.getElementById(`lab_ans_${i}`)?.value || '').trim();
+          userAnsDisplay = raw || '(Blank)';
+          officialDisplay = q.solution || q.answer || '';
+          const keywords = q.accepted_keywords || [officialDisplay];
+          const rawNorm = normWS(raw);
+          isCorrect = raw.length > 0 && keywords.every(k => rawNorm.includes(normWS(k)));
+        } else {
+          const selected = Array.from(document.querySelectorAll(`input[name="mq_${i}"]:checked`))
+            .map(el => el.value).sort().join('');
+          const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+          userAnsDisplay = selected || '(None)';
+          officialDisplay = target;
+          isCorrect = (selected === target);
+        }
+
+        const pal = document.getElementById(`pal-${i}`);
+        const expEl = document.getElementById(`mq-exp-${i}`);
+        expEl.style.display = 'block';
+        pal.classList.remove('correct', 'wrong');
+
+        if (isCorrect) {
+          earnedPoints += pts;
+          correctCount++;
+          chapterStats[ch].earned += pts;
+          pal.classList.add('correct');
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (+${pts} pts)</strong> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
+        } else {
+          pal.classList.add('wrong');
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>0 pts</strong> | Your Answer: <code>${escHtml(userAnsDisplay)}</code> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+
+      const passed = earnedPoints >= (MOCK.passing_points || 800);
+      const chRows = Object.entries(chapterStats).map(([ch, st]) => {
+        const pct = Math.round((st.earned / st.total) * 100);
+        return `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.08);font-size:13px;">
+          <span>${escHtml(ch)}</span>
+          <strong>${st.earned} / ${st.total} pts (${pct}%)</strong>
+        </div>`;
+      }).join('');
+
+      const banner = document.getElementById('score-banner');
+      banner.style.display = 'block';
+      banner.style.borderColor = passed ? '#10b981' : '#f59e0b';
+      banner.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:${passed ? '#34d399' : '#fbbf24'};">
+              ${passed ? '🏆 NATIONAL STAGE QUALIFIER LEVEL ACHIEVED!' : '⚡ KEEP LOCKING IN — REVIEW WEAK CHAPTERS BELOW'}
+            </div>
+            <h1 style="margin:4px 0;font-size:2rem;">Score: ${earnedPoints} / ${totalPoints} pts (${Math.round(earnedPoints/totalPoints*100)}%)</h1>
+            <div style="font-size:13.5px;color:var(--text-muted);">Correct Questions: ${correctCount} / ${QS.length} • Target Score: ${MOCK.passing_points} pts</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#38bdf8;">Domain Breakdown:</div>
+          ${chRows}
+        </div>
+      `;
+      banner.scrollIntoView({ behavior: 'smooth' });
+
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[`${PILLAR_ID}_mock_exam`] = {
+        completed: true,
+        score: earnedPoints,
+        total: totalPoints,
+        correct: correctCount,
+        ts: Date.now()
+      };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+    }
+
+    function resetExam() {
+      if (!confirm('Reset all answers and restart the 60-minute timer?')) return;
+      window.location.reload();
+    }
+
+    initExam();
+  </script>
+</body>
+</html>

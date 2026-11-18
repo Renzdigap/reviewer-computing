@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linux File Directory Structure (FHS) &amp; Path Navigation (`pwd`, `cd`, `ls`) | HCIA-openEuler V2.0 (Operating System &amp; Cloud-Native iSula)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 02-HCIA-openEuler-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 02 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./02-Exercise-Help-Session-and-Power-Commands-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./04-Exercise-FHS-and-Directory-Navigation-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-openEuler V2.0 Training Material.pdf • Ch.03, pp. 79–87</span>
+            <span class="badge badge-hour">⏱️ Hour 02 • Sprint 2/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Linux File Directory Structure (FHS) &amp; Path Navigation (<code class="inline-code">pwd</code>, <code class="inline-code">cd</code>, <code class="inline-code">ls</code>)</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Apply the Linux philosophy 'Everything is a file' and identify the purpose of every standard root subdirectory (<code class="inline-code">/bin</code>, <code class="inline-code">/sbin</code>, <code class="inline-code">/etc</code>, <code class="inline-code">/proc</code>, <code class="inline-code">/var</code>, <code class="inline-code">/dev</code>, <code class="inline-code">/usr</code>, <code class="inline-code">/opt</code>, etc.)</li><li>Differentiate absolute paths vs. relative paths and logical (<code class="inline-code">pwd -L</code>) vs. physical (<code class="inline-code">pwd -P</code>) working directories</li><li>Use <code class="inline-code">cd</code> (<code class="inline-code">~</code>, <code class="inline-code">-</code>, <code class="inline-code">..</code>, <code class="inline-code">.</code>) and <code class="inline-code">ls</code> (<code class="inline-code">-a</code>, <code class="inline-code">-A</code>, <code class="inline-code">-l</code>, <code class="inline-code">-h</code>, <code class="inline-code">-t</code>, <code class="inline-code">-S</code>, <code class="inline-code">-r</code>, <code class="inline-code">-d</code>, <code class="inline-code">-R</code>) with precision</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. "Everything is a File" &amp; Linux Directory Tree (<code class="inline-code">/</code>)</h3>
+<p>In Linux, <strong>everything is a file</strong>—regular files, directories, character/block devices, sockets, pipes, and processes can all be read/written via <code class="inline-code">fopen()</code>, <code class="inline-code">fclose()</code>, <code class="inline-code">fwrite()</code>, and <code class="inline-code">fread()</code>. All directories branch from the single <strong>root directory (<code class="inline-code">/</code>)</strong>:</p>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Directory</th><th>Purpose &amp; Key Characteristics</th></tr></thead><tbody>
+<tr><td><strong><code class="inline-code">/bin</code> &amp; <code class="inline-code">/sbin</code></strong></td><td><code class="inline-code">/bin</code> stores frequently used binary commands for all users; <code class="inline-code">/sbin</code> (<code class="inline-code">s</code> = superuser) stores system management programs for <code class="inline-code">root</code>.</td></tr>
+<tr><td><strong><code class="inline-code">/boot</code></strong></td><td>Core files for starting the Linux OS (kernel images, bootloader, initramfs).</td></tr>
+<tr><td><strong><code class="inline-code">/dev</code></strong></td><td>External hardware device files (disks, terminals) accessed just like files.</td></tr>
+<tr><td><strong><code class="inline-code">/etc</code></strong></td><td>All system and service configuration files and subdirectories.</td></tr>
+<tr><td><strong><code class="inline-code">/home</code> &amp; <code class="inline-code">/root</code></strong></td><td><code class="inline-code">/home</code> contains regular users' home directories (<code class="inline-code">/home/username</code>); <code class="inline-code">/root</code> is the superuser's home directory.</td></tr>
+<tr><td><strong><code class="inline-code">/lib</code> &amp; <code class="inline-code">/lib64</code></strong></td><td>Essential dynamic link libraries (similar to Windows <code class="inline-code">.dll</code> files) and 64-bit shared libraries.</td></tr>
+<tr><td><strong><code class="inline-code">/media</code> &amp; <code class="inline-code">/mnt</code></strong></td><td><code class="inline-code">/media</code> auto-mounts removable media (USB drives, CD-ROMs); <code class="inline-code">/mnt</code> is for temporary manual mounts.</td></tr>
+<tr><td><strong><code class="inline-code">/opt</code></strong></td><td>Optional/additional third-party application software (empty by default).</td></tr>
+<tr><td><strong><code class="inline-code">/proc</code></strong></td><td><strong>Virtual directory that is a mapping of system memory (RAM).</strong> Access it directly to obtain real-time kernel/process information.</td></tr>
+<tr><td><strong><code class="inline-code">/run</code></strong></td><td>Temporary file system storing runtime data since boot (cleared on reboot; <code class="inline-code">/var/run</code> points to <code class="inline-code">/run</code>).</td></tr>
+<tr><td><strong><code class="inline-code">/srv</code> &amp; <code class="inline-code">/sys</code></strong></td><td><code class="inline-code">/srv</code> stores service data; <code class="inline-code">/sys</code> mounts <code class="inline-code">sysfs</code> (introduced in Linux 2.6 kernel for hardware/kernel objects).</td></tr>
+<tr><td><strong><code class="inline-code">/tmp</code> &amp; <code class="inline-code">/var</code></strong></td><td><code class="inline-code">/tmp</code> stores temporary files; <code class="inline-code">/var</code> stores constantly expanding variable files such as <strong>logs (<code class="inline-code">/var/log</code>)</strong>.</td></tr>
+<tr><td><strong><code class="inline-code">/usr</code></strong></td><td>User applications and files (similar to Windows <code class="inline-code">Program Files</code>).</td></tr>
+</tbody></table></div>
+<p>---</p>
+<h3>2. Paths, <code class="inline-code">pwd</code>, and <code class="inline-code">cd</code></h3>
+<ul class="md-list">
+<li><strong>Absolute Path:</strong> Always starts from the root slash <strong><code class="inline-code">/</code></strong> (e.g., <code class="inline-code">/var/log/messages</code>).</li>
+<li><strong>Relative Path:</strong> Relative to the current working directory (e.g., <code class="inline-code">../lib</code> or <code class="inline-code">./script.sh</code>).</li>
+<li><strong><code class="inline-code">pwd</code> (Print Working Directory):</strong></li>
+<li><strong><code class="inline-code">pwd -L</code> (Default):</strong> Prints the <strong>logical</strong> path (preserves symbolic link names from <code class="inline-code">$PWD</code>).</li>
+<li><strong><code class="inline-code">pwd -P</code>:</strong> Prints the <strong>physical</strong> directory path, resolving all symbolic links!</li>
+<li><strong><code class="inline-code">cd</code> (Change Directory):</strong></li>
+<li><code class="inline-code">cd</code> or <code class="inline-code">cd ~</code>: Goes to the current user's home directory.</li>
+<li><code class="inline-code">cd ..</code>: Moves to the upper-level (parent) directory.</li>
+<li><code class="inline-code">cd .</code>: Stays in the current directory.</li>
+<li><strong><code class="inline-code">cd -</code></strong>: Switches back to the <strong>previous working directory</strong> (fast toggle between two directories).</li>
+</ul>
+<p>---</p>
+<h3>3. Listing Files and Directories with <code class="inline-code">ls</code></h3>
+<ul class="md-list">
+<li><strong><code class="inline-code">-l</code></strong>: Long format (file type, permissions, hard links, owner, group, size, timestamp, name).</li>
+<li><strong><code class="inline-code">-a</code> vs. <code class="inline-code">-A</code></strong>: <strong><code class="inline-code">-a</code></strong> shows all hidden files (starting with <code class="inline-code">.</code>) <strong>including <code class="inline-code">.</code> and <code class="inline-code">..</code></strong>; <strong><code class="inline-code">-A</code></strong> shows hidden files <strong>excluding <code class="inline-code">.</code> and <code class="inline-code">..</code></strong>.</li>
+<li><strong><code class="inline-code">-h</code></strong>: Human-readable sizes (<code class="inline-code">4.0K</code>, <code class="inline-code">12M</code>, <code class="inline-code">2G</code>).</li>
+<li><strong><code class="inline-code">-d</code></strong>: Displays information about the <strong>directory itself</strong> (<code class="inline-code">ls -ld /etc</code>) rather than its contents.</li>
+<li><strong>Sorting flags:</strong> <strong><code class="inline-code">-t</code></strong> (sort by modification/creation time), <strong><code class="inline-code">-S</code></strong> (sort by size), <strong><code class="inline-code">-X</code></strong> (sort by extension), <strong><code class="inline-code">-r</code></strong> (reverse sort order), <strong><code class="inline-code">-R</code></strong> (recursive listing).</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>/proc is a virtual directory that maps system memory (RAM); /var stores constantly growing files like logs; /etc stores configuration files.</li><li>pwd -L (default) prints the logical symlink path, whereas pwd -P resolves symlinks and prints the true physical directory path.</li><li>ls -a includes '.' and '..', whereas ls -A excludes them; ls -ld &lt;dir&gt; inspects the directory itself rather than listing its contents.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Do not confuse /root (the home directory of the superuser) with / (the root directory of the entire Linux filesystem tree)!</div><div class="trap-item">⚠️ EXAM TRAP: If /tmp/link3 points to /tmp/d1 and you run 'cd /tmp/link3', 'pwd' (or 'pwd -L') outputs '/tmp/link3', whereas 'pwd -P' outputs '/tmp/d1'.</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar2_h2_s2_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./04-Exercise-FHS-and-Directory-Navigation-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: Resolving Symlink Paths (`pwd -P`) and Time-Sorted Directory Listings", "duration_mins": 8, "exercise_type": "terminal", "prompt_label": "root@openEuler:~#", "scenario": "You are auditing `/var/run` (which is a symbolic link to `/run`) and `/usr/local`. Navigate into `/var/run`, print both its logical and physical paths, list all files (including hidden files, human-readable sizes, sorted by time) in `/usr/local`, and inspect the `/etc` directory entry itself without listing its contents.", "instructions": ["Step 1: Change directory to `/var/run` using `cd /var/run` and display the physical path (resolving symlinks) using `pwd -P`.", "Step 2: List all files (including hidden files) in `/usr/local` in human-readable long format sorted by time using `ls -ahlt /usr/local`.", "Step 3: Display the attributes of the `/etc` directory itself (not its contents) using `ls -ld /etc`."], "starter_code": "# Step 1: Enter /var/run and print the physical path without symlinks\ncd /var/run\n<pwd_physical_command>\n\n# Step 2: List all files in /usr/local with human-readable sizes sorted by time\n<ls_usr_local_command>\n\n# Step 3: Display the directory entry of /etc itself\n<ls_etc_dir_itself_command>", "solution_code": "# Step 1: Enter /var/run and print the physical path without symlinks\ncd /var/run\npwd -P\n\n# Step 2: List all files in /usr/local with human-readable sizes sorted by time\nls -ahlt /usr/local\n\n# Step 3: Display the directory entry of /etc itself\nls -ld /etc", "hints": ["Use `pwd -P` to print the physical working directory without symbolic links.", "Combine `-a`, `-h`, `-l`, and `-t` in `ls -ahlt /usr/local`.", "Use `ls -ld /etc` so `-d` shows the directory entry itself."], "validation_checks": [{"step": 1, "description": "Print physical working directory with pwd -P", "required_any": ["pwd -p"], "feedback_fail": "Use 'pwd -P' to output the physical path without symbolic links."}, {"step": 2, "description": "List /usr/local with -a, -h, -l, -t", "required_any": ["ls -ahlt", "ls -alht", "ls -lhat", "ls -laht", "ls /usr/local/ -ahlt"], "feedback_fail": "Use 'ls -ahlt /usr/local' to list all files in human-readable format sorted by time."}, {"step": 3, "description": "Inspect /etc directory entry itself with ls -ld", "required_any": ["ls -ld /etc", "ls -dl /etc"], "feedback_fail": "Use 'ls -ld /etc' to view the attributes of the /etc directory itself."}], "simulated_output": "/run\n\ntotal 48K\ndrwxr-xr-x. 12 root root 4.0K Jul 28 14:00 ..\ndrwxr-xr-x. 12 root root 4.0K Jul 28 14:00 .\ndrwxr-xr-x.  5 root root 4.0K Jul 28 14:00 share\ndrwxr-xr-x.  2 root root 4.0K Mar 24 05:34 bin\ndrwxr-xr-x.  2 root root 4.0K Mar 24 05:34 etc\ndrwxr-xr-x.  2 root root 4.0K Mar 24 05:34 lib64\ndrwxr-xr-x.  2 root root 4.0K Mar 24 05:34 sbin\n\ndrwxr-xr-x. 102 root root 8192 Nov 17 09:00 /etc", "quiz_questions": [{"id": "h2_s2_q1", "type": "single", "question": "Which directory in the Linux file system hierarchy is a virtual directory that serves as a mapping of system memory (RAM)?", "options": ["A. /opt", "B. /proc", "C. /var", "D. /boot"], "answer": "B", "explanation": "Per Ch.03 (p.80), `/proc` is a virtual directory which is the mapping of the system memory. You can obtain system information by directly accessing this directory."}, {"id": "h2_s2_q2", "type": "single", "question": "If `/tmp/link3` is a chain of symbolic links pointing to the physical directory `/tmp/d1`, and you run `cd /tmp/link3`, what is the output of `pwd -P`?", "options": ["A. /tmp/link3", "B. /tmp/d1", "C. /tmp", "D. An error message"], "answer": "B", "explanation": "Per Ch.03 (p.83), `pwd -L` (default) outputs the symbolic link connection path (`/tmp/link3`), whereas `pwd -P` resolves all symlinks and outputs the physical path (`/tmp/d1`)."}, {"id": "h2_s2_q3", "type": "multiple", "question": "Which of the following statements about the `ls` and `cd` commands are TRUE?", "options": ["A. `ls -A` displays hidden files and directories, excluding `.` and `..`.", "B. `ls -ld /etc` displays the directory attributes of `/etc` itself rather than the files inside `/etc`.", "C. `cd -` switches the working directory to the previous directory.", "D. `ls -t` sorts files alphabetically by file extension."], "answer": "ABC", "explanation": "Per Ch.03 (pp.84–86), A, B, and C are correct. Option D is false because `ls -t` sorts by creation/modification time (`ls -X` sorts by extension)."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

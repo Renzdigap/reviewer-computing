@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centralized Management: eSight Architecture, Interfaces (IF1–IF5) &amp; Batch Specs | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 08 • Sprint 3/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 7:00</span>
+      <a href="./04-Exercise-FusionDirector-Device-Adding-and-Intelligent-Features-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./06-Exercise-eSight-Interfaces-IF1-to-IF5-and-Batch-Specs-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (7 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.06, pp. 401–414</span>
+            <span class="badge badge-hour">⏱️ Hour 08 • Sprint 3/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Centralized Management: eSight Architecture, Interfaces (IF1–IF5) &amp; Batch Specs</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Understand eSight's cross-domain ICT scope (Huawei + third-party HP/Cisco/H3C devices), B/S architecture, and HA deployment modes</li><li>Master eSight's five external interfaces (IF1 Southbound, IF2 Northbound, IF3 External Auth, IF4 Notification, IF5 UI)</li><li>Memorize eSight's exact numerical specifications for Batch Import (500), Power-on/off priorities (1–10), OS Deployment (200/task, 40 concurrent), Firmware Upgrade (1000/schedule, 100 concurrent), and Profile Binding (2000 bound, 1000 applied)</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. eSight Overview &amp; Service-Oriented Architecture (pp. 402–404)</h3>
+<ul class="md-list">
+<li><strong>Unified Enterprise ICT O&amp;M (pp. 402–403)</strong>: Centrally manages switches, routers, WLAN, firewalls, video surveillance/cameras, storage, microwave, PON devices, <strong>servers, and server OSs</strong>, plus pre-integrates third-party devices (<strong>HP, Cisco, H3C</strong>).</li>
+<li><strong>Architecture Highlights (p. 403)</strong>:</li>
+<li><strong>B/S (Browser/Server) structure</strong>: Clients access eSight via web browser without plugins; only the server needs upgrading during maintenance.</li>
+<li><strong>Deployment Modes</strong>: Supports <strong>single-node</strong>, <strong>two-node active/standby</strong>, and <strong>multi-node multi-active</strong> deployment with scale-out from dozens to tens of thousands of devices.</li>
+<li><strong>Five External Interfaces of eSight (<code class="inline-code">IF1</code> to <code class="inline-code">IF5</code>, p. 404 — High-Yield Exam Topic!)</strong>:</li>
+</ul>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>Interface</th><th>Direction / Role</th><th>Supported Protocols &amp; Details (p. 404)</th></tr></thead><tbody>
+<tr><td><strong><code class="inline-code">IF1</code></strong></td><td><strong>Southbound Interface</strong> (connects to &amp; manages devices)</td><td><strong>SNMP, STelnet, FTP, SFTP, IPMI, HTTP/HTTPS (REST/Redfish), WebSocket, SocketPing, ICMP, WebPing, WebTrace, SSDP, Syslog, WebTelnet, Netconf, TR069</strong></td></tr>
+<tr><td><strong><code class="inline-code">IF2</code></strong></td><td><strong>Northbound Interface</strong> (integrates with upper-layer OSS / 3rd-party NMS &amp; Syslog)</td><td><strong>RESTful, SNMP, FTP, Kafka</strong> (for resources, alarms, performance) + <strong>Syslog</strong> forwarding</td></tr>
+<tr><td><strong><code class="inline-code">IF3</code></strong></td><td><strong>External Authentication Server Interface</strong></td><td><strong>LDAP, RADIUS, and SSO</strong></td></tr>
+<tr><td><strong><code class="inline-code">IF4</code></strong></td><td><strong>Notification Interface</strong> (sends alarms, events, reports)</td><td>Connects to enterprise <strong>Mail servers (Email)</strong> and <strong>SMS gateways (SMS)</strong></td></tr>
+<tr><td><strong><code class="inline-code">IF5</code></strong></td><td><strong>User Interface (UI)</strong></td><td>Invoked by system administrators and operators via Web browser</td></tr>
+</tbody></table></div>
+<p>---</p>
+<h3>2. eSight Server Device Management &amp; Alarm/Power Management (pp. 405–411)</h3>
+<ul class="md-list">
+<li><strong>Discovery &amp; Management Protocols by Server Type (p. 406)</strong>:</li>
+<li><strong>Rack, High-density, and TaiShan servers</strong>: Discovery = <strong>Redfish/SNMP</strong>; Management = <strong>Redfish/SNMP</strong>.</li>
+<li><strong>Blade servers</strong>: Discovery = <strong>Redfish/SNMP</strong>; Management = <strong>Redfish/SNMP/SSH</strong>.</li>
+<li><strong>Heterogeneous servers</strong>: Discovery = <strong>Redfish</strong>; Management = <strong>Redfish</strong>.</li>
+<li><strong>Alarm Display Colors (p. 410)</strong>: Alarms with a <strong>white background are NOT cleared</strong>; alarms with a <strong>light green background ARE cleared</strong>.</li>
+<li><strong>Device Power-On / Power-Off Task Management (p. 411)</strong>:</li>
+<li>Supports batch power-on/off tasks (once, daily, weekly, monthly, yearly) with <strong>priorities from 1 to 10 in descending order</strong> (<strong>1 = highest priority</strong>, powered on/off first). Real-time power status updates depend on <strong>device alarm reporting</strong> (otherwise click <strong>Synchronize</strong>).</li>
+</ul>
+<p>---</p>
+<h3>3. eSight Server Service Management Batch Specifications (pp. 406, 412–414)</h3>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>eSight Feature</th><th>Exact Official Numerical Specification (pp. 406, 412–414)</th></tr></thead><tbody>
+<tr><td><strong>Batch Import (Excel)</strong></td><td>Up to <strong>500 devices</strong> added at a time via Excel file</td></tr>
+<tr><td><strong>OS Deployment</strong></td><td>Up to <strong>200 devices per task</strong> and <strong>40 devices deployed concurrently</strong> (2-hour timeout; requires <strong>Smart Provisioning</strong>; can optionally deploy <strong>iBMA</strong>)</td></tr>
+<tr><td><strong>Software &amp; Firmware Upgrade</strong></td><td>Up to <strong>1,000 devices per upgrade schedule</strong> and <strong>100 devices upgraded concurrently</strong> (connects to <strong>HOUP</strong> for baselines)</td></tr>
+<tr><td><strong>Server Profile Configuration</strong></td><td>A single profile can be <strong>bound to up to 2,000 devices</strong>, and <strong>up to 1,000 devices</strong> can be selected at a time for <strong>applying</strong> a profile (Delete = not bound; Modify = not applied)</td></tr>
+</tbody></table></div>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>eSight external interfaces: IF1 = Southbound (SNMP, Redfish, IPMI, Netconf, TR069, etc.), IF2 = Northbound (RESTful, SNMP, FTP, Kafka, Syslog), IF3 = External Auth (LDAP, RADIUS, SSO), IF4 = Notification (Mail/SMS), IF5 = UI.</li><li>On the eSight alarm panel, a white background indicates an uncleared alarm, while a light green background indicates a cleared alarm.</li><li>eSight batch limits: Excel batch import = 500 devices; OS deployment = 200 devices/task (40 concurrent); Firmware upgrade = 1,000 devices/schedule (100 concurrent); Server Profile = 2,000 bound (1,000 applied at a time).</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Compare Concurrent OS Deployment limits between FusionDirector and eSight: FusionDirector supports 30 concurrent OS deployments (p. 384), whereas eSight supports up to 200 devices per task and 40 concurrent OS deployments (p. 412)!</div><div class="trap-item">⚠️ EXAM TRAP: Do not mix up eSight interfaces IF1 through IF5 — IF1 is Southbound (to managed devices), IF2 is Northbound (RESTful/SNMP/FTP/Kafka to upper-layer OSS), IF3 is LDAP/RADIUS/SSO authentication, and IF4 is Email/SMS notification.</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h8_s3_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./06-Exercise-eSight-Interfaces-IF1-to-IF5-and-Batch-Specs-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: eSight IF1–IF5 Interface & Batch Specification Verification", "duration_mins": 7, "exercise_type": "config", "prompt_label": "esight-admin@ict-nms:~#", "scenario": "Configure the eSight integration architecture mapping (`IF1`–`IF5`) and batch operation capacity limits for a large carrier data center.", "instructions": ["Map `southbound_interface` to `'IF1'`, `northbound_oss_interface` to `'IF2'`, and `auth_ldap_radius_sso_interface` to `'IF3'`.", "Set `excel_batch_import_max` to `500`, `os_deploy_task_max` to `200`, and `os_deploy_concurrent_max` to `40`.", "Set `fw_upgrade_schedule_max` to `1000`, `profile_bind_max` to `2000`, and `cleared_alarm_bg_color` to `'light green'`."], "starter_code": "# eSight Architecture & Batch Specification Config\nesight_interfaces:\n  southbound_interface: \"___\"\n  northbound_oss_interface: \"___\"\n  auth_ldap_radius_sso_interface: \"___\"\n  notification_mail_sms_interface: \"IF4\"\n  user_ui_interface: \"IF5\"\n\nesight_batch_limits:\n  excel_batch_import_max: ___\n  os_deploy_task_max: ___\n  os_deploy_concurrent_max: ___\n  fw_upgrade_schedule_max: ___\n  fw_upgrade_concurrent_max: 100\n  profile_bind_max: ___\n  cleared_alarm_bg_color: \"___\"\n", "solution_code": "# eSight Architecture & Batch Specification Config\nesight_interfaces:\n  southbound_interface: \"IF1\"\n  northbound_oss_interface: \"IF2\"\n  auth_ldap_radius_sso_interface: \"IF3\"\n  notification_mail_sms_interface: \"IF4\"\n  user_ui_interface: \"IF5\"\n\nesight_batch_limits:\n  excel_batch_import_max: 500\n  os_deploy_task_max: 200\n  os_deploy_concurrent_max: 40\n  fw_upgrade_schedule_max: 1000\n  fw_upgrade_concurrent_max: 100\n  profile_bind_max: 2000\n  cleared_alarm_bg_color: \"light green\"\n", "hints": ["IF1 is southbound, IF2 is northbound, and IF3 is external authentication (LDAP/RADIUS/SSO).", "Batch limits: Excel import = 500, OS deploy = 200/task (40 concurrent), FW upgrade = 1000/schedule (100 concurrent), Profile bind = 2000; cleared alarms have a light green background."], "validation_checks": [{"step": 1, "description": "Verify IF1, IF2, and IF3 interface mappings", "required_any": ["if1", "if2", "if3"], "feedback_fail": "Set southbound_interface='IF1', northbound_oss_interface='IF2', and auth_ldap_radius_sso_interface='IF3'."}, {"step": 2, "description": "Verify eSight batch limits (500, 200, 40, 1000, 2000)", "required_any": ["500", "200", "40", "1000", "2000"], "feedback_fail": "Check the batch limits: 500, 200, 40, 1000, and 2000."}, {"step": 3, "description": "Verify light green background color for cleared alarms", "required_any": ["light green"], "feedback_fail": "Set cleared_alarm_bg_color to 'light green'."}], "simulated_output": "[OK] eSight External Interfaces & Batch Capacities Verified:\n- Interfaces: IF1 (Southbound), IF2 (Northbound RESTful/SNMP/FTP/Kafka), IF3 (LDAP/RADIUS/SSO), IF4 (Mail/SMS), IF5 (UI)\n- Capacities: Excel Import=500 | OS Deploy=200/task (40 concurrent) | FW Upgrade=1000/schedule (100 concurrent) | Profile=2000 bound (1000 applied)\n- Alarms: White background = Uncleared | Light green background = Cleared.", "quiz_questions": [{"id": "h8_s3_q1", "type": "single", "question": "Among the five external interfaces of Huawei eSight (Ch.06, p. 404), which interface is the northbound interface used by upper-layer OSS or third-party systems to obtain resources, alarms, and performance data via RESTful, SNMP, FTP, or Kafka?", "options": ["A. IF1", "B. IF2", "C. IF3", "D. IF4"], "answer": "B", "explanation": "According to Ch.06 p.404: IF1 is the southbound interface to managed devices; IF2 is the northbound interface (RESTful, SNMP, FTP, Kafka, Syslog) to upper-layer OSS; IF3 is for external authentication servers (LDAP, RADIUS, SSO); IF4 is for notifications (Mail/SMS); IF5 is the UI."}, {"id": "h8_s3_q2", "type": "single", "question": "In Huawei eSight OS Deployment (Ch.06, p. 412), what are the maximum number of devices supported per task and the maximum number of devices that can be deployed concurrently?", "options": ["A. Maximum 30 devices per task and 10 devices concurrently", "B. Maximum 200 devices per task and 40 devices concurrently", "C. Maximum 1,000 devices per task and 500 devices concurrently", "D. Maximum 50 devices per task and 50 devices concurrently"], "answer": "B", "explanation": "According to Ch.06 p.412, each eSight OS deployment task supports a maximum of 200 devices and a maximum of 40 devices can be deployed concurrently (requiring servers with Smart Provisioning)."}, {"id": "h8_s3_q3", "type": "multiple", "question": "Which of the following statements about eSight Server Management are true?", "options": ["A. Up to 500 devices can be added at a time using an Excel file in Batch Import mode.", "B. On the eSight alarm panel, alarms with a white background are not cleared, whereas alarms with a light green background are cleared.", "C. In Software and Firmware Upgrade, up to 100 devices can be upgraded concurrently and up to 1,000 devices can be selected for an upgrade schedule.", "D. A single eSight Server Profile can be bound to a maximum of 2,000 devices, and up to 1,000 devices can be selected at a time for applying a profile."], "answer": "ABCD", "explanation": "All four statements match the exact specifications in Ch.06 pp. 406, 410, 413, and 414."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 420;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

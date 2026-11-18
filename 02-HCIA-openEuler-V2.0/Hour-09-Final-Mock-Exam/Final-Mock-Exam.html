@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HCIA-openEuler V2.0 — National Stage Final Mock Exam</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .exam-header {
+      height: 62px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .exam-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: calc(100vh - 62px);
+    }
+    .exam-sidebar {
+      background: #111827;
+      border-right: 1px solid var(--border);
+      padding: 18px;
+      position: sticky;
+      top: 62px;
+      height: calc(100vh - 62px);
+      overflow-y: auto;
+    }
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin: 12px 0 18px 0;
+    }
+    .pal-btn {
+      height: 34px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #1f2937;
+      color: #e5e7eb;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .pal-btn.answered { background: rgba(59, 130, 246, 0.28); border-color: #3b82f6; color: #93c5fd; }
+    .pal-btn.flagged { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+    .pal-btn.correct { background: rgba(16, 185, 129, 0.3); border-color: #10b981; color: #6ee7b7; }
+    .pal-btn.wrong { background: rgba(225, 29, 72, 0.3); border-color: #e11d48; color: #fda4af; }
+    .exam-main {
+      padding: 26px 36px;
+      max-width: 980px;
+    }
+    .countdown-box {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: rgba(225, 29, 72, 0.15);
+      border: 1px solid rgba(225, 29, 72, 0.45);
+      color: #fda4af;
+    }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .filter-chip {
+      background: #1f2937;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .filter-chip.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .mock-q-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 18px;
+    }
+    .mock-q-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .flag-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 3px 9px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      cursor: pointer;
+    }
+    .flag-btn.active { border-color: var(--amber); color: var(--amber); background: rgba(245,158,11,0.1); }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13.5px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: none;
+    }
+    .lab-input {
+      width: 100%;
+      min-height: 90px;
+      background: #0d1117;
+      color: #e6edf3;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .score-banner {
+      display: none;
+      padding: 22px 26px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      border: 2px solid var(--accent-bright);
+      background: linear-gradient(135deg, rgba(5,150,105,0.2), rgba(17,24,39,0.95));
+    }
+    .btn-submit-exam {
+      width: 100%;
+      padding: 12px;
+      background: var(--huawei-red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn-submit-exam:hover { opacity: 0.92; }
+  </style>
+</head>
+<body>
+  <div class="exam-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="../../index.html" style="background:#1e293b;padding:6px 12px;border-radius:6px;color:#fff;font-size:12.5px;">🏠 Hub</a>
+      <a href="../index.html" style="background:#1e293b;padding:6px 12px;border-radius:6px;color:#fff;font-size:12.5px;">← Pillar Course</a>
+      <h2 style="margin:0;border:none;font-size:1.05rem;">🏆 HCIA-openEuler V2.0 — National Stage Final Mock Exam</h2>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span id="answered-counter" style="font-size:13px;color:var(--text-muted);">0 / 60 Answered</span>
+      <div id="exam-timer" class="countdown-box">⏱️ 60:00</div>
+    </div>
+  </div>
+
+  <div class="exam-layout">
+    <div class="exam-sidebar">
+      <div style="font-weight:700;font-size:13.5px;margin-bottom:4px;">Question Navigator (1–60)</div>
+      <div style="font-size:11.5px;color:var(--text-muted);">Click any number to jump. Strict Huawei multi-choice scoring enabled.</div>
+      <div id="palette" class="palette-grid"></div>
+
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">
+        <div>• Single-Choice: 20 × 15 pts = 300 pts</div>
+        <div>• Multiple-Choice: 20 × 20 pts = 400 pts</div>
+        <div>• True/False: 10 × 10 pts = 100 pts</div>
+        <div>• Hands-On Lab: 10 × 20 pts = 200 pts</div>
+        <div style="margin-top:4px;color:#38bdf8;font-weight:600;">Target Score: 800 / 1000 pts</div>
+      </div>
+
+      <button class="btn-submit-exam" onclick="submitExam()">🎯 Submit & Grade Mock Exam</button>
+      <button onclick="resetExam()" style="width:100%;margin-top:8px;padding:8px;background:#1f2937;color:#9ca3af;border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px;">↺ Reset Exam</button>
+    </div>
+
+    <div class="exam-main">
+      <div id="score-banner" class="score-banner"></div>
+
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="filterQuestions('all', this)">All (60)</button>
+        <button class="filter-chip" onclick="filterQuestions('single', this)">Single-Choice</button>
+        <button class="filter-chip" onclick="filterQuestions('multiple', this)">Multiple-Choice</button>
+        <button class="filter-chip" onclick="filterQuestions('tf', this)">True / False</button>
+        <button class="filter-chip" onclick="filterQuestions('lab', this)">Practical Labs</button>
+        <button class="filter-chip" onclick="filterQuestions('flagged', this)">🚩 Flagged</button>
+      </div>
+
+      <div id="questions-list"></div>
+    </div>
+  </div>
+
+  <script>
+    const PILLAR_ID = "pillar2";
+    const MOCK = {"folder_name": "Hour-09-Final-Mock-Exam", "title": "HCIA-openEuler V2.0 — National Stage Final Mock Exam", "duration_mins": 60, "total_points": 1000, "passing_points": 800, "instructions": "60 Questions in 60 Minutes: 20 Single-Choice (15 pts each), 20 Multiple-Choice (20 pts each, strict all-or-nothing grading), 10 True/False (10 pts each), and 10 Hands-On openEuler/Shell/iSula Labs (20 pts each).", "questions": [{"id": 1, "type": "single", "points": 15, "chapter": "Ch.02 Getting Started with openEuler", "question": "(Official Ch.02 Quiz Q2) Which of the following keys can be used in the openEuler Bash shell to quickly supplement (auto-complete) commands, options, and file parameters?", "options": ["A. Ctrl+L", "B. Up and Down arrows", "C. Tab", "D. Space"], "answer": "C", "explanation": "Per Ch.02 (p. 50 & p. 52), pressing Tab automatically completes commands, parameters, or filenames (pressing Tab twice lists all matching commands)."}, {"id": 2, "type": "single", "points": 15, "chapter": "Ch.02 Getting Started with openEuler", "question": "In the openEuler source code repository, which directory explicitly declares all open-source licenses in use, and what is China's first open-source license adopted by openEuler?", "options": ["A. /etc/licenses directory; GPLv2", "B. LICENSES directory; Mulan PSL (Mulan Permissive Software License)", "C. /usr/share/doc directory; MIT", "D. COPYRIGHT directory; BSD 3-Clause"], "answer": "B", "explanation": "Per Ch.02 (p. 29 & p. 35), in the openEuler code repository the `LICENSES` directory declares the open-source licenses in use, and Mulan is China's first open-source license adopted by openEuler."}, {"id": 3, "type": "single", "points": 15, "chapter": "Ch.03 openEuler CLI Basics", "question": "(Official Ch.03 Quiz Q1) How many lines of a file are displayed by default when running the `head` command without any `-n` option?", "options": ["A. 5", "B. 10", "C. 15", "D. 20"], "answer": "B", "explanation": "Per Ch.03 (p. 98, p. 141 & p. 151), both `head` and `tail` display 10 lines by default when no line count is specified."}, {"id": 4, "type": "single", "points": 15, "chapter": "Ch.03 openEuler CLI Basics", "question": "Which Linux virtual directory is a direct mapping of system kernel and memory state, allowing administrators to read CPU, memory, and process info directly?", "options": ["A. /etc", "B. /var", "C. /proc", "D. /opt"], "answer": "C", "explanation": "Per Ch.03 (p. 80), `/proc` is a virtual directory mapping system memory; `/etc` holds configuration files, `/var` stores variable logs/spool data, and `/opt` stores third-party optional applications."}, {"id": 5, "type": "single", "points": 15, "chapter": "Ch.03 openEuler CLI Basics", "question": "When creating links with `ln`, what happens if you create a symbolic (soft) link with `ln -s target linkname` and later delete the original `target` file?", "options": ["A. The soft link remains valid and retains a full copy of the original file data", "B. The soft link becomes a dangling/invalid link because it only stores the path to the target", "C. The kernel automatically converts the soft link into a hard link", "D. Both the target and link share the same inode, so data cannot be removed until linkname is deleted"], "answer": "B", "explanation": "Per Ch.03 (pp. 115–116), a soft link points to a file path (different inode) and becomes invalid if the source file is deleted, whereas a hard link (`ln` without `-s`) shares the same inode and keeps the data intact until all hard links are deleted."}, {"id": 6, "type": "single", "points": 15, "chapter": "Ch.03 openEuler CLI Basics", "question": "In Vim Command-line (Last-line) mode, which command globally replaces all occurrences of `foo` with `bar` across the entire file?", "options": ["A. :s/foo/bar", "B. :%s/foo/bar/g", "C. :r/foo/bar/all", "D. /foo/bar/g"], "answer": "B", "explanation": "Per Ch.03 (p. 129), `%` targets all lines in the file and the `g` flag replaces all matches on each line (`:%s/foo/bar/g`)."}, {"id": 7, "type": "single", "points": 15, "chapter": "Ch.04 openEuler System Configuration", "question": "(Official Ch.04 Quiz Q1) Which of the following commands can be used to dynamically check host resource usage (CPU, memory, load average, and running processes) in real time?", "options": ["A. ps", "B. top", "C. free", "D. lscpu"], "answer": "B", "explanation": "Per Ch.04 (p. 249), `top` dynamically monitors real-time CPU, memory, and process resource usage; `ps` shows a static snapshot, `free` displays memory only, and `lscpu` displays CPU hardware architecture."}, {"id": 8, "type": "single", "points": 15, "chapter": "Ch.04 openEuler System Configuration", "question": "If the current shell `umask` is `0022`, what are the default numeric permissions assigned to a newly created regular file and a newly created directory respectively?", "options": ["A. File: 666; Directory: 777", "B. File: 755; Directory: 644", "C. File: 644; Directory: 755", "D. File: 600; Directory: 700"], "answer": "C", "explanation": "Per Ch.04 (p. 183), default base permissions are `666` for regular files (no execute bit by default) and `777` for directories. Subtracting `022` gives `644` (`rw-r--r--`) for files and `755` (`rwxr-xr-x`) for directories."}, {"id": 9, "type": "single", "points": 15, "chapter": "Ch.04 openEuler System Configuration", "question": "In `/etc/passwd`, which two colon-separated columns represent the user's UID and login shell respectively?", "options": ["A. 2nd column and 6th column", "B. 3rd column and 7th column", "C. 4th column and 5th column", "D. 1st column and 7th column"], "answer": "B", "explanation": "Per Ch.04 (p. 161), `/etc/passwd` has 7 fields: `1:username`, `2:password placeholder (x)`, `3:UID`, `4:GID`, `5:description`, `6:home directory`, `7:login shell`."}, {"id": 10, "type": "single", "points": 15, "chapter": "Ch.04 openEuler System Configuration", "question": "When sending process termination signals using `kill`, what is the key difference between signal `15 (SIGTERM)` and signal `9 (SIGKILL)`?", "options": ["A. Signal 15 pauses a process; Signal 9 resumes it", "B. Signal 15 requests graceful termination (can be caught/ignored); Signal 9 forces unconditional immediate termination by the kernel", "C. Signal 9 reloads configuration files without stopping the PID", "D. Signal 15 can only be executed by root, while Signal 9 is for regular users"], "answer": "B", "explanation": "Per Ch.04 (p. 234), Signal 15 (`SIGTERM`, default for `kill PID`) allows a process to clean up and exit gracefully, whereas Signal 9 (`SIGKILL`) cannot be caught or ignored and terminates the process unconditionally."}, {"id": 11, "type": "single", "points": 15, "chapter": "Ch.05 Storage and Network Management", "question": "(Official Ch.05 Quiz Q2) Which of the following commands correctly formats the `/dev/hdb6` partition with the ext4 file system?", "options": ["A. mkfs -t ext4 /dev/hdb6", "B. format -t ext4 /dev/hdb6", "C. format /dev/hdb6", "D. makefile -t ext4 /dev/hdb6"], "answer": "A", "explanation": "Per Ch.05 (p. 279 & p. 318), `mkfs -t <fstype> <device>` (or `mkfs.ext4 /dev/hdb6`) formats a partition on openEuler."}, {"id": 12, "type": "single", "points": 15, "chapter": "Ch.05 Storage and Network Management", "question": "Under the traditional MBR disk partitioning scheme for a SCSI disk, what are the maximum disk capacity and partition limits?", "options": ["A. Max 16 TB; up to 128 primary partitions", "B. Max 2 TB; up to 4 primary partitions (or 3 primary + 1 extended) and at most 15 partitions total on a SCSI disk", "C. Max 2 TB; unlimited primary partitions", "D. Max 4 TB; up to 8 primary partitions"], "answer": "B", "explanation": "Per Ch.05 (pp. 269 & 273), MBR has a 2 TB limit and allows up to 4 primary partitions (or 3 primary + 1 extended containing logical partitions, capped at 15 total partitions on SCSI disks), whereas GPT breaks the 2 TB limit and supports 128 primary partitions."}, {"id": 13, "type": "single", "points": 15, "chapter": "Ch.05 Storage and Network Management", "question": "In LVM online expansion of an `xfs` file system after running `lvextend -L +5G /dev/vg01/lv01`, which command grows the XFS file system to occupy the newly added space?", "options": ["A. resize2fs /dev/vg01/lv01", "B. xfs_growfs /mount_point", "C. e2fsck -f /dev/vg01/lv01", "D. pvresize /dev/vg01/lv01"], "answer": "B", "explanation": "Per Ch.05 (p. 298), `resize2fs` resizes ext2/ext3/ext4 file systems, while `xfs_growfs <mount_point>` (or `xfs_growfs <lv_device>`) expands mounted XFS file systems online."}, {"id": 14, "type": "single", "points": 15, "chapter": "Ch.05 Storage and Network Management", "question": "When shrinking an ext4 Logical Volume (LV) offline, what is the mandatory safe sequence of operations?", "options": ["A. lvreduce -> resize2fs -> e2fsck -f -> umount", "B. umount -> e2fsck -f -> resize2fs -> lvreduce -> mount", "C. resize2fs -> lvreduce -> umount -> mount", "D. umount -> lvreduce -> resize2fs -> mount"], "answer": "B", "explanation": "Per Ch.05 (p. 299), you MUST unmount first (`umount`), check the filesystem (`e2fsck -f`), shrink the filesystem (`resize2fs`), shrink the LV (`lvreduce`), and finally remount (`mount`). Shrinking the LV before shrinking the filesystem destroys data!"}, {"id": 15, "type": "single", "points": 15, "chapter": "Ch.06 Shell Scripts", "question": "(Official Ch.06 Quiz Q1) What is the meaning of the `*` operator in a shell script arithmetic expression such as `$((a * b))`?", "options": ["A. Summation", "B. Multiplication", "C. Subtraction", "D. Division"], "answer": "B", "explanation": "Per Ch.06 (p. 351 & p. 379), `*` performs arithmetic multiplication in shell arithmetic expressions (note: when using `expr`, `*` must be escaped as `\\*` to avoid shell glob expansion)."}, {"id": 16, "type": "single", "points": 15, "chapter": "Ch.06 Shell Scripts", "question": "Which special Bash variable retrieves the exit code of the most recently executed foreground command, and which value indicates success?", "options": ["A. `$#`; 1 indicates success", "B. `$?`; 0 indicates success", "C. `$$`; 0 indicates success", "D. `$@`; 255 indicates success"], "answer": "B", "explanation": "Per Ch.06 (p. 372), `$?` stores the exit status of the previous command, where `0` means success and any non-zero value (1–255) indicates an error."}, {"id": 17, "type": "single", "points": 15, "chapter": "Ch.06 Shell Scripts", "question": "Which Bash command-line flag executes a shell script in debugging mode, printing each expanded command prefixed with `+` before executing it?", "options": ["A. bash -d script.sh", "B. bash -x script.sh", "C. bash -v script.sh", "D. bash -n script.sh"], "answer": "B", "explanation": "Per Ch.06 (pp. 370–371), `bash -x script.sh` enables execution tracing (debugging mode), printing each command and its expanded arguments prior to execution."}, {"id": 18, "type": "single", "points": 15, "chapter": "Ch.07 Native Container Engine iSula", "question": "What is the configuration precedence order (highest to lowest priority) for the `iSulad` container daemon?", "options": ["A. /etc/isulad/daemon.json > CLI arguments > default code settings", "B. CLI arguments (or /etc/sysconfig/iSulad OPTIONS) > /etc/isulad/daemon.json > default configurations in code", "C. Default configurations in code > /etc/isulad/daemon.json > CLI arguments", "D. Environment variables > /etc/cni/net.d > CLI arguments"], "answer": "B", "explanation": "Per Ch.07 (p. 401), iSulad configuration priority is strictly: `CLI > configuration file (/etc/isulad/daemon.json) > default configurations in code`. Modifying `OPTIONS` in `/etc/sysconfig/iSulad` is equivalent to CLI configuration."}, {"id": 19, "type": "single", "points": 15, "chapter": "Ch.07 Native Container Engine iSula", "question": "In the `OverlayFS` union file system used by container images, which directory acts as an internal scratch directory and is invisible to users?", "options": ["A. lowerdir", "B. upperdir", "C. merged", "D. workdir"], "answer": "D", "explanation": "Per Ch.07 (p. 433), OverlayFS uses `lowerdir` (read-only image layers), `upperdir` (writable container layer), `merged` (unified mount point), and `workdir` (internal helper directory invisible to users)."}, {"id": 20, "type": "single", "points": 15, "chapter": "Ch.07 Native Container Engine iSula", "question": "Which southbound OCI container runtime does `iSulad` use by default, and which network mode does `iSula` currently support with CNI?", "options": ["A. runC; overlay network mode", "B. LCR (Lightweight Container Runtime); bridge network mode", "C. containerd; macvlan network mode", "D. Kata; host-only mode"], "answer": "B", "explanation": "Per Ch.07 (p. 394 & p. 420), iSula uses LCR as its default southbound OCI runtime (while also supporting runC/Kata) and currently supports `bridge` mode for CNI networking."}, {"id": 21, "type": "multiple", "points": 20, "chapter": "Ch.01 OS for the AI Era", "question": "Which of the following are core intelligent O&M and AI capabilities provided by the `openEuler Intelligence` platform?", "options": ["A. Intelligent Q&A (Natural language interaction, OCR, and knowledge retrieval via RAG)", "B. AI Application Development Framework (Agents and workflow orchestration)", "C. Intelligent Optimization (AI-assisted parameter tuning and performance optimization)", "D. Intelligent Diagnosis & Intelligent Container Image analysis"], "answer": "ABCD", "explanation": "Per Ch.01 (pp. 8–16), openEuler Intelligence delivers all four capability pillars: Intelligent Q&A, AI Application Development Framework, Intelligent Optimization, Intelligent Diagnosis, and Intelligent Container Images."}, {"id": 22, "type": "multiple", "points": 20, "chapter": "Ch.02 Getting Started with openEuler", "question": "According to Richard Stallman and the Free Software Foundation (FSF), which four essential freedoms define Free Software?", "options": ["A. Freedom to run the program for any purpose", "B. Freedom to study/learn how the program works and modify the source code", "C. Freedom to redistribute copies of the program", "D. Freedom to create and distribute modified derivative versions"], "answer": "ABCD", "explanation": "Per Ch.02 (p. 29), FSF defines four freedoms: run for any purpose (0), learn and modify source code (1), redistribute programs (2), and create/distribute derivatives (3)."}, {"id": 23, "type": "multiple", "points": 20, "chapter": "Ch.02 Getting Started with openEuler", "question": "Which of the following statements about openEuler releases and licenses are TRUE?", "options": ["A. Mulan PSL covers five major aspects: copyright license, patent license, non-trademark license, distribution restriction, and disclaimer/liability limitation.", "B. BSD permits modifying, redistributing, and developing commercial software based on the open-source code.", "C. Before contributing code to the openEuler community on Gitee, contributors must sign a Contributor License Agreement (CLA).", "D. openEuler Innovation releases receive a 6-year enterprise support lifecycle, whereas LTS releases receive only 6 months."], "answer": "ABC", "explanation": "Per Ch.02 (pp. 29–36), A, B, and C are true. D is reversed: openEuler LTS (Long Term Support) versions are released every 2 years with long-term maintenance, while Innovation versions are released every 6 months with shorter maintenance."}, {"id": 24, "type": "multiple", "points": 20, "chapter": "Ch.03 openEuler CLI Basics", "question": "Which of the following help commands can be used on openEuler to inspect command usage, manuals, or brief one-line descriptions?", "options": ["A. man <command>", "B. <command> --help", "C. help <builtin_command>", "D. whatis <command>"], "answer": "ABCD", "explanation": "Per Ch.03 (pp. 65–69), `man` queries `/usr/share/man/*.gz` manual pages, `--help` queries external command options, `help` queries shell built-in commands, and `whatis` prints a brief summary from the man database."}, {"id": 25, "type": "multiple", "points": 20, "chapter": "Ch.03 openEuler CLI Basics", "question": "Which of the following statements about `tar` and `gzip` archive/compression operations on openEuler are TRUE?", "options": ["A. `gzip` typically achieves a 60%–70% compression ratio and replaces the original uncompressed file with a `.gz` file by default.", "B. `tar -czvf backup.tar.gz /etc/hosts` creates a gzip-compressed tar archive.", "C. `tar -tf backup.tar.gz` lists the contents of an archive without extracting it.", "D. `tar -xzvf backup.tar.gz -C /tmp` extracts the archive into `/tmp`."], "answer": "ABCD", "explanation": "Per Ch.03 (pp. 111–114), all four statements accurately describe `gzip` and `tar` flags (`-c` create, `-x` extract, `-t` list, `-z` gzip, `-v` verbose, `-f` archive file, `-C` target directory)."}, {"id": 26, "type": "multiple", "points": 20, "chapter": "Ch.03 openEuler CLI Basics", "question": "Which of the following Linux text processing commands and options are matched with their TRUE functions?", "options": ["A. `grep -i` performs case-insensitive pattern matching; `grep -v` inverts the match (prints non-matching lines).", "B. `cut -d ':' -f 1,7 /etc/passwd` extracts the 1st and 7th colon-delimited fields.", "C. `wc -l` counts lines, while `sort -n -r` sorts numerically in descending order.", "D. `awk -F ':' '{print $1}' /etc/passwd` prints the first field of each line using `:` as the field separator."], "answer": "ABCD", "explanation": "Per Ch.03 (pp. 143–147), all four statements accurately describe `grep`, `cut`, `wc`, `sort`, and `awk`."}, {"id": 27, "type": "multiple", "points": 20, "chapter": "Ch.04 openEuler System Configuration", "question": "Which of the following statements about Linux file types and `chmod`/`chown`/`sticky bit` permissions are TRUE?", "options": ["A. The 7 Linux file types shown by `ls -l` are `-` (regular), `d` (directory), `l` (symlink), `b` (block), `c` (character), `p` (named pipe), and `s` (socket).", "B. Setting the sticky bit (`chmod o+t /share` or `chmod 1777 /share`) ensures that only the file owner, directory owner, or root can delete or rename files inside `/share`.", "C. `chown -R user1:group1 /data` recursively changes both the owner and the owning group of `/data`.", "D. If `ls -l` displays a `+` sign right after the permission string (e.g., `-rw-r--r--+`), the file has an extended Access Control List (ACL) configured."], "answer": "ABCD", "explanation": "Per Ch.04 (pp. 172, 178–185), all four statements are directly confirmed in the official openEuler System Configuration chapter."}, {"id": 28, "type": "multiple", "points": 20, "chapter": "Ch.04 openEuler System Configuration", "question": "Which of the following statements about RPM and DNF software package management on openEuler are TRUE?", "options": ["A. `rpm -qa` queries all installed RPM packages, while `rpm -qf /usr/bin/vim` queries which package owns that file.", "B. `/etc/dnf/dnf.conf` is the main global configuration file for DNF, and repository `.repo` files reside in `/etc/yum.repos.d/`.", "C. Running `rpm -e --nodeps <pkg>` removes a package while ignoring dependencies, which may break dependent software.", "D. `dnf` resolves package dependencies automatically, whereas `rpm -ivh` requires dependencies to be resolved manually."], "answer": "ABCD", "explanation": "Per Ch.04 (pp. 195–214), all four statements accurately contrast `rpm` and `dnf` operations on openEuler."}, {"id": 29, "type": "multiple", "points": 20, "chapter": "Ch.04 openEuler System Configuration", "question": "Which of the following `systemctl` and `journald` commands are valid for managing services and inspecting logs on openEuler?", "options": ["A. `systemctl enable --now httpd` enables the service at boot and starts it immediately.", "B. `systemctl status sshd` displays the running status, PID, and recent log lines of `sshd`.", "C. `journalctl -u sshd` queries systemd journal logs specifically for the `sshd` unit.", "D. A standard systemd `.service` unit file contains three main sections: `[Unit]`, `[Service]`, and `[Install]`."], "answer": "ABCD", "explanation": "Per Ch.04 (pp. 216–223), all four statements accurately describe `systemd`, `systemctl`, and `journald`."}, {"id": 30, "type": "multiple", "points": 20, "chapter": "Ch.04 openEuler System Configuration", "question": "Which of the following statements about process scheduling priority (`nice`), background jobs, and scheduled tasks (`at`/`crontab`) are TRUE?", "options": ["A. The `nice` value ranges from `-20` (highest priority) to `+19` (lowest priority), and only `root` can assign negative nice values.", "B. Pressing `Ctrl+Z` suspends a foreground job and puts it in the background in Stopped state; `bg %1` resumes it in the background, and `fg %1` brings it back to the foreground.", "C. `at` schedules a one-time task (`Ctrl+D` saves the job), while `crontab` schedules recurring periodic tasks using 5 time fields (`min hour dom month dow`).", "D. Non-root users can execute `renice -n -10 -p <PID>` to increase the priority of any system process."], "answer": "ABC", "explanation": "Per Ch.04 (pp. 229–248), A, B, and C are true. D is false because regular users can only lower priority (increase nice value toward +19) for their own processes; only `root` can assign negative nice values."}, {"id": 31, "type": "multiple", "points": 20, "chapter": "Ch.05 Storage and Network Management", "question": "Which of the following statements about persistent storage, `parted`, and `/etc/fstab` are TRUE?", "options": ["A. On openEuler, `ext4` and `xfs` are common disk file systems; `blkid` and `lsblk -f` inspect block device UUIDs and file system types.", "B. `parted` supports both MBR and GPT partitioning schemes and can run in both interactive mode and non-interactive script mode.", "C. In `/etc/fstab`, the 6 columns in order are: Device/UUID, Mount Point, File System Type, Mount Options, Dump backup flag, and fsck Pass order.", "D. Setting the `noatime` option in `/etc/fstab` disables updating access timestamps on reads and improves file system performance."], "answer": "ABCD", "explanation": "Per Ch.05 (pp. 257–282), all four statements match the official Storage Management slides."}, {"id": 32, "type": "multiple", "points": 20, "chapter": "Ch.05 Storage and Network Management", "question": "Which of the following statements accurately describe Logical Volume Management (LVM) layers and commands on openEuler?", "options": ["A. The LVM hierarchy flows bottom-up: Physical Disk/Partition -> Physical Volume (`pvcreate`) -> Volume Group (`vgcreate`) -> Logical Volume (`lvcreate`) -> File System (`mkfs`).", "B. A Volume Group (VG) divides storage into fixed-size Physical Extents (PEs), which default to 4 MiB.", "C. `vgextend vg01 /dev/sdc1` adds a new Physical Volume into an existing Volume Group `vg01`.", "D. `lvcreate -L 10G -n lv_data vg01` creates a 10 GiB Logical Volume named `lv_data` inside `vg01`."], "answer": "ABCD", "explanation": "Per Ch.05 (pp. 284–297), all four statements correctly describe LVM concepts and commands."}, {"id": 33, "type": "multiple", "points": 20, "chapter": "Ch.05 Storage and Network Management", "question": "Which of the following `nmcli` and network diagnostic commands are valid on openEuler?", "options": ["A. `nmcli con add con-name \"Euler\" type Ethernet ifname enp3s0` creates a new Ethernet connection profile.", "B. `nmcli con mod \"Euler\" +ipv4.routes \"192.168.10.0/24 10.0.0.1\"` appends a persistent static route to the connection.", "C. `ss -tulnp` inspects listening TCP/UDP sockets along with their owning process PIDs.", "D. `tracepath <destination>` traces the network hop path and path MTU to a remote host."], "answer": "ABCD", "explanation": "Per Ch.05 (pp. 308–317), all four statements accurately reflect NetworkManager (`nmcli`), `ss`, and `tracepath` usage on openEuler."}, {"id": 34, "type": "multiple", "points": 20, "chapter": "Ch.06 Shell Scripts", "question": "Which of the following statements about Bash I/O redirection, pipes, and quoting are TRUE?", "options": ["A. File descriptors `0`, `1`, and `2` correspond to Standard Input (stdin), Standard Output (stdout), and Standard Error (stderr).", "B. `command &> output.log` redirects both stdout and stderr to `output.log` (overwriting its content).", "C. Single quotes (`'...'`) preserve literal characters and prevent variable/command expansion, whereas double quotes (`\"...\"`) allow `$var` and `$(cmd)` expansion.", "D. A pipe (`cmd1 | cmd2`) sends the stdout of `cmd1` directly as the stdin of `cmd2`."], "answer": "ABCD", "explanation": "Per Ch.06 (pp. 338–347), all four statements are true."}, {"id": 35, "type": "multiple", "points": 20, "chapter": "Ch.06 Shell Scripts", "question": "Which of the following statements about Bash variables, test conditions, and loops are TRUE?", "options": ["A. `$#` gives the number of positional arguments passed to a script, while `$0` is the script's own name.", "B. In `[ ... ]` test expressions, `-eq` and `-gt` compare integers, while `=` and `-z` evaluate strings.", "C. `[ -d /etc/dnf ]` returns exit code 0 (true) if `/etc/dnf` exists and is a directory.", "D. In loops, `break` exits the entire enclosing loop immediately, whereas `continue` skips the rest of the current iteration and jumps to the next iteration."], "answer": "ABCD", "explanation": "Per Ch.06 (pp. 345–366), all four statements are core Bash scripting fundamentals covered in the training material."}, {"id": 36, "type": "multiple", "points": 20, "chapter": "Ch.06 Shell Scripts", "question": "When comparing a `while` loop and an `until` loop in Bash, which of the following statements are TRUE?", "options": ["A. A `while` loop continues executing as long as its test condition evaluates to TRUE (exit code 0).", "B. An `until` loop continues executing as long as its test condition evaluates to FALSE (non-zero exit code), and stops once the condition becomes TRUE.", "C. Both `while` and `until` loops enclose their loop body between `do` and `done`.", "D. In `i++` (post-increment), the current value of `i` is returned first and then `i` is incremented by 1."], "answer": "ABCD", "explanation": "Per Ch.06 (pp. 353 & 365–367), all four statements are true."}, {"id": 37, "type": "multiple", "points": 20, "chapter": "Ch.07 Native Container Engine iSula", "question": "(Official Ch.07 Quiz Q1) Which of the following are valid container states in `iSula`?", "options": ["A. Created", "B. Exited", "C. Up", "D. Paused"], "answer": "ABCD", "explanation": "Per Ch.07 (p. 439), all four (`Created`, `Exited`, `Up`, and `Paused`) are container states displayed by `isula ps -a`."}, {"id": 38, "type": "multiple", "points": 20, "chapter": "Ch.07 Native Container Engine iSula", "question": "Which Linux kernel mechanisms provide container isolation and resource limits, and what makes `iSula` distinct from Docker?", "options": ["A. Linux `Namespaces` provide isolation (PID, NET, MNT, IPC, UTS, User), while `cgroups` enforce CPU/memory/I/O resource quotas.", "B. `iSulad` is written in C/C++ (unlike Go-based Docker), giving it a smaller memory footprint and ~35% faster concurrent container startup.", "C. `iSula` provides northbound CLI and Kubernetes CRI interfaces and southbound OCI interfaces (`LCR`, `runC`, `Kata`).", "D. `iSula` can manage both lightweight application containers and system containers."], "answer": "ABCD", "explanation": "Per Ch.07 (pp. 390–398), all four statements describe kernel container primitives and `iSula` architectural advantages."}, {"id": 39, "type": "multiple", "points": 20, "chapter": "Ch.07 Native Container Engine iSula", "question": "Which of the following `isula` CLI commands perform the stated container lifecycle operations?", "options": ["A. `isula exec -it mybox /bin/sh` runs an interactive shell inside a running container named `mybox`.", "B. `isula logs mybox` retrieves stdout/stderr logs generated by container `mybox`.", "C. `isula inspect mybox` outputs detailed low-level JSON metadata (IP, mounts, state) for `mybox`.", "D. `isula rm -f mybox` forcibly deletes a container (even if currently running)."], "answer": "ABCD", "explanation": "Per Ch.07 (pp. 405–417), all four `isula` lifecycle commands are valid and follow Docker-compatible CLI semantics."}, {"id": 40, "type": "multiple", "points": 20, "chapter": "Ch.07 Native Container Engine iSula", "question": "Which of the following statements about container image layering and Copy-on-Write (CoW) in `iSula` are TRUE?", "options": ["A. A container image consists of read-only image layers (rootfs/app layers), and running a container mounts a thin read-write container layer on top.", "B. When a container attempts to modify a file located in a read-only `lowerdir`, OverlayFS performs a `copy_up` operation to copy the file into `upperdir` before modifying it.", "C. Deleting a file that resides in a read-only image layer creates a `whiteout` file in `upperdir` to hide it without modifying the underlying image.", "D. `isula pull`, `isula tag`, `isula images`, and `isula rmi` manage local container images on the host."], "answer": "ABCD", "explanation": "Per Ch.07 (pp. 428–438), all four statements accurately describe UnionFS/OverlayFS CoW mechanics and image commands."}, {"id": 41, "type": "tf", "points": 10, "chapter": "Ch.01 OS for the AI Era", "question": "(Official Ch.01 Quiz Q1) The `openEuler Intelligence` platform currently supports two interaction entries: Web entry and Intelligent Shell entry.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "Per Ch.01 (p. 8 & p. 20), openEuler Intelligence explicitly exposes two interaction entries: Web and Intelligent Shell."}, {"id": 42, "type": "tf", "points": 10, "chapter": "Ch.02 Getting Started with openEuler", "question": "(Official Ch.02 Quiz Q1) You do not need to specify the password of the `root` user during the openEuler OS installation; however, you must specify the password of the `root` user when logging in to the OS after the installation.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "Per Ch.02 (p. 52), the official quiz states this is True (when root account is skipped or locked/deferred in installer if an admin user is created, or per the official quiz Q1 answer key: True)."}, {"id": 43, "type": "tf", "points": 10, "chapter": "Ch.03 openEuler CLI Basics", "question": "In the openEuler filesystem, `less` allows only forward (downward) page scrolling and cannot scroll backward, whereas `more` supports full bidirectional scrolling.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "Per Ch.03 (p. 104 & pp. 137–139), it is the opposite: `more` only moves forward, while `less` supports both upward and downward scrolling as well as `/` and `?` searching."}, {"id": 44, "type": "tf", "points": 10, "chapter": "Ch.03 openEuler CLI Basics", "question": "Running `locate myfile.conf` searches an internal file index database (`mlocate.db`), so newly created files may not appear until `updatedb` is executed.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "Per Ch.03 (pp. 108–109), `locate` queries a pre-built database rather than scanning live disks like `find`, so `updatedb` must be run to index newly created files."}, {"id": 45, "type": "tf", "points": 10, "chapter": "Ch.04 openEuler System Configuration", "question": "The `su root` command switches identity to `root` AND resets all environment variables (including `$PATH` and `$HOME`) to `root`'s login environment, making it completely identical to `su - root`.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "Per Ch.04 (p. 191), `su` changes the user identity WITHOUT starting a login shell or loading the target user's environment variables, whereas `su -` (or `su -l`) switches to a full login shell with the target user's environment."}, {"id": 46, "type": "tf", "points": 10, "chapter": "Ch.04 openEuler System Configuration", "question": "Unlike `at`, which uses `cron` daemon configuration files, `crontab -e` edits a user's personal periodic schedule, and modifying it immediately notifies `crond` without requiring a service restart.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "Per Ch.04 (pp. 244–247), editing crontab with `crontab -e` automatically updates and reloads the user's cron schedule in `crond`."}, {"id": 47, "type": "tf", "points": 10, "chapter": "Ch.05 Storage and Network Management", "question": "(Official Ch.05 Quiz Q1) The `route` command can view or configure host route information, and route entries configured with `route add` remain valid permanently across system reboots.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "Per Ch.05 (p. 318), routes added via the `route` command take effect temporarily in runtime kernel memory and are LOST upon reboot; use `nmcli` or route config files for persistence."}, {"id": 48, "type": "tf", "points": 10, "chapter": "Ch.06 Shell Scripts", "question": "(Official Ch.06 Quiz Q2) An administrator can run the `name==Tom` command in a Bash script to assign the value `Tom` to the variable `name`.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "Per Ch.06 (p. 346 & p. 379), variable assignment in Bash uses a single `=` with NO spaces around it (`name=Tom`), NOT `==`."}, {"id": 49, "type": "tf", "points": 10, "chapter": "Ch.06 Shell Scripts", "question": "If a shell script does not have execute (`+x`) permission, it cannot be invoked directly via `./script.sh`, but it can still be executed via `bash script.sh` or `sh script.sh`.", "options": ["A. True", "B. False"], "answer": "A", "explanation": "Per Ch.06 (p. 334), `./script.sh` requires read+execute permission, whereas passing the file to an interpreter (`bash script.sh`) only requires read permission."}, {"id": 50, "type": "tf", "points": 10, "chapter": "Ch.07 Native Container Engine iSula", "question": "A container started in `iSula` with `-v /root/test2.txt:/tmp/test2.txt:ro` allows processes inside the container to modify `/tmp/test2.txt` and persist those edits to the host.", "options": ["A. True", "B. False"], "answer": "B", "explanation": "Per Ch.07 (p. 426), the `:ro` mount option mounts the host path as **read-only** inside the container; `:rw` is required for read-write persistence."}, {"id": 51, "type": "lab", "points": 20, "chapter": "Ch.03 openEuler CLI Basics", "question": "Lab 1 (Text Processing Pipeline): Complete the command pipeline to extract all lines from `/etc/passwd` whose login shell ends with `bash`, then print ONLY column 1 (username) and column 7 (shell) using `awk` with `:` as delimiter.", "starter_code": "____ 'bash$' /etc/passwd | ____ ____ ':' '{print $1, $7}'", "accepted_keywords": ["grep", "awk", "-f", "$1", "$7"], "solution": "grep 'bash$' /etc/passwd | awk -F ':' '{print $1, $7}'", "options": [], "answer": "grep 'bash$' /etc/passwd | awk -F ':' '{print $1, $7}'", "explanation": "Per Ch.03 (pp. 144–145), `grep 'bash$' /etc/passwd` matches lines ending with `bash`, and `awk -F ':' '{print $1, $7}'` splits on `:` to display username and shell."}, {"id": 52, "type": "lab", "points": 20, "chapter": "Ch.03 openEuler CLI Basics", "question": "Lab 2 (Archive & Symbolic Link): Write two commands: (1) create a gzip-compressed tar archive `/tmp/etc_conf.tar.gz` from `/etc/hosts`, and (2) create a symbolic (soft) link `/tmp/hosts.link` pointing to `/etc/hosts`.", "starter_code": "tar ____ /tmp/etc_conf.tar.gz /etc/hosts\nln ____ /etc/hosts /tmp/hosts.link", "accepted_keywords": ["tar", "-czvf", "ln -s"], "solution": "tar -czvf /tmp/etc_conf.tar.gz /etc/hosts\nln -s /etc/hosts /tmp/hosts.link", "options": [], "answer": "tar -czvf /tmp/etc_conf.tar.gz /etc/hosts\nln -s /etc/hosts /tmp/hosts.link", "explanation": "Per Ch.03 (pp. 113–117), `tar -czvf` creates a gzip-compressed archive and `ln -s` creates a symbolic link (omitting `-s` would create a hard link)."}, {"id": 53, "type": "lab", "points": 20, "chapter": "Ch.04 openEuler System Configuration", "question": "Lab 3 (User & ACL Permissions): Write two commands: (1) add existing user `alice` to supplementary group `wheel` WITHOUT removing her existing groups, and (2) grant user `alice` read-write-execute (`rwx`) ACL permission on `/opt/app.log`.", "starter_code": "usermod ____ wheel alice\nsetfacl ____ u:alice:rwx /opt/app.log", "accepted_keywords": ["usermod", "-ag", "setfacl", "-m", "u:alice:rwx"], "solution": "usermod -aG wheel alice\nsetfacl -m u:alice:rwx /opt/app.log", "options": [], "answer": "usermod -aG wheel alice\nsetfacl -m u:alice:rwx /opt/app.log", "explanation": "Per Ch.04 (pp. 168 & 187), `usermod -aG` appends a supplementary group (`-G` alone overwrites existing supplementary groups), and `setfacl -m u:alice:rwx` modifies the file ACL."}, {"id": 54, "type": "lab", "points": 20, "chapter": "Ch.04 openEuler System Configuration", "question": "Lab 4 (Systemd & Crontab): Write: (1) the command to enable and immediately start the `httpd` service, and (2) a `crontab` schedule line that runs `/usr/local/bin/backup.sh` every day at 02:30 AM.", "starter_code": "systemctl ____ --now httpd\n__ __ * * * /usr/local/bin/backup.sh", "accepted_keywords": ["systemctl enable", "30 2 * * *"], "solution": "systemctl enable --now httpd\n30 2 * * * /usr/local/bin/backup.sh", "options": [], "answer": "systemctl enable --now httpd\n30 2 * * * /usr/local/bin/backup.sh", "explanation": "Per Ch.04 (pp. 220 & 245–246), `systemctl enable --now` enables boot startup and activates immediately; crontab fields are `minute(30) hour(2) dom(*) month(*) dow(*)`."}, {"id": 55, "type": "lab", "points": 20, "chapter": "Ch.05 Storage and Network Management", "question": "Lab 5 (LVM Provisioning Workflow): Complete the 4-step LVM creation commands to initialize `/dev/sdb1` as a PV, create Volume Group `vg_data`, create a 20G Logical Volume `lv_app` inside `vg_data`, and format it as `ext4`.", "starter_code": "____ /dev/sdb1\n____ vg_data /dev/sdb1\n____ -L 20G -n lv_app vg_data\nmkfs ____ /dev/vg_data/lv_app", "accepted_keywords": ["pvcreate", "vgcreate", "lvcreate", "-l 20g", "ext4"], "solution": "pvcreate /dev/sdb1\nvgcreate vg_data /dev/sdb1\nlvcreate -L 20G -n lv_app vg_data\nmkfs -t ext4 /dev/vg_data/lv_app", "options": [], "answer": "pvcreate /dev/sdb1; vgcreate vg_data /dev/sdb1; lvcreate -L 20G -n lv_app vg_data; mkfs -t ext4 /dev/vg_data/lv_app", "explanation": "Per Ch.05 (pp. 288–296), the LVM creation workflow is `pvcreate` -> `vgcreate` -> `lvcreate` -> `mkfs`."}, {"id": 56, "type": "lab", "points": 20, "chapter": "Ch.05 Storage and Network Management", "question": "Lab 6 (Online LV Expansion & NetworkManager): Complete the commands to: (1) extend `/dev/vg_data/lv_app` by adding 10G and grow its `ext4` file system online, and (2) activate an `nmcli` connection named `Euler`.", "starter_code": "____ -L +10G /dev/vg_data/lv_app\n____ /dev/vg_data/lv_app\nnmcli ____ ____ \"Euler\"", "accepted_keywords": ["lvextend", "+10g", "resize2fs", "nmcli", "con up"], "solution": "lvextend -L +10G /dev/vg_data/lv_app\nresize2fs /dev/vg_data/lv_app\nnmcli con up \"Euler\"", "options": [], "answer": "lvextend -L +10G /dev/vg_data/lv_app; resize2fs /dev/vg_data/lv_app; nmcli con up \"Euler\"", "explanation": "Per Ch.05 (pp. 298 & 310), `lvextend -L +10G` expands the LV, `resize2fs` grows an `ext4` filesystem online, and `nmcli con up` activates the connection profile."}, {"id": 57, "type": "lab", "points": 20, "chapter": "Ch.06 Shell Scripts", "question": "Lab 7 (Bash Conditional & Variable Assignment): Fix the variable assignment and complete the `if` statement that checks whether `/etc/isulad/daemon.json` is a regular file (`-f`) and prints `Configured`.", "starter_code": "#!/bin/bash\nCFG____\"/etc/isulad/daemon.json\"\nif [ ____ \"$CFG\" ]; ____\n    echo \"Configured\"\n____", "accepted_keywords": ["cfg=", "-f", "then", "fi"], "solution": "#!/bin/bash\nCFG=\"/etc/isulad/daemon.json\"\nif [ -f \"$CFG\" ]; then\n    echo \"Configured\"\nfi", "options": [], "answer": "CFG=\"/etc/isulad/daemon.json\"; if [ -f \"$CFG\" ]; then echo \"Configured\"; fi", "explanation": "Per Ch.06 (pp. 346 & 356), Bash variable assignments must not have spaces around `=`, `-f` tests for a regular file, and `if` blocks terminate with `fi`."}, {"id": 58, "type": "lab", "points": 20, "chapter": "Ch.06 Shell Scripts", "question": "Lab 8 (Bash Loop & Arithmetic): Complete the `for` loop and arithmetic expression to accumulate the sum of odd numbers (`1, 3, 5, ..., 99`) using `seq` or brace expansion and `$(( ... ))`.", "starter_code": "#!/bin/bash\nsum=0\nfor i in $(seq 1 2 99); ____\n    sum=____\ndone\necho $sum", "accepted_keywords": ["do", "$((sum + i))"], "solution": "#!/bin/bash\nsum=0\nfor i in $(seq 1 2 99); do\n    sum=$((sum + i))\ndone\necho $sum", "options": [], "answer": "for i in $(seq 1 2 99); do sum=$((sum + i)); done", "explanation": "Per Ch.06 (pp. 349 & 361), `for ...; do ... done` iterates over the list and `$((sum + i))` performs integer arithmetic expansion."}, {"id": 59, "type": "lab", "points": 20, "chapter": "Ch.07 Native Container Engine iSula", "question": "Lab 9 (iSula Container Deployment with Persistent Storage): Write the `isula` command to run an interactive container named `web01` from image `openeuler/nginx:latest`, bind-mounting `/root/html` to `/usr/share/nginx/html` in read-write mode and executing `/bin/bash`.", "starter_code": "isula ____ -it -n web01 ____ /root/html:/usr/share/nginx/html:rw openeuler/nginx:latest /bin/bash", "accepted_keywords": ["isula run", "-v", ":rw"], "solution": "isula run -it -n web01 -v /root/html:/usr/share/nginx/html:rw openeuler/nginx:latest /bin/bash", "options": [], "answer": "isula run -it -n web01 -v /root/html:/usr/share/nginx/html:rw openeuler/nginx:latest /bin/bash", "explanation": "Per Ch.07 (pp. 407–426), `isula run` creates and starts a container, `-n` specifies the container name, and `-v host:container:rw` mounts persistent storage."}, {"id": 60, "type": "lab", "points": 20, "chapter": "Ch.07 Native Container Engine iSula", "question": "Lab 10 (iSula Debugging & Image Cleanup): Write two commands: (1) execute `ip addr` inside a running container named `web01`, and (2) remove an unused local container image `busybox:test`.", "starter_code": "isula ____ web01 ip addr\nisula ____ busybox:test", "accepted_keywords": ["isula exec", "isula rmi"], "solution": "isula exec web01 ip addr\nisula rmi busybox:test", "options": [], "answer": "isula exec web01 ip addr\nisula rmi busybox:test", "explanation": "Per Ch.07 (pp. 412 & 438), `isula exec` runs a command inside an active container and `isula rmi` removes a local container image."}]};
+    const QS = MOCK.questions || [];
+    let flagged = new Set();
+    let examSubmitted = false;
+    let remainingSecs = (MOCK.duration_mins || 60) * 60;
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    const timerInterval = setInterval(() => {
+      if (examSubmitted || remainingSecs <= 0) return;
+      remainingSecs--;
+      const m = String(Math.floor(remainingSecs / 60)).padStart(2, '0');
+      const s = String(remainingSecs % 60).padStart(2, '0');
+      document.getElementById('exam-timer').textContent = `⏱️ ${m}:${s}`;
+      if (remainingSecs === 0) submitExam();
+    }, 1000);
+
+    function initExam() {
+      const pal = document.getElementById('palette');
+      pal.innerHTML = QS.map((q, i) =>
+        `<button id="pal-${i}" class="pal-btn" onclick="scrollToQ(${i})">${i+1}</button>`
+      ).join('');
+
+      const list = document.getElementById('questions-list');
+      list.innerHTML = QS.map((q, i) => {
+        const badgeMap = {
+          single: '<span class="badge badge-lecture">Single-Choice • ' + (q.points||15) + ' pts</span>',
+          multiple: '<span class="badge badge-ref">Multiple-Choice (Select ALL) • ' + (q.points||20) + ' pts</span>',
+          tf: '<span class="badge badge-hour">True / False • ' + (q.points||10) + ' pts</span>',
+          lab: '<span class="badge badge-exercise">Hands-On Lab • ' + (q.points||20) + ' pts</span>'
+        };
+        let bodyHtml = '';
+        if (q.type === 'lab') {
+          const starter = q.starter_code ? `<pre style="background:#0d1117;padding:10px;border-radius:6px;font-family:var(--font-mono);font-size:12.5px;margin-bottom:8px;border:1px solid var(--border);">${escHtml(q.starter_code)}</pre>` : '';
+          bodyHtml = `${starter}<textarea id="lab_ans_${i}" class="lab-input" placeholder="Type the exact command, SQL statement, or configuration value..." oninput="updateProgress(${i})"></textarea>`;
+        } else {
+          const inputType = q.type === 'multiple' ? 'checkbox' : 'radio';
+          bodyHtml = (q.options || []).map(opt => {
+            const letter = opt.trim().charAt(0).toUpperCase();
+            return `<label class="q-opt"><input type="${inputType}" name="mq_${i}" value="${letter}" onchange="updateProgress(${i})" /> <span>${fmtText(opt)}</span></label>`;
+          }).join('');
+        }
+        return `<div id="mq-card-${i}" class="mock-q-card" data-qtype="${q.type}">
+          <div class="mock-q-head">
+            <div style="display:flex;gap:8px;align-items:center;">
+              <strong style="color:#fff;">Question ${i+1}</strong>
+              ${badgeMap[q.type] || ''}
+              <span style="font-size:12px;color:var(--text-muted);">${escHtml(q.chapter || '')}</span>
+            </div>
+            <button id="flag-btn-${i}" class="flag-btn" onclick="toggleFlag(${i})">🚩 Flag</button>
+          </div>
+          <div style="font-size:14.5px;font-weight:600;margin-bottom:10px;color:#f3f4f6;">${fmtText(q.question)}</div>
+          <div>${bodyHtml}</div>
+          <div id="mq-exp-${i}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function isAnswered(i) {
+      const q = QS[i];
+      if (q.type === 'lab') {
+        const val = (document.getElementById(`lab_ans_${i}`)?.value || '').trim();
+        return val.length > 0;
+      }
+      return document.querySelectorAll(`input[name="mq_${i}"]:checked`).length > 0;
+    }
+
+    function updateProgress(i) {
+      const btn = document.getElementById(`pal-${i}`);
+      if (btn) {
+        if (isAnswered(i)) btn.classList.add('answered');
+        else btn.classList.remove('answered');
+      }
+      let count = 0;
+      for (let idx = 0; idx < QS.length; idx++) if (isAnswered(idx)) count++;
+      document.getElementById('answered-counter').textContent = `${count} / ${QS.length} Answered`;
+    }
+
+    function toggleFlag(i) {
+      const btn = document.getElementById(`flag-btn-${i}`);
+      const pal = document.getElementById(`pal-${i}`);
+      if (flagged.has(i)) {
+        flagged.delete(i);
+        btn.classList.remove('active');
+        pal.classList.remove('flagged');
+      } else {
+        flagged.add(i);
+        btn.classList.add('active');
+        pal.classList.add('flagged');
+      }
+    }
+
+    function scrollToQ(i) {
+      const el = document.getElementById(`mq-card-${i}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function filterQuestions(mode, chip) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      QS.forEach((q, i) => {
+        const card = document.getElementById(`mq-card-${i}`);
+        if (mode === 'all') card.style.display = 'block';
+        else if (mode === 'flagged') card.style.display = flagged.has(i) ? 'block' : 'none';
+        else card.style.display = (q.type === mode) ? 'block' : 'none';
+      });
+    }
+
+    function submitExam() {
+      examSubmitted = true;
+      let earnedPoints = 0;
+      let totalPoints = 0;
+      let correctCount = 0;
+      let chapterStats = {};
+
+      QS.forEach((q, i) => {
+        const pts = q.points || 15;
+        totalPoints += pts;
+        const ch = q.chapter || 'General';
+        if (!chapterStats[ch]) chapterStats[ch] = { earned: 0, total: 0 };
+        chapterStats[ch].total += pts;
+
+        let isCorrect = false;
+        let userAnsDisplay = '';
+        let officialDisplay = '';
+
+        if (q.type === 'lab') {
+          const raw = (document.getElementById(`lab_ans_${i}`)?.value || '').trim();
+          userAnsDisplay = raw || '(Blank)';
+          officialDisplay = q.solution || q.answer || '';
+          const keywords = q.accepted_keywords || [officialDisplay];
+          const rawNorm = normWS(raw);
+          isCorrect = raw.length > 0 && keywords.every(k => rawNorm.includes(normWS(k)));
+        } else {
+          const selected = Array.from(document.querySelectorAll(`input[name="mq_${i}"]:checked`))
+            .map(el => el.value).sort().join('');
+          const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+          userAnsDisplay = selected || '(None)';
+          officialDisplay = target;
+          isCorrect = (selected === target);
+        }
+
+        const pal = document.getElementById(`pal-${i}`);
+        const expEl = document.getElementById(`mq-exp-${i}`);
+        expEl.style.display = 'block';
+        pal.classList.remove('correct', 'wrong');
+
+        if (isCorrect) {
+          earnedPoints += pts;
+          correctCount++;
+          chapterStats[ch].earned += pts;
+          pal.classList.add('correct');
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (+${pts} pts)</strong> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
+        } else {
+          pal.classList.add('wrong');
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>0 pts</strong> | Your Answer: <code>${escHtml(userAnsDisplay)}</code> | Official Answer: <code>${escHtml(officialDisplay)}</code><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+
+      const passed = earnedPoints >= (MOCK.passing_points || 800);
+      const chRows = Object.entries(chapterStats).map(([ch, st]) => {
+        const pct = Math.round((st.earned / st.total) * 100);
+        return `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.08);font-size:13px;">
+          <span>${escHtml(ch)}</span>
+          <strong>${st.earned} / ${st.total} pts (${pct}%)</strong>
+        </div>`;
+      }).join('');
+
+      const banner = document.getElementById('score-banner');
+      banner.style.display = 'block';
+      banner.style.borderColor = passed ? '#10b981' : '#f59e0b';
+      banner.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:${passed ? '#34d399' : '#fbbf24'};">
+              ${passed ? '🏆 NATIONAL STAGE QUALIFIER LEVEL ACHIEVED!' : '⚡ KEEP LOCKING IN — REVIEW WEAK CHAPTERS BELOW'}
+            </div>
+            <h1 style="margin:4px 0;font-size:2rem;">Score: ${earnedPoints} / ${totalPoints} pts (${Math.round(earnedPoints/totalPoints*100)}%)</h1>
+            <div style="font-size:13.5px;color:var(--text-muted);">Correct Questions: ${correctCount} / ${QS.length} • Target Score: ${MOCK.passing_points} pts</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#38bdf8;">Domain Breakdown:</div>
+          ${chRows}
+        </div>
+      `;
+      banner.scrollIntoView({ behavior: 'smooth' });
+
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[`${PILLAR_ID}_mock_exam`] = {
+        completed: true,
+        score: earnedPoints,
+        total: totalPoints,
+        correct: correctCount,
+        ts: Date.now()
+      };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+    }
+
+    function resetExam() {
+      if (!confirm('Reset all answers and restart the 60-minute timer?')) return;
+      window.location.reload();
+    }
+
+    initExam();
+  </script>
+</body>
+</html>

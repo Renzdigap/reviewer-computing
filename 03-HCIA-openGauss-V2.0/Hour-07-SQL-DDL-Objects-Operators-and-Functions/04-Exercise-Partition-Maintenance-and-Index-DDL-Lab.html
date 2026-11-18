@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hands-On Lab: Maintaining Partitioned Tables &amp; Managing Indexes (`REBUILD`, `UNUSABLE`, `DROP`) | HCIA-openGauss V2.0 (Enterprise Relational Database &amp; GaussDB)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 03-HCIA-openGauss-V2.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 07 • Sprint 2/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="./03-Lecture-DDL-Partitioned-Tables-and-Indexes.html" class="nav-btn">← Prev</a>
+      <a href="./05-Lecture-DDL-Views-and-Sequences.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="dc-split">
+          <div class="dc-left">
+            <div class="unit-badges">
+              <span class="badge badge-exercise">💻 HANDS-ON EXERCISE (8 MINS)</span>
+              <span class="badge badge-hour">Hour 07 • Sprint 2/4</span>
+              <a href="./03-Lecture-DDL-Partitioned-Tables-and-Indexes.html" class="badge badge-ref">↩ Review Paired Lecture</a>
+              <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+            </div>
+            <h1 style="font-size:1.35rem;margin-top:8px;">Hands-On Lab: Maintaining Partitioned Tables &amp; Managing Indexes (<code class="inline-code">REBUILD</code>, <code class="inline-code">UNUSABLE</code>, <code class="inline-code">DROP</code>)</h1>
+
+            <div class="scenario-box">
+              <div class="scenario-label">🛠️ PRACTICAL LAB SCENARIO</div>
+              <p style="margin:0;">Perform partition maintenance on the <code class="inline-code">training</code> range-partitioned table (<code class="inline-code">MOVE PARTITION</code>, <code class="inline-code">MERGE PARTITION</code>) and manage the <code class="inline-code">idx_bank_card</code> index (<code class="inline-code">REBUILD</code>, <code class="inline-code">UNUSABLE</code>, and <code class="inline-code">DROP INDEX CONCURRENTLY</code>).</p>
+            </div>
+
+            <div class="instructions-box">
+              <h3>📋 Instructions</h3>
+              <ul class="inst-list"><li id="inst-step-0" class="inst-item"><span class="step-num">1</span><span>Step 1: Move partition <code class="inline-code">training1</code> to tablespace <code class="inline-code">example3</code> (<code class="inline-code">ALTER TABLE training MOVE PARTITION training1 TABLESPACE example3;</code>) and merge <code class="inline-code">training1, training2</code> into <code class="inline-code">training3</code> (<code class="inline-code">ALTER TABLE training MERGE PARTITION training1, training2 INTO PARTITION training3;</code>).</span></li><li id="inst-step-1" class="inst-item"><span class="step-num">2</span><span>Step 2: Rebuild index <code class="inline-code">idx_bank_card</code> (<code class="inline-code">ALTER INDEX idx_bank_card REBUILD;</code>), mark it unusable (<code class="inline-code">ALTER INDEX idx_bank_card UNUSABLE;</code>), and drop it without locking the table (<code class="inline-code">DROP INDEX CONCURRENTLY idx_bank_card;</code>).</span></li></ul>
+              <div class="hint-bar">
+                <button class="btn-secondary" onclick="toggleHint()">💡 Show Hint</button>
+                <button class="btn-secondary" onclick="revealSolution()">🔑 Show Solution</button>
+              </div>
+              <div id="hint-box" class="hint-content" style="display:none;"></div>
+            </div>
+
+            <div class="quiz-section">
+              <h3>🎯 National Stage Exam Verification Drill (3 Questions)</h3>
+              <p style="font-size:12.5px;color:var(--text-muted);margin-bottom:10px;">
+                Answer all 3 exam-grade questions below. Note: <strong>Multiple-Choice</strong> questions follow strict Huawei grading (you must select ALL correct options and zero incorrect options).
+              </p>
+              <div id="quiz-container"></div>
+              <button class="btn-check-quiz" onclick="gradeQuiz()">✔ Check Exam Drill Answers</button>
+              <div id="quiz-summary" style="margin-top:10px;"></div>
+            </div>
+          </div>
+
+          <div class="dc-right">
+            <div class="editor-header">
+              <div class="prompt-pill"><span class="dot-green"></span> <code>openGauss=#</code></div>
+              <div class="editor-actions">
+                <button class="btn-sm" onclick="resetStarterCode()">↺ Reset</button>
+                <button class="btn-run" onclick="runVerification()">▶ Run & Verify (Ctrl+Enter)</button>
+              </div>
+            </div>
+            <textarea id="code-editor" spellcheck="false"></textarea>
+            <div class="console-header">
+              <span>TERMINAL / EXECUTION OUTPUT & VERIFICATION LOG</span>
+              <span id="lab-status-badge" class="status-pending">Pending Execution</span>
+            </div>
+            <div id="console-output" class="console-body">Click "▶ Run & Verify (Ctrl+Enter)" to execute your commands/SQL and validate each step...</div>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar3_h7_s2_exercise";
+    const MODE = "exercise";
+    const NEXT_HREF = "./05-Lecture-DDL-Views-and-Sequences.html";
+    const EX_DATA = {"title": "Hands-On Lab: Maintaining Partitioned Tables & Managing Indexes (`REBUILD`, `UNUSABLE`, `DROP`)", "duration_mins": 8, "exercise_type": "sql", "prompt_label": "openGauss=#", "scenario": "Perform partition maintenance on the `training` range-partitioned table (`MOVE PARTITION`, `MERGE PARTITION`) and manage the `idx_bank_card` index (`REBUILD`, `UNUSABLE`, and `DROP INDEX CONCURRENTLY`).", "instructions": ["Step 1: Move partition `training1` to tablespace `example3` (`ALTER TABLE training MOVE PARTITION training1 TABLESPACE example3;`) and merge `training1, training2` into `training3` (`ALTER TABLE training MERGE PARTITION training1, training2 INTO PARTITION training3;`).", "Step 2: Rebuild index `idx_bank_card` (`ALTER INDEX idx_bank_card REBUILD;`), mark it unusable (`ALTER INDEX idx_bank_card UNUSABLE;`), and drop it without locking the table (`DROP INDEX CONCURRENTLY idx_bank_card;`)."], "starter_code": "-- Step 1: Move partition training1 to example3 and merge training1, training2 into training3\nALTER TABLE training ____ PARTITION training1 TABLESPACE example3;\nALTER TABLE training ____ PARTITION training1, training2 INTO PARTITION training3;\n\n-- Step 2: Rebuild idx_bank_card, set it UNUSABLE, and drop it CONCURRENTLY\nALTER INDEX idx_bank_card ____;\nALTER INDEX idx_bank_card ____;\nDROP INDEX ____ idx_bank_card;\n", "solution_code": "ALTER TABLE training MOVE PARTITION training1 TABLESPACE example3;\nALTER TABLE training MERGE PARTITION training1, training2 INTO PARTITION training3;\n\nALTER INDEX idx_bank_card REBUILD;\nALTER INDEX idx_bank_card UNUSABLE;\nDROP INDEX CONCURRENTLY idx_bank_card;", "hints": ["Use `MOVE PARTITION` and `MERGE PARTITION ... INTO PARTITION ...`.", "Use `ALTER INDEX idx_bank_card REBUILD;`, `ALTER INDEX idx_bank_card UNUSABLE;`, and `DROP INDEX CONCURRENTLY idx_bank_card;`."], "validation_checks": [{"step": 1, "description": "Use `MOVE PARTITION` and `MERGE PARTITION`", "required_any": ["merge partition training1"], "feedback_fail": "Use `MOVE PARTITION` and `MERGE PARTITION training1, training2 INTO PARTITION training3`."}, {"step": 2, "description": "Use `REBUILD` and `UNUSABLE` on `idx_bank_card`", "required_any": ["idx_bank_card unusable"], "feedback_fail": "Include `ALTER INDEX idx_bank_card REBUILD;` and `ALTER INDEX idx_bank_card UNUSABLE;`."}, {"step": 3, "description": "Drop index without locking using `DROP INDEX CONCURRENTLY`", "required_any": ["drop index concurrently idx_bank_card"], "feedback_fail": "Use `DROP INDEX CONCURRENTLY idx_bank_card;`."}], "simulated_output": "ALTER TABLE\nALTER TABLE\nREINDEX\nALTER INDEX\nDROP INDEX", "quiz_questions": [{"id": "h7_s2_q1", "type": "tf", "question": "(Official Ch.05 Quiz p. 446 Q1) When an index is created for a table, the corresponding base table is deleted if the index is canceled (dropped).", "options": ["A. True", "B. False"], "answer": "B", "explanation": "False (Ch.05 p. 437 & p. 446). Dropping an index deletes only the index; the base table and its data remain intact."}, {"id": "h7_s2_q2", "type": "single", "question": "Which option in `DROP INDEX` deletes an index without locking concurrent access to the underlying table, but cannot be executed inside a transaction block and does not support `CASCADE`?", "options": ["A. RESTRICT", "B. CONCURRENTLY", "C. LOCAL", "D. UNUSABLE"], "answer": "B", "explanation": "Per Chapter 05 (p. 437), `DROP INDEX CONCURRENTLY` deletes an index without locking the table, supports only one index name, does not support `CASCADE`, and cannot run within a transaction."}, {"id": "h7_s2_q3", "type": "multiple", "question": "Which of the following statements about partitioned tables in openGauss are TRUE?", "options": ["A. A partitioned table supports `UNIQUE` and `PRIMARY KEY` constraints, provided the constraint keys contain all partition keys", "B. Range partitioning supports multi-column partition keys, whereas Hash and List partitioning support only single-column partition keys", "C. Enabling `ROW MOVEMENT` allows an `UPDATE` on the partition key to move the tuple between partitions", "D. Dropping a single partition automatically deletes all other partitions and the entire partitioned table"], "answer": "ABC", "explanation": "Per Chapter 05 (pp. 428, 432), A, B, and C are true. Option D is false: dropping a partition removes only that partition without affecting other partitions (whereas `DROP TABLE` deletes all partitions)."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

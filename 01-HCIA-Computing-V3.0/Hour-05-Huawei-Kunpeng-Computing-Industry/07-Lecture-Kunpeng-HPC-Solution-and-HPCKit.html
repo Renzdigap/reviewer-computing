@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kunpeng HPC Solution, Workload Types &amp; HPCKit Components | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 05 • Sprint 4/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="./06-Exercise-openEuler-ATune-iSulad-and-openGauss-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./08-Exercise-HPC-Application-Classification-and-HPCKit-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.04, pp. 270–282</span>
+            <span class="badge badge-hour">⏱️ Hour 05 • Sprint 4/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Kunpeng HPC Solution, Workload Types &amp; HPCKit Components</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Understand the 3 paradigms of scientific research and classify HPC workloads into Memory-constrained, Computing-intensive, I/O-intensive, and Network-intensive</li><li>Master the components of HPCKit: Hyper MPI (Open MPI 4.1.1 + Open UCX 1.10.1, MPI-3.1), KML (FFT, matrix/vector), and BiSheng Compiler (LLVM + Fortran + Autotuner)</li><li>Analyze the Kunpeng Cloud HPC solution (PFS, 100G InfiniBand 1.5 us latency) and the petascale university supercomputing case study</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. HPC Paradigms &amp; Four Workload Categories (pp. 271–275)</h3>
+<ul class="md-list">
+<li><strong>Three Paradigms in Scientific Research (p. 272)</strong>: <strong>Theoretical science</strong>, <strong>Experimental science</strong>, and <strong>Computing science (HPC)</strong>. HPC reduces new vehicle time-to-market (TTM) from <strong>60 months to 24 months</strong> and drug discovery screening from <strong>5,000 years on common computers to 100 days</strong>.</li>
+<li><strong>Four Categories of HPC Applications (p. 273 — High-Yield Exam Table!)</strong>:</li>
+</ul>
+<div class="table-wrap"><table class="md-table">
+<thead><tr><th>HPC Workload Category</th><th>Key Hardware Requirement</th><th>Representative Applications (p. 273)</th></tr></thead><tbody>
+<tr><td><strong>Memory-constrained</strong></td><td>Large memory capacity &amp; high memory bandwidth</td><td><strong>Numerical calculation</strong>, astrophysics, molecular dynamics simulation</td></tr>
+<tr><td><strong>Computing-intensive</strong></td><td>High-speed multi-core CPU</td><td><strong>Meteorology (weather forecasting), earthquake, and aerospace</strong></td></tr>
+<tr><td><strong>I/O-intensive</strong></td><td>High storage bandwidth &amp; large-capacity shared storage</td><td><strong>Animation rendering and gene analysis (DNA sequence alignment/assembly)</strong></td></tr>
+<tr><td><strong>Network-intensive</strong></td><td>High-speed, low-latency node interconnection</td><td><strong>CAE simulation</strong> (automotive, aviation, chip geometric modeling)</td></tr>
+</tbody></table></div>
+<ul class="md-list">
+<li><strong>Four HPC Industry Challenges (p. 275)</strong>: (1) Ever-increasing demand for computing, (2) Diverse industry applications, (3) Application, deployment, and management complexity/CAPEX, (4) Soaring power costs.</li>
+</ul>
+<p>---</p>
+<h3>2. Huawei HPCKit Base Software Components (p. 276)</h3>
+<p><strong>HPCKit</strong> provides one-click deployment and collaborative optimization of three core components:</p>
+<ol class="md-list">
+<li><strong>Hyper MPI (Communication Library)</strong>:</li>
+</ol>
+<ul class="md-list">
+<li>Built on <strong>Open MPI 4.1.1</strong> and <strong>Open UCX 1.10.1</strong>, supporting the <strong>MPI-3.1 standard</strong> for parallel computing.</li>
+<li>Provides an optimized collective communication framework and shared memory mechanism between nodes.</li>
+</ul>
+<ol class="md-list">
+<li><strong>KML (Kunpeng Math Library)</strong>:</li>
+</ol>
+<ul class="md-list">
+<li>Hardware-accelerated mathematical library optimized for Kunpeng processors, supporting <strong>Fast Fourier Transform (FFT)</strong>, matrix calculation, vectorization, and trigonometric/logarithmic functions.</li>
+</ul>
+<ol class="md-list">
+<li><strong>BiSheng Compiler</strong>:</li>
+</ol>
+<ul class="md-list">
+<li>High-performance compiler developed based on <strong>LLVM</strong> and optimized for Kunpeng, adding <strong>Fortran front-end</strong> support, middle-/back-end optimizations, and the <strong>Autotuner</strong> automatic tuning feature.</li>
+</ul>
+<p>---</p>
+<h3>3. Kunpeng Cloud HPC, University Case Study &amp; Chapter 04 Acronyms (pp. 277–282)</h3>
+<ul class="md-list">
+<li><strong>Kunpeng Cloud HPC Highlights (p. 277)</strong>:</li>
+<li><strong>30% higher price/performance ratio</strong> than traditional solutions.</li>
+<li>Unique <strong>Parallel File System (PFS)</strong> supporting both <strong>object storage and POSIX interfaces</strong> without data copy operations, reducing TCO by <strong>20%</strong>.</li>
+<li>Supports <strong>100G InfiniBand</strong> (latency as low as <strong>1.5 microseconds</strong>) and <strong>RDMA</strong>.</li>
+<li>On-cloud one-click cluster provisioning improves cluster management efficiency by <strong>90%</strong>.</li>
+<li><strong>University Petascale Supercomputing Case Study (p. 278)</strong>:</li>
+<li>Deployed <strong>720 Huawei full liquid-cooled high-density servers</strong> in only <strong>10 cabinets</strong> (saving at least <strong>CNY 170,000/year</strong> in electricity fees), plus <strong>20 TaiShan servers</strong> for bioinformatics and fluid dynamics: <strong>30,480 CPU cores</strong>, <strong>2.52 PFLOPS</strong> peak performance, and <strong>63.95% HPL efficiency</strong> (up to <strong>71%</strong> on some nodes).</li>
+<li><strong>Key Chapter 04 Acronyms (p. 282)</strong>: <strong>ISV</strong> (<em>Independent Software Vendor</em>), <strong>IHV</strong> (<em>Independent Hardware Vendor</em>), <strong>C&amp;SI</strong> (<em>Consulting and Systems Integration</em>), <strong>SDK</strong> (<em>Software Development Kit</em>).</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>Four HPC workload types (p. 273): Memory-constrained (numerical calculation/molecular dynamics), Computing-intensive (meteorology/earthquake/aerospace), I/O-intensive (animation rendering/gene analysis), and Network-intensive (CAE simulation).</li><li>HPCKit consists of Hyper MPI (Open MPI 4.1.1 + Open UCX 1.10.1, MPI-3.1), KML (Kunpeng Math Library: FFT, matrix, vector), and BiSheng Compiler (LLVM-based with Fortran front-end and Autotuner).</li><li>Kunpeng Cloud HPC uses Parallel File System (PFS) supporting both Object Storage and POSIX interfaces (-20% TCO) and 100G InfiniBand with 1.5 us latency.</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP: Do not mix up the 4 HPC workload categories on p. 273: Gene analysis &amp; animation rendering are I/O-INTENSIVE; CAE simulation is NETWORK-INTENSIVE; Meteorology/earthquake/aerospace are COMPUTING-INTENSIVE; Numerical calculation is MEMORY-CONSTRAINED!</div><div class="trap-item">⚠️ EXAM TRAP: BiSheng Compiler is developed based on LLVM (not GCC) and adds Fortran front-end support and Autotuner (p. 276).</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h5_s4_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./08-Exercise-HPC-Application-Classification-and-HPCKit-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: HPC Workload Classifier & HPCKit Toolchain Config", "duration_mins": 8, "exercise_type": "config", "prompt_label": "hpc-user@kunpeng-cluster:~#", "scenario": "Classify scientific workloads into the four official HPC categories and configure the HPCKit toolchain manifest.", "instructions": ["Map the workloads: `numerical_calculation` -> `'Memory-constrained'`, `meteorology_and_aerospace` -> `'Computing-intensive'`, `animation_and_gene_analysis` -> `'I/O-intensive'`, and `cae_simulation` -> `'Network-intensive'`.", "Set `bisheng_compiler_base` to `'LLVM'` and `hyper_mpi_standard` to `'MPI-3.1'`.", "Set `infiniband_100g_latency_us` to `1.5`."], "starter_code": "# HPC Workload & HPCKit Toolchain Configuration\nhpc_workload_classes:\n  numerical_calculation: \"___\"\n  meteorology_and_aerospace: \"___\"\n  animation_and_gene_analysis: \"___\"\n  cae_simulation: \"___\"\n\nhpckit_toolchain:\n  bisheng_compiler_base: \"___\"\n  bisheng_auto_tuning_feature: \"Autotuner\"\n  hyper_mpi_standard: \"___\"\n  math_library: \"KML\"\n  infiniband_100g_latency_us: ___\n", "solution_code": "# HPC Workload & HPCKit Toolchain Configuration\nhpc_workload_classes:\n  numerical_calculation: \"Memory-constrained\"\n  meteorology_and_aerospace: \"Computing-intensive\"\n  animation_and_gene_analysis: \"I/O-intensive\"\n  cae_simulation: \"Network-intensive\"\n\nhpckit_toolchain:\n  bisheng_compiler_base: \"LLVM\"\n  bisheng_auto_tuning_feature: \"Autotuner\"\n  hyper_mpi_standard: \"MPI-3.1\"\n  math_library: \"KML\"\n  infiniband_100g_latency_us: 1.5\n", "hints": ["Numerical calculation is Memory-constrained, Meteorology/Aerospace is Computing-intensive, Animation/Gene analysis is I/O-intensive, and CAE simulation is Network-intensive.", "BiSheng Compiler is based on LLVM; Hyper MPI supports MPI-3.1; 100G InfiniBand latency is 1.5 microseconds."], "validation_checks": [{"step": 1, "description": "Verify the 4 HPC workload categories", "required_any": ["memory-constrained", "computing-intensive", "i/o-intensive", "network-intensive"], "feedback_fail": "Check the four workload categories: Memory-constrained, Computing-intensive, I/O-intensive, and Network-intensive."}, {"step": 2, "description": "Verify LLVM base for BiSheng Compiler and MPI-3.1 for Hyper MPI", "required_any": ["llvm", "mpi-3.1"], "feedback_fail": "Set bisheng_compiler_base to 'LLVM' and hyper_mpi_standard to 'MPI-3.1'."}, {"step": 3, "description": "Verify 1.5 microsecond latency for 100G InfiniBand", "required_any": ["1.5"], "feedback_fail": "Set infiniband_100g_latency_us to 1.5."}], "simulated_output": "[OK] Kunpeng HPC Workload Classification & HPCKit Manifest Verified:\n- Workloads: Memory-constrained (Numerical) | Computing-intensive (Meteorology) | I/O-intensive (Gene/Animation) | Network-intensive (CAE)\n- HPCKit: BiSheng Compiler (LLVM + Fortran + Autotuner) + Hyper MPI (Open MPI 4.1.1 / UCX 1.10.1 / MPI-3.1) + KML\n- Cloud HPC: PFS (Object + POSIX, -20% TCO) | 100G IB (1.5 us latency).", "quiz_questions": [{"id": "h5_s4_q1", "type": "single", "question": "According to Chapter 04 (p. 273), how are 'animation rendering and gene analysis' and 'CAE simulation' classified among HPC application types?", "options": ["A. Animation/gene analysis is I/O-intensive; CAE simulation is Network-intensive", "B. Animation/gene analysis is Network-intensive; CAE simulation is Memory-constrained", "C. Animation/gene analysis is Computing-intensive; CAE simulation is I/O-intensive", "D. Both are classified exclusively as Memory-constrained"], "answer": "A", "explanation": "According to Ch.04 p.273: Numerical calculation is Memory-constrained; Meteorology, earthquake, and aerospace are Computing-intensive; Animation rendering and gene analysis are I/O-intensive; and CAE simulation is Network-intensive."}, {"id": "h5_s4_q2", "type": "multiple", "question": "Which of the following statements about the components of Huawei's HPCKit are true?", "options": ["A. Hyper MPI is based on Open MPI 4.1.1 and Open UCX 1.10.1 and supports the MPI-3.1 standard.", "B. The Kunpeng Math Library (KML) accelerates FFT, matrix calculation, vectorization, and trigonometric/logarithmic functions.", "C. The BiSheng Compiler is developed based on LLVM, supports the Fortran front-end, and integrates the Autotuner feature.", "D. HPCKit only runs on x86 CISC processors and does not support Arm processors."], "answer": "ABC", "explanation": "A, B, and C are true (Ch.04, p.276). D is false because HPCKit is specifically optimized for Huawei Kunpeng (Arm) processors."}, {"id": "h5_s4_q3", "type": "single", "question": "In the Kunpeng Cloud HPC solution, which storage technology supports both object storage and POSIX interfaces without requiring data copy operations, reducing TCO by 20%?", "options": ["A. Parallel File System (PFS)", "B. FAT32", "C. NTFS", "D. Local SATA RAID 0"], "answer": "A", "explanation": "According to Ch.04 p.277, Huawei's unique Parallel File System (PFS) supports both object storage and POSIX interfaces without data copy operations, reducing TCO by 20%."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>

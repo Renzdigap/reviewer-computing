@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local O&amp;M (SmartKit) &amp; Remote O&amp;M (eService / Call Home) | HCIA-Computing V3.0 (Kunpeng &amp; Server Ecosystem)</title>
+  <style>
+    
+:root {
+  --bg-dark: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #1f2937;
+  --bg-editor: #0d1117;
+  --border: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #059669;
+  --accent-bright: #10b981;
+  --huawei-red: #e11d48;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.inline-code {
+  font-family: var(--font-mono);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.code-block {
+  margin: 14px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.copy-btn {
+  background: #21262d;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #30363d; }
+.code-block pre {
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #e6edf3;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+}
+.md-table th, .md-table td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+.md-table th {
+  background: #1e293b;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.md-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.md-list { margin: 8px 0 12px 22px; }
+.md-list li { margin-bottom: 5px; }
+.md-quote {
+  border-left: 4px solid var(--amber);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+h1, h2, h3, h4 { color: #f8fafc; margin: 16px 0 8px 0; font-weight: 700; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1.08rem; color: #38bdf8; }
+p { margin-bottom: 10px; }
+
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; font-size: 13.5px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-btn:hover { background: #334155; text-decoration: none; }
+    .timer-pill {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .lecture-container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 28px 34px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .unit-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .badge-lecture { background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-exercise { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-ref { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-hour { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .unit-title { font-size: 1.65rem; margin: 6px 0 18px 0; color: #fff; }
+    .objectives-card {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .takeaways-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 22px;
+    }
+    .traps-card {
+      background: rgba(225, 29, 72, 0.09);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+    }
+    .trap-item { margin: 6px 0; font-size: 13.5px; color: #fda4af; }
+    .unit-footer-cta {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: linear-gradient(90deg, rgba(5,150,105,0.18), rgba(59,130,246,0.14));
+      border: 1px solid rgba(16,185,129,0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-primary-lg:hover { background: var(--accent-bright); }
+    .dc-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+    .dc-left {
+      padding: 20px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+    .dc-right {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--bg-editor);
+    }
+    .scenario-box {
+      background: #1e293b;
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+    .scenario-label { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px; }
+    .instructions-box {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .inst-list { list-style: none; margin: 10px 0; }
+    .inst-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.02);
+      font-size: 13.5px;
+    }
+    .inst-item.passed { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .step-num {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inst-item.passed .step-num { background: var(--accent-bright); }
+    .hint-bar { display: flex; gap: 8px; margin-top: 10px; }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: #374151; }
+    .hint-content {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 6px;
+      font-size: 13px;
+      color: #fde68a;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: #161b22;
+      border-bottom: 1px solid var(--border);
+    }
+    .prompt-pill { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #9ca3af; }
+    .dot-green { width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block; }
+    .editor-actions { display: flex; gap: 8px; }
+    .btn-sm {
+      background: #21262d;
+      color: #d1d5db;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-run {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-run:hover { background: var(--accent-bright); }
+    #code-editor {
+      flex: 1;
+      width: 100%;
+      background: #0d1117;
+      color: #e6edf3;
+      border: none;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.55;
+      resize: none;
+      outline: none;
+    }
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 14px;
+      background: #161b22;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .status-pending { color: #fbbf24; }
+    .status-pass { color: #34d399; font-weight: 700; }
+    .console-body {
+      height: 42%;
+      padding: 14px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      white-space: pre-wrap;
+      color: #d1d5db;
+      background: #090d14;
+    }
+    .quiz-section {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(17, 24, 39, 0.6);
+    }
+    .q-card {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .q-title { font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+    .q-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .q-opt:hover { background: rgba(255,255,255,0.04); }
+    .q-exp {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      display: none;
+    }
+    .btn-check-quiz {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    @media (max-width: 960px) {
+      .dc-split { grid-template-columns: 1fr; height: auto; }
+      #code-editor { min-height: 240px; }
+      .console-body { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../../index.html" class="nav-btn">🏠 All Pillars</a>
+      <a href="../index.html" class="nav-btn">📚 01-HCIA-Computing-V3.0 Course Player</a>
+      <span style="color:var(--text-muted);">|</span>
+      <span>Hour 08 • Sprint 4/4</span>
+    </div>
+    <div class="topbar-right">
+      <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">⏱️ 8:00</span>
+      <a href="./06-Exercise-eSight-Interfaces-IF1-to-IF5-and-Batch-Specs-Lab.html" class="nav-btn">← Prev</a>
+      <a href="./08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab.html" class="nav-btn">Next →</a>
+    </div>
+  </div>
+
+  
+        <div class="lecture-container">
+          <div class="unit-badges">
+            <span class="badge badge-lecture">📖 BITE-SIZED LECTURE (8 MINS)</span>
+            <span class="badge badge-ref">📄 HCIA-Computing V3.0 Training Material.pdf • Ch.06, pp. 415–443</span>
+            <span class="badge badge-hour">⏱️ Hour 08 • Sprint 4/4</span>
+            <span id="done-badge" class="badge badge-exercise" style="display:none;">✓ Completed</span>
+          </div>
+          <h1 class="unit-title">Local O&amp;M (SmartKit) &amp; Remote O&amp;M (eService / Call Home)</h1>
+
+          <div class="objectives-card">
+            <h3>🎯 Learning Objectives</h3>
+            <ul class="md-list"><li>Master SmartKit's features (50 parallel tasks, plugin-based, white-box customizable), 4-step local O&amp;M process, and 6 O&amp;M scenarios</li><li>Understand SmartKit IP/IES config (link-local L2 restriction), 2 OS deployment channels, Atlas CANN deployment, Burn-in test (V5/TS200 via SP vs. V3 via FTK.iso), and In-band vs. Out-of-band firmware upgrade</li><li>Master eService Remote O&amp;M functions (Remote Inspection, Log Collection, Fault Diagnosis FMA, Health Evaluation, Call Home) and solve Ch.06 Quiz Q1!</li></ul>
+          </div>
+
+          <div class="lecture-prose">
+            <h3>1. SmartKit: Local O&amp;M Toolbox for Service Engineers (pp. 416–420)</h3>
+<p><strong>SmartKit</strong> is Huawei's lightweight, wizard-based, plugin-based local O&amp;M toolbox installed on <strong>frontline engineers' laptops</strong>, supporting FusionServer, Kunpeng/TaiShan, Atlas, storage, machine vision, and cloud products:</p>
+<ul class="md-list">
+<li><strong>Key Highlights (pp. 416, 418)</strong>: Processes <strong>up to 50 tasks in parallel</strong>, supports <strong>online updates</strong> from <strong>HOUP</strong>, interconnects with <strong>eService</strong>, and supports <strong>white-box customization</strong> for Kunpeng OEM/ecosystem partners.</li>
+<li><strong>Four-Step SmartKit Local O&amp;M Process (p. 417)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Prepare</strong>: Upgrade tool to latest version, prepare O&amp;M documents (firmware, drivers, templates, scripts, operation guides).</li>
+<li><strong>Authorize &amp; Connect</strong>: <strong>Obtain customer authorization</strong>, suspend services &amp; back up data if needed, connect to network, and <strong>add devices</strong>.</li>
+<li><strong>Configure</strong>: Obtain device information and set task parameters.</li>
+<li><strong>Execute &amp; Restore</strong>: Execute the task and restore customer services.</li>
+</ol>
+<ul class="md-list">
+<li><strong>Six SmartKit Scenarios &amp; Sub-Functions (p. 419)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Device Management</strong>: Add/manage <strong>iBMC, HMM, OS, CMC, IES, TCE</strong> (prerequisite for all other functions).</li>
+<li><strong>Site Deployment Delivery</strong>: <strong>IP address configuration</strong>, <strong>IES configuration</strong> (Atlas 500), <strong>Hardware configuration</strong> (iBMC, BIOS, RAID, HMM), <strong>OS deployment</strong>, One-click site deployment, <strong>Atlas batch deployment</strong>.</li>
+<li><strong>Routine Maintenance</strong>: <strong>Health check</strong> (formerly <strong>"inspection" in uMate</strong>), <strong>Power control</strong>, <strong>Configuration check</strong> (compares against a <strong>baseline device</strong> or <strong>baseline file</strong>).</li>
+<li><strong>Troubleshooting</strong>: <strong>Log collection</strong> (One-click, E9000/TCE custom, or <strong>OS log collection script package</strong> when customer denies service network access), <strong>Burn-in test</strong>, <strong>Hardware diagnosis</strong>, <strong>Device repair</strong>.</li>
+<li><strong>Upgrade / Patch Installation</strong>: <strong>Firmware upgrade</strong>, E9000/TCE upgrade, Device change, <strong>Software package management</strong> (creates local HOUP repositories), Server bundle upgrade, <strong>Batch distribution</strong> (delivers <strong>IPMI, SNMP, Redfish, SSH commands, and files</strong> in batches).</li>
+<li><strong>Parts Replacement</strong>: <strong>Electronic label (ELabel) modification</strong>.</li>
+</ol>
+<p>---</p>
+<h3>2. Deep-Dive into Key SmartKit Functions (pp. 421–432)</h3>
+<ul class="md-list">
+<li><strong>IP Address &amp; IES Configuration (pp. 421–422)</strong>:</li>
+<li><em>Scenario 1</em>: Configure new IPv4/IPv6/hostname (or Atlas 500 partition/IEF certificate in IES) using known <strong>MAC address or SN</strong> (<em>Note</em>: Uses <strong>link-local address</strong>, so <strong>PC and server CANNOT be connected across routes / L3</strong>!).</li>
+<li><em>Scenario 2</em>: Configure new IP using known <strong>IPv4/IPv6 address</strong> (supports cross-route L3 connection).</li>
+<li><strong>Two SmartKit OS Deployment Channels (p. 424)</strong>: Deploys OSs in batches over the <strong>management network</strong> (no PXE server or service network required!):</li>
+</ul>
+<ol class="md-list">
+<li><strong>Onboard Smart Provisioning</strong>: Deploys the <strong>OS and driver at the same time</strong>.</li>
+<li><strong>Direct deployment through image mounting</strong>: <strong>Faster speed</strong> and independent of Smart Provisioning, <strong>but you must install the driver separately after installing the OS</strong>.</li>
+</ol>
+<ul class="md-list">
+<li><strong>Atlas Batch Deployment (p. 425)</strong>: Connects to the <strong>service plane (OS) via SSH</strong> to deploy <strong>CANN</strong> software for Atlas series products.</li>
+<li><strong>Burn-In Test (p. 429)</strong>: Stress-tests <strong>CPU, memory, and disks</strong> after installation to detect transport damage:</li>
+<li><strong>V5 and TaiShan 200 servers</strong>: Use <strong>iBMC to deliver commands to Smart Provisioning</strong> for stress tests.</li>
+<li><strong>V3 servers</strong>: Mount <strong><code class="inline-code">FTK.iso</code></strong> (<em>FusionServer Tools Toolkit</em>) through iBMC for stress tests.</li>
+<li><strong>Firmware Upgrade Classification (p. 430)</strong>:</li>
+<li><strong>Out-of-band parts</strong>: <strong>iBMC, BIOS, and Smart Provisioning</strong> (upgraded directly via iBMC).</li>
+<li><strong>In-band firmware</strong>: <strong>PCIe card firmware and drive firmware</strong> (upgraded after entering the service OS or external mini-memory system).</li>
+</ul>
+<p>---</p>
+<h3>3. eService: 24/7 Remote O&amp;M Platform &amp; Call Home (pp. 433–438 — Official Quiz Q1!)</h3>
+<p><strong>eService</strong> provides remote O&amp;M for customers via <strong>eServiceClient</strong> deployed in the customer's equipment room (backed by SQL/NoSQL + HDFS + Elasticsearch + DataCompass):</p>
+<ul class="md-list">
+<li><strong>Four Core eService Functions (pp. 435–437)</strong>:</li>
+</ul>
+<ol class="md-list">
+<li><strong>Remote Inspection and Log Collection</strong>: 24/7 secure remote inspection and log package collection.</li>
+<li><strong>Fault Diagnosis (FMA)</strong>: Analyzes device faults and risks based on collected logs.</li>
+<li><strong>Health Evaluation</strong>: Outputs device health reports based on logs or inspection reports.</li>
+<li><strong>Call Home (p. 437)</strong>: Automatic fault reporting method that <strong>automatically sends hardware alarms</strong> generated by Huawei devices via <code class="inline-code">eServiceClient</code> to the <strong>Huawei technical support center</strong>, <strong>automatically creates trouble tickets</strong>, and pushes expert inspection reports within hours.</li>
+</ol>
+<ul class="md-list">
+<li><strong>Official Ch.06 Quiz Q1 (p. 438)</strong>: Which tools can configure RAIDs on bare-metal TaiShan 200 (2280) servers during project delivery?</li>
+<li><strong>Answer: <code class="inline-code">ABC</code> — A. Smart Provisioning, B. SmartKit, C. iBMC!</strong> (<strong>D. eService</strong> is for remote monitoring/inspection/Call Home and <strong>cannot</strong> configure RAID!).</li>
+</ul>
+          </div>
+
+          <div class="takeaways-card">
+            <h3>🔑 High-Yield Summary & Takeaways</h3>
+            <ul class="md-list"><li>SmartKit runs on engineers' laptops, processes up to 50 parallel tasks, and covers 6 scenarios: Device Management, Site Deployment Delivery, Routine Maintenance, Troubleshooting, Upgrade/Patch Installation, and Parts Replacement (Electronic label modification).</li><li>SmartKit OS deployment uses the management network via two channels: (1) Onboard Smart Provisioning (deploys OS + driver simultaneously) or (2) Direct image mounting (faster, independent of SP, install driver after OS).</li><li>SmartKit Burn-in Test stress-tests CPU, memory, and disk: V5/TaiShan 200 uses Smart Provisioning, whereas V3 mounts FTK.iso.</li><li>Out-of-band firmware includes iBMC, BIOS, and Smart Provisioning; In-band firmware includes PCIe card firmware and drive firmware.</li><li>To configure RAID on bare-metal TaiShan 200 2280 servers, you can use Smart Provisioning, SmartKit, or iBMC (ABC) — NOT eService (Ch.06 Quiz Q1)!</li></ul>
+          </div>
+
+          <div class="traps-card">
+            <h3>🚨 Huawei National Stage Exam Traps</h3>
+            <div class="trap-item">⚠️ EXAM TRAP (Ch.06 Quiz Q1): eService is a remote O&amp;M platform (Remote Inspection, Log Collection, Fault Diagnosis, Health Evaluation, Call Home automatic trouble ticket creation) — it CANNOT configure RAID or install OSs on bare-metal servers! Only Smart Provisioning (A), SmartKit (B), and iBMC (C) can configure RAID.</div><div class="trap-item">⚠️ EXAM TRAP: When SmartKit configures device IP addresses based on MAC address or SN (Scenario 1, pp. 421–422), it uses link-local addresses, so the PC and server CANNOT be connected across routes!</div>
+          </div>
+
+          <div class="unit-footer-cta">
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">ACTIVE LEARNING CHECKPOINT</div>
+              <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
+            </div>
+            <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
+              ✓ Mark Lecture Completed & Start Exercise →
+            </button>
+          </div>
+        </div>
+        
+
+  <script>
+    const UNIT_ID = "pillar1_h8_s4_lecture";
+    const MODE = "lecture";
+    const NEXT_HREF = "./08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab.html";
+    const EX_DATA = {"title": "Hands-On Lab: SmartKit Delivery Pipeline & eService Call Home Verification", "duration_mins": 8, "exercise_type": "config", "prompt_label": "fe-engineer@smartkit-laptop:~#", "scenario": "You are delivering a batch of bare-metal TaiShan 200 (2280) servers on site using SmartKit and configuring eService Call Home for post-delivery maintenance.", "instructions": ["Set `raid_capable_tools` to `['Smart Provisioning', 'SmartKit', 'iBMC']` and `excluded_remote_om_tool` to `'eService'`.", "Set `smartkit_max_parallel_tasks` to `50` and `ts200_burn_in_engine` to `'Smart Provisioning'` (while V3 uses `'FTK.iso'`).", "Set `eservice_auto_ticket_feature` to `'Call Home'`."], "starter_code": "# SmartKit Delivery & eService Remote O&M Configuration\nraid_configuration_quiz:\n  raid_capable_tools:\n    - \"___\"\n    - \"___\"\n    - \"___\"\n  excluded_remote_om_tool: \"___\"\n\nsmartkit_capabilities:\n  smartkit_max_parallel_tasks: ___\n  ts200_burn_in_engine: \"___\"\n  v3_burn_in_iso: \"FTK.iso\"\n  out_of_band_firmware: [\"iBMC\", \"BIOS\", \"Smart Provisioning\"]\n  in_band_firmware: [\"PCIe card firmware\", \"Drive firmware\"]\n\neservice_remote_om:\n  eservice_auto_ticket_feature: \"___\"\n", "solution_code": "# SmartKit Delivery & eService Remote O&M Configuration\nraid_configuration_quiz:\n  raid_capable_tools:\n    - \"Smart Provisioning\"\n    - \"SmartKit\"\n    - \"iBMC\"\n  excluded_remote_om_tool: \"eService\"\n\nsmartkit_capabilities:\n  smartkit_max_parallel_tasks: 50\n  ts200_burn_in_engine: \"Smart Provisioning\"\n  v3_burn_in_iso: \"FTK.iso\"\n  out_of_band_firmware: [\"iBMC\", \"BIOS\", \"Smart Provisioning\"]\n  in_band_firmware: [\"PCIe card firmware\", \"Drive firmware\"]\n\neservice_remote_om:\n  eservice_auto_ticket_feature: \"Call Home\"\n", "hints": ["Smart Provisioning, SmartKit, and iBMC can configure RAID on bare-metal TaiShan 2280 servers; eService cannot (Ch.06 Quiz Q1).", "SmartKit runs up to 50 parallel tasks, uses Smart Provisioning for TS200 burn-in tests, and eService uses Call Home for automatic alarm reporting and ticket creation."], "validation_checks": [{"step": 1, "description": "Verify Smart Provisioning, SmartKit, and iBMC as RAID-capable tools", "required_any": ["smart provisioning", "smartkit", "ibmc"], "feedback_fail": "Include 'Smart Provisioning', 'SmartKit', and 'iBMC' in raid_capable_tools."}, {"step": 2, "description": "Verify eService exclusion and 50 parallel tasks in SmartKit", "required_any": ["eservice", "50"], "feedback_fail": "Set excluded_remote_om_tool to 'eService' and smartkit_max_parallel_tasks to 50."}, {"step": 3, "description": "Verify Call Home feature in eService", "required_any": ["call home"], "feedback_fail": "Set eservice_auto_ticket_feature to 'Call Home'."}], "simulated_output": "[OK] SmartKit & eService O&M Configuration Validated:\n- Bare-Metal RAID Config Tools (Ch.06 Quiz Q1): Smart Provisioning, SmartKit, iBMC (ABC) [eService excluded]\n- SmartKit: 50 parallel tasks | OS Deploy (SP = OS+Driver; Image Mount = Faster) | Burn-in (TS200=SP, V3=FTK.iso)\n- eService: Remote Inspection, Log Collection, Fault Diagnosis (FMA), Health Evaluation, Call Home (auto trouble ticket).", "quiz_questions": [{"id": "h8_s4_q1", "type": "multiple", "question": "(Official Ch.06 Quiz Q1) A batch of TaiShan 200 2280 balanced servers are purchased, but they do not have pre-integrated software. During project delivery, engineers need to configure RAIDs for these servers and install OSs. Which of the following computing management software can be used to configure RAIDs for these servers?", "options": ["A. Smart Provisioning", "B. SmartKit", "C. iBMC", "D. eService"], "answer": "ABC", "explanation": "According to Ch.06 p.438 Official Quiz Q1, Smart Provisioning (A), SmartKit (B), and iBMC (C) can all be used to configure RAIDs on bare-metal TaiShan 200 (2280) servers. eService (D) is a remote O&M platform for monitoring, log collection, health evaluation, and Call Home, and cannot configure RAID."}, {"id": "h8_s4_q2", "type": "single", "question": "In Huawei eService, which feature automatically sends hardware alarms generated by Huawei devices to the Huawei technical support center and automatically creates trouble tickets for quick handling?", "options": ["A. Smart Provisioning", "B. Call Home", "C. Burn-in Test", "D. Electronic label modification"], "answer": "B", "explanation": "According to Ch.06 p.437, Call Home is an automatic fault reporting method in eService that sends hardware alarms from Huawei devices to the Huawei technical support center and automatically creates trouble tickets."}, {"id": "h8_s4_q3", "type": "multiple", "question": "Which of the following statements about Huawei SmartKit functions are true?", "options": ["A. When SmartKit configures device IP addresses using known MAC addresses or SNs (Scenario 1), it uses link-local addresses, so the PC and server cannot be connected across routes.", "B. SmartKit OS deployment via onboard Smart Provisioning deploys the OS and driver simultaneously, whereas direct deployment through image mounting is faster and independent of Smart Provisioning (driver installed after OS).", "C. In SmartKit Firmware Upgrade, iBMC, BIOS, and Smart Provisioning are out-of-band parts, while PCIe card firmware and drive firmware are in-band firmware.", "D. For Burn-in Tests on TaiShan 200 and V5 servers, SmartKit uses iBMC to deliver commands to Smart Provisioning to stress-test the CPU, memory, and disks."], "answer": "ABCD", "explanation": "All four statements come directly from Ch.06 pp. 421, 424, 429, and 430."}]};
+
+
+    function escHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function fmtText(s) {
+      let out = escHtml(s);
+      out = out.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+    function normWS(s) {
+      return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+
+    let timerSecs = 480;
+    let timerRunning = true;
+    setInterval(() => {
+      if (!timerRunning || timerSecs <= 0) return;
+      timerSecs--;
+      const m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      const s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timer-display').textContent = `⏱️ ${m}:${s}`;
+    }, 1000);
+    function toggleTimer() { timerRunning = !timerRunning; }
+
+    function copyCodeBlock(btn) {
+      const code = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    }
+
+    function refreshDoneBadge() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      if (prog[UNIT_ID]?.completed) {
+        const b = document.getElementById('done-badge');
+        if (b) b.style.display = 'inline-block';
+      }
+    }
+    refreshDoneBadge();
+
+    function markUnitCompleted() {
+      const prog = JSON.parse(localStorage.getItem('huawei_study_progress_v1') || '{}');
+      prog[UNIT_ID] = { completed: true, ts: Date.now() };
+      localStorage.setItem('huawei_study_progress_v1', JSON.stringify(prog));
+      refreshDoneBadge();
+    }
+
+    function completeLectureAndContinue() {
+      markUnitCompleted();
+      window.location.href = NEXT_HREF;
+    }
+
+    if (MODE === 'exercise') {
+      const editor = document.getElementById('code-editor');
+      editor.value = EX_DATA.starter_code || '';
+      editor.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          runVerification();
+        }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+        }
+      });
+      renderQuiz();
+    }
+
+    function resetStarterCode() {
+      document.getElementById('code-editor').value = EX_DATA.starter_code || '';
+    }
+
+    function toggleHint() {
+      const box = document.getElementById('hint-box');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        box.innerHTML = '<strong>Hints:</strong><ul style="margin-left:18px;margin-top:4px;">' +
+          (EX_DATA.hints || []).map(h => `<li>${fmtText(h)}</li>`).join('') + '</ul>';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function revealSolution() {
+      document.getElementById('code-editor').value = EX_DATA.solution_code || '';
+      runVerification();
+    }
+
+    function runVerification() {
+      const code = document.getElementById('code-editor').value;
+      const codeNorm = normWS(code);
+      const checks = EX_DATA.validation_checks || [];
+      let allPassed = true;
+      let logLines = ['[SYSTEM] Executing verification checks...\n'];
+
+      checks.forEach((chk, idx) => {
+        const reqs = chk.required_any || [];
+        const passed = reqs.length === 0 || reqs.some(r => codeNorm.includes(normWS(r)));
+        const stepEl = document.getElementById(`inst-step-${idx}`);
+        if (passed) {
+          if (stepEl) stepEl.classList.add('passed');
+          logLines.push(`✅ Step ${chk.step || (idx+1)} PASS: ${chk.description}`);
+        } else {
+          if (stepEl) stepEl.classList.remove('passed');
+          allPassed = false;
+          logLines.push(`❌ Step ${chk.step || (idx+1)} FAIL: ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+        }
+      });
+
+      const badge = document.getElementById('lab-status-badge');
+      if (allPassed) {
+        badge.className = 'status-pass';
+        badge.textContent = '✓ All Lab Steps Verified!';
+        logLines.push('\n--- SIMULATED EXECUTION OUTPUT ---');
+        logLines.push(EX_DATA.simulated_output || 'Command executed successfully (Exit code: 0).');
+        markUnitCompleted();
+      } else {
+        badge.className = 'status-pending';
+        badge.textContent = 'Needs Revision';
+      }
+      document.getElementById('console-output').textContent = logLines.join('\n');
+    }
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const qs = EX_DATA.quiz_questions || [];
+      container.innerHTML = qs.map((q, idx) => {
+        const isMulti = q.type === 'multiple';
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const badgeTxt = isMulti ? 'Multiple-Choice (Select ALL)' : (q.type === 'tf' ? 'True/False' : 'Single-Choice');
+        const optsHtml = (q.options || []).map(opt => {
+          const letter = opt.trim().charAt(0).toUpperCase();
+          return `<label class="q-opt"><input type="${inputType}" name="q_${idx}" value="${letter}" /> <span>${fmtText(opt)}</span></label>`;
+        }).join('');
+        return `<div class="q-card">
+          <div class="q-title">Q${idx+1} [${badgeTxt}]: ${fmtText(q.question)}</div>
+          <div>${optsHtml}</div>
+          <div id="q_exp_${idx}" class="q-exp"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeQuiz() {
+      const qs = EX_DATA.quiz_questions || [];
+      let correctCount = 0;
+      qs.forEach((q, idx) => {
+        const selected = Array.from(document.querySelectorAll(`input[name="q_${idx}"]:checked`))
+          .map(el => el.value).sort().join('');
+        const target = (q.answer || '').toUpperCase().replace(/[^A-Z]/g, '').split('').sort().join('');
+        const expEl = document.getElementById(`q_exp_${idx}`);
+        expEl.style.display = 'block';
+        if (selected === target) {
+          correctCount++;
+          expEl.style.background = 'rgba(16, 185, 129, 0.14)';
+          expEl.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          expEl.innerHTML = `✅ <strong>Correct (${target})!</strong> ${fmtText(q.explanation || '')}`;
+        } else {
+          expEl.style.background = 'rgba(225, 29, 72, 0.14)';
+          expEl.style.border = '1px solid rgba(225, 29, 72, 0.4)';
+          expEl.innerHTML = `❌ <strong>Your answer: ${selected || 'None'} | Official Answer: ${target}</strong><br/>${fmtText(q.explanation || '')}`;
+        }
+      });
+      const sumEl = document.getElementById('quiz-summary');
+      sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
+        Exam Drill Score: ${correctCount} / ${qs.length}
+        ${correctCount === qs.length ? ' — 🏆 Mastery Achieved! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+      </div>`;
+      if (correctCount === qs.length) markUnitCompleted();
+    }
+  </script>
+</body>
+</html>
