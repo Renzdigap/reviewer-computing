@@ -411,8 +411,8 @@ p { margin-bottom: 10px; }
     </div>
     <div class="topbar-right">
       <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">07:00</span>
-      <a href="./04-Exercise-openEuler-Releases-and-Licenses-Lab.html" class="nav-btn">← Prev</a>
-      <a href="./06-Exercise-openEuler-Installation-and-Partition-Plan-Lab.html" class="nav-btn">Next →</a>
+      <a href="./04-Exercise-openEuler-Releases-and-Licenses-Lab.html" class="nav-btn">Prev</a>
+      <a href="./06-Exercise-openEuler-Installation-and-Partition-Plan-Lab.html" class="nav-btn">Next</a>
     </div>
   </div>
 
@@ -453,7 +453,7 @@ p { margin-bottom: 10px; }
 <li><code class="inline-code">Install openEuler 24.03 LTS</code>: Directly install the system.</li>
 <li><code class="inline-code">Test this media &amp; install openEuler 24.03 LTS</code>: Check the software package integrity first, then install.</li>
 <li><code class="inline-code">Troubleshooting --&gt;</code>: Rescue and diagnostic mode.</li>
-<li>Keybindings: <code class="inline-code">▲</code>/<code class="inline-code">▼</code> to select, <strong><code class="inline-code">e</code></strong> to edit the selected boot item, or <strong><code class="inline-code">c</code></strong> for a command prompt.</li>
+<li>Keybindings: <code class="inline-code">[Up]</code>/<code class="inline-code">[Down]</code> to select, <strong><code class="inline-code">e</code></strong> to edit the selected boot item, or <strong><code class="inline-code">c</code></strong> for a command prompt.</li>
 <li><strong>Recommended Manual Partitions (<code class="inline-code">Installation Destination</code>):</strong></li>
 </ul>
 <p>In manual partitioning mode, you can configure <strong>common (standard) partitions</strong>, <strong>logical volumes (LVM)</strong>, or <strong>thin-provisioning logical volumes</strong>:</p>
@@ -497,7 +497,7 @@ p { margin-bottom: 10px; }
               <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
             </div>
             <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
-              Mark Lecture Completed & Start Exercise →
+              Mark Lecture Completed & Start Exercise
             </button>
           </div>
         </div>
@@ -624,7 +624,7 @@ p { margin-bottom: 10px; }
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   Hint: ${chk.feedback_fail}`);
         }
       });
 
@@ -684,7 +684,7 @@ p { margin-bottom: 10px; }
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

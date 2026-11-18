@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 05 — Database & Object Management (MOT, Tablespaces, Users/Roles, Backup/Export) (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `08-Exercise-COPY-gs-dump-gs-restore-and-VACUUM-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `08-Exercise-COPY-gs-dump-gs-restore-and-VACUUM-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openGauss V2.0 Training Material.pdf` — Ch.04, pp. 322–347
 
 ---

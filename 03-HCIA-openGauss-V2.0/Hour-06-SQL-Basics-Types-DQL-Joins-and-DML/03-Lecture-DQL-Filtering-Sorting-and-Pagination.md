@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 06 — SQL Basics — Classification, Data Types, DQL, Joins & DML (Sprint 2 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `04-Exercise-WHERE-ORDER-BY-and-LIMIT-OFFSET-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openGauss V2.0 Training Material.pdf` — Ch.05, pp. 373–395
 
 ---

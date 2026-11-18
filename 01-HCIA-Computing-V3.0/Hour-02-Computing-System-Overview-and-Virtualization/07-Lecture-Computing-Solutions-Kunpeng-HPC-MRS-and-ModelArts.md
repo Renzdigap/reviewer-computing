@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 02 — Computing System Overview, System Software & Virtualization (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `08-Exercise-Kunpeng-HPC-and-Cloud-BigData-Solution-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `08-Exercise-Kunpeng-HPC-and-Cloud-BigData-Solution-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.02, pp. 117–128
 
 ---

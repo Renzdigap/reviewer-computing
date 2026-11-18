@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 02 — openEuler CLI Basics & File Operations (Sprint 3 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `06-Exercise-File-Lifecycle-Operations-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `06-Exercise-File-Lifecycle-Operations-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.03, pp. 88–95
 
 ---

@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 08 — GaussDB Enterprise Distributed Database & Cloud Ecosystem (Sprint 3 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `06-Exercise-Distributed-Tables-GTM-Lite-and-Backup-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `06-Exercise-Distributed-Tables-GTM-Lite-and-Backup-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openGauss V2.0 Training Material.pdf` — Ch.06, pp. 496–503
 
 ---

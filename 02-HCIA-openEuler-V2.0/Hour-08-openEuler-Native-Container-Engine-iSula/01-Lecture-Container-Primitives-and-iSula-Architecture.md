@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 08 — openEuler Native Container Engine iSula (iSulad) (Sprint 1 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `02-Exercise-Namespaces-Cgroups-and-iSula-Specs-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `02-Exercise-Namespaces-Cgroups-and-iSula-Specs-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.07, pp. 387–398
 
 ---

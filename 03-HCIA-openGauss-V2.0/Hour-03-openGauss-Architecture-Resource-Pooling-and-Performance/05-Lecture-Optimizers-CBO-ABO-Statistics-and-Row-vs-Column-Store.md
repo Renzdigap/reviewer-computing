@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 03 — openGauss Architecture, Resource Pooling & High Performance (Sprint 3 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `06-Exercise-ANALYZE-Statistics-and-Column-Store-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `06-Exercise-ANALYZE-Statistics-and-Column-Store-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openGauss V2.0 Training Material.pdf` — Ch.03, pp. 160–173
 
 ---

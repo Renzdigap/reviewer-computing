@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 02 — openGauss Installation, Authentication & O&M Tools (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `08-Exercise-Server-Inspection-and-Backup-Tools-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `08-Exercise-Server-Inspection-and-Backup-Tools-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openGauss V2.0 Training Material.pdf` — Ch.02, pp. 101–126
 
 ---

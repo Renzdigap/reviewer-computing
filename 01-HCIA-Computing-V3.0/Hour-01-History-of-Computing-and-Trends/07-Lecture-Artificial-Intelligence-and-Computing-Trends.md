@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `08-Exercise-AI-Elements-and-Heterogeneous-Trends-Lab` (7 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `08-Exercise-AI-Elements-and-Heterogeneous-Trends-Lab` (7 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.01, pp. 46–66
 
 ---

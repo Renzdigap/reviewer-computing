@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 03 — Server Hardware Architecture: CPU, Memory, Mainboard & Storage Drives (Sprint 2 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `04-Exercise-DIMM-Channel-Balance-and-SPD-Verification-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.03, pp. 142–148, 224–225
 
 ---

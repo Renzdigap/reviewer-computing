@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 06 — Computing Product Deployment: Equipment Room, iBMC, BIOS & RAID Configuration (Sprint 2 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `04-Exercise-iBMC-Default-IP-Credentials-and-WebUI-Navigation-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `04-Exercise-iBMC-Default-IP-Credentials-and-WebUI-Navigation-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.05, pp. 296–308
 
 ---

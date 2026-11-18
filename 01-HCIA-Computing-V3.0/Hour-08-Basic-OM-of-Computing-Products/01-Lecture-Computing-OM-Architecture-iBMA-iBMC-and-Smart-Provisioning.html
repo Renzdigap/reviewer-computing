@@ -411,8 +411,8 @@ p { margin-bottom: 10px; }
     </div>
     <div class="topbar-right">
       <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">08:00</span>
-      <a href="../Hour-07-OS-Driver-and-Service-Deployment/08-Exercise-openGauss-XML-gs-preinstall-and-gs-install-Lab.html" class="nav-btn">← Prev</a>
-      <a href="./02-Exercise-Single-Node-OM-iBMA-BOB-and-Smart-Provisioning-Lab.html" class="nav-btn">Next →</a>
+      <a href="../Hour-07-OS-Driver-and-Service-Deployment/08-Exercise-openGauss-XML-gs-preinstall-and-gs-install-Lab.html" class="nav-btn">Prev</a>
+      <a href="./02-Exercise-Single-Node-OM-iBMA-BOB-and-Smart-Provisioning-Lab.html" class="nav-btn">Next</a>
     </div>
   </div>
 
@@ -491,7 +491,7 @@ p { margin-bottom: 10px; }
               <div style="font-weight:700;font-size:16px;">Ready to apply this immediately? Launch the paired hands-on exercise!</div>
             </div>
             <button class="btn-primary-lg" onclick="completeLectureAndContinue()">
-              Mark Lecture Completed & Start Exercise →
+              Mark Lecture Completed & Start Exercise
             </button>
           </div>
         </div>
@@ -618,7 +618,7 @@ p { margin-bottom: 10px; }
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   Hint: ${chk.feedback_fail}`);
         }
       });
 
@@ -678,7 +678,7 @@ p { margin-bottom: 10px; }
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

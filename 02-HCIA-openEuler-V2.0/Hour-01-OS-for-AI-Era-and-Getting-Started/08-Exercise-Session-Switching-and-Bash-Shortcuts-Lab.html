@@ -411,8 +411,8 @@ p { margin-bottom: 10px; }
     </div>
     <div class="topbar-right">
       <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">08:00</span>
-      <a href="./07-Lecture-CLI-vs-GUI-Login-and-Bash-Shortcuts.html" class="nav-btn">← Prev</a>
-      <a href="../Hour-02-openEuler-CLI-Basics-and-File-Operations/01-Lecture-CLI-Syntax-Help-and-Power-Management.html" class="nav-btn">Next →</a>
+      <a href="./07-Lecture-CLI-vs-GUI-Login-and-Bash-Shortcuts.html" class="nav-btn">Prev</a>
+      <a href="../Hour-02-openEuler-CLI-Basics-and-File-Operations/01-Lecture-CLI-Syntax-Help-and-Power-Management.html" class="nav-btn">Next</a>
     </div>
   </div>
 
@@ -422,7 +422,7 @@ p { margin-bottom: 10px; }
             <div class="unit-badges">
               <span class="badge badge-exercise">HANDS-ON EXERCISE (8 MINS)</span>
               <span class="badge badge-hour">Hour 01 • Sprint 4/4</span>
-              <a href="./07-Lecture-CLI-vs-GUI-Login-and-Bash-Shortcuts.html" class="badge badge-ref">↩ Review Paired Lecture</a>
+              <a href="./07-Lecture-CLI-vs-GUI-Login-and-Bash-Shortcuts.html" class="badge badge-ref">Review Paired Lecture</a>
               <span id="done-badge" class="badge badge-exercise" style="display:none;">Completed</span>
             </div>
             <h1 style="font-size:1.35rem;margin-top:8px;">Hands-On Lab: Identity Verification, Shell Inspection &amp; History Navigation</h1>
@@ -457,8 +457,8 @@ p { margin-bottom: 10px; }
             <div class="editor-header">
               <div class="prompt-pill"><span class="dot-green"></span> <code>root@openEuler:~#</code></div>
               <div class="editor-actions">
-                <button class="btn-sm" onclick="resetStarterCode()">↺ Reset</button>
-                <button class="btn-run" onclick="runVerification()">▶ Run & Verify (Ctrl+Enter)</button>
+                <button class="btn-sm" onclick="resetStarterCode()">Reset</button>
+                <button class="btn-run" onclick="runVerification()">Run & Verify (Ctrl+Enter)</button>
               </div>
             </div>
             <textarea id="code-editor" spellcheck="false"></textarea>
@@ -466,7 +466,7 @@ p { margin-bottom: 10px; }
               <span>TERMINAL / EXECUTION OUTPUT & VERIFICATION LOG</span>
               <span id="lab-status-badge" class="status-pending">Pending Execution</span>
             </div>
-            <div id="console-output" class="console-body">Click "▶ Run & Verify (Ctrl+Enter)" to execute your commands/SQL and validate each step...</div>
+            <div id="console-output" class="console-body">Click "Run & Verify (Ctrl+Enter)" to execute your commands/SQL and validate each step...</div>
           </div>
         </div>
         
@@ -475,7 +475,7 @@ p { margin-bottom: 10px; }
     const UNIT_ID = "pillar2_h1_s4_exercise";
     const MODE = "exercise";
     const NEXT_HREF = "../Hour-02-openEuler-CLI-Basics-and-File-Operations/01-Lecture-CLI-Syntax-Help-and-Power-Management.html";
-    const EX_DATA = {"title": "Hands-On Lab: Identity Verification, Shell Inspection & History Navigation", "duration_mins": 8, "exercise_type": "terminal", "prompt_label": "root@openEuler:~#", "scenario": "You are logged into openEuler via SSH as `root`. Verify your current UID/GID identity, display recent command history, switch to the common user `openeuler` using a login shell, and exit back to `root`.", "instructions": ["Step 1: Run the `id` command to display the current user's UID, GID, and group memberships.", "Step 2: Run the `history` command to view previously executed shell commands.", "Step 3: Switch to the user `openeuler` with a full login environment using `su - openeuler`."], "starter_code": "# Step 1: View current user UID and GID\n<command_1>\n\n# Step 2: View historical commands\n<command_2>\n\n# Step 3: Switch to user 'openeuler' with login environment\n<command_3>", "solution_code": "# Step 1: View current user UID and GID\nid\n\n# Step 2: View historical commands\nhistory\n\n# Step 3: Switch to user 'openeuler' with login environment\nsu - openeuler", "hints": ["The `id` command prints the current user's UID and GID.", "The `history` command lists the recorded bash command history.", "Use `su - openeuler` to switch to the `openeuler` account."], "validation_checks": [{"step": 1, "description": "Run the id command", "required_any": ["id"], "feedback_fail": "Include the 'id' command to check the current user's UID/GID."}, {"step": 2, "description": "Run the history command", "required_any": ["history"], "feedback_fail": "Include the 'history' command to inspect recorded commands."}, {"step": 3, "description": "Switch user with su - openeuler", "required_any": ["su - openeuler", "su -l openeuler"], "feedback_fail": "Use 'su - openeuler' to switch to the openeuler user."}], "simulated_output": "uid=0(root) gid=0(root) groups=0(root)\n    1  cat /etc/os-release\n    2  uname -r\n    3  id\n    4  history\nLast login: Tue Nov 17 09:15:02 CST 2026 on pts/0\n[openeuler@openEuler ~]$", "quiz_questions": [{"id": "h1_s4_q1", "type": "single", "question": "[Official Ch.02 Quiz Q2] Which of the following keys can be used to quickly supplement commands and parameters?", "options": ["A. Ctrl+L", "B. ↑ and ↓", "C. tab", "D. Space"], "answer": "C", "explanation": "Official Ch.02 Quiz Q2 (p.52): C. The Tab key is used to automatically supplement (auto-complete) commands, file names, and parameters."}, {"id": "h1_s4_q2", "type": "single", "question": "In the Bash shell on openEuler, which keyboard shortcut moves the cursor to the beginning of the current command line, and which moves it to the end?", "options": ["A. Ctrl+C and Ctrl+L", "B. Ctrl+A (or Home) and Ctrl+E (or End)", "C. Alt+F1 and Alt+F6", "D. Ctrl+Z and Ctrl+D"], "answer": "B", "explanation": "Per Ch.02 (p.50) and Ch.03 (p.62), Home or Ctrl+A moves the cursor to the beginning of the line, while End or Ctrl+E moves the cursor to the end of the line."}, {"id": "h1_s4_q3", "type": "multiple", "question": "Which of the following graphical desktop environments can be installed on openEuler if a GUI is required?", "options": ["A. GNOME and XFCE", "B. UKUI (developed by Kylin Software)", "C. DDE (developed by UnionTech Software)", "D. Kiran (developed by Hunan Kylin Information Security)"], "answer": "ABCD", "explanation": "Per Ch.02 (p.47), openEuler uses the CLI by default, and supports installing GNOME, UKUI, DDE, Kiran, or XFCE desktop environments as needed."}]};
+    const EX_DATA = {"title": "Hands-On Lab: Identity Verification, Shell Inspection & History Navigation", "duration_mins": 8, "exercise_type": "terminal", "prompt_label": "root@openEuler:~#", "scenario": "You are logged into openEuler via SSH as `root`. Verify your current UID/GID identity, display recent command history, switch to the common user `openeuler` using a login shell, and exit back to `root`.", "instructions": ["Step 1: Run the `id` command to display the current user's UID, GID, and group memberships.", "Step 2: Run the `history` command to view previously executed shell commands.", "Step 3: Switch to the user `openeuler` with a full login environment using `su - openeuler`."], "starter_code": "# Step 1: View current user UID and GID\n<command_1>\n\n# Step 2: View historical commands\n<command_2>\n\n# Step 3: Switch to user 'openeuler' with login environment\n<command_3>", "solution_code": "# Step 1: View current user UID and GID\nid\n\n# Step 2: View historical commands\nhistory\n\n# Step 3: Switch to user 'openeuler' with login environment\nsu - openeuler", "hints": ["The `id` command prints the current user's UID and GID.", "The `history` command lists the recorded bash command history.", "Use `su - openeuler` to switch to the `openeuler` account."], "validation_checks": [{"step": 1, "description": "Run the id command", "required_any": ["id"], "feedback_fail": "Include the 'id' command to check the current user's UID/GID."}, {"step": 2, "description": "Run the history command", "required_any": ["history"], "feedback_fail": "Include the 'history' command to inspect recorded commands."}, {"step": 3, "description": "Switch user with su - openeuler", "required_any": ["su - openeuler", "su -l openeuler"], "feedback_fail": "Use 'su - openeuler' to switch to the openeuler user."}], "simulated_output": "uid=0(root) gid=0(root) groups=0(root)\n    1  cat /etc/os-release\n    2  uname -r\n    3  id\n    4  history\nLast login: Tue Nov 17 09:15:02 CST 2026 on pts/0\n[openeuler@openEuler ~]$", "quiz_questions": [{"id": "h1_s4_q1", "type": "single", "question": "[Official Ch.02 Quiz Q2] Which of the following keys can be used to quickly supplement commands and parameters?", "options": ["A. Ctrl+L", "B. [Up] and [Down]", "C. tab", "D. Space"], "answer": "C", "explanation": "Official Ch.02 Quiz Q2 (p.52): C. The Tab key is used to automatically supplement (auto-complete) commands, file names, and parameters."}, {"id": "h1_s4_q2", "type": "single", "question": "In the Bash shell on openEuler, which keyboard shortcut moves the cursor to the beginning of the current command line, and which moves it to the end?", "options": ["A. Ctrl+C and Ctrl+L", "B. Ctrl+A (or Home) and Ctrl+E (or End)", "C. Alt+F1 and Alt+F6", "D. Ctrl+Z and Ctrl+D"], "answer": "B", "explanation": "Per Ch.02 (p.50) and Ch.03 (p.62), Home or Ctrl+A moves the cursor to the beginning of the line, while End or Ctrl+E moves the cursor to the end of the line."}, {"id": "h1_s4_q3", "type": "multiple", "question": "Which of the following graphical desktop environments can be installed on openEuler if a GUI is required?", "options": ["A. GNOME and XFCE", "B. UKUI (developed by Kylin Software)", "C. DDE (developed by UnionTech Software)", "D. Kiran (developed by Hunan Kylin Information Security)"], "answer": "ABCD", "explanation": "Per Ch.02 (p.47), openEuler uses the CLI by default, and supports installing GNOME, UKUI, DDE, Kiran, or XFCE desktop environments as needed."}]};
 
 
     function escHtml(s) {
@@ -592,7 +592,7 @@ p { margin-bottom: 10px; }
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   Hint: ${chk.feedback_fail}`);
         }
       });
 
@@ -652,7 +652,7 @@ p { margin-bottom: 10px; }
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }

@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 05 — Huawei Kunpeng Processors, TaiShan Servers, openEuler/openGauss & HPC (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `08-Exercise-HPC-Application-Classification-and-HPCKit-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `08-Exercise-HPC-Application-Classification-and-HPCKit-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.04, pp. 270–282
 
 ---

@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 04 — User, Group & File Permission Management (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `08-Exercise-ACL-and-Sudo-Configuration-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `08-Exercise-ACL-and-Sudo-Configuration-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.04, pp. 184–193
 
 ---

@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `08-Exercise-Session-Switching-and-Bash-Shortcuts-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `08-Exercise-Session-Switching-and-Bash-Shortcuts-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.02, pp. 47–52 & Ch.03, p. 62
 
 ---
@@ -43,7 +43,7 @@
 | Shortcut / Command | Function in Bash Shell |
 | :--- | :--- |
 | **`Tab`** | **Automatically supplements (auto-completes) commands, parameters, or file names** (Ch.02 Quiz Q2!). Press **`Tab` twice** on an empty line to list all available commands. |
-| **`↑` and `↓`** | Quickly browse previously executed historical commands. |
+| **`[Up]` and `[Down]`** | Quickly browse previously executed historical commands. |
 | **`history` / `!n`** | `history` lists recorded commands; `history n` (or `!n`) executes historical command `n`. |
 | **`Home` or `Ctrl+A`** | Moves the cursor to the **beginning** of the current line. |
 | **`End` or `Ctrl+E`** | Moves the cursor to the **end** of the current line. |

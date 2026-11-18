@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 1 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `02-Exercise-openEuler-Intelligence-Architecture-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `02-Exercise-openEuler-Intelligence-Architecture-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.01, pp. 1–22
 
 ---

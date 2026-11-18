@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 06 — openEuler Disk Partitioning, LVM & Network Management (Sprint 1 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `02-Exercise-Fdisk-and-Parted-Partitioning-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `02-Exercise-Fdisk-and-Parted-Partitioning-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.05, pp. 256–276
 
 ---

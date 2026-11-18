@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)  
 **Schedule Block:** Hour 07 — SQL DDL Objects, Sequences, Operators & Built-in Functions (Sprint 3 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `06-Exercise-Views-and-Decremental-Sequences-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `06-Exercise-Views-and-Decremental-Sequences-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openGauss V2.0 Training Material.pdf` — Ch.05, pp. 438–447
 
 ---

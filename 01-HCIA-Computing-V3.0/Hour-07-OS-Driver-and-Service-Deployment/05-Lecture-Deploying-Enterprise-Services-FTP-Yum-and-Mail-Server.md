@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 07 — OS Compatibility, openEuler 22.03 LTS Installation, Drivers/Firmware & Service Deployment (Sprint 3 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `06-Exercise-vsftpd-Private-Yum-Repo-and-Postfix-Dovecot-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `06-Exercise-vsftpd-Private-Yum-Repo-and-Postfix-Dovecot-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.05, pp. 336–342
 
 ---

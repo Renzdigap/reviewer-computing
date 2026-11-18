@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 01 — OS for the AI Era & Getting Started with openEuler (Sprint 3 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `06-Exercise-openEuler-Installation-and-Partition-Plan-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `06-Exercise-openEuler-Installation-and-Partition-Plan-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.02, pp. 38–45, 52
 
 ---
@@ -32,7 +32,7 @@ When booting from the openEuler 24.03/20.03 LTS ISO:
   * `Install openEuler 24.03 LTS`: Directly install the system.
   * `Test this media & install openEuler 24.03 LTS`: Check the software package integrity first, then install.
   * `Troubleshooting -->`: Rescue and diagnostic mode.
-  * Keybindings: `▲`/`▼` to select, **`e`** to edit the selected boot item, or **`c`** for a command prompt.
+  * Keybindings: `[Up]`/`[Down]` to select, **`e`** to edit the selected boot item, or **`c`** for a command prompt.
 * **Recommended Manual Partitions (`Installation Destination`):**
   In manual partitioning mode, you can configure **common (standard) partitions**, **logical volumes (LVM)**, or **thin-provisioning logical volumes**:
 

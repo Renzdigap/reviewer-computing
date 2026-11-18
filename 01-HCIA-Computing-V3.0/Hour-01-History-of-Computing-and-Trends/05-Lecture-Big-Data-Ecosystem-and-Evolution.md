@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 01 — History of Computing & Industry Trends (Sprint 3 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `06-Exercise-Hadoop-Ecosystem-Component-Mapping` (8 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `06-Exercise-Hadoop-Ecosystem-Component-Mapping` (8 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.01, pp. 38–45, 55
 
 ---

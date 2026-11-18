@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-Computing V3.0 (Kunpeng & Server Ecosystem)  
 **Schedule Block:** Hour 08 — Basic O&M of Computing Products: iBMA, iBMC, Smart Provisioning, FusionDirector, eSight, SmartKit & eService (Sprint 4 of 4)  
-**Format:** Bite-Sized Lecture (8 mins) → Followed immediately by `08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (8 mins) - Followed immediately by `08-Exercise-SmartKit-and-eService-Call-Home-Scenario-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-Computing V3.0 Training Material.pdf` — Ch.06, pp. 415–443
 
 ---

@@ -71,7 +71,7 @@ Last login: Tue Nov 17 09:15:02 CST 2026 on pts/0
 **[Official Ch.02 Quiz Q2] Which of the following keys can be used to quickly supplement commands and parameters?**
 
 - A. Ctrl+L
-- B. ↑ and ↓
+- B. [Up] and [Down]
 - C. tab
 - D. Space
 

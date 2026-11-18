@@ -2,7 +2,7 @@
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 05 — Software Packages, systemd Services, Processes & Scheduled Tasks (Sprint 2 of 4)  
-**Format:** Bite-Sized Lecture (7 mins) → Followed immediately by `04-Exercise-DNF-Config-Manager-and-Package-Ops-Lab` (8 mins)  
+**Format:** Bite-Sized Lecture (7 mins) - Followed immediately by `04-Exercise-DNF-Config-Manager-and-Package-Ops-Lab` (8 mins)  
 **Official Material Reference:** `HCIA-openEuler V2.0 Training Material.pdf` — Ch.04, pp. 207–214
 
 ---

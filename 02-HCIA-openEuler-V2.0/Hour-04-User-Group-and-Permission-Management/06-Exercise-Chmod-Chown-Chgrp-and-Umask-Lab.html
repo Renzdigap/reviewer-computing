@@ -411,8 +411,8 @@ p { margin-bottom: 10px; }
     </div>
     <div class="topbar-right">
       <span id="timer-display" class="timer-pill" onclick="toggleTimer()" title="Click to Pause/Resume Sprint Timer">08:00</span>
-      <a href="./05-Lecture-File-Permissions-Ownership-and-umask.html" class="nav-btn">← Prev</a>
-      <a href="./07-Lecture-Sticky-Bit-ACL-and-Privilege-Escalation.html" class="nav-btn">Next →</a>
+      <a href="./05-Lecture-File-Permissions-Ownership-and-umask.html" class="nav-btn">Prev</a>
+      <a href="./07-Lecture-Sticky-Bit-ACL-and-Privilege-Escalation.html" class="nav-btn">Next</a>
     </div>
   </div>
 
@@ -422,7 +422,7 @@ p { margin-bottom: 10px; }
             <div class="unit-badges">
               <span class="badge badge-exercise">HANDS-ON EXERCISE (8 MINS)</span>
               <span class="badge badge-hour">Hour 04 • Sprint 3/4</span>
-              <a href="./05-Lecture-File-Permissions-Ownership-and-umask.html" class="badge badge-ref">↩ Review Paired Lecture</a>
+              <a href="./05-Lecture-File-Permissions-Ownership-and-umask.html" class="badge badge-ref">Review Paired Lecture</a>
               <span id="done-badge" class="badge badge-exercise" style="display:none;">Completed</span>
             </div>
             <h1 style="font-size:1.35rem;margin-top:8px;">Hands-On Lab: Modifying Permissions (<code class="inline-code">chmod</code>), Dual Ownership (<code class="inline-code">chown</code>) &amp; <code class="inline-code">umask</code></h1>
@@ -457,8 +457,8 @@ p { margin-bottom: 10px; }
             <div class="editor-header">
               <div class="prompt-pill"><span class="dot-green"></span> <code>root@openEuler:~#</code></div>
               <div class="editor-actions">
-                <button class="btn-sm" onclick="resetStarterCode()">↺ Reset</button>
-                <button class="btn-run" onclick="runVerification()">▶ Run & Verify (Ctrl+Enter)</button>
+                <button class="btn-sm" onclick="resetStarterCode()">Reset</button>
+                <button class="btn-run" onclick="runVerification()">Run & Verify (Ctrl+Enter)</button>
               </div>
             </div>
             <textarea id="code-editor" spellcheck="false"></textarea>
@@ -466,7 +466,7 @@ p { margin-bottom: 10px; }
               <span>TERMINAL / EXECUTION OUTPUT & VERIFICATION LOG</span>
               <span id="lab-status-badge" class="status-pending">Pending Execution</span>
             </div>
-            <div id="console-output" class="console-body">Click "▶ Run & Verify (Ctrl+Enter)" to execute your commands/SQL and validate each step...</div>
+            <div id="console-output" class="console-body">Click "Run & Verify (Ctrl+Enter)" to execute your commands/SQL and validate each step...</div>
           </div>
         </div>
         
@@ -592,7 +592,7 @@ p { margin-bottom: 10px; }
         } else {
           if (stepEl) stepEl.classList.remove('passed');
           allPassed = false;
-          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   ↳ Hint: ${chk.feedback_fail}`);
+          logLines.push(`[FAIL] Step ${chk.step || (idx+1)} : ${chk.description}\n   Hint: ${chk.feedback_fail}`);
         }
       });
 
@@ -652,7 +652,7 @@ p { margin-bottom: 10px; }
       const sumEl = document.getElementById('quiz-summary');
       sumEl.innerHTML = `<div style="padding:10px;border-radius:6px;background:#1e293b;font-weight:700;">
         Exam Drill Score: ${correctCount} / ${qs.length}
-        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit →</a>' : ''}
+        ${correctCount === qs.length ? ' — [PASS] Completed! <a href="' + NEXT_HREF + '" style="margin-left:10px;color:#34d399;">Continue to Next Unit</a>' : ''}
       </div>`;
       if (correctCount === qs.length) markUnitCompleted();
     }
