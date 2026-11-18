@@ -36,13 +36,13 @@
   * **NO spaces are allowed on the left or right of `=`!**
   * **Official Ch.06 Quiz Q2 Trap:** *"An administrator can run the `name==Tom` command to assign value Tom to variable name."* -> **False!** (`==` is equality comparison, NOT assignment!).
 * **Brace Expansion (`${VAR}` — Ch.06, p.347):**
-  * If `FIRST=john`, `FIRST_=Jane`, and `LAST=Doe`, then `echo $FIRST_$LAST` outputs **`Doe`** (because bash looks up `$FIRST_` + `$LAST`? Wait: if `FIRST_` was unset it would output `Doe`; on Slide 27, when you want `$FIRST` followed by `_` and `$LAST`, you **must use braces**: **`echo ${FIRST}_$LAST` -> `john_Doe`**!).
+  * If `FIRST=john`, `FIRST_=Jane`, and `LAST=Doe`, then `echo FIRST_LAST` outputs **`Doe`** (because bash looks up `FIRST_` + `LAST`? Wait: if `FIRST_` was unset it would output `Doe`; on Slide 27, when you want `FIRST` followed by `_` and `LAST`, you **must use braces**: **`echo ${FIRST}_$LAST` -> `john_Doe`**!).
 * **`read <var>`:** Waits for user keyboard input and assigns it to `<var>`.
 
 ---
 
 ### 3. Arithmetic Operations (`$[...]`), Precedence & `++i` vs. `i++`
-* **Syntax:** **`$[expression]`** (e.g., `echo $[1+1]` -> `2`, `echo $[2*2]` -> `4`).
+* **Syntax:** **`[expression]`** (e.g., `echo [1+1]` -> `2`, `echo $[2*2]` -> `4`).
 * **Official Ch.06 Quiz Q1:** In a shell script arithmetic expression, **`*` means Multiplication**!
 * **Arithmetic Operator Precedence (Highest to Lowest — Ch.06, p.352):**
   1. **`<VAR>++`, `<VAR>--`** (Post-increment / Post-decrement)
@@ -54,7 +54,7 @@
 * **`++i` vs. `i++` (Ch.06, p.353):**
   * `i++` creates a temporary variable to save the old value of `i`, returns that old value, and then increments `i` by 1.
   * `++i` directly adds 1 to `i`'s memory space and returns the new value without creating temporary space (higher performance).
-  * **Slide 33 Example:** If `i=3`, `echo $[++i]` outputs **`4`** (`i` becomes 4); then `echo $[i++]` outputs **`4`** (returns old value 4, while `i` becomes 5); then `echo $i` outputs **`5`**!
+  * **Slide 33 Example:** If `i=3`, `echo [++i]` outputs **`4`** (`i` becomes 4); then `echo [i++]` outputs **`4`** (returns old value 4, while `i` becomes 5); then `echo $i` outputs **`5`**!
 
 ---
 

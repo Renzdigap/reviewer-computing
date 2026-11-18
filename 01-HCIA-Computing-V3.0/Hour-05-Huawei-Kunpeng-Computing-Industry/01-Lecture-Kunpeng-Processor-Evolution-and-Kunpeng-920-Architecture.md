@@ -15,8 +15,8 @@
 ---
 
 ### 1. Evolution of Huawei Kunpeng Processors (pp. 231, 233, 236)
-Huawei's Kunpeng open hardware platform spans **Processor $\rightarrow$ Single Node ( Kunpeng Open Motherboard / Server) $\rightarrow$ Cluster**, paired with **Kunpeng DevKit** and **Kunpeng BoostKit**:
-- **Motherboard Highlights (p. 231)**: **25% higher motherboard performance** (56G SerDes), **15% lower failure rate** than industry average (signal bit error rate $\text{BER} < 10^{-12}$), and **15% higher energy efficiency ratio** via **Dynamic Energy Management Technology (DEMT)**.
+Huawei's Kunpeng open hardware platform spans **Processor \rightarrow Single Node ( Kunpeng Open Motherboard / Server) \rightarrow Cluster**, paired with **Kunpeng DevKit** and **Kunpeng BoostKit**:
+- **Motherboard Highlights (p. 231)**: **25% higher motherboard performance** (56G SerDes), **15% lower failure rate** than industry average (signal bit error rate BER < 10^{-12}), and **15% higher energy efficiency ratio** via **Dynamic Energy Management Technology (DEMT)**.
 
 | Year | Chip / Processor | Milestone Significance (pp. 233, 236) |
 | :---: | :--- | :--- |
@@ -35,15 +35,15 @@ Huawei's Kunpeng open hardware platform spans **Processor $\rightarrow$ Single N
   1. **SoC (System on a Chip)**: Integrates the **CPU, southbridge, RoCE NIC, SAS/drive controller, and hardware encryption/compression acceleration engines** on a single chip (4 chips integrated into 1!).
   2. **Chip**: Encapsulated package using **Chip on Wafer on Substrate (CoWoS)** packaging technology.
   3. **Die**: Minimum physical silicon unit of a chip. **Kunpeng 920 encapsulates 3 dies**:
-     - **2 Compute (CPU) dies**: Each CPU die contains up to **32 cores** (8 clusters × 4 cores) and **4 DDR4 memory controllers** ($2 \times 4 = 8$ DDR4 channels total).
+     - **2 Compute (CPU) dies**: Each CPU die contains up to **32 cores** (8 clusters × 4 cores) and **4 DDR4 memory controllers** (2 × 4 = 8 DDR4 channels total).
      - **1 I/O die**: Provides **PCIe 4.0/CCIX** interfaces, **100GE RoCE** Ethernet ports, SAS/SATA storage controllers, inter-chip cache coherence interface, and hardware acceleration engines.
-  4. **Cluster**: Set of cores; **1 Cluster = 4 Cores**, and **1 CPU Die = 8 Clusters** ($8 \times 4 = 32$ cores/die, $64$ cores/processor).
+  4. **Cluster**: Set of cores; **1 Cluster = 4 Cores**, and **1 CPU Die = 8 Clusters** (8 × 4 = 32 cores/die, 64 cores/processor).
   5. **Core**: Computing unit of the CPU.
 
 ---
 
 ### 3. HCCS Interconnect & Performance Gains (pp. 237–239 — Official Quiz Q1!)
-- **HCCS (Huawei Cache Coherence System, p. 237)**: Provides cache-coherent memory access across kernels, devices, and clusters with up to **480 Gbit/s inter-chip bandwidth**, supporting **2-socket and 4-socket NUMA interconnection** with up to **256 physical cores** ($4 \times 64$).
+- **HCCS (Huawei Cache Coherence System, p. 237)**: Provides cache-coherent memory access across kernels, devices, and clusters with up to **480 Gbit/s inter-chip bandwidth**, supporting **2-socket and 4-socket NUMA interconnection** with up to **256 physical cores** (4 × 64).
 - **Performance Gains vs. Previous Generation (pp. 238–239)**:
   - **2.9x** single-processor integer computing performance (**3.9x** CPU core performance) and **4x** chip density.
   - **8-channel DDR4 controller**: Increases memory bandwidth by **60%**.

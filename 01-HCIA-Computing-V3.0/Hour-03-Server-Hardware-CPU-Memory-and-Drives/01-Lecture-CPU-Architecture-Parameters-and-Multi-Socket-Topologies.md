@@ -35,7 +35,7 @@
   3. **Time control** (strict timing sequences for signals and instruction execution)
   4. **Data processing** (arithmetic and logical operations on data)
 - **Three Key CPU Parameters (p. 140)**:
-  - **Dominant frequency (Clock frequency)**: E.g., at 100 MHz, 1 clock cycle = $10\text{ ns}$, which is twice as fast as 50 MHz ($20\text{ ns}$).
+  - **Dominant frequency (Clock frequency)**: E.g., at 100 MHz, 1 clock cycle = 10 ns, which is twice as fast as 50 MHz (20 ns).
   - **Cache (L1/L2/L3)**: Bridges the speed gap between fast CPU cores and slower main memory; operates near processor frequency.
   - **Number of cores & threads**: Normally a **1:1** correspondence (16 cores = 16 threads); with hyper-threading (SMT), it becomes **1:2** (16 cores = 32 threads).
 - **Arm RISC Characteristics (p. 137)**: Small size, low power, supports **Thumb (16-bit) / Arm (32-bit)** dual instruction sets (plus 64-bit AArch64), uses a large number of registers, performs most data operations in registers, and uses **fixed instruction length**.

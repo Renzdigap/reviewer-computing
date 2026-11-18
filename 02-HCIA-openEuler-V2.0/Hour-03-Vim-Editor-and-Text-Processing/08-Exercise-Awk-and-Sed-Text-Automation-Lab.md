@@ -84,7 +84,7 @@ enabled=1
 <summary>✅ <strong>Check Answer & Explanation (Question 1)</strong></summary>
 
 - **Correct Answer:** `B`
-- **Explanation:** Per Ch.03 (p.144), `awk` reads files or standard input by line, uses spaces as the default separator to slice each line, and uses `$0` to represent the entire line (`awk '{print $0}' test.txt`).
+- **Explanation:** Per Ch.03 (p.144), `awk` reads files or standard input by line, uses spaces as the default separator to slice each line, and uses `0` to represent the entire line (`awk '{print 0}' test.txt`).
 </details>
 
 ### Question 2 [Single-Choice]

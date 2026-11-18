@@ -34,12 +34,12 @@ Middleware connects system software (OS) and application software across differe
 ---
 
 ### 3. Databases, Data Models, OLTP vs. OLAP & Hardware Sizing (pp. 92–101)
-- **Database System (DBS)**: $\text{DBS} = \text{Database (DB)} + \text{DBMS} + \text{Database Applications}$ (plus DBA and users). DBMS provides **DDL** (Data Definition Language), **DML** (Data Manipulation Language), operation management (integrity, security, concurrency, fault recovery), and maintenance utilities.
+- **Database System (DBS)**: DBS = Database (DB) + DBMS + Database Applications (plus DBA and users). DBMS provides **DDL** (Data Definition Language), **DML** (Data Manipulation Language), operation management (integrity, security, concurrency, fault recovery), and maintenance utilities.
 - **Three Classical Database Models (p. 98 — Official Quiz Q2)**:
   - **Hierarchical model** (e.g., IBM **IMS**): Tree structure; **only one root node** has no parent; all other nodes have **only one parent node**.
   - **Network model**: **Allows more than one node to have no parent**, and **a node can have more than one parent**.
   - **Relational model (born 1969)**: Two-dimensional tables (rows/tuples and columns/attributes); relationships must be normalized with indivisible atomic data items.
-  *(Exam Note: On Ch.02 p.98, the text explicitly defines **Network model** as allowing $>1$ node with $>1$ parent; however, the slide notes on p.124 printed `2. C` as an answer-key typo. Always know both the technical definition of Network model and the official slide text!)*
+  *(Exam Note: On Ch.02 p.98, the text explicitly defines **Network model** as allowing >1 node with >1 parent; however, the slide notes on p.124 printed `2. C` as an answer-key typo. Always know both the technical definition of Network model and the official slide text!)*
 
 | Feature | OLTP (On-Line Transaction Processing) | OLAP (On-Line Analytical Processing, Codd 1993) |
 | :--- | :--- | :--- |
@@ -48,7 +48,7 @@ Middleware connects system software (OS) and application software across differe
 | **Records & Scale** | **Dozens** of records / **100 MB to GB** | **Millions** of records / **100 GB to TB** |
 | **Key Bottleneck / Metric** | **Memory efficiency**, TPS, SQL rate, concurrency | **Drive I/O bandwidth**, SQL duration, partitioning |
 
-- **Server Requirements for Databases (p. 101)**: Peak CPU load must **not exceed 85%**. Reference 4-socket Kunpeng openGauss 5.0.0+ configuration on **openEuler 20.03 LTS**: **TaiShan 200 (model 2480)**, **4 × Kunpeng 920 64-core CPUs**, **1 TB RAM**, **Hi1822 NIC (4 × 25GE, latency < 0.1 ms)**, **4 × NVMe SSDs** (V5 sequential write $\ge 2600\text{ MB/s}$).
+- **Server Requirements for Databases (p. 101)**: Peak CPU load must **not exceed 85%**. Reference 4-socket Kunpeng openGauss 5.0.0+ configuration on **openEuler 20.03 LTS**: **TaiShan 200 (model 2480)**, **4 × Kunpeng 920 64-core CPUs**, **1 TB RAM**, **Hi1822 NIC (4 × 25GE, latency < 0.1 ms)**, **4 × NVMe SSDs** (V5 sequential write ≥ 2600 MB/s).
 
 ---
 

@@ -26,7 +26,7 @@
     - Example: `SELECT instr('abcdabcdabcd', 'bcd', 2, 2);` -> Starts at pos 2 (`'bcdabcdabcd'`), 1st match is at pos 2, **2nd match is at pos `6`**!
   - **`overlay(str PLACING newstr FROM pos [FOR len])`**: Replaces `len` chars starting at `pos`.
     - Example: `SELECT overlay('hello' PLACING 'world' FROM 2 FOR 3);` -> Replaces `'ell'` with `'world'` -> **`'hworldo'`**.
-  - **`insert(str, pos, len, newstr)`**: `insert('quadratic', 5, 2, 'what')` $\\equiv$ `replace('quadratic', 'ra', 'what')` -> `'quadwhattic'`.
+  - **`insert(str, pos, len, newstr)`**: `insert('quadratic', 5, 2, 'what')` \\equiv `replace('quadratic', 'ra', 'what')` -> `'quadwhattic'`.
   - **`substring('Thomas' FROM 2 FOR 3)`** -> **`'hom'`**; **`replace('abcdefabcdef', 'cd', 'XXX')`** -> **`'abXXXefabXXXef'`**.
   - **`lpad('hi', 5, 'xyza')`** -> **`'xyzhi'`**; **`rpad('hi', 5, 'xy')`** -> **`'hixyx'`**; **`reverse('abcde')`** -> **`'edcba'`**.
   - **`char_length('hello')`** (char count) vs. **`lengthb('hello')`** (byte count); **`ascii(str)`**; **`concat`** / **`concat_ws`** (max 8000 bytes).
@@ -41,8 +41,8 @@
 - **Arithmetic Functions (pp. 456–458, Ch.05 p. 468 Quiz Q2: BC!)**:
   - **`sin(n)`**, **`cos(n)`**, **`acos(n)`**, **`asin(n)`**, **`abs(n)`**.
   - **`round(number [, decimals])`**: `round(1234.5678, -2)` -> **`1200`**; `round(1234.5678, 2)` -> **`1234.57`**.
-  - **`bitand(29, 15)`** -> **`13`** ($11101_2 \land 01111_2 = 01101_2 = 13$).
-  - **`ceil(-42.8)`** -> **`-42`** (smallest integer $\\ge x$); **`floor(-42.8)`** -> **`-43`** (largest integer $\\le x$); **`trunc(42.8)`** -> **`42`**; **`div(9,4)`** -> **`2`**; **`mod(9,4)`** -> **`1`**; **`cbrt(27.0)`** -> **`3`**; **`log(100.0)`** -> **`2`**.
+  - **`bitand(29, 15)`** -> **`13`** (11101_2 \land 01111_2 = 01101_2 = 13).
+  - **`ceil(-42.8)`** -> **`-42`** (smallest integer \≥ x); **`floor(-42.8)`** -> **`-43`** (largest integer \≤ x); **`trunc(42.8)`** -> **`42`**; **`div(9,4)`** -> **`2`**; **`mod(9,4)`** -> **`1`**; **`cbrt(27.0)`** -> **`3`**; **`log(100.0)`** -> **`2`**.
   - *(Note: `length(str)` and `hex(p1)` are character/string functions, so in Ch.05 p. 468 Quiz Q2 only **`B. sin(n)`** and **`C. round(v numeric, s int)`** are arithmetic functions!)*
 
 ---

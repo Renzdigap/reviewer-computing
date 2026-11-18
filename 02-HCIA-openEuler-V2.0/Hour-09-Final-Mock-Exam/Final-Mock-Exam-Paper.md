@@ -278,13 +278,13 @@
 
 - [ ] A. File descriptors `0`, `1`, and `2` correspond to Standard Input (stdin), Standard Output (stdout), and Standard Error (stderr).
 - [ ] B. `command &> output.log` redirects both stdout and stderr to `output.log` (overwriting its content).
-- [ ] C. Single quotes (`'...'`) preserve literal characters and prevent variable/command expansion, whereas double quotes (`"..."`) allow `$var` and `$(cmd)` expansion.
+- [ ] C. Single quotes (`'...'`) preserve literal characters and prevent variable/command expansion, whereas double quotes (`"..."`) allow `var` and `(cmd)` expansion.
 - [ ] D. A pipe (`cmd1 | cmd2`) sends the stdout of `cmd1` directly as the stdin of `cmd2`.
 
 ### Q35. [Multiple-Choice (Select ALL Correct) — 20 pts] (Ch.06 Shell Scripts)
 **Which of the following statements about Bash variables, test conditions, and loops are TRUE?**
 
-- [ ] A. `$#` gives the number of positional arguments passed to a script, while `$0` is the script's own name.
+- [ ] A. `#` gives the number of positional arguments passed to a script, while `0` is the script's own name.
 - [ ] B. In `[ ... ]` test expressions, `-eq` and `-gt` compare integers, while `=` and `-z` evaluate strings.
 - [ ] C. `[ -d /etc/dnf ]` returns exit code 0 (true) if `/etc/dnf` exists and is a directory.
 - [ ] D. In loops, `break` exits the entire enclosing loop immediately, whereas `continue` skips the rest of the current iteration and jumps to the next iteration.
@@ -354,7 +354,7 @@
 - [ ] B. False
 
 ### Q45. [True / False — 10 pts] (Ch.04 openEuler System Configuration)
-**The `su root` command switches identity to `root` AND resets all environment variables (including `$PATH` and `$HOME`) to `root`'s login environment, making it completely identical to `su - root`.**
+**The `su root` command switches identity to `root` AND resets all environment variables (including `PATH` and `HOME`) to `root`'s login environment, making it completely identical to `su - root`.**
 
 - [ ] A. True
 - [ ] B. False
@@ -393,7 +393,7 @@
 **Lab 1 (Text Processing Pipeline): Complete the command pipeline to extract all lines from `/etc/passwd` whose login shell ends with `bash`, then print ONLY column 1 (username) and column 7 (shell) using `awk` with `:` as delimiter.**
 
 ```bash
-____ 'bash$' /etc/passwd | ____ ____ ':' '{print $1, $7}'
+____ 'bash' /etc/passwd | ____ ____ ':' '{print 1, $7}'
 ```
 *Write your command / SQL / answer below:*
 ```text

@@ -439,7 +439,7 @@ p { margin-bottom: 10px; }
 <li>Offline RPM (must manually install all dependency RPMs): <code class="inline-code">rpm -ihv iSulad-xx.aarch64.rpm</code>.</li>
 <li><strong>Configuration Priority (Highest to Lowest — Ch.07, p.401):</strong></li>
 </ul>
-<p>$$\text{CLI (\texttt{isulad --xxx})} &gt; \text{Configuration file (\texttt{/etc/isulad/daemon.json})} &gt; \text{Default configurations in code}$$</p>
+<p>$CLI (`isulad --xxx)` &gt; Configuration file (`/etc/isulad/daemon.json)` &gt; Default configurations in code$</p>
 <ul class="md-list">
 <li><strong>CLI Configuration:</strong> e.g., <strong><code class="inline-code">isulad -l DEBUG</code></strong> (takes effect immediately without restarting; if managed by <code class="inline-code">systemd</code>, modifying <code class="inline-code">OPTIONS</code> in <strong><code class="inline-code">/etc/sysconfig/iSulad</code></strong> is equivalent to CLI configuration).</li>
 <li><strong>Config File (<code class="inline-code">/etc/isulad/daemon.json</code>):</strong> Modifying <code class="inline-code">/etc/isulad/daemon.json</code> <strong>requires restarting <code class="inline-code">iSulad</code></strong> (<strong><code class="inline-code">systemctl restart isulad</code></strong>) to take effect!</li>

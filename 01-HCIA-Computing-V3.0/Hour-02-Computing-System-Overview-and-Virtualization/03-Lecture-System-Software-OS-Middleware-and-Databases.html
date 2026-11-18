@@ -451,13 +451,13 @@ p { margin-bottom: 10px; }
 <p>---</p>
 <h3>3. Databases, Data Models, OLTP vs. OLAP &amp; Hardware Sizing (pp. 92–101)</h3>
 <ul class="md-list">
-<li><strong>Database System (DBS)</strong>: $\text{DBS} = \text{Database (DB)} + \text{DBMS} + \text{Database Applications}$ (plus DBA and users). DBMS provides <strong>DDL</strong> (Data Definition Language), <strong>DML</strong> (Data Manipulation Language), operation management (integrity, security, concurrency, fault recovery), and maintenance utilities.</li>
+<li><strong>Database System (DBS)</strong>: DBS = Database (DB) + DBMS + Database Applications (plus DBA and users). DBMS provides <strong>DDL</strong> (Data Definition Language), <strong>DML</strong> (Data Manipulation Language), operation management (integrity, security, concurrency, fault recovery), and maintenance utilities.</li>
 <li><strong>Three Classical Database Models (p. 98 — Official Quiz Q2)</strong>:</li>
 <li><strong>Hierarchical model</strong> (e.g., IBM <strong>IMS</strong>): Tree structure; <strong>only one root node</strong> has no parent; all other nodes have <strong>only one parent node</strong>.</li>
 <li><strong>Network model</strong>: <strong>Allows more than one node to have no parent</strong>, and <strong>a node can have more than one parent</strong>.</li>
 <li><strong>Relational model (born 1969)</strong>: Two-dimensional tables (rows/tuples and columns/attributes); relationships must be normalized with indivisible atomic data items.</li>
 </ul>
-<p><em>(Exam Note: On Ch.02 p.98, the text explicitly defines <strong>Network model</strong> as allowing $&gt;1$ node with $&gt;1$ parent; however, the slide notes on p.124 printed <code class="inline-code">2. C</code> as an answer-key typo. Always know both the technical definition of Network model and the official slide text!)</em></p>
+<p><em>(Exam Note: On Ch.02 p.98, the text explicitly defines <strong>Network model</strong> as allowing &gt;1 node with &gt;1 parent; however, the slide notes on p.124 printed <code class="inline-code">2. C</code> as an answer-key typo. Always know both the technical definition of Network model and the official slide text!)</em></p>
 <div class="table-wrap"><table class="md-table">
 <thead><tr><th>Feature</th><th>OLTP (On-Line Transaction Processing)</th><th>OLAP (On-Line Analytical Processing, Codd 1993)</th></tr></thead><tbody>
 <tr><td><strong>Orientation &amp; Users</strong></td><td><strong>Transaction</strong> / Clerks, DBAs</td><td><strong>Analysis</strong> / Decision-making personnel</td></tr>
@@ -466,7 +466,7 @@ p { margin-bottom: 10px; }
 <tr><td><strong>Key Bottleneck / Metric</strong></td><td><strong>Memory efficiency</strong>, TPS, SQL rate, concurrency</td><td><strong>Drive I/O bandwidth</strong>, SQL duration, partitioning</td></tr>
 </tbody></table></div>
 <ul class="md-list">
-<li><strong>Server Requirements for Databases (p. 101)</strong>: Peak CPU load must <strong>not exceed 85%</strong>. Reference 4-socket Kunpeng openGauss 5.0.0+ configuration on <strong>openEuler 20.03 LTS</strong>: <strong>TaiShan 200 (model 2480)</strong>, <strong>4 × Kunpeng 920 64-core CPUs</strong>, <strong>1 TB RAM</strong>, <strong>Hi1822 NIC (4 × 25GE, latency &lt; 0.1 ms)</strong>, <strong>4 × NVMe SSDs</strong> (V5 sequential write $\ge 2600\text{ MB/s}$).</li>
+<li><strong>Server Requirements for Databases (p. 101)</strong>: Peak CPU load must <strong>not exceed 85%</strong>. Reference 4-socket Kunpeng openGauss 5.0.0+ configuration on <strong>openEuler 20.03 LTS</strong>: <strong>TaiShan 200 (model 2480)</strong>, <strong>4 × Kunpeng 920 64-core CPUs</strong>, <strong>1 TB RAM</strong>, <strong>Hi1822 NIC (4 × 25GE, latency &lt; 0.1 ms)</strong>, <strong>4 × NVMe SSDs</strong> (V5 sequential write ≥ 2600 MB/s).</li>
 </ul>
           </div>
 

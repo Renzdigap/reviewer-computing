@@ -32,10 +32,10 @@
 ### 2. Redfish & iBMA 2.0 Architecture (pp. 194–196)
 - **Redfish (p. 194)**: Maintained by **DMTF (`www.dmtf.org`)** to solve security and horizontal-scalability limitations of IPMI. Based on **HTTPS/SSL** and uses **RESTful APIs** (`JSON`).
 - **Four Redfish HTTP Operations & Plugin Methods (p. 196)**:
-  - `GET` $\rightarrow$ `getAllInfo` (query resources)
-  - `POST` $\rightarrow$ `postRequest` (create/action)
-  - `PATCH` $\rightarrow$ `patchRequest` (update/modify parameters)
-  - `DELETE` $\rightarrow$ `deleteRequest` (remove resource)
+  - `GET` \rightarrow `getAllInfo` (query resources)
+  - `POST` \rightarrow `postRequest` (create/action)
+  - `PATCH` \rightarrow `patchRequest` (update/modify parameters)
+  - `DELETE` \rightarrow `deleteRequest` (remove resource)
 - **iBMA 2.0 (In-Band Management Agent, p. 195)**: Runs inside the host OS to obtain in-band metrics unavailable to out-of-band BMC (process info, CPU performance, RAID controller details) and integrates with **iBMC** via **vNIC** and **BOB** (*Baseboard Management Controller Out-of-Band*).
 
 ---

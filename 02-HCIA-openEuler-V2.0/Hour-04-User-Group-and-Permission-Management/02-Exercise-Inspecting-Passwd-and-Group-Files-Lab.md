@@ -12,7 +12,7 @@ You are performing a security audit of user accounts on openEuler. Inspect the `
 
 ### 📋 Step-by-Step Instructions
 1. Step 1: Use `grep` to view the `root` entry in `/etc/passwd` (`grep '^root:' /etc/passwd`).
-2. Step 2: Use `awk -F: '{print $1, $3, $7}' /etc/passwd` to print the username (field 1), UID (field 3), and login shell (field 7).
+2. Step 2: Use `awk -F: '{print 1, 3, $7}' /etc/passwd` to print the username (field 1), UID (field 3), and login shell (field 7).
 3. Step 3: View the first 5 lines of `/etc/group` using `head -n 5 /etc/group`.
 
 ### 📝 Starter Workspace (`root@openEuler:~#`)
@@ -20,7 +20,7 @@ You are performing a security audit of user accounts on openEuler. Inspect the `
 # Step 1: Match the root user line in /etc/passwd
 <grep_root_command>
 
-# Step 2: Print username ($1), UID ($3), and login shell ($7) from /etc/passwd
+# Step 2: Print username (1), UID (3), and login shell ($7) from /etc/passwd
 <awk_passwd_command>
 
 # Step 3: View the first 5 lines of /etc/group
@@ -31,7 +31,7 @@ You are performing a security audit of user accounts on openEuler. Inspect the `
 <summary>💡 <strong>Click to View Hints</strong></summary>
 
 - Use `grep '^root:' /etc/passwd`.
-- Use `awk -F: '{print $1, $3, $7}' /etc/passwd`.
+- Use `awk -F: '{print 1, 3, $7}' /etc/passwd`.
 - Use `head -n 5 /etc/group`.
 
 </details>
@@ -44,8 +44,8 @@ You are performing a security audit of user accounts on openEuler. Inspect the `
 # Step 1: Match the root user line in /etc/passwd
 grep '^root:' /etc/passwd
 
-# Step 2: Print username ($1), UID ($3), and login shell ($7) from /etc/passwd
-awk -F: '{print $1, $3, $7}' /etc/passwd
+# Step 2: Print username (1), UID (3), and login shell ($7) from /etc/passwd
+awk -F: '{print 1, 3, $7}' /etc/passwd
 
 # Step 3: View the first 5 lines of /etc/group
 head -n 5 /etc/group

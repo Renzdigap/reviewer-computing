@@ -19,7 +19,7 @@
   * Recommended (auto-resolves dependencies): **`yum install -y iSulad`** (installs iSula 2.0.11 by default on openEuler 22.03 LTS).
   * Offline RPM (must manually install all dependency RPMs): `rpm -ihv iSulad-xx.aarch64.rpm`.
 * **Configuration Priority (Highest to Lowest — Ch.07, p.401):**
-  $$\text{CLI (\texttt{isulad --xxx})} > \text{Configuration file (\texttt{/etc/isulad/daemon.json})} > \text{Default configurations in code}$$
+  $CLI (`isulad --xxx)` > Configuration file (`/etc/isulad/daemon.json)` > Default configurations in code$
   * **CLI Configuration:** e.g., **`isulad -l DEBUG`** (takes effect immediately without restarting; if managed by `systemd`, modifying `OPTIONS` in **`/etc/sysconfig/iSulad`** is equivalent to CLI configuration).
   * **Config File (`/etc/isulad/daemon.json`):** Modifying `/etc/isulad/daemon.json` **requires restarting `iSulad`** (**`systemctl restart isulad`**) to take effect!
 

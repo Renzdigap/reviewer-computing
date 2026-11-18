@@ -35,7 +35,7 @@ Equipment rooms can use **air-cooled** or **water-cooled** layouts across three 
 
 ### 3. TaiShan 200 (2280) Installation Workflow & Power-On Specs (pp. 293–295)
 - **Five High-Level Deployment Phases (p. 293)**:
-  `Hardware installation` $\rightarrow$ `Power-on` $\rightarrow$ `Initialization` (Query mgmt IP $\rightarrow$ Log in to iBMC WebUI $\rightarrow$ Check server $\rightarrow$ Change initial password) $\rightarrow$ `Configuring the BIOS` $\rightarrow$ `Configuring RAID` $\rightarrow$ `Installing the OS` $\rightarrow$ `Driver installation`.
+  `Hardware installation` \rightarrow `Power-on` \rightarrow `Initialization` (Query mgmt IP \rightarrow Log in to iBMC WebUI \rightarrow Check server \rightarrow Change initial password) \rightarrow `Configuring the BIOS` \rightarrow `Configuring RAID` \rightarrow `Installing the OS` \rightarrow `Driver installation`.
 - **Physical Mounting (p. 294)**: Support the server from the **bottom center of both sides**, place it onto the guide rails, slide it into the cabinet, align the mounting ears with the cabinet mounting bars, and tighten the **captive screws**.
 - **Power-On & Circuit Breaker Specifications (p. 295)**:
   - External power circuit breaker current rating connected to the server: **32 A AC** or **63 A DC**.

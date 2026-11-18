@@ -8,7 +8,7 @@
 ---
 
 ## 🎯 Learning Objectives
-- Trace the history of Unix/Linux shells (V6 shell, sh, csh, tcsh, ksh, bash) and inspect shells via `/etc/shells`, `$SHELL`, and `$0`
+- Trace the history of Unix/Linux shells (V6 shell, sh, csh, tcsh, ksh, bash) and inspect shells via `/etc/shells`, `SHELL`, and `0`
 - Execute scripts via `sh script.sh`, `./script.sh` (`chmod +x`), `$PATH`, and persistent background mode (`nohup ./my_script.sh &`)
 - Redirect standard input/output/error streams (`>`, `>>`, `<`, `<< EOF`) and chain processes with IPC pipes (`|`)
 
@@ -33,7 +33,7 @@ The **Shell** is the command interpreter in user space that parses user commands
 * **Shebang (`#!`):** The first line of a script specifies the interpreter, e.g., **`#!/bin/bash`** or `#!/bin/csh`.
 * **Execution Modes:**
   1. **`sh script_name.sh`:** Invokes the interpreter directly (does not require `x` permission on the file).
-  2. **`./script_name.sh` (or via `$PATH`):** Requires execute permission (**`chmod +x script_name.sh`**). To invoke by name from any directory, add its directory to `$PATH` (persist by adding `export PATH="$PATH:/new/path"` to `.bashrc` or `.bash_profile`).
+  2. **`./script_name.sh` (or via `PATH`):** Requires execute permission (**`chmod +x script_name.sh`**). To invoke by name from any directory, add its directory to `PATH` (persist by adding `export PATH="$PATH:/new/path"` to `.bashrc` or `.bash_profile`).
 * **Background Execution (`&` vs. `nohup` — Ch.06, p.336):**
   * **`./my_script.sh &`:** Runs in the background, **but stops if you exit the shell!**
   * **`nohup ./my_script.sh &`:** Keeps the script running even after exiting the shell! Standard output and standard error are automatically redirected to **`nohup.out`**. View background jobs with **`jobs`**.
@@ -53,7 +53,7 @@ Every Linux process opens **three text stream interfaces**: **Standard Input (st
 ---
 
 ## 🔑 Key Takeaways
-- **Check installed shells with 'cat /etc/shells', default login shell with 'echo $SHELL', and current shell with 'echo $0'.**
+- **Check installed shells with 'cat /etc/shells', default login shell with 'echo SHELL', and current shell with 'echo 0'.**
 - **Running './my_script.sh &' stops when the shell exits, whereas 'nohup ./my_script.sh &' keeps running after logout and redirects stdout/stderr to nohup.out.**
 - **'>' overwrites a file, '>>' appends to a file, '<' redirects file input, '<< EOF' provides inline input redirection (Here-Document), and '|' is an IPC pipe.**
 

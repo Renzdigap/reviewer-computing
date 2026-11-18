@@ -39,7 +39,7 @@
 
 ### 3. MOT Memory Formula & SQL Syntax (p. 305)
 - **Mandatory Memory Formula**:
-  $$(\text{max\_mot\_global\_memory} + \text{max\_mot\_local\_memory}) + 2\text{ GB} < \text{max\_process\_memory}$$
+  $$(max\_mot\_global\_memory + max\_mot\_local\_memory) + 2 GB < max\_process\_memory$$
   - **Global memory**: Long-term memory shared across all CPU cores storing all MOT table data and indexes.
   - **Local memory**: Short-term session memory used to handle private transaction data changes until commit.
 - **MOT SQL Syntax (FDW Mechanism)**:

@@ -52,7 +52,7 @@ ORDER BY { column_name | number | expression } [ ASC | DESC ] [ NULLS FIRST | NU
 - **`LIMIT count`**: Maximum number of rows to return.
 - **`OFFSET start`**: Number of initial rows to skip before returning rows.
 - **Three Equivalent Syntax Forms in openGauss (p. 392)**:
-  - **`LIMIT 5, 20`** $\equiv$ **`LIMIT 20 OFFSET 5`** $\equiv$ **`OFFSET 5 LIMIT 20`**
+  - **`LIMIT 5, 20`** \equiv **`LIMIT 20 OFFSET 5`** \equiv **`OFFSET 5 LIMIT 20`**
   - All three mean: **skip the first 5 rows, and return at most 20 rows**!
 
 ---

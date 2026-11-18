@@ -47,7 +47,7 @@ Repository files reside in **`/etc/yum.repos.d/`** by default:
 [OS]
 name=OS
 baseurl=https://repo.openeuler.org/openEuler-24.03-LTS-SP1/OS/$basearch/
-metalink=https://mirrors.openeuler.org/metalink?repo=$releasever/OS&arch=$basearch
+metalink=https://mirrors.openeuler.org/metalink?repo=releasever/OS&arch=basearch
 metadata_expire=1h
 enabled=1
 gpgcheck=1

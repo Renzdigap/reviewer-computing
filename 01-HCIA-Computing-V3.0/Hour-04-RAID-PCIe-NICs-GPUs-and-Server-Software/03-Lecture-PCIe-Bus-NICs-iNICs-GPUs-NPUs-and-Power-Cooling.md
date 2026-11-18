@@ -21,7 +21,7 @@
 - **TaiShan 200 Riser Cards & PCIe Slots (p. 172)**: Rear **I/O module 1** provides **slots 1–3** (when riser installed: **slot 2 & slot 3**); **I/O module 2** provides **slots 4–6** (when riser installed: **slot 5 & slot 6**); **I/O module 3** provides **slots 7–8**.
 - **PCIe 1.0 to 5.0 Transmission Rates & Bandwidths (p. 173)**:
 
-| PCIe Version | Launch Year | Transfer Rate | $\times 1$ Bandwidth | $\times 4$ Bandwidth | $\times 8$ Bandwidth | $\times 16$ Bandwidth |
+| PCIe Version | Launch Year | Transfer Rate | × 1 Bandwidth | × 4 Bandwidth | × 8 Bandwidth | × 16 Bandwidth |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **PCIe 1.0** | 2003 | **2.5 GT/s** | 250 MB/s | 1.0 GB/s | 2.0 GB/s | **4.0 GB/s** |
 | **PCIe 2.0** | 2007 | **5.0 GT/s** | 500 MB/s | 2.0 GB/s | 4.0 GB/s | **8.0 GB/s** |
@@ -29,19 +29,19 @@
 | **PCIe 4.0** | 2017 | **16.0 GT/s** | 1969 MB/s | 7.88 GB/s | 15.75 GB/s | **31.5 GB/s** |
 | **PCIe 5.0** | 2019 | **32.0 GT/s** | 3938 MB/s | 15.75 GB/s | 31.51 GB/s | **63.0 GB/s** |
 
-*(Pin counts & lengths: $\times 1 = 36\text{ pins} / 25\text{ mm}$; $\times 4 = 64\text{ pins} / 39\text{ mm}$; $\times 8 = 98\text{ pins} / 56\text{ mm}$; $\times 16 = 164\text{ pins} / 89\text{ mm}$.)*
+*(Pin counts & lengths: × 1 = 36 pins / 25 mm; × 4 = 64 pins / 39 mm; × 8 = 98 pins / 56 mm; × 16 = 164 pins / 89 mm.)*
 
 ---
 
 ### 2. Huawei Server NICs & Hi1822 iNIC (pp. 174–180 — Official Quiz Q1!)
-- **Ports**: **Electrical port (RJ45)** for twisted-pair cables (e.g., **TM210** FlexIO $4 \times \text{GE}$); **Optical port** (optical cage for **SFP+, SFP28, QSFP+** modules, e.g., **TM280** FlexIO $4 \times 25\text{GE}$).
+- **Ports**: **Electrical port (RJ45)** for twisted-pair cables (e.g., **TM210** FlexIO 4 × GE); **Optical port** (optical cage for **SFP+, SFP28, QSFP+** modules, e.g., **TM280** FlexIO 4 × 25GE).
 - **Four Huawei Server NIC Structural Types (p. 177 — Ch.03 Quiz Q1!)**:
-  1. **LOM (LAN on Motherboard)**: **Integrated directly in the PCH chip of the server mainboard and CANNOT be replaced**. Provides $2 \times \text{GE}$ electrical + $2 \times 10\text{GE}$ optical/electrical ports; **does NOT occupy PCIe slots**.
+  1. **LOM (LAN on Motherboard)**: **Integrated directly in the PCH chip of the server mainboard and CANNOT be replaced**. Provides 2 × GE electrical + 2 × 10GE optical/electrical ports; **does NOT occupy PCIe slots**.
   2. **PCIe Standard Card**: Self-developed or purchased; installed in **standard PCIe slots**.
   3. **FlexIO Card**: Non-standard Huawei-developed PCIe card mounted at the **rear panel**, used **ONLY on Huawei rack servers**.
   4. **Mezzanine Card**: Used **ONLY on compute nodes of Huawei E9000 blade servers** (no external physical ports; signals route via blade backplane; not interchangeable across vendors).
 - **Huawei Intelligent Converged Network Chips & IN200 iNIC (pp. 179–180)**:
-  - Evolution: **FE308 (2004, 1st-gen)** $\rightarrow$ **Hi1821 (2014, 2nd-gen)** $\rightarrow$ **Hi1822 (2018, 3rd-gen)**.
+  - Evolution: **FE308 (2004, 1st-gen)** \rightarrow **Hi1821 (2014, 2nd-gen)** \rightarrow **Hi1822 (2018, 3rd-gen)**.
   - **Hi1822 / IN200 iNIC**: Converged Ethernet (25GE–100GE) & FC (16G–32G), **48 built-in programmable data forwarding cores**, OVS (15 Mpps) & **RoCE v1/v2** offloading, SR-IOV, PCIe 3.0 x16 HHHL card.
 
 ---
@@ -51,8 +51,8 @@
   - **ALU Chip Area**: ALU accounts for **5% of CPU chip space** vs. **40% of GPU chip space**. Discrete GPUs (PCIe, e.g., NVIDIA Tesla/GeForce, AMD Radeon/FireStream) have independent video memory; Integrated GPUs (in CPU) occupy system memory.
   - **NPU**: Simulates biological neurons and synapses at the circuit layer; **intermediate neuron layer results do NOT need to be output to main memory** but pass directly to the next layer, Processing a group of neurons in 1 or a few instructions. Both GPUs and NPUs require **CPU cooperation**.
 - **Computing Power Metrics (pp. 184–185)**:
-  - **FLOPS** (Floating-Point Operations/s): **MFLOPS ($10^6$)**, **GFLOPS ($10^9$)**, **TFLOPS ($10^{12}$)**, **PFLOPS ($10^{15}$)**, **EFLOPS ($10^{18}$)**.
-  - **TOPS** ($10^{12}$ Ops/s): Focuses on **integer computing power**.
+  - **FLOPS** (Floating-Point Operations/s): **MFLOPS (10^6)**, **GFLOPS (10^9)**, **TFLOPS (10^{12})**, **PFLOPS (10^{15})**, **EFLOPS (10^{18})**.
+  - **TOPS** (10^{12} Ops/s): Focuses on **integer computing power**.
 - **Server Cooling (pp. 186–187)**:
   - **Indirect Liquid Cooling**: **Cold plate** (uses safe, non-toxic deionized water + glycol in closed loop over main heat components; other components cooled by air/liquid doors).
   - **Direct Liquid Cooling (100% liquid)**: **Spray** (selective coolant spray) and **Immersion** (single-phase or two-phase low-boiling-point refrigerant).

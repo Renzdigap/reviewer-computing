@@ -428,16 +428,16 @@ p { margin-bottom: 10px; }
 
           <div class="objectives-card">
             <h3>🎯 Learning Objectives</h3>
-            <ul class="md-list"><li>Calculate the row count ($I \times J$) and column count ($N + M$) of a Cartesian Product (<code class="inline-code">SELECT * FROM A, B;</code>)</li><li>Write <code class="inline-code">INNER JOIN ... ON</code> queries and understand the legacy <code class="inline-code">(+)</code> operator caveat</li><li>Contrast <code class="inline-code">LEFT [OUTER] JOIN</code>, <code class="inline-code">RIGHT [OUTER] JOIN</code>, and <code class="inline-code">FULL [OUTER] JOIN</code> on Huawei's <code class="inline-code">education</code> and <code class="inline-code">training</code> tables</li></ul>
+            <ul class="md-list"><li>Calculate the row count (I × J) and column count (N + M) of a Cartesian Product (<code class="inline-code">SELECT * FROM A, B;</code>)</li><li>Write <code class="inline-code">INNER JOIN ... ON</code> queries and understand the legacy <code class="inline-code">(+)</code> operator caveat</li><li>Contrast <code class="inline-code">LEFT [OUTER] JOIN</code>, <code class="inline-code">RIGHT [OUTER] JOIN</code>, and <code class="inline-code">FULL [OUTER] JOIN</code> on Huawei's <code class="inline-code">education</code> and <code class="inline-code">training</code> tables</li></ul>
           </div>
 
           <div class="lecture-prose">
             <h3>1. Cartesian Product &amp; Join Basics (pp. 383–384)</h3>
 <ul class="md-list">
-<li><strong>Cartesian Product (Direct Product, $X \\times Y$, p. 383)</strong>:</li>
-<li>If table $X$ has <strong>$I$ tuples (rows)</strong> and <strong>$N$ attributes (columns)</strong>, and table $Y$ has <strong>$J$ tuples</strong> and <strong>$M$ attributes</strong>, then <code class="inline-code">SELECT * FROM X, Y;</code> (a join without any <code class="inline-code">WHERE</code> or <code class="inline-code">ON</code> join condition) produces:</li>
-<li><strong>$I \\times J$ tuples (rows)</strong> (e.g., 4 rows in $A$ $\\times$ 5 rows in $B$ = <strong>20 rows</strong>).</li>
-<li><strong>$N + M$ attributes (columns)</strong>.</li>
+<li><strong>Cartesian Product (Direct Product, X \× Y, p. 383)</strong>:</li>
+<li>If table X has <strong>I tuples (rows)</strong> and <strong>N attributes (columns)</strong>, and table Y has <strong>J tuples</strong> and <strong>M attributes</strong>, then <code class="inline-code">SELECT * FROM X, Y;</code> (a join without any <code class="inline-code">WHERE</code> or <code class="inline-code">ON</code> join condition) produces:</li>
+<li><strong>I \× J tuples (rows)</strong> (e.g., 4 rows in A \× 5 rows in B = <strong>20 rows</strong>).</li>
+<li><strong>N + M attributes (columns)</strong>.</li>
 <li><strong>Table References in <code class="inline-code">FROM</code></strong>: Can be ordinary tables, views, or subqueries (<code class="inline-code">(SELECT ...) AS alias</code>).</li>
 <li><strong>Note on <code class="inline-code">(+)</code> Outer Join Operator (p. 384)</strong>: openGauss supports Oracle's <code class="inline-code">(+)</code> operator in <code class="inline-code">WHERE</code> clauses to convert a join into an outer join, <strong>but it is NOT recommended</strong> because it is not standard SQL syntax.</li>
 </ul>
@@ -451,7 +451,7 @@ p { margin-bottom: 10px; }
 <tr><td><strong>Full Outer Join</strong></td><td><code class="inline-code">A FULL [OUTER] JOIN B ON A.id = B.id</code></td><td>Returns all matched rows <strong>plus</strong> unmatched rows from <code class="inline-code">A</code> (padded with <code class="inline-code">NULL</code> on the right) <strong>and</strong> unmatched rows from <code class="inline-code">B</code> (padded with <code class="inline-code">NULL</code> on the left).</td></tr>
 </tbody></table></div>
 <p>---</p>
-<h3>3. Official Walkthrough: <code class="inline-code">education e</code> (<code class="inline-code">staff_id</code> 11, 12, 13) $\\bowtie$ <code class="inline-code">training t</code> (<code class="inline-code">staff_id</code> 10, 11, 12) (pp. 387–389)</h3>
+<h3>3. Official Walkthrough: <code class="inline-code">education e</code> (<code class="inline-code">staff_id</code> 11, 12, 13) \\bowtie <code class="inline-code">training t</code> (<code class="inline-code">staff_id</code> 10, 11, 12) (pp. 387–389)</h3>
 <ul class="md-list">
 <li><strong><code class="inline-code">education e</code></strong>: <code class="inline-code">(11, 'master')</code>, <code class="inline-code">(12, 'doctor')</code>, <code class="inline-code">(13, 'scholar')</code></li>
 <li><strong><code class="inline-code">training t</code></strong>: <code class="inline-code">(10, 90)</code>, <code class="inline-code">(11, 92)</code>, <code class="inline-code">(12, 95)</code></li>

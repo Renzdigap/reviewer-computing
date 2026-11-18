@@ -15,7 +15,7 @@
 ---
 
 ### 1. Client Tools vs. Server Tools Classification (pp. 102–104, Ch.02 Quiz Q1!)
-All tools are located in `$GPHOME/script` and `$GAUSSHOME/bin`.
+All tools are located in `GPHOME/script` and `GAUSSHOME/bin`.
 - **Client Tool (ONLY ONE in this table!)**:
   - **`gsql`**: CLI database connection tool used by clients to connect to the server, run interactive/scripted SQL statements, and execute meta-commands (`\l`, `\c`, `\dt`, `\d`, `\q`). **(`gsql` is NOT a server tool — exact Ch.02 Quiz Q1: C!)**
 - **11 Server Tools (p. 104)**:

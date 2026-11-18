@@ -32,13 +32,13 @@
 | **Database capacity** | Varies depending on the OS and hardware |
 | **Maximum size of a single table** | **32 TB** |
 | **Maximum size of data in a single row / single field** | **1 GB** (Row) / **1 GB** (Field) |
-| **Maximum number of records in each table** | **$2^{48}$** |
+| **Maximum number of records in each table** | **2^{48}** |
 | **Number of columns in a single table** | **250 to 1,600** (varies with field type) |
 | **Number of indexes / constraints on a single table** | **Unlimited** |
 | **Maximum columns in a composite index** | **32** (up to 16 recommended in DDL guide) |
 | **Maximum concurrent connections** | **10,000** |
 | **Maximum partitions in a partitioned table** | **32,768 (Range partitioning)** / **64 (Hash or List partitioning)** |
-| **Size of each partition / records per partition** | **32 TB** / **$2^{55}$ records** |
+| **Size of each partition / records per partition** | **32 TB** / **2^{55} records** |
 
 ---
 

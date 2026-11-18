@@ -36,8 +36,8 @@
 | **Serial (Auto-Inc)** | `SMALLSERIAL` / `SERIAL` / `BIGSERIAL` | **2 / 4 / 8 bytes** | Not true types; creates integer col + sequence + `NOT NULL`. Cannot be added via `ALTER TABLE` or used in temp tables. |
 | **Arbitrary Precision** | `NUMERIC(p,s)` / `DECIMAL(p,s)` / `NUMBER(p,s)` / `DEC(p,s)` | **2 bytes per 4 decimal digits + 8-byte overhead** | `p` (precision) in `[1, 1000]`, `s` (scale) in `[0, p]` |
 | **Floating-Point** | `REAL` (`FLOAT4`) | **4 bytes** | Single-precision inexact float |
-| | `DOUBLE PRECISION` (`FLOAT8` / `BINARY_DOUBLE`) | **8 bytes** | Double-precision inexact float (`FLOAT(p)` is 4 or 8B for $p \in [1,53]$) |
-| **Character** | `CHAR(n)` / `CHARACTER(n)` / `NCHAR(n)` | Up to **10 MB** | Fixed-length, blank-padded (default $n=1$). ASCII = 1B/char; Unicode = 2B/char. |
+| | `DOUBLE PRECISION` (`FLOAT8` / `BINARY_DOUBLE`) | **8 bytes** | Double-precision inexact float (`FLOAT(p)` is 4 or 8B for p \in [1,53]) |
+| **Character** | `CHAR(n)` / `CHARACTER(n)` / `NCHAR(n)` | Up to **10 MB** | Fixed-length, blank-padded (default n=1). ASCII = 1B/char; Unicode = 2B/char. |
 | | `VARCHAR(n)` / `VARCHAR2(n)` / `NVARCHAR2(n)` | Up to **10 MB** | Variable-length string without blank padding |
 | | **`TEXT` / `CLOB`** | Up to **1 GB – 1 byte** | **`CLOB` is an alias of `TEXT` used to store large text objects (p. 372 Q2: True!)** |
 | **Date / Time** | `DATE` | **4 bytes** | Date and time |

@@ -34,7 +34,7 @@
   * A **Shell** (compiled in C) acts as the bridge between the user and the Linux kernel. Common shells include **`bash`** (default on openEuler), `sh`, `csh`, and `ksh`.
   * Prompt format: `[Current login user@Host name Current location]#/$`
   * **`#` (Hash/Pound):** Indicates the **root** superuser (`[root@openEuler ~]#`).
-  * **`$` (Dollar sign):** Indicates a **common (regular) user** (`[user@openEuler ~]$`).
+  * **`` (Dollar sign):** Indicates a **common (regular) user** (`[user@openEuler ~]`).
   * Use **`su - username`** to switch users, and **`id`** to check the current user's UID/GID.
 
 ---

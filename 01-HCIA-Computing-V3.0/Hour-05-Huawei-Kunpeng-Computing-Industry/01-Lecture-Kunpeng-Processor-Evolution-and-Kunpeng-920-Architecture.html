@@ -433,9 +433,9 @@ p { margin-bottom: 10px; }
 
           <div class="lecture-prose">
             <h3>1. Evolution of Huawei Kunpeng Processors (pp. 231, 233, 236)</h3>
-<p>Huawei's Kunpeng open hardware platform spans <strong>Processor $\rightarrow$ Single Node ( Kunpeng Open Motherboard / Server) $\rightarrow$ Cluster</strong>, paired with <strong>Kunpeng DevKit</strong> and <strong>Kunpeng BoostKit</strong>:</p>
+<p>Huawei's Kunpeng open hardware platform spans <strong>Processor \rightarrow Single Node ( Kunpeng Open Motherboard / Server) \rightarrow Cluster</strong>, paired with <strong>Kunpeng DevKit</strong> and <strong>Kunpeng BoostKit</strong>:</p>
 <ul class="md-list">
-<li><strong>Motherboard Highlights (p. 231)</strong>: <strong>25% higher motherboard performance</strong> (56G SerDes), <strong>15% lower failure rate</strong> than industry average (signal bit error rate $\text{BER} &lt; 10^{-12}$), and <strong>15% higher energy efficiency ratio</strong> via <strong>Dynamic Energy Management Technology (DEMT)</strong>.</li>
+<li><strong>Motherboard Highlights (p. 231)</strong>: <strong>25% higher motherboard performance</strong> (56G SerDes), <strong>15% lower failure rate</strong> than industry average (signal bit error rate BER &lt; 10^{-12}), and <strong>15% higher energy efficiency ratio</strong> via <strong>Dynamic Energy Management Technology (DEMT)</strong>.</li>
 </ul>
 <div class="table-wrap"><table class="md-table">
 <thead><tr><th>Year</th><th>Chip / Processor</th><th>Milestone Significance (pp. 233, 236)</th></tr></thead><tbody>
@@ -458,17 +458,17 @@ p { margin-bottom: 10px; }
 <li><strong>Die</strong>: Minimum physical silicon unit of a chip. <strong>Kunpeng 920 encapsulates 3 dies</strong>:</li>
 </ol>
 <ul class="md-list">
-<li><strong>2 Compute (CPU) dies</strong>: Each CPU die contains up to <strong>32 cores</strong> (8 clusters × 4 cores) and <strong>4 DDR4 memory controllers</strong> ($2 \times 4 = 8$ DDR4 channels total).</li>
+<li><strong>2 Compute (CPU) dies</strong>: Each CPU die contains up to <strong>32 cores</strong> (8 clusters × 4 cores) and <strong>4 DDR4 memory controllers</strong> (2 × 4 = 8 DDR4 channels total).</li>
 <li><strong>1 I/O die</strong>: Provides <strong>PCIe 4.0/CCIX</strong> interfaces, <strong>100GE RoCE</strong> Ethernet ports, SAS/SATA storage controllers, inter-chip cache coherence interface, and hardware acceleration engines.</li>
 </ul>
 <ol class="md-list">
-<li><strong>Cluster</strong>: Set of cores; <strong>1 Cluster = 4 Cores</strong>, and <strong>1 CPU Die = 8 Clusters</strong> ($8 \times 4 = 32$ cores/die, $64$ cores/processor).</li>
+<li><strong>Cluster</strong>: Set of cores; <strong>1 Cluster = 4 Cores</strong>, and <strong>1 CPU Die = 8 Clusters</strong> (8 × 4 = 32 cores/die, 64 cores/processor).</li>
 <li><strong>Core</strong>: Computing unit of the CPU.</li>
 </ol>
 <p>---</p>
 <h3>3. HCCS Interconnect &amp; Performance Gains (pp. 237–239 — Official Quiz Q1!)</h3>
 <ul class="md-list">
-<li><strong>HCCS (Huawei Cache Coherence System, p. 237)</strong>: Provides cache-coherent memory access across kernels, devices, and clusters with up to <strong>480 Gbit/s inter-chip bandwidth</strong>, supporting <strong>2-socket and 4-socket NUMA interconnection</strong> with up to <strong>256 physical cores</strong> ($4 \times 64$).</li>
+<li><strong>HCCS (Huawei Cache Coherence System, p. 237)</strong>: Provides cache-coherent memory access across kernels, devices, and clusters with up to <strong>480 Gbit/s inter-chip bandwidth</strong>, supporting <strong>2-socket and 4-socket NUMA interconnection</strong> with up to <strong>256 physical cores</strong> (4 × 64).</li>
 <li><strong>Performance Gains vs. Previous Generation (pp. 238–239)</strong>:</li>
 <li><strong>2.9x</strong> single-processor integer computing performance (<strong>3.9x</strong> CPU core performance) and <strong>4x</strong> chip density.</li>
 <li><strong>8-channel DDR4 controller</strong>: Increases memory bandwidth by <strong>60%</strong>.</li>

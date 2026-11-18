@@ -37,7 +37,7 @@
 ---
 
 ### 3. openGauss Enterprise-Class Open Source Database (pp. 266–269)
-- **Evolution & License (pp. 266–267)**: Internal incubation (2001–2011) $\rightarrow$ Joint productization (2011–2019) $\rightarrow$ **GaussDB global release on May 15, 2019** $\rightarrow$ **openGauss open-sourced on June 30, 2020** under the **Mulan Permissive Software License v2 (Mulan PSL v2)**.
+- **Evolution & License (pp. 266–267)**: Internal incubation (2001–2011) \rightarrow Joint productization (2011–2019) \rightarrow **GaussDB global release on May 15, 2019** \rightarrow **openGauss open-sourced on June 30, 2020** under the **Mulan Permissive Software License v2 (Mulan PSL v2)**.
 - **Four Core Strengths of openGauss (pp. 268–269)**:
   1. **Superb Performance**: Multi-core concurrency control + Kunpeng optimization reaching **1,500,000 tpmC (1.5M tpmC)** TPC-C benchmark on a **Kunpeng 2-socket server**; **NUMA-aware data structures** in the kernel; **SQL bypass** intelligent engine.
   2. **Constant Availability**: Primary/standby sync, async, and **cascaded standby** deployment; **Data page CRC check** with automatic damaged-page restoration from standby; parallel recovery promoting **standby to primary within 10 seconds (`< 10s` RTO)**.

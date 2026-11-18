@@ -461,19 +461,19 @@ p { margin-bottom: 10px; }
 <li><strong>Method 1 — Using VNC / BIOS Configuration Utility (pp. 322–323)</strong>:</li>
 </ul>
 <ol class="md-list">
-<li>In BIOS <strong><code class="inline-code">Advanced</code></strong> tab, select the Avago RAID controller card $\rightarrow$ <strong><code class="inline-code">Main Menu &gt; Configuration Management &gt; Create Virtual Drive</code></strong>.</li>
+<li>In BIOS <strong><code class="inline-code">Advanced</code></strong> tab, select the Avago RAID controller card \rightarrow <strong><code class="inline-code">Main Menu &gt; Configuration Management &gt; Create Virtual Drive</code></strong>.</li>
 <li>Configure parameters:</li>
 </ol>
 <ul class="md-list">
 <li><strong>Select RAID Level</strong> (e.g., RAID 1)</li>
 <li><strong>Select Drives From</strong>: <strong><code class="inline-code">Unconfigured Capacity</code></strong> (free drives not in any virtual drive) or <strong><code class="inline-code">Free Capacity</code></strong> (unused space in an existing drive group)</li>
-<li><strong>Select Drives</strong>: Use arrow keys and <strong><code class="inline-code">Space</code> bar</strong> to select member drives $\rightarrow$ <strong><code class="inline-code">Apply Changes</code></strong></li>
+<li><strong>Select Drives</strong>: Use arrow keys and <strong><code class="inline-code">Space</code> bar</strong> to select member drives \rightarrow <strong><code class="inline-code">Apply Changes</code></strong></li>
 <li><strong>Access Policy</strong>: <strong><code class="inline-code">Read/Write</code></strong>, <strong><code class="inline-code">Read Only</code></strong>, or <strong><code class="inline-code">Blocked</code></strong></li>
 <li><strong>Method 2 — Using iBMC WebUI (pp. 324–325)</strong>:</li>
 </ul>
 <ol class="md-list">
 <li>Choose <strong><code class="inline-code">System &gt; Storage Management</code></strong>, expand <strong><code class="inline-code">PCIe Card</code></strong>, and click <strong><code class="inline-code">Add</code></strong> next to the RAID card to open <strong>Create Logical Drive</strong>.</li>
-<li>Example (p. 325): Set <strong>Name</strong> = <code class="inline-code">Data</code>, <strong>Initialization State</strong> = <code class="inline-code">Quick Init</code>, <strong>RAID Level</strong> = <code class="inline-code">5</code>. With <strong>four 8 TB SATA HDDs</strong> installed, each 8 TB decimal HDD has an actual binary available capacity of about <strong><code class="inline-code">7.2 TB</code></strong> in Storage Management (so a 4-drive RAID 5 provides $3 \times 7.2\text{ TB} \approx 21.6\text{ TB}$).</li>
+<li>Example (p. 325): Set <strong>Name</strong> = <code class="inline-code">Data</code>, <strong>Initialization State</strong> = <code class="inline-code">Quick Init</code>, <strong>RAID Level</strong> = <code class="inline-code">5</code>. With <strong>four 8 TB SATA HDDs</strong> installed, each 8 TB decimal HDD has an actual binary available capacity of about <strong><code class="inline-code">7.2 TB</code></strong> in Storage Management (so a 4-drive RAID 5 provides 3 × 7.2 TB ≈ 21.6 TB).</li>
 </ol>
           </div>
 

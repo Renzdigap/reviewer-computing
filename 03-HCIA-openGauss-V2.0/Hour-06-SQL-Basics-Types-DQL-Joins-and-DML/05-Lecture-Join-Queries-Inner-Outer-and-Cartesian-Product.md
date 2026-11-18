@@ -8,17 +8,17 @@
 ---
 
 ## 🎯 Learning Objectives
-- Calculate the row count ($I \times J$) and column count ($N + M$) of a Cartesian Product (`SELECT * FROM A, B;`)
+- Calculate the row count (I × J) and column count (N + M) of a Cartesian Product (`SELECT * FROM A, B;`)
 - Write `INNER JOIN ... ON` queries and understand the legacy `(+)` operator caveat
 - Contrast `LEFT [OUTER] JOIN`, `RIGHT [OUTER] JOIN`, and `FULL [OUTER] JOIN` on Huawei's `education` and `training` tables
 
 ---
 
 ### 1. Cartesian Product & Join Basics (pp. 383–384)
-- **Cartesian Product (Direct Product, $X \\times Y$, p. 383)**:
-  - If table $X$ has **$I$ tuples (rows)** and **$N$ attributes (columns)**, and table $Y$ has **$J$ tuples** and **$M$ attributes**, then `SELECT * FROM X, Y;` (a join without any `WHERE` or `ON` join condition) produces:
-    - **$I \\times J$ tuples (rows)** (e.g., 4 rows in $A$ $\\times$ 5 rows in $B$ = **20 rows**).
-    - **$N + M$ attributes (columns)**.
+- **Cartesian Product (Direct Product, X \× Y, p. 383)**:
+  - If table X has **I tuples (rows)** and **N attributes (columns)**, and table Y has **J tuples** and **M attributes**, then `SELECT * FROM X, Y;` (a join without any `WHERE` or `ON` join condition) produces:
+    - **I \× J tuples (rows)** (e.g., 4 rows in A \× 5 rows in B = **20 rows**).
+    - **N + M attributes (columns)**.
 - **Table References in `FROM`**: Can be ordinary tables, views, or subqueries (`(SELECT ...) AS alias`).
 - **Note on `(+)` Outer Join Operator (p. 384)**: openGauss supports Oracle's `(+)` operator in `WHERE` clauses to convert a join into an outer join, **but it is NOT recommended** because it is not standard SQL syntax.
 
@@ -35,7 +35,7 @@
 
 ---
 
-### 3. Official Walkthrough: `education e` (`staff_id` 11, 12, 13) $\\bowtie$ `training t` (`staff_id` 10, 11, 12) (pp. 387–389)
+### 3. Official Walkthrough: `education e` (`staff_id` 11, 12, 13) \\bowtie `training t` (`staff_id` 10, 11, 12) (pp. 387–389)
 - **`education e`**: `(11, 'master')`, `(12, 'doctor')`, `(13, 'scholar')`
 - **`training t`**: `(10, 90)`, `(11, 92)`, `(12, 95)`
   - **`INNER JOIN`**: Returns only `11` and `12` (2 rows).

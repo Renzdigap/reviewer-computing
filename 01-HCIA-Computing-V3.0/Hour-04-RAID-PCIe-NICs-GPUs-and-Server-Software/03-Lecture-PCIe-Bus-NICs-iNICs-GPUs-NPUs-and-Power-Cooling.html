@@ -441,29 +441,29 @@ p { margin-bottom: 10px; }
 <li><strong>PCIe 1.0 to 5.0 Transmission Rates &amp; Bandwidths (p. 173)</strong>:</li>
 </ul>
 <div class="table-wrap"><table class="md-table">
-<thead><tr><th>PCIe Version</th><th>Launch Year</th><th>Transfer Rate</th><th>$\times 1$ Bandwidth</th><th>$\times 4$ Bandwidth</th><th>$\times 8$ Bandwidth</th><th>$\times 16$ Bandwidth</th></tr></thead><tbody>
+<thead><tr><th>PCIe Version</th><th>Launch Year</th><th>Transfer Rate</th><th>× 1 Bandwidth</th><th>× 4 Bandwidth</th><th>× 8 Bandwidth</th><th>× 16 Bandwidth</th></tr></thead><tbody>
 <tr><td><strong>PCIe 1.0</strong></td><td>2003</td><td><strong>2.5 GT/s</strong></td><td>250 MB/s</td><td>1.0 GB/s</td><td>2.0 GB/s</td><td><strong>4.0 GB/s</strong></td></tr>
 <tr><td><strong>PCIe 2.0</strong></td><td>2007</td><td><strong>5.0 GT/s</strong></td><td>500 MB/s</td><td>2.0 GB/s</td><td>4.0 GB/s</td><td><strong>8.0 GB/s</strong></td></tr>
 <tr><td><strong>PCIe 3.0</strong></td><td>2010</td><td><strong>8.0 GT/s</strong></td><td>984.6 MB/s</td><td>3.94 GB/s</td><td>7.88 GB/s</td><td><strong>15.8 GB/s</strong></td></tr>
 <tr><td><strong>PCIe 4.0</strong></td><td>2017</td><td><strong>16.0 GT/s</strong></td><td>1969 MB/s</td><td>7.88 GB/s</td><td>15.75 GB/s</td><td><strong>31.5 GB/s</strong></td></tr>
 <tr><td><strong>PCIe 5.0</strong></td><td>2019</td><td><strong>32.0 GT/s</strong></td><td>3938 MB/s</td><td>15.75 GB/s</td><td>31.51 GB/s</td><td><strong>63.0 GB/s</strong></td></tr>
 </tbody></table></div>
-<p><em>(Pin counts &amp; lengths: $\times 1 = 36\text{ pins} / 25\text{ mm}$; $\times 4 = 64\text{ pins} / 39\text{ mm}$; $\times 8 = 98\text{ pins} / 56\text{ mm}$; $\times 16 = 164\text{ pins} / 89\text{ mm}$.)</em></p>
+<p><em>(Pin counts &amp; lengths: × 1 = 36 pins / 25 mm; × 4 = 64 pins / 39 mm; × 8 = 98 pins / 56 mm; × 16 = 164 pins / 89 mm.)</em></p>
 <p>---</p>
 <h3>2. Huawei Server NICs &amp; Hi1822 iNIC (pp. 174–180 — Official Quiz Q1!)</h3>
 <ul class="md-list">
-<li><strong>Ports</strong>: <strong>Electrical port (RJ45)</strong> for twisted-pair cables (e.g., <strong>TM210</strong> FlexIO $4 \times \text{GE}$); <strong>Optical port</strong> (optical cage for <strong>SFP+, SFP28, QSFP+</strong> modules, e.g., <strong>TM280</strong> FlexIO $4 \times 25\text{GE}$).</li>
+<li><strong>Ports</strong>: <strong>Electrical port (RJ45)</strong> for twisted-pair cables (e.g., <strong>TM210</strong> FlexIO 4 × GE); <strong>Optical port</strong> (optical cage for <strong>SFP+, SFP28, QSFP+</strong> modules, e.g., <strong>TM280</strong> FlexIO 4 × 25GE).</li>
 <li><strong>Four Huawei Server NIC Structural Types (p. 177 — Ch.03 Quiz Q1!)</strong>:</li>
 </ul>
 <ol class="md-list">
-<li><strong>LOM (LAN on Motherboard)</strong>: <strong>Integrated directly in the PCH chip of the server mainboard and CANNOT be replaced</strong>. Provides $2 \times \text{GE}$ electrical + $2 \times 10\text{GE}$ optical/electrical ports; <strong>does NOT occupy PCIe slots</strong>.</li>
+<li><strong>LOM (LAN on Motherboard)</strong>: <strong>Integrated directly in the PCH chip of the server mainboard and CANNOT be replaced</strong>. Provides 2 × GE electrical + 2 × 10GE optical/electrical ports; <strong>does NOT occupy PCIe slots</strong>.</li>
 <li><strong>PCIe Standard Card</strong>: Self-developed or purchased; installed in <strong>standard PCIe slots</strong>.</li>
 <li><strong>FlexIO Card</strong>: Non-standard Huawei-developed PCIe card mounted at the <strong>rear panel</strong>, used <strong>ONLY on Huawei rack servers</strong>.</li>
 <li><strong>Mezzanine Card</strong>: Used <strong>ONLY on compute nodes of Huawei E9000 blade servers</strong> (no external physical ports; signals route via blade backplane; not interchangeable across vendors).</li>
 </ol>
 <ul class="md-list">
 <li><strong>Huawei Intelligent Converged Network Chips &amp; IN200 iNIC (pp. 179–180)</strong>:</li>
-<li>Evolution: <strong>FE308 (2004, 1st-gen)</strong> $\rightarrow$ <strong>Hi1821 (2014, 2nd-gen)</strong> $\rightarrow$ <strong>Hi1822 (2018, 3rd-gen)</strong>.</li>
+<li>Evolution: <strong>FE308 (2004, 1st-gen)</strong> \rightarrow <strong>Hi1821 (2014, 2nd-gen)</strong> \rightarrow <strong>Hi1822 (2018, 3rd-gen)</strong>.</li>
 <li><strong>Hi1822 / IN200 iNIC</strong>: Converged Ethernet (25GE–100GE) &amp; FC (16G–32G), <strong>48 built-in programmable data forwarding cores</strong>, OVS (15 Mpps) &amp; <strong>RoCE v1/v2</strong> offloading, SR-IOV, PCIe 3.0 x16 HHHL card.</li>
 </ul>
 <p>---</p>
@@ -473,8 +473,8 @@ p { margin-bottom: 10px; }
 <li><strong>ALU Chip Area</strong>: ALU accounts for <strong>5% of CPU chip space</strong> vs. <strong>40% of GPU chip space</strong>. Discrete GPUs (PCIe, e.g., NVIDIA Tesla/GeForce, AMD Radeon/FireStream) have independent video memory; Integrated GPUs (in CPU) occupy system memory.</li>
 <li><strong>NPU</strong>: Simulates biological neurons and synapses at the circuit layer; <strong>intermediate neuron layer results do NOT need to be output to main memory</strong> but pass directly to the next layer, Processing a group of neurons in 1 or a few instructions. Both GPUs and NPUs require <strong>CPU cooperation</strong>.</li>
 <li><strong>Computing Power Metrics (pp. 184–185)</strong>:</li>
-<li><strong>FLOPS</strong> (Floating-Point Operations/s): <strong>MFLOPS ($10^6$)</strong>, <strong>GFLOPS ($10^9$)</strong>, <strong>TFLOPS ($10^{12}$)</strong>, <strong>PFLOPS ($10^{15}$)</strong>, <strong>EFLOPS ($10^{18}$)</strong>.</li>
-<li><strong>TOPS</strong> ($10^{12}$ Ops/s): Focuses on <strong>integer computing power</strong>.</li>
+<li><strong>FLOPS</strong> (Floating-Point Operations/s): <strong>MFLOPS (10^6)</strong>, <strong>GFLOPS (10^9)</strong>, <strong>TFLOPS (10^{12})</strong>, <strong>PFLOPS (10^{15})</strong>, <strong>EFLOPS (10^{18})</strong>.</li>
+<li><strong>TOPS</strong> (10^{12} Ops/s): Focuses on <strong>integer computing power</strong>.</li>
 <li><strong>Server Cooling (pp. 186–187)</strong>:</li>
 <li><strong>Indirect Liquid Cooling</strong>: <strong>Cold plate</strong> (uses safe, non-toxic deionized water + glycol in closed loop over main heat components; other components cooled by air/liquid doors).</li>
 <li><strong>Direct Liquid Cooling (100% liquid)</strong>: <strong>Spray</strong> (selective coolant spray) and <strong>Immersion</strong> (single-phase or two-phase low-boiling-point refrigerant).</li>

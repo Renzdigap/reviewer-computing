@@ -50,9 +50,9 @@
 
 - **HDD Service Categories (p. 154)**: Enterprise-class performance, Enterprise-class capacity (SATA/SAS), Enterprise-class cloud drive (24/7 low power), Desktop drive (**5 day / 8 hour** household/PC use).
 - **SSD Service Categories by DWPD (*Drive Writes Per Day*, p. 154)**:
-  - **Read-intensive SSD**: $\text{DWPD} < 3$ (frequent reads)
-  - **Mixed read/write SSD**: $3 \le \text{DWPD} \le 10$ (balanced reads/writes)
-  - **Write-intensive SSD**: $\text{DWPD} > 10$ (frequent writes)
+  - **Read-intensive SSD**: DWPD < 3 (frequent reads)
+  - **Mixed read/write SSD**: 3 ≤ DWPD ≤ 10 (balanced reads/writes)
+  - **Write-intensive SSD**: DWPD > 10 (frequent writes)
 
 ---
 

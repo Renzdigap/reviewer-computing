@@ -3,7 +3,7 @@
 **Official Material Reference:** Chapter 06 (pp. 321–381)  
 **Pacing:** 60 Minutes (4 × 15-Minute Active Learning Sprints)
 
-Master openEuler Bash shell fundamentals, script execution modes (`sh`, `./`, `nohup`), text streams, redirection (`>`, `>>`, `<`, `<< EOF`), and pipes (`|`), write scripts with variables, quoting, `read`, and arithmetic extensions (`$[...]`), implement conditional branches (`if-then-fi`, `case`) and loops (`for`, `while`, `until`, `break`, `continue`), and debug scripts using `bash -x` and `$?` exit codes.
+Master openEuler Bash shell fundamentals, script execution modes (`sh`, `./`, `nohup`), text streams, redirection (`>`, `>>`, `<`, `<< EOF`), and pipes (`|`), write scripts with variables, quoting, `read`, and arithmetic extensions (`[...]`), implement conditional branches (`if-then-fi`, `case`) and loops (`for`, `while`, `until`, `break`, `continue`), and debug scripts using `bash -x` and `?` exit codes.
 
 ---
 

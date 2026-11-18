@@ -8,7 +8,7 @@
 ---
 
 ## 🎯 Learning Objectives
-- Analyze and slice text streams line-by-line using `awk` (`$0`, `$1..$n`, default space separator, `-F` custom field delimiter)
+- Analyze and slice text streams line-by-line using `awk` (`0`, `1..$n`, default space separator, `-F` custom field delimiter)
 - Understand how `sed` (stream editor) processes lines in a pattern buffer without altering the original file by default
 - Apply `sed` options (`-n`, `-e`, `-f`, `-i`, `-l`, `-r`) for non-interactive string replacement and in-place file editing
 
@@ -18,12 +18,12 @@
 **`awk`** is a powerful text analysis utility that reads files or standard input **line by line**, slices each line into fields using **spaces (whitespace) as the default separator**, and executes actions on each slice.
 * **Syntax:** `awk [options] 'action' filename`
 * **Positional Field Variables:**
-  * **`$0`**: Represents the **entire current line** (e.g., `awk '{print $0}' test.txt`).
-  * **`$1`, `$2`, `$3`...**: Represent the 1st, 2nd, 3rd field of the current line.
+  * **`0`**: Represents the **entire current line** (e.g., `awk '{print 0}' test.txt`).
+  * **`1`, `2`, `$3`...**: Represent the 1st, 2nd, 3rd field of the current line.
 * **Custom Field Separator (`-F`):**
   * Use `-F` to specify a delimiter other than whitespace, such as `:` for `/etc/passwd`:
     ```bash
-    awk -F: '{print $1, $3}' /etc/passwd
+    awk -F: '{print 1, 3}' /etc/passwd
     ```
 * **Pipeline Example from Official Material (Ch.03, p.144):**
   ```bash
@@ -55,7 +55,7 @@
 ---
 
 ## 🔑 Key Takeaways
-- **awk reads input line by line using spaces as the default separator; $0 is the entire line, $1 is the first field, and -F changes the field separator.**
+- **awk reads input line by line using spaces as the default separator; 0 is the entire line, 1 is the first field, and -F changes the field separator.**
 - **sed is a non-interactive stream editor that modifies text in a memory buffer by default without changing the source file on disk.**
 - **In sed, -i edits the original file directly in place, -n suppresses default output, -e enables multipoint editing, and -r enables extended regular expressions.**
 

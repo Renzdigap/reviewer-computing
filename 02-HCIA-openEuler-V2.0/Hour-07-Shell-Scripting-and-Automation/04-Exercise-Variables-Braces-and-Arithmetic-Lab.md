@@ -1,4 +1,4 @@
-# 💻 Hands-On Lab: Variable Brace Expansion (`${FIRST}_$LAST`) & Shell Arithmetic (`$[...]`) Time Calculation
+# 💻 Hands-On Lab: Variable Brace Expansion (`${FIRST}_LAST`) & Shell Arithmetic (`[...]`) Time Calculation
 
 **Pillar:** HCIA-openEuler V2.0 (Operating System & Cloud-Native iSula)  
 **Schedule Block:** Hour 07 — Shell Scripting, Variables, Control Flow & Automation (Sprint 2 of 4)  
@@ -8,12 +8,12 @@
 ---
 
 ## 🛠️ Part A: Practical Lab Scenario
-Complete the official openEuler shell script exercises from Ch.06 (pp. 347–350): use `${FIRST}_$LAST` to output `john_Doe`, and calculate the number of seconds in a day (`86400`) using `$[ $SEC_PER_MIN * $MIN_PER_HR * $HR_PER_DAY ]`.
+Complete the official openEuler shell script exercises from Ch.06 (pp. 347–350): use `${FIRST}_LAST` to output `john_Doe`, and calculate the number of seconds in a day (`86400`) using `[ SEC_PER_MIN * MIN_PER_HR * $HR_PER_DAY ]`.
 
 ### 📋 Step-by-Step Instructions
 1. Step 1: Assign `FIRST=john` and `LAST=Doe` (no spaces around `=`), and echo `${FIRST}_$LAST`.
 2. Step 2: Define `SEC_PER_MIN=60`, `MIN_PER_HR=60`, and `HR_PER_DAY=24`.
-3. Step 3: Compute `SEC_PER_DAY=$[ $SEC_PER_MIN * $MIN_PER_HR * $HR_PER_DAY ]` and echo the result.
+3. Step 3: Compute `SEC_PER_DAY=[ SEC_PER_MIN * MIN_PER_HR * HR_PER_DAY ]` and echo the result.
 
 ### 📝 Starter Workspace (`root@openEuler:~#`)
 ```bash
@@ -35,7 +35,7 @@ echo "There are $SEC_PER_DAY seconds in a day"
 <summary>💡 <strong>Click to View Hints</strong></summary>
 
 - Use `echo ${FIRST}_$LAST` (Ch.06 p.347).
-- Use `SEC_PER_DAY=$[ $SEC_PER_MIN * $MIN_PER_HR * $HR_PER_DAY ]` (Ch.06 p.350).
+- Use `SEC_PER_DAY=[ SEC_PER_MIN * MIN_PER_HR * HR_PER_DAY ]` (Ch.06 p.350).
 - Remember `*` is the multiplication operator in shell expressions.
 
 </details>
@@ -55,7 +55,7 @@ echo ${FIRST}_$LAST
 SEC_PER_MIN=60
 MIN_PER_HR=60
 HR_PER_DAY=24
-SEC_PER_DAY=$[ $SEC_PER_MIN * $MIN_PER_HR * $HR_PER_DAY ]
+SEC_PER_DAY=[ SEC_PER_MIN * MIN_PER_HR * HR_PER_DAY ]
 echo "There are $SEC_PER_DAY seconds in a day"
 ```
 
@@ -104,7 +104,7 @@ There are 86400 seconds in a day
 - A. `printenv` views global environment variables, while `set` views all variables (local, global, user-defined) and functions in the process.
 - B. Single quotes (`'`) preserve literal characters without expanding variables, whereas double quotes (`"`) expand variables and commands.
 - C. A shell variable name must start with a letter or underscore (`_`) and cannot contain spaces around `=` during assignment.
-- D. If `i=3`, running `echo $[++i]` outputs `4`, and then running `echo $[i++]` also outputs `4` (leaving `i` equal to `5`).
+- D. If `i=3`, running `echo [++i]` outputs `4`, and then running `echo [i++]` also outputs `4` (leaving `i` equal to `5`).
 
 <details>
 <summary>✅ <strong>Check Answer & Explanation (Question 3)</strong></summary>

@@ -15,7 +15,7 @@
 ---
 
 ### 1. Computing System Architecture & RASUM Features (pp. 72–75)
-- **Definition**: $\text{Computing System} = \text{Computer} + \text{Data}$. In a narrow sense, it consists of a **hardware system** (hosts + peripherals) and a **software system** (system software + application software). Broadly, it is divided into three layers: **Hardware**, **Software**, and **Solutions**.
+- **Definition**: Computing System = Computer + Data. In a narrow sense, it consists of a **hardware system** (hosts + peripherals) and a **software system** (system software + application software). Broadly, it is divided into three layers: **Hardware**, **Software**, and **Solutions**.
 - **Five Server Features (RASUM, p. 75)**:
   - **R — Reliability**: Duration that the server operates consecutively without failure.
   - **A — Availability**: Percentage of normal system uptime and service time.

@@ -40,15 +40,15 @@
 
 ### 3. Configuring RAID via VNC (BIOS) and via iBMC WebUI (pp. 322–325)
 - **Method 1 — Using VNC / BIOS Configuration Utility (pp. 322–323)**:
-  1. In BIOS **`Advanced`** tab, select the Avago RAID controller card $\rightarrow$ **`Main Menu > Configuration Management > Create Virtual Drive`**.
+  1. In BIOS **`Advanced`** tab, select the Avago RAID controller card \rightarrow **`Main Menu > Configuration Management > Create Virtual Drive`**.
   2. Configure parameters:
      - **Select RAID Level** (e.g., RAID 1)
      - **Select Drives From**: **`Unconfigured Capacity`** (free drives not in any virtual drive) or **`Free Capacity`** (unused space in an existing drive group)
-     - **Select Drives**: Use arrow keys and **`Space` bar** to select member drives $\rightarrow$ **`Apply Changes`**
+     - **Select Drives**: Use arrow keys and **`Space` bar** to select member drives \rightarrow **`Apply Changes`**
      - **Access Policy**: **`Read/Write`**, **`Read Only`**, or **`Blocked`**
 - **Method 2 — Using iBMC WebUI (pp. 324–325)**:
   1. Choose **`System > Storage Management`**, expand **`PCIe Card`**, and click **`Add`** next to the RAID card to open **Create Logical Drive**.
-  2. Example (p. 325): Set **Name** = `Data`, **Initialization State** = `Quick Init`, **RAID Level** = `5`. With **four 8 TB SATA HDDs** installed, each 8 TB decimal HDD has an actual binary available capacity of about **`7.2 TB`** in Storage Management (so a 4-drive RAID 5 provides $3 \times 7.2\text{ TB} \approx 21.6\text{ TB}$).
+  2. Example (p. 325): Set **Name** = `Data`, **Initialization State** = `Quick Init`, **RAID Level** = `5`. With **four 8 TB SATA HDDs** installed, each 8 TB decimal HDD has an actual binary available capacity of about **`7.2 TB`** in Storage Management (so a 4-drive RAID 5 provides 3 × 7.2 TB ≈ 21.6 TB).
 
 ---
 

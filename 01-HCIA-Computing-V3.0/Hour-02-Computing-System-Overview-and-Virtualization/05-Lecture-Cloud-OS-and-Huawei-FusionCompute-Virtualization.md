@@ -44,9 +44,9 @@ Virtualization creates an abstraction layer over physical hardware to decouple O
 | Resource | Official FusionCompute Requirement (pp. 115–116) |
 | :--- | :--- |
 | **CPU** | CPUs in the same cluster **must be of the same model** and support hardware virtualization (e.g., **Intel VT-x** enabled in BIOS; x86 Intel/Hygon or Arm **Kunpeng 920**/Phytium). |
-| **Memory** | At least **8 GB** (**48 GB or more** is recommended). Host memory $\ge$ Management VM memory + Host management domain memory. |
-| **System Drive** | **VRM (Virtual Resource Manager) node**: $\ge \mathbf{270\text{ GB}}$; **Compute node (CNA)**: $\ge \mathbf{150\text{ GB}}$. Recommended: **two SAS drives in RAID 1** for system drives (and RAID 1 for local VM storage). |
-| **Network Port** | $\ge \mathbf{1}$ NIC interface; recommended **6 NICs** at **1000 Mbit/s (1 GE) or higher**. Network load should be $\le \mathbf{60\%}$ of bandwidth. |
+| **Memory** | At least **8 GB** (**48 GB or more** is recommended). Host memory ≥ Management VM memory + Host management domain memory. |
+| **System Drive** | **VRM (Virtual Resource Manager) node**: ≥ 270 GB; **Compute node (CNA)**: ≥ 150 GB. Recommended: **two SAS drives in RAID 1** for system drives (and RAID 1 for local VM storage). |
+| **Network Port** | ≥ 1 NIC interface; recommended **6 NICs** at **1000 Mbit/s (1 GE) or higher**. Network load should be ≤ 60% of bandwidth. |
 
 ---
 

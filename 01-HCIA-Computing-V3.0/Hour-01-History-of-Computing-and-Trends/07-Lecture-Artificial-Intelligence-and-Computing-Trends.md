@@ -16,7 +16,7 @@
 
 ### 1. AI, Machine Learning, Deep Learning & Basic Elements (pp. 47–51)
 - **Artificial Intelligence (AI)**: Coined by **John McCarthy in 1956** at the **Dartmouth Conference** as the *"science and engineering of making intelligent machines, especially intelligent computer programs."*
-- **Machine Learning (ML, 1980s)**: Proposed by **Arthur Samuel in 1959**; **Tom Mitchell** defined it via experience $E$, task class $T$, and performance measure $P$. Builds models from sample/training data without explicit rules.
+- **Machine Learning (ML, 1980s)**: Proposed by **Arthur Samuel in 1959**; **Tom Mitchell** defined it via experience E, task class T, and performance measure P. Builds models from sample/training data without explicit rules.
 - **Deep Learning (DL, 2010s)**: Subfield of ML originating from artificial neural networks (such as Multilayer Perceptron, **MLP**); **Geoffrey Hinton** spearheaded deep learning with backpropagation in **2006**.
 - **Four Basic Elements of AI Applications (pp. 48, 51, 61 Quiz Q1)**:
   1. **Data**
@@ -46,7 +46,7 @@
   - **Integer computations**: Outstanding in **text processing, storage, and big data analysis**.
   - **Floating-point computations**: Excellent in **scientific computing and video processing**.
 - **Two Major Computing Industry Trends (p. 58)**:
-  1. **PCs $\rightarrow$ Intelligent Mobile Terminals**: In 2023, 1.17 billion mobile terminals vs. 240 million PCs shipped. Processor shift from **x86 to Arm**, requiring **homogeneous computing power** across cloud data centers (DCs) and mobile devices.
+  1. **PCs \rightarrow Intelligent Mobile Terminals**: In 2023, 1.17 billion mobile terminals vs. 240 million PCs shipped. Processor shift from **x86 to Arm**, requiring **homogeneous computing power** across cloud data centers (DCs) and mobile devices.
   2. **All Things Connected (IoT & Cloud-Edge Collaboration)**: **AI computing power accounts for 80%** of computing power consumed in DCs. **Cloud-edge collaboration** uses **central training (Cloud DC) + edge inference (Edge)**.
 - **Key Chapter 01 Acronyms (pp. 64–65)**: **CANN** (*Compute Architecture for Neural Networks*, Ascend heterogeneous compute architecture for AI), **BMS** (*Bare Metal Server*), **NFV** (*Network Functions Virtualization*), **CRM** (*Computing Resource Manager*).
 

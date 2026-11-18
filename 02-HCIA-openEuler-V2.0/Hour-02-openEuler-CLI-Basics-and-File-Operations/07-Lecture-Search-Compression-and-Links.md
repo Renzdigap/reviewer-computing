@@ -25,7 +25,7 @@
 * **`locate [OPTION] PATTERN` (Fast database index search):**
   * Searches the pre-built index database `/var/lib/mlocate/mlocate.db`.
   * **Must run `updatedb` first** if the database does not exist or newly created files are not yet indexed!
-* **`which [-a] programname`:** Searches only directories in **`$PATH`** to find the absolute path of an executable command (`-a` lists all matches across `$PATH`).
+* **`which [-a] programname`:** Searches only directories in **`PATH`** to find the absolute path of an executable command (`-a` lists all matches across `PATH`).
 
 ---
 

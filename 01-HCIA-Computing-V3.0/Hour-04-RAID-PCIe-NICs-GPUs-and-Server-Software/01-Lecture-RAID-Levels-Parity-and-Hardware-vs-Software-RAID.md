@@ -17,16 +17,16 @@
 ### 1. RAID Core Technologies & Standard/Nested Levels (pp. 159–163)
 Proposed by **Prof. D.A. Patterson** at UC Berkeley in **1988**, **RAID (Redundant Array of Independent Disks)** combines multiple physical disks into logical disks/volumes (**LUNs**) using **Data striping**, **Mirroring**, and **Data parity** (XOR or Galois field P+Q).
 
-| RAID Level | Min Disks | Drive Utilization ($N$ disks, $M$ spans) | Fault Tolerance & Key Mechanism (pp. 160–163) |
+| RAID Level | Min Disks | Drive Utilization (N disks, M spans) | Fault Tolerance & Key Mechanism (pp. 160–163) |
 | :--- | :---: | :---: | :--- |
-| **RAID 0** | $\ge 1$ (or $\ge 2$) | **100%** ($N$) | **0 failed disks**. Striping only; highest read/write speed, **low reliability** (graphics workstations). |
-| **RAID 1** | $\ge 2$ ($2N$) | **50%** ($N/2$) | **1 disk per mirror pair**. Mirroring only; high reliability & read speed, medium write speed. |
-| **RAID 1E** | $\ge 3$ | **50%** ($N/2$) | Each disk has two stripe groups where the next stripe group holds the **right-shifted misplaced mirror** of the previous stripe group. Tolerates **1 disk offline** (or **2 non-adjacent disks** if $\ge 4$ disks, provided first and last disks do not fail together). |
-| **RAID 5** | $\ge 3$ | **$(N - 1)/N$** | **1 failed disk**. Cyclically distributed XOR parity ($P_0 = D_0 \oplus D_1$). Single disk failure causes performance degradation during rebuild. |
-| **RAID 6** | $\ge 4$ | **$(N - 2)/N$** | **2 failed disks simultaneously**. Two independent distributed parity codes: **P** ($P_0 = D_0 \oplus D_1$) and **Q** ($Q_0 = (D_0 \cdot K_0) \oplus (D_1 \cdot K_1)$ in Galois field). |
-| **RAID 10 vs. 01** | $\ge 4$ (even) | **50%** | **RAID 10** mirrors first (RAID 1) then stripes (RAID 0); tolerates 1 failed disk per RAID 1 span. **RAID 01** stripes first (RAID 0) then mirrors (RAID 1) — losing 1 disk loses an entire stripe and degrades the array into a non-redundant RAID 0! |
-| **RAID 50** | $\ge 6$ | **$(N - M)/N$** | **RAID 5 first, then RAID 0** across $M$ spans ($\ge 2$ spans $\times 3$ disks $= 6$ disks min). Tolerates 1 disk failure per RAID 5 span. |
-| **RAID 60** | $\ge 8$ (theory) | **$(N - 2M)/N$** | **RAID 6 first, then RAID 0** across $M$ spans ($\ge 2$ spans $\times 4$ disks $= 8$ disks min on p.161–162). Tolerates 2 disk failures per RAID 6 span. |
+| **RAID 0** | ≥ 1 (or ≥ 2) | **100%** (N) | **0 failed disks**. Striping only; highest read/write speed, **low reliability** (graphics workstations). |
+| **RAID 1** | ≥ 2 (2N) | **50%** (N/2) | **1 disk per mirror pair**. Mirroring only; high reliability & read speed, medium write speed. |
+| **RAID 1E** | ≥ 3 | **50%** (N/2) | Each disk has two stripe groups where the next stripe group holds the **right-shifted misplaced mirror** of the previous stripe group. Tolerates **1 disk offline** (or **2 non-adjacent disks** if ≥ 4 disks, provided first and last disks do not fail together). |
+| **RAID 5** | ≥ 3 | **$(N - 1)/N** | **1 failed disk**. Cyclically distributed XOR parity (P_0 = D_0 \oplus D_1$). Single disk failure causes performance degradation during rebuild. |
+| **RAID 6** | ≥ 4 | **$(N - 2)/N** | **2 failed disks simultaneously**. Two independent distributed parity codes: **P** (P_0 = D_0 \oplus D_1) and **Q** (Q_0 = (D_0 \cdot K_0) \oplus (D_1 \cdot K_1)$ in Galois field). |
+| **RAID 10 vs. 01** | ≥ 4 (even) | **50%** | **RAID 10** mirrors first (RAID 1) then stripes (RAID 0); tolerates 1 failed disk per RAID 1 span. **RAID 01** stripes first (RAID 0) then mirrors (RAID 1) — losing 1 disk loses an entire stripe and degrades the array into a non-redundant RAID 0! |
+| **RAID 50** | ≥ 6 | **$(N - M)/N** | **RAID 5 first, then RAID 0** across M spans (≥ 2 spans × 3 disks = 6$ disks min). Tolerates 1 disk failure per RAID 5 span. |
+| **RAID 60** | ≥ 8 (theory) | **$(N - 2M)/N** | **RAID 6 first, then RAID 0** across M spans (≥ 2 spans × 4 disks = 8$ disks min on p.161–162). Tolerates 2 disk failures per RAID 6 span. |
 
 ---
 

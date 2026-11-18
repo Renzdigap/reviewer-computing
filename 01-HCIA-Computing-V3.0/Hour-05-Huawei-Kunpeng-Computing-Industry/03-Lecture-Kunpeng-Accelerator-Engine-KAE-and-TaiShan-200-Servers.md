@@ -36,7 +36,7 @@
 | **Memory** | Up to **16 DDR4** DIMMs | Up to **32 DDR4-2933** DIMMs (up to **4 TB**) |
 | **PCIe Expansion** | **5 × PCIe 3.0** slots | Up to **8 × PCIe 4.0** slots |
 | **Local Drives** | SAS/SATA HDDs and SSDs | **NVMe SSDs**, SAS/SATA HDDs, and SSDs |
-| **Onboard LOM** | **GE / 10GE** LOM | **100GE** LOM (flexible $4\times\text{GE}$, $4\times 10\text{GE}$, or $4\times 25\text{GE}$) |
+| **Onboard LOM** | **GE / 10GE** LOM | **100GE** LOM (flexible 4×GE, 4× 10GE, or 4× 25GE) |
 | **Cooling** | Air cooling | **Board-level and full liquid cooling** |
 
 #### TaiShan 200 Model Portfolio (p. 247):
@@ -51,7 +51,7 @@
 
 ### 3. Structural Differences: TaiShan 2280 vs. 5280 vs. x86 (pp. 248–256)
 - **Crucial Structural Difference from x86 (p. 250)**: Unlike x86 servers (which use socketed, replaceable CPUs), **the CPUs of a TaiShan server are integrated (soldered) directly onto the motherboard and CANNOT be replaced separately** (3 motherboard variants are available). TaiShan also delivers higher DIMM density (32 slots vs. 24 on x86 Skylake).
-- **Rear I/O Module Rule (p. 249)**: On the rear panel of TaiShan 2280, **I/O modules 1 and 2** can be configured with the same drive module or riser module, while **I/O module 3 cannot** (supports $4\times 2.5''$ rear drives or $2\times\text{PCIe 4.0 x8 FHHL}$ slots).
+- **Rear I/O Module Rule (p. 249)**: On the rear panel of TaiShan 2280, **I/O modules 1 and 2** can be configured with the same drive module or riser module, while **I/O module 3 cannot** (supports 4× 2.5'' rear drives or 2×PCIe 4.0 x8 FHHL slots).
 - **TaiShan 2280 vs. 5280 Internal Structure (pp. 252–254)**: Both share the **same motherboard**, but differ in **drive backplanes**: 5280 holds **24 × 3.5" front drives** + **12 × 3.5" rear lower drives** + **4 × 3.5" rear upper drives** (up to 40 × 3.5" drives) + **4 × 2.5" rear drives**.
 - **Kunpeng Application Benchmarks (p. 256)**: Big Data (**+30% performance**), SDS (**+20% IOPS**, compression time **reduced by 66%**).
 

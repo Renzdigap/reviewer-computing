@@ -12,7 +12,7 @@ Write a Python hardware inspection script that maps CPU Control Unit registers (
 
 ### 📋 Step-by-Step Instructions
 1. Set `next_instruction_address_register` to `'PC'` and `current_instruction_register` to `'IR'`.
-2. Calculate `clock_period_ns_at_100mhz` as `10` (since $1 / 100\text{ MHz} = 10\text{ ns}$).
+2. Calculate `clock_period_ns_at_100mhz` as `10` (since 1 / 100 MHz = 10 ns).
 3. Map the core counts for Kunpeng 920 models: `7260` -> `64`, `5250` -> `48`, `5220` -> `32`, `3210` -> `24`.
 
 ### 📝 Starter Workspace (`python3@taishan-2280:~$`)

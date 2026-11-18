@@ -41,7 +41,7 @@
 
 ### 3. Mandatory OS Configuration Changes & User Planning (pp. 86–91)
 1. **Disable SELinux & Firewall**: Set `SELINUX=disabled` in `/etc/selinux/config`, reboot, and run `systemctl disable firewalld.service && systemctl stop firewalld.service`.
-2. **Locale & Timezone**: Add `export LANG=en_US.UTF-8` to `/etc/profile`; copy `/usr/share/zoneinfo/$Locale/$Timezone` to `/etc/localtime` and sync time with `date -s`. Optional: `swapoff -a` to prevent buffer eviction.
+2. **Locale & Timezone**: Add `export LANG=en_US.UTF-8` to `/etc/profile`; copy `/usr/share/zoneinfo/Locale/Timezone` to `/etc/localtime` and sync time with `date -s`. Optional: `swapoff -a` to prevent buffer eviction.
 3. **Disable `RemoveIPC` (Critical on openEuler!)**: Set `RemoveIPC=no` in **both** `/etc/systemd/logind.conf` and `/usr/lib/systemd/system/systemd-logind.service`, then run `systemctl daemon-reload && systemctl restart systemd-logind`.
 4. **Enable Root SSH & Disable Banner**: In `/etc/ssh/sshd_config`, set `PermitRootLogin yes` and comment out `#Banner XXXX` (welcome banners interfere with remote installation scripts).
 5. **User & Group (`dbgrp` and `omm`)**: Create group `dbgrp` (`-G dbgrp`) and OS user `omm` (`-U omm`). During `gs_install`, a database superuser `omm` with the same name is created.

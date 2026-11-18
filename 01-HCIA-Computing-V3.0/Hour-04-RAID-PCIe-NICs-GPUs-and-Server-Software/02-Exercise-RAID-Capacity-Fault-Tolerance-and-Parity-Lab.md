@@ -12,7 +12,7 @@ Write a Python script to compute usable capacities for a server with 8 × 4 TB d
 
 ### 📋 Step-by-Step Instructions
 1. Set `raid5_min_disks` to `3`, `raid50_min_disks` to `6`, and `raid60_min_disks` to `8`.
-2. For `N = 8` disks of `4` TB each (total raw = 32 TB, `M = 2` spans): set `usable_tb_raid5` to `28` ($(8-1)\times 4$), `usable_tb_raid6` to `24` ($(8-2)\times 4$), and `usable_tb_raid60` to `16` ($(8 - 2\times 2)\times 4$).
+2. For `N = 8` disks of `4` TB each (total raw = 32 TB, `M = 2` spans): set `usable_tb_raid5` to `28` ($(8-1)× 4), `usable_tb_raid6` to `24` ((8-2)× 4), and `usable_tb_raid60` to `16` ((8 - 2× 2)× 4$).
 3. Set `software_raid_supports_bootable_array` to `False`.
 
 ### 📝 Starter Workspace (`python3@taishan-raid:~$`)

@@ -33,13 +33,13 @@ Memory (internal/main memory) acts as the communication bridge between external 
 - **Memory Parameters (p. 146)**:
   - **Memory Frequency**: Measured in **MT/s** (*millions of transfers/times per second*, e.g., 2666, 2933, 3000, 3200, 3600 MT/s).
   - **SIMM vs. DIMM**: A Single Inline Memory Module (**SIMM**) provides a **32-bit** data channel (4 Bytes); a Dual Inline Memory Module (**DIMM**) provides a **64-bit** data channel (**8 Bytes**).
-  - **Theoretical Memory Bandwidth Formula**: $\text{Bandwidth} = \text{Memory Frequency (MT/s)} \times 8\text{ Bytes (64 bits)} \times \text{Number of Channels}$.
+  - **Theoretical Memory Bandwidth Formula**: Bandwidth = Memory Frequency (MT/s) × 8 Bytes (64 bits) × Number of Channels.
 
 ---
 
 ### 3. TaiShan 200 (2280) DIMM Slots & Installation Rules (pp. 147–148)
 - **Slot Topology (p. 147)**: Equipped with two Kunpeng 920 processors (e.g., 7260 or 5250), a TaiShan 200 (2280) provides up to **32 DDR4 DIMM slots**:
-  - Each processor supports **8 DIMM channels**, and each channel supports **2 DIMMs** ($2\text{ CPUs} \times 8\text{ channels} \times 2\text{ DIMMs/channel} = 32\text{ DIMMs}$).
+  - Each processor supports **8 DIMM channels**, and each channel supports **2 DIMMs** (2 CPUs × 8 channels × 2 DIMMs/channel = 32 DIMMs).
 - **Mandatory DIMM Installation Rules (p. 148)**:
   1. **At least one DIMM must be configured in slots supported by CPU 1**.
   2. **All DIMMs on a server must have the exact same specifications** (capacity, bit width, rank, height) — i.e., **the same part number (P/N code)**.

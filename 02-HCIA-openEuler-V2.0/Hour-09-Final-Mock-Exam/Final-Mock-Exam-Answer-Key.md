@@ -226,7 +226,7 @@
 - **Explanation:** Per Ch.03 (pp. 108–109), `locate` queries a pre-built database rather than scanning live disks like `find`, so `updatedb` must be run to index newly created files.
 
 ### Q45 (Ch.04 openEuler System Configuration) — [10 pts]
-- **Question:** The `su root` command switches identity to `root` AND resets all environment variables (including `$PATH` and `$HOME`) to `root`'s login environment, making it completely identical to `su - root`.
+- **Question:** The `su root` command switches identity to `root` AND resets all environment variables (including `PATH` and `HOME`) to `root`'s login environment, making it completely identical to `su - root`.
 - **Correct Answer:** `B`
 - **Explanation:** Per Ch.04 (p. 191), `su` changes the user identity WITHOUT starting a login shell or loading the target user's environment variables, whereas `su -` (or `su -l`) switches to a full login shell with the target user's environment.
 
@@ -257,8 +257,8 @@
 
 ### Q51 (Ch.03 openEuler CLI Basics) — [20 pts]
 - **Question:** Lab 1 (Text Processing Pipeline): Complete the command pipeline to extract all lines from `/etc/passwd` whose login shell ends with `bash`, then print ONLY column 1 (username) and column 7 (shell) using `awk` with `:` as delimiter.
-- **Correct Answer:** `grep 'bash$' /etc/passwd | awk -F ':' '{print $1, $7}'`
-- **Explanation:** Per Ch.03 (pp. 144–145), `grep 'bash$' /etc/passwd` matches lines ending with `bash`, and `awk -F ':' '{print $1, $7}'` splits on `:` to display username and shell.
+- **Correct Answer:** `grep 'bash' /etc/passwd | awk -F ':' '{print 1, $7}'`
+- **Explanation:** Per Ch.03 (pp. 144–145), `grep 'bash' /etc/passwd` matches lines ending with `bash`, and `awk -F ':' '{print 1, $7}'` splits on `:` to display username and shell.
 
 ### Q52 (Ch.03 openEuler CLI Basics) — [20 pts]
 - **Question:** Lab 2 (Archive & Symbolic Link): Write two commands: (1) create a gzip-compressed tar archive `/tmp/etc_conf.tar.gz` from `/etc/hosts`, and (2) create a symbolic (soft) link `/tmp/hosts.link` pointing to `/etc/hosts`.

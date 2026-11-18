@@ -16,7 +16,7 @@
 
 ### 1. Evolution & Overall Architecture of Huawei Computing O&M Software (pp. 355–358)
 - **Four Evolution Phases of O&M Software (p. 355)**:
-  `Manual configuration + Scripts` $\rightarrow$ `Tools` $\rightarrow$ `Automation` $\rightarrow$ `Intelligence` (Note: Intelligence is the ultimate goal, **but the tool-based and automated phases CANNOT be skipped**!).
+  `Manual configuration + Scripts` \rightarrow `Tools` \rightarrow `Automation` \rightarrow `Intelligence` (Note: Intelligence is the ultimate goal, **but the tool-based and automated phases CANNOT be skipped**!).
 
 | Huawei O&M Product | Positioning & Target Scenario / Customer (pp. 356–358) |
 | :--- | :--- |

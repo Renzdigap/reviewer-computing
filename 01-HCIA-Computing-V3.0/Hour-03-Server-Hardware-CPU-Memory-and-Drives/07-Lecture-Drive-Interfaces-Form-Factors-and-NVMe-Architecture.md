@@ -37,11 +37,11 @@ Mainstream server drives use **SATA**, **SAS**, and **PCIe (NVMe)** interfaces:
 ### 2. Drive Physical Form Factors: LFF vs. SFF (p. 157)
 Although SSDs have no spinning platters, they use the same form factors as HDDs:
 - **3.5-inch HDD — LFF (Large Form Factor)**:
-  - $H \times W = \mathbf{147\text{ mm} \times 101.85\text{ mm}}$, enterprise depth $= \mathbf{26.1\text{ mm}}$.
+  - H × W = 147 mm × 101.85 mm, enterprise depth = 26.1 mm.
 - **2.5-inch HDD — SFF (Small Form Factor)**:
-  - $H \times W = \mathbf{100.45\text{ mm} \times 69.85\text{ mm}}$, enterprise depth $= \mathbf{15\text{ mm}}$.
+  - H × W = 100.45 mm × 69.85 mm, enterprise depth = 15 mm.
 - **2.5-inch SSD — SFF (Small Form Factor)**:
-  - $H \times W = \mathbf{100.45\text{ mm} \times 69.85\text{ mm}}$, depth can be **7 mm, 9.5 mm, or 15 mm** (never exceeds 15 mm).
+  - H × W = 100.45 mm × 69.85 mm, depth can be **7 mm, 9.5 mm, or 15 mm** (never exceeds 15 mm).
 
 ---
 
