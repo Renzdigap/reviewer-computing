@@ -8,10 +8,20 @@ Welcome to your **DataCamp-Style Active Learning & Exam-Ready Study Reviewer** f
 
 ---
 
-## 🚀 Quick Launch
-- **Interactive Web Platform via Local Server (Recommended for unified progress sync across all pages):** Run `py run_reviewer.py` and select `[0]`.
-- **Direct Offline Browser Launch:** Double-click **[`index.html`](./index.html)** in `C:\Users\RoG\Desktop\huawei` (or open any Pillar's `index.html`). Works 100% offline with zero external dependencies.
-- **Interactive Terminal / CLI Mode:** Run `py run_reviewer.py` and select `[1]`, `[2]`, or `[3]`.
+## 🚀 Quick Launch & Persistent Progress Synchronization
+
+- **Interactive Web Platform via Local Server (Recommended for permanent disk sync):**
+  ```powershell
+  py run_reviewer.py
+  # Select [0] to launch the local web server and open the master dashboard in your browser
+  ```
+  - **Fixed Port**: Default `http://127.0.0.1:8080` (retains browser origin across computer restarts).
+  - **File-Backed Persistence**: Automatically persists progress to [`progress.json`](./progress.json) in real time via background REST endpoints (`GET/POST /api/progress`).
+  - **Automatic Git Push**: Click **"🔄 Commit & Push to GitHub"** on any dashboard (or select `[s]` in `run_reviewer.py` / `practice_cli.py`) to commit and push your study progress directly to GitHub.
+  - **Export / Import JSON**: One-click download and upload for backups and seamless progress transfer across devices.
+
+- **Direct Offline Browser Launch:** Double-click **[`index.html`](./index.html)** (or open any Pillar's `index.html`). Works 100% offline with zero external dependencies, saving to `localStorage`.
+- **Interactive Terminal / CLI Mode:** Run `py run_reviewer.py` and select `[1]`, `[2]`, or `[3]`, or run `py practice_cli.py` inside any pillar folder. Directly syncs completed units and mock exam scores with `progress.json`.
 
 ---
 
@@ -31,26 +41,29 @@ Each of the 3 Pillars is engineered for an intensive **9-Hour Daily Lock-In Sche
 ## 📂 Directory Structure Overview
 ```text
 C:\Users\RoG\Desktop\huawei\
-├── index.html                                  # Unified Master Study Hub & Search Portal
-├── README.md                                   # Master 3×9-Hour Study Plan & Guide
-├── run_reviewer.py                             # Master CLI & Local Web Server Launcher
+├── index.html                                  # Master Study Hub & Global Search Portal
+├── README.md                                   # Master 3×9-Hour Study Plan & Sync Guide
+├── run_reviewer.py                             # Fixed-Port Web Server & Master CLI Launcher
+├── sync_engine.js                              # Real-time background sync engine & JSON export/import
+├── progress_manager.py                         # File-backed persistence manager (progress.json) & Git sync
+├── progress.json                               # Persistent JSON store for units and mock exam scores
 ├── 01-HCIA-Computing-V3.0\                     # PILLAR 1: Computing & Kunpeng (9 Hours)
 │   ├── index.html                              # Pillar 1 DataCamp-Style Course Player
-│   ├── practice_cli.py                         # Pillar 1 Terminal Trainer
+│   ├── practice_cli.py                         # Pillar 1 Terminal Trainer (synced with progress.json)
 │   ├── README.md                               # Pillar 1 Schedule & Syllabus
 │   ├── Hour-01-History-of-Computing-and-Trends\ # 01-Lecture .. 08-Exercise (.md + .html)
 │   ├── ... (Hours 02 through 08) ...
 │   └── Hour-09-Final-Mock-Exam\                # Final-Mock-Exam.html (60 Qs, 60 Mins)
 ├── 02-HCIA-openEuler-V2.0\                     # PILLAR 2: openEuler OS (9 Hours)
 │   ├── index.html                              # Pillar 2 DataCamp-Style Course Player
-│   ├── practice_cli.py                         # Pillar 2 Terminal Trainer
+│   ├── practice_cli.py                         # Pillar 2 Terminal Trainer (synced with progress.json)
 │   ├── README.md                               # Pillar 2 Schedule & Syllabus
 │   ├── Hour-01-OS-for-AI-Era-and-Getting-Started\
 │   ├── ... (Hours 02 through 08) ...
 │   └── Hour-09-Final-Mock-Exam\                # Final-Mock-Exam.html (60 Qs, 60 Mins)
 └── 03-HCIA-openGauss-V2.0\                     # PILLAR 3: openGauss & GaussDB (9 Hours)
     ├── index.html                              # Pillar 3 DataCamp-Style Course Player
-    ├── practice_cli.py                         # Pillar 3 Terminal Trainer
+    ├── practice_cli.py                         # Pillar 3 Terminal Trainer (synced with progress.json)
     ├── README.md                               # Pillar 3 Schedule & Syllabus
     ├── Hour-01-openGauss-Overview-and-Database-Fundamentals\
     ├── ... (Hours 02 through 08) ...

@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
 """
-Interactive Terminal Study Reviewer & Mock Exam Runner
+Interactive Terminal Study Reviewer & Mock Exam Runner (with progress.json sync)
 Pillar: HCIA-openGauss V2.0 (Enterprise Relational Database & GaussDB)
 Run with: py practice_cli.py
 """
 import json
 import os
 import re
+import sys
+import time
 import webbrowser
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(HERE)
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+import progress_manager
+
 DATA_FILE = os.path.join(HERE, "curriculum_data.json")
 
 
@@ -24,32 +32,79 @@ def norm_ws(s):
 
 def run_cli():
     data = load_data()
+    pillar_id = data.get("id", "pillar3")
+
     while True:
-        print("\n" + "=" * 72)
-        print(f"  HUAWEI ICT COMPETITION NATIONAL STAGE — {data['title']}")
-        print("=" * 72)
-        print("  [0] 🌐 Open Interactive DataCamp-Style Web App (index.html) in Browser")
+        prog_all = progress_manager.get_progress().get("progress", {})
+        
+        # Calculate pillar stats
+        total_units = 0
+        done_units = 0
         for h in data["hours"]:
-            print(f"  [{h['hour_number']}] ⏱️  Hour 0{h['hour_number']}: {h['title']} (4 Bite-Sized Sprints)")
-        print(f"  [9] 🏆 Hour 09: {data['mock_exam']['title']} (60 Questions, 60 Mins)")
+            for s in h["sprints"]:
+                total_units += 2
+                lec_uid = f"{pillar_id}_h{h['hour_number']}_s{s['sprint_number']}_lecture"
+                ex_uid = f"{pillar_id}_h{h['hour_number']}_s{s['sprint_number']}_exercise"
+                if prog_all.get(lec_uid, {}).get("completed"):
+                    done_units += 1
+                if prog_all.get(ex_uid, {}).get("completed"):
+                    done_units += 1
+
+        mock_key = f"{pillar_id}_mock_exam"
+        mock_info = prog_all.get(mock_key, {})
+        mock_score_str = f"{mock_info.get('score', 0)} / {mock_info.get('total', 1000)} pts" if mock_info.get("completed") else "Not taken yet"
+
+        pct = Math_round = round((done_units / total_units * 100)) if total_units else 0
+
+        print("\n" + "=" * 74)
+        print(f"  HUAWEI ICT COMPETITION NATIONAL STAGE — {data['title']}")
+        print(f"  Progress (progress.json): {done_units}/{total_units} Units ({pct}%) | Mock Exam: {mock_score_str}")
+        print("=" * 74)
+        print("  [0] 🌐 Open Interactive Web App (index.html) in Browser")
+        print("  [s] 🔄 Git Sync Now (Commit & Push progress.json to GitHub)")
+
+        for h in data["hours"]:
+            h_units = 0
+            h_done = 0
+            for s in h["sprints"]:
+                h_units += 2
+                lec_uid = f"{pillar_id}_h{h['hour_number']}_s{s['sprint_number']}_lecture"
+                ex_uid = f"{pillar_id}_h{h['hour_number']}_s{s['sprint_number']}_exercise"
+                if prog_all.get(lec_uid, {}).get("completed"):
+                    h_done += 1
+                if prog_all.get(ex_uid, {}).get("completed"):
+                    h_done += 1
+            status_tag = "✅ COMPLETE" if h_done == h_units else f"({h_done}/{h_units} done)"
+            print(f"  [{h['hour_number']}] ⏱️  Hour 0{h['hour_number']}: {h['title']} {status_tag}")
+
+        mock_status = "✅ " + mock_score_str if mock_info.get("completed") else "⏱️ 60 Questions, 60 Mins"
+        print(f"  [9] 🏆 Hour 09: {data['mock_exam']['title']} [{mock_status}]")
         print("  [q] Quit")
-        choice = input("\nSelect an option (0-9 or q): ").strip().lower()
+
+        choice = input("\nSelect an option (0-9, s, or q): ").strip().lower()
         if choice == "q":
             break
         elif choice == "0":
             webbrowser.open(os.path.join(HERE, "index.html"))
             print("Launched index.html in your default browser!")
+        elif choice == "s":
+            print("\nSyncing progress.json with GitHub...")
+            ok, msg = progress_manager.git_sync_progress()
+            print(("✅ " if ok else "⚠️ ") + msg)
         elif choice in [str(i) for i in range(1, 9)]:
             h = data["hours"][int(choice) - 1]
-            study_hour(h)
+            study_hour(h, pillar_id)
         elif choice == "9":
-            run_mock_exam(data["mock_exam"])
+            run_mock_exam(data["mock_exam"], pillar_id)
 
 
-def study_hour(h):
+def study_hour(h, pillar_id):
     for s in h["sprints"]:
         lec = s["lecture"]
         ex = s["exercise"]
+        lec_uid = f"{pillar_id}_h{h['hour_number']}_s{s['sprint_number']}_lecture"
+        ex_uid = f"{pillar_id}_h{h['hour_number']}_s{s['sprint_number']}_exercise"
+
         print("\n" + "-" * 72)
         print(f"📖 LECTURE (Hour 0{h['hour_number']} • Sprint {s['sprint_number']}/4): {lec['title']}")
         print(f"   Ref: {lec['pdf_ref']} | Duration: {lec['duration_mins']} mins")
@@ -61,6 +116,13 @@ def study_hour(h):
         print("\n⚠️ Exam Traps:")
         for t in lec.get("exam_traps", []):
             print(f"  ! {t}")
+
+        # Mark lecture done
+        progress_manager.merge_and_save({
+            lec_uid: {"completed": True, "ts": int(time.time() * 1000)}
+        })
+        print(f"\n[Auto-Sync] 📖 Lecture marked completed in progress.json!")
+
         input("\nPress Enter to start the immediate Hands-On Exercise...")
 
         print("\n" + "-" * 72)
@@ -83,7 +145,9 @@ def study_hour(h):
         print("\nSimulated Output:\n" + ex.get("simulated_output", ""))
 
         print("\n--- Quick Exam Verification Drill (3 Questions) ---")
-        for q_idx, q in enumerate(ex.get("quiz_questions", []), 1):
+        drill_correct = 0
+        qs = ex.get("quiz_questions", [])
+        for q_idx, q in enumerate(qs, 1):
             print(f"\nQ{q_idx} [{q['type'].upper()}]: {q['question']}")
             for opt in q.get("options", []):
                 print(f"   {opt}")
@@ -91,15 +155,23 @@ def study_hour(h):
             target = "".join(sorted([c for c in q["answer"].upper() if c.isalpha()]))
             u_norm = "".join(sorted([c for c in u_ans if c.isalpha()]))
             if u_norm == target:
+                drill_correct += 1
                 print(f"✅ Correct ({target})! {q.get('explanation', '')}")
             else:
                 print(f"❌ Official Answer: {target} | {q.get('explanation', '')}")
-        cont = input("\nContinue to next sprint in this hour? (Y/n): ").strip().lower()
+
+        # Mark exercise done
+        progress_manager.merge_and_save({
+            ex_uid: {"completed": True, "ts": int(time.time() * 1000)}
+        })
+        print(f"\n[Auto-Sync] 💻 Exercise marked completed in progress.json!")
+
+        cont = input(f"\nCompleted Sprint {s['sprint_number']}/4. Continue to next sprint? (Y/n): ").strip().lower()
         if cont == "n":
             break
 
 
-def run_mock_exam(mock):
+def run_mock_exam(mock, pillar_id):
     qs = mock.get("questions", [])
     print("\n" + "=" * 72)
     print(f"🏆 {mock['title']} ({len(qs)} Questions, {mock['total_points']} pts)")
@@ -108,8 +180,10 @@ def run_mock_exam(mock):
     if mode == "1":
         webbrowser.open(os.path.join(HERE, mock["folder_name"], "Final-Mock-Exam.html"))
         return
+
     earned = 0
     total = 0
+    correct_cnt = 0
     for i, q in enumerate(qs, 1):
         pts = q.get("points", 15)
         total += pts
@@ -126,6 +200,7 @@ def run_mock_exam(mock):
             ok = bool(u) and all(norm_ws(k) in u_norm for k in kws)
             if ok:
                 earned += pts
+                correct_cnt += 1
                 print(f"✅ Correct (+{pts} pts)!")
             else:
                 print(f"❌ Official Solution: {q.get('solution', q.get('answer', ''))}")
@@ -140,11 +215,25 @@ def run_mock_exam(mock):
             u_norm = "".join(sorted([c for c in u.upper() if c.isalpha()]))
             if u_norm == target:
                 earned += pts
+                correct_cnt += 1
                 print(f"✅ Correct (+{pts} pts)!")
             else:
                 print(f"❌ Official Answer: {target}")
             print(f"   Explanation: {q.get('explanation', '')}")
+
     print(f"\nFINAL SCORE: {earned} / {total} pts")
+    if total > 0:
+        mock_key = f"{pillar_id}_mock_exam"
+        progress_manager.merge_and_save({
+            mock_key: {
+                "completed": True,
+                "score": earned,
+                "total": total,
+                "correct": correct_cnt,
+                "ts": int(time.time() * 1000)
+            }
+        })
+        print(f"💾 Mock exam score ({earned}/{total} pts) saved to progress.json!")
 
 
 if __name__ == "__main__":
