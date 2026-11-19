@@ -17,7 +17,6 @@ Welcome to your **Active Learning & Exam-Ready Study Reviewer** for the **Huawei
   ```
   - **Fixed Port**: Default `http://127.0.0.1:8080` (retains browser origin across computer restarts).
   - **File-Backed Local Persistence**: Automatically persists your progress in real time to your local `progress.json` file.
-  - **Strictly Private & Local (Team-Friendly)**: `progress.json` is completely ignored by Git (`.gitignore`). When teammates clone or pull this repository, they get a fresh, clean reviewer and their progress stays 100% private on their own machine without clashing with yours.
   - **Export / Import Backup (.json)**: One-click download and upload buttons on the dashboard for making personal backups or migrating your progress between your own personal computers (e.g. PC to laptop).
 
 - **Direct Offline Browser Launch:** Double-click **[`index.html`](./index.html)** (or open any Pillar's `index.html`). Works 100% offline with zero external dependencies, saving to `localStorage`.
