@@ -1,6 +1,6 @@
 # Huawei ICT Competition (Computing Track) — National Stage Study Reviewer
 
-Welcome to your **DataCamp-Style Active Learning & Exam-Ready Study Reviewer** for the **Huawei ICT Competition National Stage (Computing Track)**, built directly from the 3 official Huawei training materials in `C:\Users\RoG\Desktop\huawei`:
+Welcome to your **Active Learning & Exam-Ready Study Reviewer** for the **Huawei ICT Competition National Stage (Computing Track)**, built directly from the 3 official Huawei training materials in `C:\Users\RoG\Desktop\huawei`:
 
 1. **[`01-HCIA-Computing-V3.0`](./01-HCIA-Computing-V3.0/index.html)** — *Kunpeng Computing Industry, Server Architecture, Hardware/RAID/BIOS/iBMC Deployment & Enterprise O&M (iBMA, Smart Provisioning, FusionDirector, eSight, SmartKit, eService)*
 2. **[`02-HCIA-openEuler-V2.0`](./02-HCIA-openEuler-V2.0/index.html)** — *openEuler Intelligence, CLI Basics, Vim, Text Processing (`grep`/`sed`/`awk`), Users/Permissions/ACLs, RPM/DNF/systemd, Processes/Crontab, Disk/LVM/Network (`nmcli`), Shell Scripting & Native Container Engine `iSula`*
@@ -48,21 +48,21 @@ C:\Users\RoG\Desktop\huawei\
 ├── progress_manager.py                         # File-backed persistence manager (progress.json) & Git sync
 ├── progress.json                               # Persistent JSON store for units and mock exam scores
 ├── 01-HCIA-Computing-V3.0\                     # PILLAR 1: Computing & Kunpeng (9 Hours)
-│   ├── index.html                              # Pillar 1 DataCamp-Style Course Player
+│   ├── index.html                              # Pillar 1 Course Player
 │   ├── practice_cli.py                         # Pillar 1 Terminal Trainer (synced with progress.json)
 │   ├── README.md                               # Pillar 1 Schedule & Syllabus
 │   ├── Hour-01-History-of-Computing-and-Trends\ # 01-Lecture .. 08-Exercise (.md + .html)
 │   ├── ... (Hours 02 through 08) ...
 │   └── Hour-09-Final-Mock-Exam\                # Final-Mock-Exam.html (60 Qs, 60 Mins)
 ├── 02-HCIA-openEuler-V2.0\                     # PILLAR 2: openEuler OS (9 Hours)
-│   ├── index.html                              # Pillar 2 DataCamp-Style Course Player
+│   ├── index.html                              # Pillar 2 Course Player
 │   ├── practice_cli.py                         # Pillar 2 Terminal Trainer (synced with progress.json)
 │   ├── README.md                               # Pillar 2 Schedule & Syllabus
 │   ├── Hour-01-OS-for-AI-Era-and-Getting-Started\
 │   ├── ... (Hours 02 through 08) ...
 │   └── Hour-09-Final-Mock-Exam\                # Final-Mock-Exam.html (60 Qs, 60 Mins)
 └── 03-HCIA-openGauss-V2.0\                     # PILLAR 3: openGauss & GaussDB (9 Hours)
-    ├── index.html                              # Pillar 3 DataCamp-Style Course Player
+    ├── index.html                              # Pillar 3 Course Player
     ├── practice_cli.py                         # Pillar 3 Terminal Trainer (synced with progress.json)
     ├── README.md                               # Pillar 3 Schedule & Syllabus
     ├── Hour-01-openGauss-Overview-and-Database-Fundamentals\

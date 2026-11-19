@@ -23,7 +23,7 @@
 
 ---
 
-## How to Study This Pillar (DataCamp-Style Active Loop)
+## How to Study This Pillar (Active Study Loop)
 1. **Open [`index.html`](./index.html)** in any web browser (or open individual `01-Lecture-...html` / `02-Exercise-...html` files inside each `Hour-0X-...` folder).
 2. **7-Minute Focused Lecture:** Read the concise theory, comparison tables, and **Huawei National Stage Exam Traps**.
 3. **8-Minute Immediate Hands-On Exercise:** Write the exact CLI commands, SQL statements, configuration parameters, or calculations in the interactive right-hand workbench (`Ctrl+Enter` to verify) and complete the 3 Exam Verification Drill questions.
