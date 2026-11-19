@@ -105,7 +105,6 @@ def start_local_server():
     url = f"http://127.0.0.1:{port}/index.html"
     print(f"\n[Server] Reviewer running at: {url}")
     print(f"[Storage] Local PC path: {progress_manager.PROGRESS_FILE}")
-    print("[Private] Progress stays strictly on this machine (ignored by Git)")
     webbrowser.open(url)
     return httpd, port
 
@@ -122,7 +121,6 @@ def main():
             print("=" * 78)
             server_status = f"Running on http://127.0.0.1:{server_port}" if httpd else "Not running"
             print(f"  Status: Web Server [{server_status}] | Local Progress Units Saved: [{total_saved}]")
-            print("  Storage: Strictly Local PC (progress.json is gitignored for teammate privacy)")
             print("-" * 78)
             print("  [0] Launch Web Platform in Browser (Saves locally to progress.json)")
             print("  [f] Open index.html directly via file://")
