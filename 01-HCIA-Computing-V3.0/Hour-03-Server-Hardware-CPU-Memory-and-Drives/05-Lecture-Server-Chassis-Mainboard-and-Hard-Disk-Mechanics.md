@@ -43,7 +43,7 @@
   - **FlexIO card 1 (connected to CPU 1)** and **FlexIO card 2 (connected to CPU 2)**
   - **USB 3.0 port**, **VGA port**, **Debugging serial port**, and **Management network port (iBMC)**.
 <!-- PDF_FIGS_START -->
-![TaiShan 200 (2280) Front Panel Components and Indicators (1-9) (Official Reference: p. 151)](../assets/images/p1_h3s3_front_panel_2280.png)
+![TaiShan 200 (2280) Front Panel Components and Indicators (1-9) (Official Reference: p. 151)](../assets/images/p1_h3s3_front_panel_2280_full.png)
 *Figure: TaiShan 200 (2280) Front Panel Components and Indicators (1-9) (Official Reference: p. 151)*
 
 ![TaiShan 200 (2280) Rear Panel Ports and I/O Modules (1-12) (Official Reference: p. 152)](../assets/images/p1_h3s3_rear_panel_2280.png)
