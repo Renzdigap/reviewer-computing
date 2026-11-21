@@ -40,11 +40,11 @@
 
 ### 3. Configuring RAID via VNC (BIOS) and via iBMC WebUI (pp. 322–325)
 - **Method 1 — Using VNC / BIOS Configuration Utility (pp. 322–323)**:
-  1. In BIOS **`Advanced`** tab, select the Avago RAID controller card \rightarrow **`Main Menu > Configuration Management > Create Virtual Drive`**.
+  1. In BIOS **`Advanced`** tab, select the Avago RAID controller card > **`Main Menu > Configuration Management > Create Virtual Drive`**.
   2. Configure parameters:
      - **Select RAID Level** (e.g., RAID 1)
      - **Select Drives From**: **`Unconfigured Capacity`** (free drives not in any virtual drive) or **`Free Capacity`** (unused space in an existing drive group)
-     - **Select Drives**: Use arrow keys and **`Space` bar** to select member drives \rightarrow **`Apply Changes`**
+     - **Select Drives**: Use arrow keys and **`Space` bar** to select member drives > **`Apply Changes`**
      - **Access Policy**: **`Read/Write`**, **`Read Only`**, or **`Blocked`**
 - **Method 2 — Using iBMC WebUI (pp. 324–325)**:
   1. Choose **`System > Storage Management`**, expand **`PCIe Card`**, and click **`Add`** next to the RAID card to open **Create Logical Drive**.

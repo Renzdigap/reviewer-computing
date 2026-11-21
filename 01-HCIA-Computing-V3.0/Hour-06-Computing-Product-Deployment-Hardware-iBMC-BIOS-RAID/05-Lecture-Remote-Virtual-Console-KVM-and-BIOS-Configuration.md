@@ -15,7 +15,7 @@
 ---
 
 ### 1. iBMC Remote Virtual Console (KVM): Private vs. Shared Modes (p. 310)
-On the iBMC WebUI **Home** page, clicking **Virtual Console \rightarrow Start** offers four options across **Java** and **HTML5** Integrated Remote Consoles:
+On the iBMC WebUI **Home** page, clicking **Virtual Console > Start** offers four options across **Java** and **HTML5** Integrated Remote Consoles:
 - **Java / HTML5 Integrated Remote Console (Private)**: Allows **only 1 local user or VNC user** to access and operate the server through iBMC at a time.
 - **Java / HTML5 Integrated Remote Console (Shared)**: Allows **up to 2 local users or 5 VNC users** to simultaneously access and perform operations on the server through iBMC (each user can view operations performed by the others).
 
@@ -44,8 +44,8 @@ On the iBMC WebUI **Home** page, clicking **Virtual Console \rightarrow Start** 
 | :--- | :--- |
 | **Configure iBMC IP/User** | **`Advanced > IPMI iBMC Configuration > iBMC Configuration`** |
 | **Set System Date & Time** | **`Main > System Date`** or **`Main > System Time`** |
-| **Set Boot Sequence** | **`Boot > Boot Type Order`**: Use **`+` or `-`** keys to move a boot option up or down, then press **`F10`** (*Save configuration changes and exit?* \rightarrow **Yes**). |
-| **Configure PXE for Onboard NIC** | **`Advanced > LOM Configuration > PXE Configuration`**: Select `PXE1 Configuration` \rightarrow **`Enable`**, set **PXE Boot Capability** to **`UEFI: IPv4`**, **`UEFI: IPv6`**, or **`UEFI: IPv4/IPv6`**, then press **`F10`** to save and restart. |
+| **Set Boot Sequence** | **`Boot > Boot Type Order`**: Use **`+` or `-`** keys to move a boot option up or down, then press **`F10`** (*Save configuration changes and exit?* > **Yes**). |
+| **Configure PXE for Onboard NIC** | **`Advanced > LOM Configuration > PXE Configuration`**: Select `PXE1 Configuration` > **`Enable`**, set **PXE Boot Capability** to **`UEFI: IPv4`**, **`UEFI: IPv6`**, or **`UEFI: IPv4/IPv6`**, then press **`F10`** to save and restart. |
 | **Set Preferred Boot Medium via iBMC WebUI** | **`System > BIOS Settings`**: Select the preferred boot medium to take effect **one time** or **permanently**. |
 
 ---

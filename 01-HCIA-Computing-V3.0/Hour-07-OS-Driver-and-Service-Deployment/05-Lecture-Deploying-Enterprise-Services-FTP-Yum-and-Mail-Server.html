@@ -586,7 +586,7 @@ p { margin-bottom: 10px; }
 <h3>3. Linux Mail Server: Postfix (SMTP) + Dovecot (POP3/IMAP) (pp. 340–342)</h3>
 <ul class="md-list">
 <li><strong>Mainstream Combination</strong>: <strong>Postfix + Dovecot</strong> (often backed by MySQL, storing mail in <code class="inline-code">/var/mail/mydomain.com/myuser</code>):</li>
-<li><strong>Postfix</strong>: Open-source Mail Transfer Agent providing the <strong>SMTP (Simple Mail Transfer Protocol)</strong> service for sending and relaying emails between mail servers (e.g., <code class="inline-code">me@huawei.com</code> \rightarrow <code class="inline-code">smtp.huawei.com</code> \rightarrow <code class="inline-code">smtp.gmail.com</code>, which saves the email to disk).</li>
+<li><strong>Postfix</strong>: Open-source Mail Transfer Agent providing the <strong>SMTP (Simple Mail Transfer Protocol)</strong> service for sending and relaying emails between mail servers (e.g., <code class="inline-code">me@huawei.com</code> &gt; <code class="inline-code">smtp.huawei.com</code> &gt; <code class="inline-code">smtp.gmail.com</code>, which saves the email to disk).</li>
 <li><strong>Dovecot</strong>: Famous <strong>POP3</strong> and <strong>IMAP</strong> server implementation responsible <strong>only for the path between the recipient's mail server and the recipient's email client (user agent)</strong>.</li>
 <li><strong>POP3 vs. IMAP (pp. 340, 342)</strong>:</li>
 <li><strong>POP3 (Post Office Protocol v3)</strong>: Downloads <strong>entire emails</strong> to the client device and then disconnects; actions on the client do not sync back to the server.</li>

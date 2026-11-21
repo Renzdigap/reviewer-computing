@@ -37,7 +37,7 @@ Both drivers and firmware are code, but they operate at different layers with di
 ### 3. Initial Installation vs. Overwrite Installation Order (p. 335 — High-Yield Exam Trap!)
 Look carefully at the official flowchart on **Ch.05 Page 335**:
 1. **Common Preparation Steps**:
-   `Start` \rightarrow `Check the OS` \rightarrow `Obtain the software package` \rightarrow `Create a hardware running user`
+   `Start` > `Check the OS` > `Obtain the software package` > `Create a hardware running user`
 2. **Branch A — Initial Installation (brand-new hardware without driver/firmware)**:
    - **Step 1**: **Install the driver** first! (Because the OS needs the driver to communicate with the hardware card to flash its firmware.)
    - **Step 2**: **Install the firmware** second!

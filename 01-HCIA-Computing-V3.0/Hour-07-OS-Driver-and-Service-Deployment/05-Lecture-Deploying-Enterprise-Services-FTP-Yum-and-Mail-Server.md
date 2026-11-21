@@ -38,7 +38,7 @@
 
 ### 3. Linux Mail Server: Postfix (SMTP) + Dovecot (POP3/IMAP) (pp. 340–342)
 - **Mainstream Combination**: **Postfix + Dovecot** (often backed by MySQL, storing mail in `/var/mail/mydomain.com/myuser`):
-  - **Postfix**: Open-source Mail Transfer Agent providing the **SMTP (Simple Mail Transfer Protocol)** service for sending and relaying emails between mail servers (e.g., `me@huawei.com` \rightarrow `smtp.huawei.com` \rightarrow `smtp.gmail.com`, which saves the email to disk).
+  - **Postfix**: Open-source Mail Transfer Agent providing the **SMTP (Simple Mail Transfer Protocol)** service for sending and relaying emails between mail servers (e.g., `me@huawei.com` > `smtp.huawei.com` > `smtp.gmail.com`, which saves the email to disk).
   - **Dovecot**: Famous **POP3** and **IMAP** server implementation responsible **only for the path between the recipient's mail server and the recipient's email client (user agent)**.
 - **POP3 vs. IMAP (pp. 340, 342)**:
   - **POP3 (Post Office Protocol v3)**: Downloads **entire emails** to the client device and then disconnects; actions on the client do not sync back to the server.

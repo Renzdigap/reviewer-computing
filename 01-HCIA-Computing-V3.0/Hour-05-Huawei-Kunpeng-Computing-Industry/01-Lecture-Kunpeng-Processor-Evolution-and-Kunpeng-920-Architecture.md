@@ -15,7 +15,7 @@
 ---
 
 ### 1. Evolution of Huawei Kunpeng Processors (pp. 231, 233, 236)
-Huawei's Kunpeng open hardware platform spans **Processor \rightarrow Single Node ( Kunpeng Open Motherboard / Server) \rightarrow Cluster**, paired with **Kunpeng DevKit** and **Kunpeng BoostKit**:
+Huawei's Kunpeng open hardware platform spans **Processor > Single Node ( Kunpeng Open Motherboard / Server) > Cluster**, paired with **Kunpeng DevKit** and **Kunpeng BoostKit**:
 - **Motherboard Highlights (p. 231)**: **25% higher motherboard performance** (56G SerDes), **15% lower failure rate** than industry average (signal bit error rate BER < 10^{-12}), and **15% higher energy efficiency ratio** via **Dynamic Energy Management Technology (DEMT)**.
 
 | Year | Chip / Processor | Milestone Significance (pp. 233, 236) |

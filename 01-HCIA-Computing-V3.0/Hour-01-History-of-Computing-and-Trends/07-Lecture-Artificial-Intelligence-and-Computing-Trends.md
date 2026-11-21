@@ -54,7 +54,7 @@
   - **Integer computations**: Outstanding in **text processing, storage, and big data analysis**.
   - **Floating-point computations**: Excellent in **scientific computing and video processing**.
 - **Two Major Computing Industry Trends (p. 58)**:
-  1. **PCs \rightarrow Intelligent Mobile Terminals**: In 2023, 1.17 billion mobile terminals vs. 240 million PCs shipped. Processor shift from **x86 to Arm**, requiring **homogeneous computing power** across cloud data centers (DCs) and mobile devices.
+  1. **PCs > Intelligent Mobile Terminals**: In 2023, 1.17 billion mobile terminals vs. 240 million PCs shipped. Processor shift from **x86 to Arm**, requiring **homogeneous computing power** across cloud data centers (DCs) and mobile devices.
   2. **All Things Connected (IoT & Cloud-Edge Collaboration)**: **AI computing power accounts for 80%** of computing power consumed in DCs. **Cloud-edge collaboration** uses **central training (Cloud DC) + edge inference (Edge)**.
 - **Key Chapter 01 Acronyms (pp. 64–65)**: **CANN** (*Compute Architecture for Neural Networks*, Ascend heterogeneous compute architecture for AI), **BMS** (*Bare Metal Server*), **NFV** (*Network Functions Virtualization*), **CRM** (*Computing Resource Manager*).
 

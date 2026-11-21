@@ -31,7 +31,7 @@ Connect a PC to the iBMC management port via crossover or twisted-pair cable, br
 
 | Task | Exact iBMC WebUI Menu Path (pp. 300–308) |
 | :--- | :--- |
-| **Change iBMC Management IP** | **`iBMC Settings > Network Settings`** (locate **Network Protocols** area \rightarrow Save) |
+| **Change iBMC Management IP** | **`iBMC Settings > Network Settings`** (locate **Network Protocols** area > Save) |
 | **Check Version & Upgrade Firmware** | **`iBMC Settings > Firmware Upgrade`** (upload file, optionally select *Restart iBMC immediately after upgrade*) |
 | **Change Initial Password** | **`User & Security > Local Users`** (click **Edit** next to the user) |
 | **Configure Time Zone & NTP** | **`iBMC Settings > Time Zone & NTP`** (synchronizes host clocks with **UTC** within **1 ms on LAN** and **tens of ms on WAN**) |

@@ -49,7 +49,7 @@
   3. **FlexIO Card**: Non-standard Huawei-developed PCIe card mounted at the **rear panel**, used **ONLY on Huawei rack servers**.
   4. **Mezzanine Card**: Used **ONLY on compute nodes of Huawei E9000 blade servers** (no external physical ports; signals route via blade backplane; not interchangeable across vendors).
 - **Huawei Intelligent Converged Network Chips & IN200 iNIC (pp. 179–180)**:
-  - Evolution: **FE308 (2004, 1st-gen)** \rightarrow **Hi1821 (2014, 2nd-gen)** \rightarrow **Hi1822 (2018, 3rd-gen)**.
+  - Evolution: **FE308 (2004, 1st-gen)** > **Hi1821 (2014, 2nd-gen)** > **Hi1822 (2018, 3rd-gen)**.
   - **Hi1822 / IN200 iNIC**: Converged Ethernet (25GE–100GE) & FC (16G–32G), **48 built-in programmable data forwarding cores**, OVS (15 Mpps) & **RoCE v1/v2** offloading, SR-IOV, PCIe 3.0 x16 HHHL card.
 <!-- PDF_FIGS_START -->
 ![Server NIC Physical Board and Main Control Chip (Official Reference: p. 174)](../assets/images/p1_h4s2_nic_main_chip.png)
